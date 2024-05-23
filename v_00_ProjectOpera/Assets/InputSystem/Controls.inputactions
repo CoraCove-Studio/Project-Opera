@@ -526,17 +526,6 @@
                 },
                 {
                     "name": "",
-                    "id": "a1f417cc-a4e3-4153-85b9-d1f6295a9522",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "df1c0ddf-7c8f-47b0-a030-38ff4220d09f",
                     "path": "*/{Submit}",
                     "interactions": "",
