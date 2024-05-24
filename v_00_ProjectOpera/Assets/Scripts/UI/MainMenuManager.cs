@@ -16,23 +16,47 @@ public class MainMenuManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    #region Button Methods
+
+    public void OnClickStartButton()
     {
 
     }
+
+    public void OnClickSubMenuButton()
+    {
+
+    }
+
+    #endregion
+
+
+    #region EventSystem Methods
 
     public void OnPointerEnter(GameObject self)
     {
         eventSystem.SetSelectedGameObject(self);
     }
-    public void PlayButtonSelectClip()
+    public void SelectButton(Image buttonImage)
     {
+        buttonImage.color = new(255, 255, 255, 1);
+
+        // the following code prevents a sound from being played on start
         if (firstButtonSelected == false)
         {
             firstButtonSelected = true;
             return;
         }
-        print("New button selected.");
+        else
+        {
+            // play button noise
+        }
     }
+
+    public void DeselectButton(Image buttonImage)
+    {
+        buttonImage.color = new(255, 255, 255, 0);
+    }
+
+    #endregion
 }
