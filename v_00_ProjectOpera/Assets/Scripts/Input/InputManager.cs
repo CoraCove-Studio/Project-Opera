@@ -7,17 +7,20 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance { get; private set; }
     private Controls controls;
 
+    public delegate void MoveInputHandler(Vector2 movement);
+    public event MoveInputHandler OnMove;
+
+    public delegate void VertMoveInputHandler(float vertMovement);
+    public event VertMoveInputHandler OnVertMove;
+
+    public delegate void CameraInputHandler(Vector2 movement);
+    public event CameraInputHandler OnCamMove;
+
     // Action maps
     private InputActionMap coreActionMap;
     private InputActionMap UIActionMap;
 
-    public delegate void MoveInputHandler(Vector2 movement);
-    public delegate void VertMoveInputHandler(float vertMovement);
-    // public delegate void InteractInputHandler()
 
-    public event MoveInputHandler OnMove;
-    public event VertMoveInputHandler OnVertMove;
-    //public event InteractInputHandler 
 
     private void Awake()
     {
@@ -36,29 +39,36 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         controls.Core.Enable();
-        controls.Core.Movement.performed += context => HandleMovement(context.ReadValue<Vector2>());
-        controls.Core.Movement.canceled += context => HandleMovement(Vector2.zero);
-        controls.Core.Movement.performed += context => HandleVertMovement(context.ReadValue<float>());
-        controls.Core.Movement.canceled += context => HandleVertMovement(0);
+        controls.Core.Movement.performed += HandleMovement;
+        controls.Core.VerticalMove.performed += HandleVertMovement;
+        controls.Core.Look.performed += HandleCamMovement;
     }
 
     private void OnDisable()
     {
         controls.Core.Disable();
-        controls.Core.Movement.performed -= context => HandleMovement(context.ReadValue<Vector2>());
-        controls.Core.Movement.canceled -= context => HandleMovement(Vector2.zero);
-        controls.Core.Movement.performed -= context => HandleVertMovement(context.ReadValue<float>());
-        controls.Core.Movement.canceled -= context => HandleVertMovement(0);
+        controls.Core.Movement.performed -= HandleMovement;
+        controls.Core.VerticalMove.performed -= HandleVertMovement;
+        controls.Core.Look.performed -= HandleCamMovement;
+
     }
 
-    private void HandleMovement(Vector2 movementInput)
+    public void HandleMovement(InputAction.CallbackContext ctx)
     {
+        Vector2 movementInput = ctx.ReadValue<Vector2>();
         OnMove?.Invoke(movementInput);
     }
 
-    private void HandleVertMovement(float vertMovementInput)
+    public void HandleVertMovement(InputAction.CallbackContext ctx)
     {
-        OnVertMove?.Invoke(vertMovementInput);
+        float vertMovement = ctx.ReadValue<float>();
+        OnVertMove?.Invoke(vertMovement);
+    }
+
+    public void HandleCamMovement(InputAction.CallbackContext ctx)
+    {
+        Vector2 movementInput = ctx.ReadValue<Vector2>();
+        OnCamMove?.Invoke(movementInput);
     }
 
 }
