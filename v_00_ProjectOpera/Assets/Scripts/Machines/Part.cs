@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Part : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    ObjectPooler objectPooler;
+
+    public void SetObjectPoolerReference(ObjectPooler reference)
     {
-        
+        objectPooler = reference;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag(TagManager.PLAYER))
+        {
+            gameObject.transform.parent = objectPooler.transform;
+            gameObject.SetActive(false);
+        }
     }
+
 }
