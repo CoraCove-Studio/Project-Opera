@@ -2,7 +2,7 @@
     "name": "Controls",
     "maps": [
         {
-            "name": "CoreGameplay",
+            "name": "Core",
             "id": "760e29e2-1f42-4362-9111-9c6e24a0b53c",
             "actions": [
                 {
@@ -10,6 +10,15 @@
                     "type": "Value",
                     "id": "79577e9a-f490-496e-969d-d00fa33cf843",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "VerticalMove",
+                    "type": "Value",
+                    "id": "51b87549-2ca7-4166-a43a-66b0a406fb80",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -161,6 +170,39 @@
                     "action": "Pickup",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "ccf5ed0d-2a50-4805-b1da-6f1f0ce03a42",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalMove",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "e6658f2b-0101-4302-b648-9acf88b6ac14",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "VerticalMove",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "cd3f25b5-4768-409c-ad15-d8a4e195c7c4",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "VerticalMove",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },

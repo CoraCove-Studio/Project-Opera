@@ -24,7 +24,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     ""name"": ""Controls"",
     ""maps"": [
         {
-            ""name"": ""CoreGameplay"",
+            ""name"": ""Core"",
             ""id"": ""760e29e2-1f42-4362-9111-9c6e24a0b53c"",
             ""actions"": [
                 {
@@ -32,6 +32,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""79577e9a-f490-496e-969d-d00fa33cf843"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""VerticalMove"",
+                    ""type"": ""Value"",
+                    ""id"": ""51b87549-2ca7-4166-a43a-66b0a406fb80"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -183,6 +192,39 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Pickup"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""ccf5ed0d-2a50-4805-b1da-6f1f0ce03a42"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VerticalMove"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""e6658f2b-0101-4302-b648-9acf88b6ac14"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""VerticalMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""cd3f25b5-4768-409c-ad15-d8a4e195c7c4"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""VerticalMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -711,13 +753,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // CoreGameplay
-        m_CoreGameplay = asset.FindActionMap("CoreGameplay", throwIfNotFound: true);
-        m_CoreGameplay_Movement = m_CoreGameplay.FindAction("Movement", throwIfNotFound: true);
-        m_CoreGameplay_Look = m_CoreGameplay.FindAction("Look", throwIfNotFound: true);
-        m_CoreGameplay_ToggleMenu = m_CoreGameplay.FindAction("ToggleMenu", throwIfNotFound: true);
-        m_CoreGameplay_Interact = m_CoreGameplay.FindAction("Interact", throwIfNotFound: true);
-        m_CoreGameplay_Pickup = m_CoreGameplay.FindAction("Pickup", throwIfNotFound: true);
+        // Core
+        m_Core = asset.FindActionMap("Core", throwIfNotFound: true);
+        m_Core_Movement = m_Core.FindAction("Movement", throwIfNotFound: true);
+        m_Core_VerticalMove = m_Core.FindAction("VerticalMove", throwIfNotFound: true);
+        m_Core_Look = m_Core.FindAction("Look", throwIfNotFound: true);
+        m_Core_ToggleMenu = m_Core.FindAction("ToggleMenu", throwIfNotFound: true);
+        m_Core_Interact = m_Core.FindAction("Interact", throwIfNotFound: true);
+        m_Core_Pickup = m_Core.FindAction("Pickup", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -788,35 +831,40 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // CoreGameplay
-    private readonly InputActionMap m_CoreGameplay;
-    private List<ICoreGameplayActions> m_CoreGameplayActionsCallbackInterfaces = new List<ICoreGameplayActions>();
-    private readonly InputAction m_CoreGameplay_Movement;
-    private readonly InputAction m_CoreGameplay_Look;
-    private readonly InputAction m_CoreGameplay_ToggleMenu;
-    private readonly InputAction m_CoreGameplay_Interact;
-    private readonly InputAction m_CoreGameplay_Pickup;
-    public struct CoreGameplayActions
+    // Core
+    private readonly InputActionMap m_Core;
+    private List<ICoreActions> m_CoreActionsCallbackInterfaces = new List<ICoreActions>();
+    private readonly InputAction m_Core_Movement;
+    private readonly InputAction m_Core_VerticalMove;
+    private readonly InputAction m_Core_Look;
+    private readonly InputAction m_Core_ToggleMenu;
+    private readonly InputAction m_Core_Interact;
+    private readonly InputAction m_Core_Pickup;
+    public struct CoreActions
     {
         private @Controls m_Wrapper;
-        public CoreGameplayActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_CoreGameplay_Movement;
-        public InputAction @Look => m_Wrapper.m_CoreGameplay_Look;
-        public InputAction @ToggleMenu => m_Wrapper.m_CoreGameplay_ToggleMenu;
-        public InputAction @Interact => m_Wrapper.m_CoreGameplay_Interact;
-        public InputAction @Pickup => m_Wrapper.m_CoreGameplay_Pickup;
-        public InputActionMap Get() { return m_Wrapper.m_CoreGameplay; }
+        public CoreActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Core_Movement;
+        public InputAction @VerticalMove => m_Wrapper.m_Core_VerticalMove;
+        public InputAction @Look => m_Wrapper.m_Core_Look;
+        public InputAction @ToggleMenu => m_Wrapper.m_Core_ToggleMenu;
+        public InputAction @Interact => m_Wrapper.m_Core_Interact;
+        public InputAction @Pickup => m_Wrapper.m_Core_Pickup;
+        public InputActionMap Get() { return m_Wrapper.m_Core; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CoreGameplayActions set) { return set.Get(); }
-        public void AddCallbacks(ICoreGameplayActions instance)
+        public static implicit operator InputActionMap(CoreActions set) { return set.Get(); }
+        public void AddCallbacks(ICoreActions instance)
         {
-            if (instance == null || m_Wrapper.m_CoreGameplayActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_CoreGameplayActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_CoreActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CoreActionsCallbackInterfaces.Add(instance);
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @VerticalMove.started += instance.OnVerticalMove;
+            @VerticalMove.performed += instance.OnVerticalMove;
+            @VerticalMove.canceled += instance.OnVerticalMove;
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
@@ -831,11 +879,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Pickup.canceled += instance.OnPickup;
         }
 
-        private void UnregisterCallbacks(ICoreGameplayActions instance)
+        private void UnregisterCallbacks(ICoreActions instance)
         {
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @VerticalMove.started -= instance.OnVerticalMove;
+            @VerticalMove.performed -= instance.OnVerticalMove;
+            @VerticalMove.canceled -= instance.OnVerticalMove;
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
@@ -850,21 +901,21 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Pickup.canceled -= instance.OnPickup;
         }
 
-        public void RemoveCallbacks(ICoreGameplayActions instance)
+        public void RemoveCallbacks(ICoreActions instance)
         {
-            if (m_Wrapper.m_CoreGameplayActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_CoreActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(ICoreGameplayActions instance)
+        public void SetCallbacks(ICoreActions instance)
         {
-            foreach (var item in m_Wrapper.m_CoreGameplayActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_CoreActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_CoreGameplayActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_CoreActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public CoreGameplayActions @CoreGameplay => new CoreGameplayActions(this);
+    public CoreActions @Core => new CoreActions(this);
 
     // UI
     private readonly InputActionMap m_UI;
@@ -992,9 +1043,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_KeyboardSchemeIndex];
         }
     }
-    public interface ICoreGameplayActions
+    public interface ICoreActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnVerticalMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnToggleMenu(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
