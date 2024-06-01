@@ -42,18 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "Pickup",
                     "type": "Button",
-                    "id": "b344948f-b5a0-4aa7-adbe-f04cf46f18f4",
+                    "id": "adbcc220-5be0-48e8-99ad-00e1991a5b05",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pickup",
+                    "name": "Interact",
                     "type": "Button",
-                    "id": "adbcc220-5be0-48e8-99ad-00e1991a5b05",
+                    "id": "2b3b89c2-c5e8-46f4-8074-3d7741cf1114",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -151,17 +151,6 @@
                 },
                 {
                     "name": "",
-                    "id": "4376aa01-a26a-4667-9b0b-4174097d0005",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c8c3743e-0054-48db-8f7c-b6f139e6ffba",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
@@ -203,6 +192,17 @@
                     "action": "VerticalMove",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "45239b27-ecbf-4ed0-8fdd-0b71b14bb6eb",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

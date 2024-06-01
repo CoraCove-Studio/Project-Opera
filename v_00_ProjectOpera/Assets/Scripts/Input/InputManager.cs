@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,9 +13,11 @@ public class InputManager : MonoBehaviour
 
     public delegate void MoveInputHandler(Vector2 movement);
     public delegate void VertMoveInputHandler(float vertMovement);
+    // public delegate void InteractInputHandler()
 
     public event MoveInputHandler OnMove;
-    // public event VertMoveInputHandler OnVertMove;
+    public event VertMoveInputHandler OnVertMove;
+    //public event InteractInputHandler 
 
     private void Awake()
     {
@@ -35,6 +38,8 @@ public class InputManager : MonoBehaviour
         controls.Core.Enable();
         controls.Core.Movement.performed += context => HandleMovement(context.ReadValue<Vector2>());
         controls.Core.Movement.canceled += context => HandleMovement(Vector2.zero);
+        controls.Core.Movement.performed += context => HandleVertMovement(context.ReadValue<float>());
+        controls.Core.Movement.canceled += context => HandleVertMovement(0);
     }
 
     private void OnDisable()
@@ -42,11 +47,18 @@ public class InputManager : MonoBehaviour
         controls.Core.Disable();
         controls.Core.Movement.performed -= context => HandleMovement(context.ReadValue<Vector2>());
         controls.Core.Movement.canceled -= context => HandleMovement(Vector2.zero);
+        controls.Core.Movement.performed -= context => HandleVertMovement(context.ReadValue<float>());
+        controls.Core.Movement.canceled -= context => HandleVertMovement(0);
     }
 
     private void HandleMovement(Vector2 movementInput)
     {
         OnMove?.Invoke(movementInput);
+    }
+
+    private void HandleVertMovement(float vertMovementInput)
+    {
+        OnVertMove?.Invoke(vertMovementInput);
     }
 
 }

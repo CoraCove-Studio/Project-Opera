@@ -64,18 +64,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""Pickup"",
                     ""type"": ""Button"",
-                    ""id"": ""b344948f-b5a0-4aa7-adbe-f04cf46f18f4"",
+                    ""id"": ""adbcc220-5be0-48e8-99ad-00e1991a5b05"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pickup"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
-                    ""id"": ""adbcc220-5be0-48e8-99ad-00e1991a5b05"",
+                    ""id"": ""2b3b89c2-c5e8-46f4-8074-3d7741cf1114"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -173,17 +173,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4376aa01-a26a-4667-9b0b-4174097d0005"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""c8c3743e-0054-48db-8f7c-b6f139e6ffba"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
@@ -225,6 +214,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""VerticalMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45239b27-ecbf-4ed0-8fdd-0b71b14bb6eb"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -759,8 +759,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Core_VerticalMove = m_Core.FindAction("VerticalMove", throwIfNotFound: true);
         m_Core_Look = m_Core.FindAction("Look", throwIfNotFound: true);
         m_Core_ToggleMenu = m_Core.FindAction("ToggleMenu", throwIfNotFound: true);
-        m_Core_Interact = m_Core.FindAction("Interact", throwIfNotFound: true);
         m_Core_Pickup = m_Core.FindAction("Pickup", throwIfNotFound: true);
+        m_Core_Interact = m_Core.FindAction("Interact", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -838,8 +838,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Core_VerticalMove;
     private readonly InputAction m_Core_Look;
     private readonly InputAction m_Core_ToggleMenu;
-    private readonly InputAction m_Core_Interact;
     private readonly InputAction m_Core_Pickup;
+    private readonly InputAction m_Core_Interact;
     public struct CoreActions
     {
         private @Controls m_Wrapper;
@@ -848,8 +848,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @VerticalMove => m_Wrapper.m_Core_VerticalMove;
         public InputAction @Look => m_Wrapper.m_Core_Look;
         public InputAction @ToggleMenu => m_Wrapper.m_Core_ToggleMenu;
-        public InputAction @Interact => m_Wrapper.m_Core_Interact;
         public InputAction @Pickup => m_Wrapper.m_Core_Pickup;
+        public InputAction @Interact => m_Wrapper.m_Core_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Core; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -871,12 +871,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ToggleMenu.started += instance.OnToggleMenu;
             @ToggleMenu.performed += instance.OnToggleMenu;
             @ToggleMenu.canceled += instance.OnToggleMenu;
-            @Interact.started += instance.OnInteract;
-            @Interact.performed += instance.OnInteract;
-            @Interact.canceled += instance.OnInteract;
             @Pickup.started += instance.OnPickup;
             @Pickup.performed += instance.OnPickup;
             @Pickup.canceled += instance.OnPickup;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(ICoreActions instance)
@@ -893,12 +893,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ToggleMenu.started -= instance.OnToggleMenu;
             @ToggleMenu.performed -= instance.OnToggleMenu;
             @ToggleMenu.canceled -= instance.OnToggleMenu;
-            @Interact.started -= instance.OnInteract;
-            @Interact.performed -= instance.OnInteract;
-            @Interact.canceled -= instance.OnInteract;
             @Pickup.started -= instance.OnPickup;
             @Pickup.performed -= instance.OnPickup;
             @Pickup.canceled -= instance.OnPickup;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(ICoreActions instance)
@@ -1049,8 +1049,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnVerticalMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnToggleMenu(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
         void OnPickup(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
