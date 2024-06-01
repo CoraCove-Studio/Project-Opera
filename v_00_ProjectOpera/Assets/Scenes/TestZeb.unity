@@ -664,13 +664,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b5c53d0c920c2c41af01dec40e607ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 3
   verticalSpeed: 3
-  rotationSpeed: 1
-  xSensitivity: 0.3
-  ySensitivity: 0.3
-  maxPitchAngle: 80
-  xRotation: 0
+  lookSpeed: 2
+  xSensitivity: 1.5
+  ySensitivity: 1.5
+  maxPitchAngle: 75
 --- !u!54 &771681081
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -680,7 +679,7 @@ Rigidbody:
   m_GameObject: {fileID: 771681074}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
