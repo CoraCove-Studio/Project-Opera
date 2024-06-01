@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
                                   transform.right * currentMovementInput.x;
 
             // Accelerate the current velocity towards the input direction
-            currentVelocity += inputVector * acceleration * Time.fixedDeltaTime;
+            currentVelocity += acceleration * Time.fixedDeltaTime * inputVector;
 
             // Clamp the velocity to the maximum movement speed
             if (currentVelocity.magnitude > movementSpeed)
