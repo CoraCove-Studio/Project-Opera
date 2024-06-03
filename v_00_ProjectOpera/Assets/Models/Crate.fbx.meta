@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5ed0d43cb4dfae649bd79b363d7dad02
+guid: 1cd7f5cf03a831442872613fff62a066
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: CryoPod_MeshMat
-    second: {fileID: 2100000, guid: 025269b3f12de0848b5a3ccae444f28d, type: 2}
+      name: Can
+    second: {fileID: 2100000, guid: f4bf0271e7259ab43a91a41e0d78613f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
