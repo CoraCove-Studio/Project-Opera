@@ -9,39 +9,39 @@ public class CryoMachine : MonoBehaviour
     [SerializeField] private float timer;
     [SerializeField] private ObjectPooler objPooler;
     [SerializeField] private Transform outputPos;
+    private IEnumerator productionCoroutine;
 
     private void OnEnable()
     {
-        StartCoroutine(Production(resourceInput, timer));
+        productionCoroutine = Production(resourceInput, timer);
+        StartCoroutine(productionCoroutine);
     }
 
     private void OnDisable()
     {
-        StopCoroutine(Production(resourceInput, timer));
+        StopCoroutine(productionCoroutine);
     }
 
-
-    ////only for testing if AddInput works
-    //private void Update()
-    //{
-    //    if (resourceInput <= 0)
-    //    {
-    //        AddInput(10);
-    //    }
-    //}
     private IEnumerator Production(int input, float interval)
     {
         GameObject nitrogen;
-        while (input > 0)
+
+        while (true)
         {
+            if (input > 0)
+            {
+                resourceInput--;
+                input--;
+                nitrogen = objPooler.ReturnNitrogen();
+                nitrogen.transform.position = outputPos.position;
+                nitrogen.SetActive(true);
+            }
+            else
+            {
+                input = resourceInput;
+            }
             yield return new WaitForSeconds(interval);
-            resourceInput--;
-            nitrogen = objPooler.ReturnNitrogen();
-            nitrogen.transform.position = outputPos.position;
-            nitrogen.SetActive(true);
         }
-        input = resourceInput;
-        interval = timer;
     }
 
     //called to add resources to machine

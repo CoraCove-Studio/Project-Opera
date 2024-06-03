@@ -9,39 +9,39 @@ public class PrinterMachine : MonoBehaviour
     [SerializeField] private float timer;
     [SerializeField] private ObjectPooler objPooler;
     [SerializeField] private Transform outputPos;
+    private IEnumerator productionCoroutine;
 
     private void OnEnable()
     {
-        StartCoroutine(Production(resourceInput, timer));
+        productionCoroutine = Production(resourceInput, timer);
+        StartCoroutine(productionCoroutine);
     }
 
     private void OnDisable()
     {
-        StopCoroutine(Production(resourceInput, timer));
+        StopCoroutine(productionCoroutine);
     }
 
-
-    //only for testing if AddInput works
-    //private void Update()
-    //{
-    //    if (resourceInput <= 0)
-    //    {
-    //        AddInput(10);
-    //    }
-    //}
     private IEnumerator Production(int input, float interval)
     {
         GameObject part;
-        while (input > 0)
+
+        while (true)
         {
+            if (input > 0)
+            {
+                resourceInput--;
+                input--;
+                part = objPooler.ReturnPart();
+                part.transform.position = outputPos.position;
+                part.SetActive(true);
+            }
+            else
+            {
+                input = resourceInput;
+            }
             yield return new WaitForSeconds(interval);
-            resourceInput--;
-            part = objPooler.ReturnPart();
-            part.transform.position = outputPos.position;
-            part.SetActive(true);
         }
-        input = resourceInput;
-        interval = timer;
     }
 
     //called to add resources to machine

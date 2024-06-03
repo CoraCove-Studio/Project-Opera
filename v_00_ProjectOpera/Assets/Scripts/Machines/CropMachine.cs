@@ -10,39 +10,39 @@ public class CropMachine : MonoBehaviour
     [SerializeField] private ObjectPooler objPooler;
     [SerializeField] private Transform outputPos;
 
+    private IEnumerator productionCoroutine;
+
     private void OnEnable()
     {
-        StartCoroutine(Production(resourceInput, timer));
+        productionCoroutine = Production(resourceInput, timer);
+        StartCoroutine(productionCoroutine);
     }
 
     private void OnDisable()
     {
-        StopCoroutine(Production(resourceInput, timer));
+        StopCoroutine(productionCoroutine);
     }
 
-
-    ////only for testing if AddInput works
-    //private void Update()
-    //{
-    //    if (resourceInput <= 0)
-    //    {
-    //        AddInput(10);
-    //    }
-    //}
     private IEnumerator Production(int input, float interval)
     {
         GameObject crop;
-        while (input > 0)
+
+        while (true)
         {
+            if (input > 0)
+            {
+                resourceInput--;
+                input--;
+                crop = objPooler.ReturnCrop();
+                crop.transform.position = outputPos.position;
+                crop.SetActive(true);
+            }
+            else
+            {
+                input = resourceInput;
+            }
             yield return new WaitForSeconds(interval);
-            resourceInput--;
-            input--;
-            crop = objPooler.ReturnCrop();
-            crop.transform.position = outputPos.position;
-            crop.SetActive(true);
         }
-        input = resourceInput;
-        interval = timer;
     }
 
     //called to add resources to machine
