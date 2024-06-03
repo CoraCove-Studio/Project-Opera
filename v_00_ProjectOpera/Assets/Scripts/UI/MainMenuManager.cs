@@ -21,7 +21,6 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickStartButton()
     {
-        print("hello world");
         SceneManager.LoadScene("TestZeb");
     }
 

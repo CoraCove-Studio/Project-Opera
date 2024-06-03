@@ -43,6 +43,7 @@ public class ObjectPooler : MonoBehaviour
         return crop;
     }
 
+    //instantiates new crop if no crops inactive in hierarchy
     private GameObject GetNewCrop()
     {
         GameObject crop;
@@ -70,6 +71,7 @@ public class ObjectPooler : MonoBehaviour
         return part;
     }
 
+    //instantiates new part if no parts inactive in hierarchy
     private GameObject GetNewPart()
     {
         GameObject part;
@@ -97,6 +99,7 @@ public class ObjectPooler : MonoBehaviour
         return nitrogen;
     }
 
+    //instantiates new nitrogen if no nitrogen inactive in hierarchy
     private GameObject GetNewNitrogen()
     {
         GameObject nitrogen;

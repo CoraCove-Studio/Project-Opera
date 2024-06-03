@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class MachineBehavior : MonoBehaviour
+public class PrinterMachine : MonoBehaviour
 {
+
     [SerializeField] private int resourceInput;
     [SerializeField] private float timer;
     [SerializeField] private ObjectPooler objPooler;
@@ -22,23 +22,23 @@ public class MachineBehavior : MonoBehaviour
 
 
     //only for testing if AddInput works
-    private void Update()
-    {
-        if(resourceInput <= 0)
-        {
-            AddInput(10);
-        }
-    }
+    //private void Update()
+    //{
+    //    if (resourceInput <= 0)
+    //    {
+    //        AddInput(10);
+    //    }
+    //}
     private IEnumerator Production(int input, float interval)
     {
-        GameObject crop;
+        GameObject part;
         while (input > 0)
         {
             yield return new WaitForSeconds(interval);
             resourceInput--;
-            crop = objPooler.ReturnCrop();
-            crop.transform.position = outputPos.position;
-            crop.SetActive(true);
+            part = objPooler.ReturnPart();
+            part.transform.position = outputPos.position;
+            part.SetActive(true);
         }
         input = resourceInput;
         interval = timer;
