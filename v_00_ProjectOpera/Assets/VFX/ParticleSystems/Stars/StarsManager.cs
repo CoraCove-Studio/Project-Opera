@@ -20,7 +20,12 @@ public class StarsManager : MonoBehaviour
         starsRenderer.material.renderQueue = (int) RenderQueue.Background;
     }
 
-    void FixedUpdate()
+    void Update()
+    {
+        UnMovingStars();
+    }
+
+    void UnMovingStars()
     {
         transform.rotation = Quaternion.identity;
     }
