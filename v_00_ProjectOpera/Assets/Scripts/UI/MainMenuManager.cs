@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickStartButton()
     {
-
+        print("hello world");
+        SceneManager.LoadScene("TestZeb");
     }
 
     public void OnClickSubMenuButton()
