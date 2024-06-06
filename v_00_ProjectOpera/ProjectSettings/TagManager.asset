@@ -7,6 +7,7 @@ TagManager:
   - Crop
   - Part
   - Nitrogen
+  - CollectionDetector
   layers:
   - Default
   - TransparentFX

@@ -8,5 +8,6 @@ public class TagManager : MonoBehaviour
     public const string CROP = "Crop";
     public const string PART = "Part";
     public const string NITROGEN = "Nitrogen";
+    public const string COLLECTION = "CollectionDetector";
 
 }
