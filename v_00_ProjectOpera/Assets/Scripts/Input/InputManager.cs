@@ -13,6 +13,9 @@ public class InputManager : MonoBehaviour
     public delegate void CameraInputHandler(Vector2 movement);
     public event CameraInputHandler OnCamMove;
 
+    public delegate void InteractHandler();
+    public event InteractHandler OnInteraction;
+
     // Action maps
     private InputActionMap coreActionMap;
     private InputActionMap UIActionMap;
@@ -39,6 +42,7 @@ public class InputManager : MonoBehaviour
         controls.Core.Movement.performed += HandleMovement;
         controls.Core.Movement.canceled += HandleMovement;
         controls.Core.Look.performed += HandleCamMovement;
+        controls.Core.Interact.performed += HandleInteraction;
     }
 
     private void OnDisable()
@@ -47,6 +51,7 @@ public class InputManager : MonoBehaviour
         controls.Core.Movement.performed -= HandleMovement;
         controls.Core.Movement.canceled -= HandleMovement;
         controls.Core.Look.performed -= HandleCamMovement;
+        controls.Core.Interact.performed -= HandleInteraction;
 
     }
 
@@ -61,4 +66,9 @@ public class InputManager : MonoBehaviour
         OnCamMove?.Invoke(movementInput);
     }
 
+    public void HandleInteraction(InputAction.CallbackContext ctx)
+    {
+        print("Handling interaction.");
+        OnInteraction?.Invoke();
+    }
 }
