@@ -1041,10 +1041,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCam: {fileID: 1002790697}
   interactDistance: 5
-  interactLayer:
+  interactableLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  playerUI: {fileID: 0}
+  playerUI: {fileID: 496010888}
 --- !u!1001 &942494486
 PrefabInstance:
   m_ObjectHideFlags: 0

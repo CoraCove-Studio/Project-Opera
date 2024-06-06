@@ -4,7 +4,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private Camera playerCam;
     [SerializeField] private float interactDistance = 5f;
-    [SerializeField] private LayerMask interactLayer;
+    [SerializeField] private LayerMask interactableLayerMask;
     [SerializeField] private PlayerUIHandler playerUI;
 
     private InteractableObject currentInteractable;
@@ -45,23 +45,27 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject.layer == 3 )
         {
-            if (hit.collider.TryGetComponent(out currentInteractable))
+            // Check if the hit object's layer is in the interactableLayerMask
+            if (((1 << hit.collider.gameObject.layer) & interactableLayerMask) != 0)
             {
-                currentInteractable.OnFocus();
+                if (hit.collider.TryGetComponent(out currentInteractable))
+                {
+                    currentInteractable.OnFocus();
+                    playerUI.EnableInteractReticle();
+                }
             }
         }
         else
         {
             currentInteractable = null;
+            playerUI.DisableInteractReticle();
         }
     }
 
     private void InteractionInput()
     {
-        print("Interaction attempted.");
         if (currentInteractable != null)
         {
-            print("Interacted with " + currentInteractable.name);
             currentInteractable.OnInteract();
         }
     }

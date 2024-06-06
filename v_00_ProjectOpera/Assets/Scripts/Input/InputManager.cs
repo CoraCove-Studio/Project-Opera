@@ -68,7 +68,6 @@ public class InputManager : MonoBehaviour
 
     public void HandleInteraction(InputAction.CallbackContext ctx)
     {
-        print("Handling interaction.");
         OnInteraction?.Invoke();
     }
 }
