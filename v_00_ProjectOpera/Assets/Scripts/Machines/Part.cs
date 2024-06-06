@@ -32,7 +32,21 @@ public class Part : MonoBehaviour
         {
             print("collector detected");
             endPosition = other.transform.position;
-            gameObject.transform.position = Vector3.Lerp(startPosition, endPosition, collectionDuration);
+            StartCoroutine(MoveToEndPosition());
         }
+    }
+
+    private IEnumerator MoveToEndPosition()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < collectionDuration)
+        {
+            transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / collectionDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endPosition;
     }
 }
