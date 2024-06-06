@@ -46,7 +46,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""ToggleMenu"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""4d850d34-edb8-4e30-9ba6-da5191e2a9ad"",
                     ""expectedControlType"": ""Button"",
@@ -92,7 +92,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""ToggleMenu"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -103,7 +103,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""ToggleMenu"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -737,7 +737,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Core = asset.FindActionMap("Core", throwIfNotFound: true);
         m_Core_Movement = m_Core.FindAction("Movement", throwIfNotFound: true);
         m_Core_Look = m_Core.FindAction("Look", throwIfNotFound: true);
-        m_Core_ToggleMenu = m_Core.FindAction("ToggleMenu", throwIfNotFound: true);
+        m_Core_Pause = m_Core.FindAction("Pause", throwIfNotFound: true);
         m_Core_Pickup = m_Core.FindAction("Pickup", throwIfNotFound: true);
         m_Core_Interact = m_Core.FindAction("Interact", throwIfNotFound: true);
         // UI
@@ -815,7 +815,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<ICoreActions> m_CoreActionsCallbackInterfaces = new List<ICoreActions>();
     private readonly InputAction m_Core_Movement;
     private readonly InputAction m_Core_Look;
-    private readonly InputAction m_Core_ToggleMenu;
+    private readonly InputAction m_Core_Pause;
     private readonly InputAction m_Core_Pickup;
     private readonly InputAction m_Core_Interact;
     public struct CoreActions
@@ -824,7 +824,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public CoreActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Core_Movement;
         public InputAction @Look => m_Wrapper.m_Core_Look;
-        public InputAction @ToggleMenu => m_Wrapper.m_Core_ToggleMenu;
+        public InputAction @Pause => m_Wrapper.m_Core_Pause;
         public InputAction @Pickup => m_Wrapper.m_Core_Pickup;
         public InputAction @Interact => m_Wrapper.m_Core_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Core; }
@@ -842,9 +842,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
-            @ToggleMenu.started += instance.OnToggleMenu;
-            @ToggleMenu.performed += instance.OnToggleMenu;
-            @ToggleMenu.canceled += instance.OnToggleMenu;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
             @Pickup.started += instance.OnPickup;
             @Pickup.performed += instance.OnPickup;
             @Pickup.canceled += instance.OnPickup;
@@ -861,9 +861,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
-            @ToggleMenu.started -= instance.OnToggleMenu;
-            @ToggleMenu.performed -= instance.OnToggleMenu;
-            @ToggleMenu.canceled -= instance.OnToggleMenu;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
             @Pickup.started -= instance.OnPickup;
             @Pickup.performed -= instance.OnPickup;
             @Pickup.canceled -= instance.OnPickup;
@@ -1018,7 +1018,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-        void OnToggleMenu(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
         void OnPickup(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
