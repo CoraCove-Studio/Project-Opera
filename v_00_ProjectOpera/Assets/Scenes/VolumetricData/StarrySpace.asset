@@ -88,7 +88,7 @@ MonoBehaviour:
     m_Value: 6378100
   planetCenterPosition:
     m_OverrideState: 1
-    m_Value: {x: 0, y: -6378100, z: 0}
+    m_Value: {x: 0, y: -6378072, z: 0}
   airDensityR:
     m_OverrideState: 1
     m_Value: 0.04534
@@ -112,7 +112,7 @@ MonoBehaviour:
     m_Value: {r: 0.076559395, g: 0.30817598, b: 0.24005345, a: 1}
   aerosolMaximumAltitude:
     m_OverrideState: 1
-    m_Value: 300
+    m_Value: 299.52
   aerosolAnisotropy:
     m_OverrideState: 1
     m_Value: 0.53
