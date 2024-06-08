@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerUIHandler : MonoBehaviour
 {
@@ -11,6 +12,16 @@ public class PlayerUIHandler : MonoBehaviour
     [SerializeField] private List<Sprite> reticles = new();
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private EventSystem eventSystem;
+
+    [SerializeField] private List<TextMeshProUGUI> resourceLabels = new();
+
+    private readonly string[] labelText = {
+        "CROPS: ",
+        "PARTS: ",
+        "NITROGEN: ",
+        "CREDITS: "
+    };
+
 
     private bool firstButtonSelected = false;
 
@@ -97,6 +108,24 @@ public class PlayerUIHandler : MonoBehaviour
 
     public void UpdateUI()
     {
-        
+        List<int> playerResources = GetPlayerResources();
+
+        for (int i = 0; i < resourceLabels.Count; i++)
+        {
+            resourceLabels[i].text = labelText[i] + playerResources[i].ToString();
+        }
+    }
+
+    private List<int> GetPlayerResources()
+    {
+        List<int> resourceList = new()
+        {
+            GameManager.Instance.PlayerCrops,
+            GameManager.Instance.PlayerParts,
+            GameManager.Instance.PlayerNitrogen,
+            GameManager.Instance.PlayerCredits,
+        };
+
+        return resourceList;
     }
 }

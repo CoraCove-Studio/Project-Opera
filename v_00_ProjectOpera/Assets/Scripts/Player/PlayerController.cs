@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour
             InputManager.Instance.OnMove += ReceiveMovementInput;
             InputManager.Instance.OnCamMove += ReceiveCamInput;
         }
+        else
+        {
+            print("No input manager found.");
+        }
     }
 
     private void OnDisable()
