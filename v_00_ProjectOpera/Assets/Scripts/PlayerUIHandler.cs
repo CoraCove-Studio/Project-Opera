@@ -94,4 +94,9 @@ public class PlayerUIHandler : MonoBehaviour
     {
         playerReticle.gameObject.SetActive(!playerReticle.gameObject.activeSelf);
     }
+
+    public void UpdateUI()
+    {
+        
+    }
 }
