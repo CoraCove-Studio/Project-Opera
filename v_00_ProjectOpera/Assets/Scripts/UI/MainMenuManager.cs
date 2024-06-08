@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -30,39 +31,29 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickHelpButton()
     {
-        if(activePanel != null)
-        {
-            activePanel.SetActive(false);
-        }
-        activePanel = helpPanel;
-        activePanel.SetActive(true);
+        SwapActivePanel(helpPanel);
     }
     public void OnClickSettingsButton()
     {
-        if (activePanel != null)
-        {
-            activePanel.SetActive(false);
-        }
-        activePanel = settingsPanel;
-        activePanel.SetActive(true);
+        SwapActivePanel(settingsPanel);
     }
     public void OnClickCreditsButton()
     {
-        if (activePanel != null)
-        {
-            activePanel.SetActive(false);
-        }
-        activePanel = creditsPanel;
-        activePanel.SetActive(true);
+        SwapActivePanel(creditsPanel);
     }
 
     public void OnClickQuit()
     {
         Application.Quit();
     }
-    public void OnClickSubMenuButton()
+    private void SwapActivePanel(GameObject panel)
     {
-
+        if (activePanel != null)
+        {
+            activePanel.SetActive(false);
+        }
+        panel.SetActive(true);
+        activePanel = panel;
     }
 
     #endregion
