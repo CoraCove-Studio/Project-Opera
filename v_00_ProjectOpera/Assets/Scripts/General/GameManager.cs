@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     #region Singleton pattern and Update
 
     private static GameManager instance;
-
     public static GameManager Instance
     {
         get
@@ -211,6 +210,25 @@ public class GameManager : MonoBehaviour
         PlayerNitrogen += amount;
     }
 
+    public void AddResourceToPlayer(int amount, ResourceTypes resourceType)
+    {
+        switch (resourceType)
+        {
+            case ResourceTypes.CROP:
+                PlayerCrops += amount;
+                break;
+            case ResourceTypes.PART:
+                PlayerParts += amount;
+                break;
+            case ResourceTypes.NITROGEN:
+                PlayerNitrogen += amount;
+                break;
+            default:
+                print("Adding resource failed, not recognized resource type.");
+                break;
+        }
+    }
+
     public void AddCreditsToPlayer(int amount)
     {
         PlayerCredits += amount;
@@ -234,6 +252,25 @@ public class GameManager : MonoBehaviour
         PlayerCredits -= amount;
     }
 
+    public void TakeResourceToPlayer(int amount, ResourceTypes resourceType)
+    {
+        switch (resourceType)
+        {
+            case ResourceTypes.CROP:
+                PlayerCrops -= amount;
+                break;
+            case ResourceTypes.PART:
+                PlayerParts -= amount;
+                break;
+            case ResourceTypes.NITROGEN:
+                PlayerNitrogen -= amount;
+                break;
+            default:
+                print("Taking resource failed, not recognized resource type.");
+                break;
+        }
+    }
+
     #endregion
 
     #region Cheatcodes
@@ -242,15 +279,15 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            AddCropsToPlayer(1);
+            AddResourceToPlayer(1, ResourceTypes.CROP);
         }
         if (Input.GetKeyDown(KeyCode.U))
         {
-            AddPartsToPlayer(1);
+            AddResourceToPlayer(1, ResourceTypes.PART);
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            AddNitrogenToPlayer(1);
+            AddResourceToPlayer(1, ResourceTypes.NITROGEN);
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -263,11 +300,6 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
-    // methods to pause and unpause the game by stopping time. Should subscribe to the OnPause and OnResume events.
 
     // Method which tracks the timer and has functionality to count down to a set time.
-
-    // Methods to restart the timer to default value, or enable/disable it when things like going to the main menu happen.
-
-
 }

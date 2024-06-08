@@ -46,9 +46,10 @@ public class CropMachine : MonoBehaviour
     }
 
     //called to add resources to machine
-    public void AddInput(int addedResource)
+    public void AddInput()
     {
-        resourceInput += addedResource;
+        GameManager.Instance.TakeCropsFromPlayer(1);
+        resourceInput++;
     }
 
 

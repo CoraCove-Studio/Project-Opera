@@ -4,7 +4,21 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager Instance { get; private set; }
+
+    private static InputManager instance;
+    public static InputManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                GameObject InputManager = new("InputManager");
+                instance = InputManager.AddComponent<InputManager>();
+                DontDestroyOnLoad(InputManager);
+            }
+            return instance;
+        }
+    }
     private Controls controls;
 
     public delegate void MoveInputHandler(Vector3 movement);
@@ -27,17 +41,19 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (instance == null)
         {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
             controls = new Controls();
             coreActionMap = controls.Core;
             UIActionMap = controls.UI;
+            print("Action maps loaded.");
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+            print("Additional InputManager created and destroyed.");
         }
     }
 

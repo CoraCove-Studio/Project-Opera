@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crop : MonoBehaviour
+public class Product : MonoBehaviour
 {
     ObjectPooler objectPooler;
     [SerializeField] private float collectionDuration = 5.0f;
     [SerializeField] private Vector3 startPosition;
-    [SerializeField] private Vector3 endPosition;
+    [SerializeField] private ResourceTypes resourceType;
 
     private void OnEnable()
     {
@@ -23,9 +23,7 @@ public class Crop : MonoBehaviour
     {
         if (other.gameObject.CompareTag(TagManager.PLAYER))
         {
-            print("player detected");
-            //method to add to player's resource count
-            //gameObject.transform.parent = objectPooler.transform;
+            GameManager.Instance.AddResourceToPlayer(1, resourceType);
             gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag(TagManager.COLLECTION))
@@ -46,6 +44,5 @@ public class Crop : MonoBehaviour
             yield return null;
         }
 
-        transform.position = endPosition;
     }
 }
