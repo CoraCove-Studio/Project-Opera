@@ -8,13 +8,17 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private GameObject activePanel;
+    [SerializeField] private GameObject helpPanel;
+    [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject creditsPanel;
 
     private bool firstButtonSelected = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+ 
     }
 
     #region Button Methods
@@ -24,6 +28,38 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene("TestZeb");
     }
 
+    public void OnClickHelpButton()
+    {
+        if(activePanel != null)
+        {
+            activePanel.SetActive(false);
+        }
+        activePanel = helpPanel;
+        activePanel.SetActive(true);
+    }
+    public void OnClickSettingsButton()
+    {
+        if (activePanel != null)
+        {
+            activePanel.SetActive(false);
+        }
+        activePanel = settingsPanel;
+        activePanel.SetActive(true);
+    }
+    public void OnClickCreditsButton()
+    {
+        if (activePanel != null)
+        {
+            activePanel.SetActive(false);
+        }
+        activePanel = creditsPanel;
+        activePanel.SetActive(true);
+    }
+
+    public void OnClickQuit()
+    {
+        Application.Quit();
+    }
     public void OnClickSubMenuButton()
     {
 
