@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.021901937, g: 0.022422925, b: 0.021151854, a: 1}
+  m_IndirectSpecularColor: {r: 0.022089548, g: 0.022613013, b: 0.021326927, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -499,6 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e65ce9b0be26e84da63b05b1a77c607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainGameSceneName: TestZeb
   playerUI: {fileID: 7542325022802552092}
 --- !u!4 &525901142
 Transform:
@@ -611,50 +612,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2008a157ec29e934e86058e914a50bd1, type: 3}
---- !u!1 &780228065
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 780228067}
-  - component: {fileID: 780228066}
-  m_Layer: 0
-  m_Name: InputManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &780228066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780228065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3f7d7bb73316042934722d33b1c51e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &780228067
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780228065}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.381072, y: 13.562204, z: -10.751266}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &817394986 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7742780737561719692, guid: 43304b317c4c92b4ea3b5d812410c612,
@@ -683,6 +640,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5060444177187149915, guid: 43304b317c4c92b4ea3b5d812410c612, type: 3}
+--- !u!114 &937226521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1428689345551831206, guid: 7c9eeee814b401842a694843c3bbd582,
+    type: 3}
+  m_PrefabInstance: {fileID: 7542325022802552091}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &942494486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2771,6 +2740,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
         type: 3}
+      propertyPath: timerLabel
+      value: 
+      objectReference: {fileID: 937226521}
+    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 1402205818}
@@ -2806,7 +2780,6 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 780228067}
   - {fileID: 7542325022802552091}
   - {fileID: 1958346677}
   - {fileID: 1735758172}

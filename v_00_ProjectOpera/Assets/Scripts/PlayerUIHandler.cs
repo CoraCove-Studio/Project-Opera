@@ -14,6 +14,7 @@ public class PlayerUIHandler : MonoBehaviour
     [SerializeField] private EventSystem eventSystem;
 
     [SerializeField] private List<TextMeshProUGUI> resourceLabels = new();
+    [SerializeField] private TextMeshProUGUI timerLabel;
 
     private readonly string[] labelText = {
         "CROPS: ",
@@ -27,19 +28,20 @@ public class PlayerUIHandler : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        UpdateUI();
+
     }
 
     public void EnablePauseMenu()
     {
         pauseMenu.SetActive(true);
-        Cursor.lockState = CursorLockMode.Confined;
+        ToggleReticleVisibility();
     }
 
     public void DisablePauseMenu()
     {
         pauseMenu.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
+        ToggleReticleVisibility();
     }
 
     #region Button Methods
@@ -114,6 +116,11 @@ public class PlayerUIHandler : MonoBehaviour
         {
             resourceLabels[i].text = labelText[i] + playerResources[i].ToString();
         }
+    }
+
+    public void UpdateGameTimer(int minutes, int seconds)
+    {
+        timerLabel.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     private List<int> GetPlayerResources()

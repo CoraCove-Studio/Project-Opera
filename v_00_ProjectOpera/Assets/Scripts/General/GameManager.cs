@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 
-    #region Singleton pattern
+    #region Singleton pattern and Update
 
     private static GameManager instance;
 
@@ -34,42 +36,107 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        SetNewGameValues();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            AddCropsToPlayer(1);
-        }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            AddPartsToPlayer(1);
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            AddNitrogenToPlayer(1);
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            AddCreditsToPlayer(1);
-        }
+        Cheatcodes();
+        GameTimer();
     }
 
     #endregion
+
+    [SerializeField] private string mainGameSceneName = "TestZeb";
 
     const int minResources = 0;
     const int maxResources = 300;
 
     [SerializeField] private PlayerUIHandler playerUI;
 
+    public bool GamePaused { get; private set; } = true;
+    private float timeCounter;
+
     private int playerCredits;
 
     private int playerCrops;
     private int playerParts;
     private int playerNitrogen;
+
+    #region
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        InputManager.Instance.OnPause += ToggleGamePause;
+
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        print("Current scene is: " + scene.name);
+        if (scene.name == mainGameSceneName)
+        {
+            playerUI = GameObject.Find("PlayerCanvas").GetComponent<PlayerUIHandler>();
+            StartNewGame();
+        }
+    }
+
+    #endregion
+
+    public void StartNewGame()
+    {
+        // To be called when the main scene is loaded
+        SetNewGameValues();
+        playerUI.UpdateUI();
+        Cursor.lockState = CursorLockMode.Locked;
+        GamePaused = false;
+    }
+
+    public void GameTimer()
+    {
+        if (GamePaused == false)
+        {
+            timeCounter += Time.deltaTime;
+            int minutes = Mathf.FloorToInt(timeCounter / 60f);
+            int seconds = Mathf.FloorToInt(timeCounter - minutes * 60);
+            if (playerUI != null)
+            {
+                playerUI.UpdateGameTimer(minutes, seconds);
+            }
+        }
+    }
+
+    private void RestartTimer()
+    {
+        timeCounter = 0;
+    }
+
+    private void ToggleGamePause()
+    {
+        if (GamePaused == false)
+        {
+            print("Pausing game.");
+            Time.timeScale = 0;
+            playerUI.EnablePauseMenu();
+            // toggle action map?
+            Cursor.lockState = CursorLockMode.Confined;
+            GamePaused = true;
+        }
+        else
+        {
+            print("Resuming game.");
+            Time.timeScale = 1;
+            playerUI.DisablePauseMenu();
+            // toggle action map
+            Cursor.lockState = CursorLockMode.Locked;
+            GamePaused = false;
+        }
+    }
 
     #region Resources Get/Set
     public int PlayerCrops
@@ -119,13 +186,17 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    private void SetNewGameValues()
+    public void SetNewGameValues()
     {
-        PlayerCrops = 5;
-        PlayerParts = 5;
-        PlayerNitrogen = 5;
-        PlayerCredits = 50;
+        // Important that these are the lowercase local variables, not the setters
+        // Because otherwise the gameManager will try to access UI elements that don't exist.
+        playerCrops = 5;
+        playerParts = 5;
+        playerNitrogen = 5;
+        playerCredits = 50;
     }
+
+    #region Add / Take Resource Methods
 
     public void AddCropsToPlayer(int amount)
     {
@@ -145,6 +216,53 @@ public class GameManager : MonoBehaviour
         PlayerCredits += amount;
     }
 
+    public void TakeCropsFromPlayer(int amount)
+    {
+        PlayerCrops -= amount;
+    }
+    public void TakePartsFromPlayer(int amount)
+    {
+        PlayerParts -= amount;
+    }
+    public void TakeNitrogenFromPlayer(int amount)
+    {
+        PlayerNitrogen -= amount;
+    }
+
+    public void TakeCreditsFromPlayer(int amount)
+    {
+        PlayerCredits -= amount;
+    }
+
+    #endregion
+
+    #region Cheatcodes
+
+    private void Cheatcodes()
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            AddCropsToPlayer(1);
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            AddPartsToPlayer(1);
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            AddNitrogenToPlayer(1);
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            AddCreditsToPlayer(1);
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartTimer();
+        }
+    }
+
+    #endregion
     // methods to pause and unpause the game by stopping time. Should subscribe to the OnPause and OnResume events.
 
     // Method which tracks the timer and has functionality to count down to a set time.

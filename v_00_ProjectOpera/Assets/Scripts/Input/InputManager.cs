@@ -19,9 +19,6 @@ public class InputManager : MonoBehaviour
     public delegate void PauseHandler();
     public event PauseHandler OnPause;
 
-    public delegate void UnPauseHandler();
-    public event UnPauseHandler OnResume;
-
     // Action maps
     private InputActionMap coreActionMap;
     private InputActionMap UIActionMap;
@@ -93,14 +90,13 @@ public class InputManager : MonoBehaviour
     private void EnableUIControls()
     {
         UIActionMap.Enable();
-        // Add UI-specific actions here if needed
-        // NOT WORKING: Needs to be able to unpause from UI action map
+        UIActionMap["Pause"].performed += HandlePause;
     }
 
     private void DisableUIControls()
     {
         UIActionMap.Disable();
-        // Remove UI-specific actions here if needed
+        UIActionMap["Pause"].performed -= HandlePause;
     }
 
     private void HandlePause(InputAction.CallbackContext context)
@@ -119,7 +115,7 @@ public class InputManager : MonoBehaviour
                 print("Pause deactivated.");
                 DisableUIControls();
                 EnableCoreControls();
-                OnResume?.Invoke();
+                OnPause?.Invoke();
             }
         }
     }
