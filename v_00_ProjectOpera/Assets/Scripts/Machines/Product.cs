@@ -36,6 +36,7 @@ public class Product : MonoBehaviour
     private IEnumerator MoveToEndPosition(GameObject player)
     {
         float elapsedTime = 0f;
+        startPosition = transform.position;
 
         while (elapsedTime < collectionDuration)
         {
