@@ -4,16 +4,19 @@ using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
+
+    private static bool isQuitting = false;
     private static InputManager instance;
     public static InputManager Instance
     {
         get
         {
-            if (instance == null)
+            if (instance == null && isQuitting != true)
             {
                 GameObject inputManager = new("InputManager");
                 instance = inputManager.AddComponent<InputManager>();
                 DontDestroyOnLoad(inputManager);
+                Debug.Log("New InputManager has been created.");
             }
             return instance;
         }
@@ -53,12 +56,19 @@ public class InputManager : MonoBehaviour
     {
         EnableCoreControls();
         SceneManager.sceneLoaded += OnSceneLoaded;
+        Application.quitting += Quitting;
     }
 
     private void OnDisable()
     {
         DisableCoreControls();
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        Application.quitting -= Quitting;
+    }
+
+    private void Quitting()
+    {
+        isQuitting = true;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

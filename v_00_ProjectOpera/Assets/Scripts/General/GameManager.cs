@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
     private int playerParts;
     private int playerNitrogen;
 
+    private static bool isQuitting = false;
+
     #endregion
 
     #region Singleton pattern
@@ -33,11 +36,12 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if (instance == null)
+            if (instance == null && isQuitting != true)
             {
                 GameObject gameManager = new("GameManager");
                 instance = gameManager.AddComponent<GameManager>();
                 DontDestroyOnLoad(gameManager);
+                Debug.Log("New GameManager has been created.");
             }
             return instance;
         }
@@ -146,12 +150,20 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         InputManager.Instance.OnPause += ToggleGamePause;
+        Application.quitting += Quitting;
+    }
+
+    private void Quitting()
+    {
+        Debug.Log("Application has begun quitting.");
+        isQuitting = true;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
         InputManager.Instance.OnPause -= ToggleGamePause;
+        Application.quitting -= Quitting;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
