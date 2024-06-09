@@ -90,7 +90,7 @@ public class ObjectPooler : MonoBehaviour
     public GameObject ReturnNitrogen()
     {
         GameObject nitrogen;
-        nitrogen = ReturnInactiveObject(listOfCrops);
+        nitrogen = ReturnInactiveObject(listOfNitrogen);
 
         if (nitrogen == null)
         {

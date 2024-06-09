@@ -1,10 +1,9 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
-
     private static InputManager instance;
     public static InputManager Instance
     {
@@ -12,14 +11,17 @@ public class InputManager : MonoBehaviour
         {
             if (instance == null)
             {
-                GameObject InputManager = new("InputManager");
-                instance = InputManager.AddComponent<InputManager>();
-                DontDestroyOnLoad(InputManager);
+                GameObject inputManager = new("InputManager");
+                instance = inputManager.AddComponent<InputManager>();
+                DontDestroyOnLoad(inputManager);
             }
             return instance;
         }
     }
+
     private Controls controls;
+    private InputActionMap coreActionMap;
+    private InputActionMap UIActionMap;
 
     public delegate void MoveInputHandler(Vector3 movement);
     public event MoveInputHandler OnMove;
@@ -33,106 +35,122 @@ public class InputManager : MonoBehaviour
     public delegate void PauseHandler();
     public event PauseHandler OnPause;
 
-    // Action maps
-    private InputActionMap coreActionMap;
-    private InputActionMap UIActionMap;
-
-
-
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            controls = new Controls();
-            coreActionMap = controls.Core;
-            UIActionMap = controls.UI;
-            print("Action maps loaded.");
+            InitializeControls();
         }
-        else if (Instance != this)
+        else if (instance != this)
         {
             Destroy(gameObject);
-            print("Additional InputManager created and destroyed.");
         }
     }
 
     private void OnEnable()
     {
         EnableCoreControls();
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         DisableCoreControls();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    public void HandleMovement(InputAction.CallbackContext ctx)
-    { 
-        OnMove?.Invoke(ctx.ReadValue<Vector3>());
-    }
-
-    public void HandleCamMovement(InputAction.CallbackContext ctx)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Vector2 movementInput = ctx.ReadValue<Vector2>();
-        OnCamMove?.Invoke(movementInput);
+        if (scene.name == GameManager.Instance.mainGameSceneName)
+        {
+            EnableCoreControls();
+        }
+        else if (scene.name == "GameOver")
+        {
+            DisableCoreControls();
+            EnableUIControls();
+        }
     }
 
-    public void HandleInteraction(InputAction.CallbackContext ctx)
+    private void InitializeControls()
     {
-        OnInteraction?.Invoke();
+        controls = new Controls();
+        coreActionMap = controls.Core;
+        UIActionMap = controls.UI;
+
+        // Assign action handlers
+        coreActionMap["Movement"].performed += HandleMovement;
+        coreActionMap["Movement"].canceled += HandleMovement;
+        coreActionMap["Look"].performed += HandleCamMovement;
+        coreActionMap["Interact"].performed += HandleInteraction;
+        coreActionMap["Pause"].performed += HandlePause;
+
+        UIActionMap["Pause"].performed += HandlePause;
     }
 
     private void EnableCoreControls()
     {
         coreActionMap.Enable();
-        coreActionMap["Movement"].performed += HandleMovement;
-        coreActionMap["Movement"].canceled += HandleMovement;
-        coreActionMap["Look"].performed += HandleCamMovement;
-        coreActionMap["Interact"].performed += HandleInteraction;
-        coreActionMap["Pause"].performed += HandlePause; // Ensure Pause action is set up
     }
 
     private void DisableCoreControls()
     {
         coreActionMap.Disable();
-        coreActionMap["Movement"].performed -= HandleMovement;
-        coreActionMap["Movement"].canceled -= HandleMovement;
-        coreActionMap["Look"].performed -= HandleCamMovement;
-        coreActionMap["Interact"].performed -= HandleInteraction;
-        coreActionMap["Pause"].performed -= HandlePause;
     }
 
     private void EnableUIControls()
     {
         UIActionMap.Enable();
-        UIActionMap["Pause"].performed += HandlePause;
     }
 
     private void DisableUIControls()
     {
         UIActionMap.Disable();
-        UIActionMap["Pause"].performed -= HandlePause;
     }
 
-    private void HandlePause(InputAction.CallbackContext context)
+    private void HandleMovement(InputAction.CallbackContext ctx)
+    {
+        OnMove?.Invoke(ctx.ReadValue<Vector3>());
+    }
+
+    private void HandleCamMovement(InputAction.CallbackContext ctx)
+    {
+        OnCamMove?.Invoke(ctx.ReadValue<Vector2>());
+    }
+
+    private void HandleInteraction(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            OnInteraction?.Invoke();
+        }
+    }
+
+    public void HandlePause(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             if (coreActionMap.enabled)
             {
-                print("Pause activated.");
                 DisableCoreControls();
                 EnableUIControls();
-                OnPause?.Invoke();
+                Debug.Log("InputManager: OnPause: Core disabled, UI enabled.");
             }
             else
             {
-                print("Pause deactivated.");
                 DisableUIControls();
                 EnableCoreControls();
-                OnPause?.Invoke();
+                Debug.Log("InputManager: OnPause: Core enabled, UI disabled.");
             }
+            OnPause?.Invoke();
         }
+    }
+
+    public void UnpauseWithButton()
+    {
+        DisableUIControls();
+        EnableCoreControls();
     }
 }

@@ -35,30 +35,31 @@ public class PlayerUIHandler : MonoBehaviour
     public void EnablePauseMenu()
     {
         pauseMenu.SetActive(true);
-        ToggleReticleVisibility();
+        ToggleReticleVisibility(false);
     }
 
     public void DisablePauseMenu()
     {
         pauseMenu.SetActive(false);
-        ToggleReticleVisibility();
+        ToggleReticleVisibility(true);
     }
 
     #region Button Methods
 
     public void OnClickResumeButton()
     {
-        DisablePauseMenu();
+        GameManager.Instance.ToggleGamePause();
+        InputManager.Instance.UnpauseWithButton();
     }
 
     public void OnClickMainMenuButton()
     {
-
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void OnClickQuitButton()
     {
-
+        Application.Quit();
     }
 
     #endregion
@@ -103,9 +104,9 @@ public class PlayerUIHandler : MonoBehaviour
         playerReticle.sprite = reticles[0];
     }
 
-    public void ToggleReticleVisibility()
+    public void ToggleReticleVisibility(bool trueOrFalse)
     {
-        playerReticle.gameObject.SetActive(!playerReticle.gameObject.activeSelf);
+        playerReticle.gameObject.SetActive(trueOrFalse);
     }
 
     public void UpdateUI()
@@ -120,7 +121,7 @@ public class PlayerUIHandler : MonoBehaviour
 
     public void UpdateGameTimer(int minutes, int seconds)
     {
-        timerLabel.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timerLabel.text = string.Format("TIME TO DESTINATION: {0:00}:{1:00}", minutes, seconds);
     }
 
     private List<int> GetPlayerResources()
