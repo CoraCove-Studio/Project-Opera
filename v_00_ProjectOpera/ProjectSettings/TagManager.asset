@@ -7,11 +7,12 @@ TagManager:
   - Crop
   - Part
   - Nitrogen
+  - CollectionDetector
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Interactable
   - Water
   - UI
   - 
