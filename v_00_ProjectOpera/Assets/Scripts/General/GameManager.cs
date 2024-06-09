@@ -100,19 +100,28 @@ public class GameManager : MonoBehaviour
     {
         if (GamePaused == false)
         {
-            timeCounter += Time.deltaTime;
+            timeCounter -= Time.deltaTime;
             int minutes = Mathf.FloorToInt(timeCounter / 60f);
             int seconds = Mathf.FloorToInt(timeCounter - minutes * 60);
             if (playerUI != null)
             {
                 playerUI.UpdateGameTimer(minutes, seconds);
             }
+            CheckGameOver();
         }
     }
 
     private void RestartTimer()
     {
-        timeCounter = 0;
+        timeCounter = 360;
+    }
+
+    private void CheckGameOver()
+    {
+        if(timeCounter <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     private void ToggleGamePause()
@@ -192,7 +201,7 @@ public class GameManager : MonoBehaviour
         playerCrops = 5;
         playerParts = 5;
         playerNitrogen = 5;
-        playerCredits = 50;
+        playerCredits = 0;
     }
 
     #region Add / Take Resource Methods

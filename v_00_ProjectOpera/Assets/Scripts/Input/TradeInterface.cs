@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class TradeInterface : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnClickSellCrops()
     {
-        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        if(GameManager.Instance.PlayerCrops > 0)
+        {
+            GameManager.Instance.TakeCropsFromPlayer(1);
+            GameManager.Instance.AddCreditsToPlayer(5);
+        }
     }
 
     public void OnClickSellParts()
     {
-        print("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+        if(GameManager.Instance.PlayerParts > 0)
+        {
+            GameManager.Instance.TakePartsFromPlayer(1);
+            GameManager.Instance.AddCreditsToPlayer(5);
+        }
     }
 
     public void OnClickSellNitrogen()
     {
-        print("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+        if(GameManager.Instance.PlayerNitrogen > 0)
+        {
+            GameManager.Instance.TakeNitrogenFromPlayer(1);
+            GameManager.Instance.AddCreditsToPlayer(5);
+        }
     }
 }
