@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 12424945384145163}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OutputPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,8 @@ GameObject:
   - component: {fileID: 4433414978180330980}
   - component: {fileID: 4616194199480077083}
   - component: {fileID: 4219863942600363973}
-  m_Layer: 0
+  - component: {fileID: 7937464392694026692}
+  m_Layer: 3
   m_Name: CropMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +151,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba8337d6f38bdc44808819355c77a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceInput: 0
+  resourceInput: 5
   timer: 1
   objPooler: {fileID: 0}
   outputPos: {fileID: 12424945384145163}
+--- !u!114 &7937464392694026692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5666739263254355761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15d914f1678dc1945845cbb43c6eaac0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Focus:
+    m_PersistentCalls:
+      m_Calls: []
+  Interact:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4219863942600363973}
+        m_TargetAssemblyTypeName: CropMachine, Assembly-CSharp
+        m_MethodName: AddInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  LoseFocus:
+    m_PersistentCalls:
+      m_Calls: []

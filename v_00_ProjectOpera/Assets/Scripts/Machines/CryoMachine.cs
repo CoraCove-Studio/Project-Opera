@@ -45,11 +45,11 @@ public class CryoMachine : MonoBehaviour
     }
 
     //called to add resources to machine
-    public void AddInput(int addedResource)
+    public void AddInput()
     {
-        resourceInput += addedResource;
+        GameManager.Instance.TakePartsFromPlayer(1);
+        resourceInput++;
     }
-
 
     //called when upgrade is purchased and applied
     public void Upgrade(float reduction)

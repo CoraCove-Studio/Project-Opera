@@ -49,7 +49,7 @@ public class ObjectPooler : MonoBehaviour
         GameObject crop;
 
             crop = Instantiate(listOfCropPrefabs[0]);
-            Crop _ = crop.GetComponent<Crop>();
+            Product _ = crop.GetComponent<Product>();
             _.SetObjectPoolerReference(this);
             listOfCrops.Add(crop);
 
@@ -62,7 +62,7 @@ public class ObjectPooler : MonoBehaviour
     public GameObject ReturnPart()
     {
         GameObject part;
-        part = ReturnInactiveObject(listOfCrops);
+        part = ReturnInactiveObject(listOfParts);
 
         if (part == null)
         {
@@ -77,7 +77,7 @@ public class ObjectPooler : MonoBehaviour
         GameObject part;
 
         part = Instantiate(listOfPartPrefabs[0]);
-        Part _ = part.GetComponent<Part>();
+        Product _ = part.GetComponent<Product>();
         _.SetObjectPoolerReference(this);
         listOfParts.Add(part);
 
@@ -105,7 +105,7 @@ public class ObjectPooler : MonoBehaviour
         GameObject nitrogen;
 
         nitrogen = Instantiate(listOfNitrogenPrefabs[0]);
-        Nitrogen _ = nitrogen.GetComponent<Nitrogen>();
+        Product _ = nitrogen.GetComponent<Product>();
         _.SetObjectPoolerReference(this);
         listOfNitrogen.Add(nitrogen);
 

@@ -48,7 +48,7 @@ public class CropMachine : MonoBehaviour
     //called to add resources to machine
     public void AddInput()
     {
-        GameManager.Instance.TakeCropsFromPlayer(1);
+        GameManager.Instance.TakeNitrogenFromPlayer(1);
         resourceInput++;
     }
 

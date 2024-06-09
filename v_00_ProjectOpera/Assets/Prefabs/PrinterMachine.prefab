@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1825554812109035164}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.72, y: 0.217, z: 0}
+  m_LocalPosition: {x: -1.472, y: 0.217, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 7730944120783585061}
   - component: {fileID: 7583900840180472704}
   - component: {fileID: 2555752708083909328}
+  - component: {fileID: 3569985919570665739}
   m_Layer: 0
   m_Name: PrinterMachine
   m_TagString: Untagged
@@ -154,3 +155,24 @@ MonoBehaviour:
   timer: 1
   objPooler: {fileID: 0}
   outputPos: {fileID: 8139582411061171423}
+--- !u!114 &3569985919570665739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8600211906201054024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15d914f1678dc1945845cbb43c6eaac0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Focus:
+    m_PersistentCalls:
+      m_Calls: []
+  Interact:
+    m_PersistentCalls:
+      m_Calls: []
+  LoseFocus:
+    m_PersistentCalls:
+      m_Calls: []
