@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestZeb.unity
     guid: b20ffa5618faa4a429c489b93c0e7d2d
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: dcee34b7198a7924eab1992db11c343c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 79eaf3ef6826dd7409d7a579c25efee3,
       type: 2}
