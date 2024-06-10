@@ -30,4 +30,16 @@ public class ColorSettings : ScriptableObject
             public float tintPercent;
         }
     }
+
+    public void RandomizeColors()
+    {
+        if (planetMaterial != null)
+        {
+            planetMaterial.color = new Color(Random.value, Random.value, Random.value);
+        }
+        else
+        {
+            Debug.LogError("Planet material is not assigned.");
+        }
+    }
 }

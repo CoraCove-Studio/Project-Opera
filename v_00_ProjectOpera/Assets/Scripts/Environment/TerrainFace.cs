@@ -58,6 +58,9 @@ public class TerrainFace
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
         mesh.uv = uv;
+
+        Debug.Log("Vertices count: " + vertices.Length);
+        Debug.Log("Triangles count: " + triangles.Length);
     }
 
     public void UpdateUVs(ColorGenerator colorGenerator)
