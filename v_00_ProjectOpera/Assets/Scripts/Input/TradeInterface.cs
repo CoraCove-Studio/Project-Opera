@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TradeInterface : MonoBehaviour
 {
-    [SerializeField] public GameObject planetPrefab;
-
     public void OnClickSellCrops()
     {
         if(GameManager.Instance.PlayerCrops > 0)
@@ -30,23 +28,6 @@ public class TradeInterface : MonoBehaviour
         {
             GameManager.Instance.TakeNitrogenFromPlayer(1);
             GameManager.Instance.AddCreditsToPlayer(5);
-        }
-    }
-
-    public void OnClickCreateAPlanet()
-    {
-        Planet oldPlanet = FindObjectOfType<Planet>();
-        if (oldPlanet != null)
-        {
-            oldPlanet.DestroyPlanet();
-        }
-
-        // Instantiate a new planet
-        GameObject newPlanetObject = Instantiate(planetPrefab);
-        Planet newPlanet = newPlanetObject.GetComponent<Planet>();
-        if (newPlanet != null)
-        {
-            newPlanet.GenerateRandomPlanet();
         }
     }
 }

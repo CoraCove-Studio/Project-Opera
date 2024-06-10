@@ -133,26 +133,4 @@ public class Planet : MonoBehaviour
             }
         }
     }
-
-    public void GenerateRandomPlanet()
-    {
-        if (colorSettings != null)
-        {
-            colorSettings.RandomizeColors();
-            Initialize();
-            GenerateMesh();
-        }
-    }
-
-    public void DestroyPlanet()
-    {
-        foreach (MeshFilter meshFilter in meshFilters)
-        {
-            if (meshFilter != null)
-            {
-                Destroy(meshFilter.gameObject);
-            }
-        }
-        Destroy(gameObject);
-    }
 }
