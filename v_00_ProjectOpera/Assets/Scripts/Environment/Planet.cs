@@ -8,8 +8,8 @@ public class Planet : MonoBehaviour
     public bool autoUpdate = true;
     [Range(2, 256)] public int resolution = 10;
 
-    [Header("HDRP Materials")]
-    public Material hdrpMaterial;
+    //[Header("HDRP Materials")]
+    //public Material hdrpMaterial;
 
     [Header("Settings")]
     public ShapeSettings shapeSettings;
@@ -24,11 +24,13 @@ public class Planet : MonoBehaviour
     MeshFilter[] meshFilters;
     TerrainFace[] terrainFaces;
 
-    ShapeGenerator shapeGenerator;
+    ShapeGenerator shapeGenerator = new ShapeGenerator();
+    ColorGenerator colorGenerator = new ColorGenerator();
 
     void Initialize()
     {
-        shapeGenerator = new ShapeGenerator(shapeSettings);
+        shapeGenerator.UpdateSettings(shapeSettings);
+        colorGenerator.UpdateSettings(colorSettings);
 
         if (meshFilters == null || meshFilters.Length == 0)
         {
@@ -46,17 +48,20 @@ public class Planet : MonoBehaviour
                 GameObject meshObj = new GameObject("mesh");
                 meshObj.transform.parent = transform;
 
+                
                 // Assign the HDRP material
                 MeshRenderer meshRenderer = meshObj.AddComponent<MeshRenderer>();
-                if (hdrpMaterial != null)
-                {
-                    //Debug.Log("Assigning HDRP material to mesh renderer.");
-                    meshRenderer.material = hdrpMaterial;
-                }
-                else
-                {
-                    Debug.LogError("HDRP Material not assigned!");
-                }
+                meshRenderer.material = colorSettings.planetMaterial;
+
+                //if (hdrpMaterial != null)
+                //{
+                //    //Debug.Log("Assigning HDRP material to mesh renderer.");
+                //    meshRenderer.material = hdrpMaterial;
+                //}
+                //else
+                //{
+                //    Debug.LogError("HDRP Material not assigned!");
+                //}
 
                 meshFilters[i] = meshObj.AddComponent<MeshFilter>();
                 meshFilters[i].sharedMesh = new Mesh();
@@ -64,10 +69,10 @@ public class Planet : MonoBehaviour
             else
             {
                 MeshRenderer meshRenderer = meshFilters[i].GetComponent<MeshRenderer>();
-                if (meshRenderer != null && hdrpMaterial != null)
+                if (meshRenderer != null) //&& hdrpMaterial != null
                 {
                     //Debug.Log("Reassigning HDRP material to existing mesh renderer.");
-                    meshRenderer.material = hdrpMaterial;
+                    meshRenderer.material = colorSettings.planetMaterial;
                 }
             }
 
@@ -105,17 +110,27 @@ public class Planet : MonoBehaviour
 
     void GenerateMesh()
     {
-        foreach (TerrainFace face in terrainFaces)
+        for (int i = 0; i < 6; i++)
         {
-            face.ConstructMesh();
+            if (meshFilters[i].gameObject.activeSelf)
+            {
+                terrainFaces[i].ConstructMesh();
+            }
         }
+
+        colorGenerator.UpdateElevation(shapeGenerator.elevationMinMax);
     }
 
     void GenerateColors()
     {
-        foreach (MeshFilter m in meshFilters)
+        colorGenerator.UpdateColors();
+
+        for (int i = 0; i < 6; i++)
         {
-            m.GetComponent<MeshRenderer>().sharedMaterial.color = colorSettings.planetColor;
+            if (meshFilters[i].gameObject.activeSelf)
+            {
+                terrainFaces[i].UpdateUVs(colorGenerator);
+            }
         }
     }
 }
