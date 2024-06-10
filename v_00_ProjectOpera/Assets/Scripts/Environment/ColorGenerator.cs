@@ -54,15 +54,15 @@ public class ColorGenerator
             {
                 Color gradientCol;
 
-                //if (i < textureResolution)
-                //{
-                //    //gradientCol = settings.oceanColor.Evaluate(i / (textureResolution - 1));
-                //}
-                //else
-                //{
-                    
-                //}
-                gradientCol = biome.gradient.Evaluate((i - textureResolution) / (textureResolution - 1f));
+                if (i < textureResolution)
+                {
+                    gradientCol = settings.oceanColor.Evaluate(i / (textureResolution - 1));
+                }
+                else
+                {
+                    gradientCol = biome.gradient.Evaluate((i - textureResolution) / (textureResolution - 1f));
+                }
+
                 Color tintCol = biome.tint;
                 colors[colorIndex] = gradientCol * (1-biome.tintPercent) + tintCol * biome.tintPercent;
                 colorIndex++;
