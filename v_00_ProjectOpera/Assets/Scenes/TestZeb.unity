@@ -1514,7 +1514,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &460769192
 Transform:
@@ -1618,7 +1618,7 @@ MonoBehaviour:
   m_PenumbraTint: 0
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
-  m_ShadowUpdateMode: 0
+  m_ShadowUpdateMode: 2
   m_AlwaysDrawDynamicShadows: 0
   m_UpdateShadowOnLightMovement: 0
   m_CachedShadowTranslationThreshold: 0.01
@@ -1712,7 +1712,7 @@ Light:
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
+  m_UseViewFrustumForShadowCasterCull: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1001 &501299190
@@ -2965,7 +2965,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1205182323
 Transform:
@@ -3069,7 +3069,7 @@ MonoBehaviour:
   m_PenumbraTint: 0
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
-  m_ShadowUpdateMode: 0
+  m_ShadowUpdateMode: 2
   m_AlwaysDrawDynamicShadows: 0
   m_UpdateShadowOnLightMovement: 0
   m_CachedShadowTranslationThreshold: 0.01
@@ -3163,7 +3163,7 @@ Light:
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
+  m_UseViewFrustumForShadowCasterCull: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &1272119073
@@ -3408,7 +3408,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &1310134250
 MonoBehaviour:
@@ -3497,7 +3497,7 @@ MonoBehaviour:
   m_PenumbraTint: 0
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
-  m_ShadowUpdateMode: 0
+  m_ShadowUpdateMode: 2
   m_AlwaysDrawDynamicShadows: 0
   m_UpdateShadowOnLightMovement: 0
   m_CachedShadowTranslationThreshold: 0.01
@@ -3591,7 +3591,7 @@ Light:
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
+  m_UseViewFrustumForShadowCasterCull: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1310134252
@@ -3625,7 +3625,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1316371617
 Transform:
@@ -3729,7 +3729,7 @@ MonoBehaviour:
   m_PenumbraTint: 0
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
-  m_ShadowUpdateMode: 0
+  m_ShadowUpdateMode: 2
   m_AlwaysDrawDynamicShadows: 0
   m_UpdateShadowOnLightMovement: 0
   m_CachedShadowTranslationThreshold: 0.01
@@ -3823,7 +3823,7 @@ Light:
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
+  m_UseViewFrustumForShadowCasterCull: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1327466492 stripped
@@ -4272,7 +4272,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &1541277464
 MonoBehaviour:
@@ -4361,7 +4361,7 @@ MonoBehaviour:
   m_PenumbraTint: 0
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
-  m_ShadowUpdateMode: 0
+  m_ShadowUpdateMode: 2
   m_AlwaysDrawDynamicShadows: 0
   m_UpdateShadowOnLightMovement: 0
   m_CachedShadowTranslationThreshold: 0.01
@@ -4455,7 +4455,7 @@ Light:
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
+  m_UseViewFrustumForShadowCasterCull: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1541277466
@@ -4566,7 +4566,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1777036566
 Transform:
@@ -4670,7 +4670,7 @@ MonoBehaviour:
   m_PenumbraTint: 0
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
-  m_ShadowUpdateMode: 0
+  m_ShadowUpdateMode: 2
   m_AlwaysDrawDynamicShadows: 0
   m_UpdateShadowOnLightMovement: 0
   m_CachedShadowTranslationThreshold: 0.01
@@ -4764,7 +4764,7 @@ Light:
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
+  m_UseViewFrustumForShadowCasterCull: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &1796750770
@@ -4947,7 +4947,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &1992384093
 MonoBehaviour:
@@ -5036,7 +5036,7 @@ MonoBehaviour:
   m_PenumbraTint: 0
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
-  m_ShadowUpdateMode: 0
+  m_ShadowUpdateMode: 2
   m_AlwaysDrawDynamicShadows: 0
   m_UpdateShadowOnLightMovement: 0
   m_CachedShadowTranslationThreshold: 0.01
@@ -5130,7 +5130,7 @@ Light:
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 18.027756}
   m_UseBoundingSphereOverride: 1
-  m_UseViewFrustumForShadowCasterCull: 1
+  m_UseViewFrustumForShadowCasterCull: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1992384095
@@ -5164,7 +5164,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2013744278
 Transform:
@@ -5268,7 +5268,7 @@ MonoBehaviour:
   m_PenumbraTint: 0
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
-  m_ShadowUpdateMode: 0
+  m_ShadowUpdateMode: 2
   m_AlwaysDrawDynamicShadows: 0
   m_UpdateShadowOnLightMovement: 0
   m_CachedShadowTranslationThreshold: 0.01
@@ -5362,7 +5362,7 @@ Light:
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
+  m_UseViewFrustumForShadowCasterCull: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1001 &2015614186
