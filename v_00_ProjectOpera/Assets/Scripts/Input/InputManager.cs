@@ -54,14 +54,12 @@ public class InputManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EnableCoreControls();
         SceneManager.sceneLoaded += OnSceneLoaded;
         Application.quitting += Quitting;
     }
 
     private void OnDisable()
     {
-        DisableCoreControls();
         SceneManager.sceneLoaded -= OnSceneLoaded;
         Application.quitting -= Quitting;
     }
@@ -75,7 +73,7 @@ public class InputManager : MonoBehaviour
     {
         if (scene.name == GameManager.Instance.mainGameSceneName)
         {
-            EnableCoreControls();
+            EnableUIControls();
         }
         else if (scene.name == "GameOver")
         {
@@ -138,9 +136,9 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public void HandlePause(InputAction.CallbackContext context)
+    private void HandlePause(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && GameManager.Instance.IsInTutorial == false)
         {
             if (coreActionMap.enabled)
             {

@@ -15,10 +15,13 @@ public class GameManager : MonoBehaviour
     private const int maxResources = 300;
 
     public PlayerUIHandler PlayerUI { get; private set; }
+    public GameObject Player { get; private set; }
+    private Rigidbody playerRigidBody;
     private GameTimer gameTimer;
     private float gameDurationInSeconds;
 
-    public bool GamePaused { get; private set; } = false;
+    public bool GamePaused { get; private set; } = true;
+    public bool IsInTutorial { get; private set; } = true;
 
     private int playerCredits;
     private int playerCrops;
@@ -65,40 +68,45 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         Cheatcodes();
-        if (gameTimer != null && PlayerUI != null)
+        if (gameTimer != null && PlayerUI != null && GamePaused == false)
         {
             PlayerUI.UpdateGameTimer(gameTimer.TimeLeft.Item1, gameTimer.TimeLeft.Item2);
             CheckGameOver();
         }
         if (Input.GetKeyDown(KeyCode.P)) // Debugging for other scenes
         {
-            StartNewGame();
+            SetUpNewGame();
         }
     }
 
-
-    public void StartNewGame()
+    public void StartGame()
+    {
+        ToggleGamePause();
+        gameTimer.StartTimer();
+        playerRigidBody.isKinematic = false;
+    }
+    public void SetUpNewGame()
     {
         Debug.Log("GameManager: StartNewGame: Starting new game.");
         PlayerUI = GameObject.Find("PlayerCanvas").GetComponent<PlayerUIHandler>();
         GameObject.Find("GameTimer").TryGetComponent(out gameTimer);
+        playerRigidBody = GameObject.Find("PlayerPrefab").GetComponent<Rigidbody>();
+
         SetNewGameValues();
+
         if (PlayerUI != null)
         {
             PlayerUI.UpdateUI();
+            PlayerUI.ToggleReticleVisibility(false);
+            InputManager.Instance.PauseWithButton();
         }
         else
         {
             Debug.Log("PlayerUI not found by GameManager.");
         }
-        if (GamePaused == true)
-        {
-            ToggleGamePause();
-        }
         if (gameTimer != null)
         {
             gameTimer.SetNewTimer(gameDurationInSeconds);
-            gameTimer.StartTimer();
         }
     }
 
@@ -177,7 +185,7 @@ public class GameManager : MonoBehaviour
         print("Current scene is: " + scene.name);
         if (scene.name == mainGameSceneName || scene.name == "TestZeb")
         {
-            StartNewGame();
+            SetUpNewGame();
         }
         else if (scene.name == "GameOver")
         {

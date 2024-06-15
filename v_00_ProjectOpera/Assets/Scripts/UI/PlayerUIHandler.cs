@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 public class PlayerUIHandler : MonoBehaviour
 {
@@ -33,7 +32,7 @@ public class PlayerUIHandler : MonoBehaviour
     private void Awake()
     {
         UpdateUI();
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void PauseGame()
@@ -46,15 +45,18 @@ public class PlayerUIHandler : MonoBehaviour
 
     public void ResumeGame()
     {
-        if (currentPanel == pauseMenu)
+        if (currentPanel != null)
         {
-            pauseMenu.SetActive(false);
+            if (currentPanel == pauseMenu)
+            {
+                pauseMenu.SetActive(false);
+            }
+            else if (currentPanel == machineSpawnPanel)
+            {
+                machineSpawnPanel.SetActive(false);
+            }
+            currentPanel = null;
         }
-        else if (currentPanel == machineSpawnPanel)
-        {
-            machineSpawnPanel.SetActive(false);
-        }
-        currentPanel = null;
         ToggleReticleVisibility(true);
         Cursor.lockState = CursorLockMode.Locked;
     }
