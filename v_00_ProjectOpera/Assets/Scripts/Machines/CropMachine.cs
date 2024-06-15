@@ -10,12 +10,12 @@ public class CropMachine : MonoBehaviour
     [SerializeField] private ObjectPooler objPooler;
     [SerializeField] private Transform outputPos;
 
-    private IEnumerator productionCoroutine;
+    private Coroutine productionCoroutine;
 
     private void OnEnable()
     {
-        productionCoroutine = Production(resourceInput, timer);
-        StartCoroutine(productionCoroutine);
+        objPooler = GameObject.Find("ObjectPooler").GetComponent<ObjectPooler>();
+        productionCoroutine = StartCoroutine(Production(resourceInput, timer));
     }
 
     private void OnDisable()

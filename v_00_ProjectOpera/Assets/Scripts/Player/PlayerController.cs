@@ -5,17 +5,20 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
 
-    [SerializeField] private float movementSpeed = 5f;
+    [SerializeField] private float movementSpeed = 4f;
     [SerializeField] private float acceleration = 10f;
-    [SerializeField] private float drag = 5f;
+    [SerializeField] private float drag = 2f;
     [SerializeField] private float lookSpeed = 2f;
     [SerializeField] private float xSensitivity = 0.5f;
     [SerializeField] private float ySensitivity = 0.5f;
     [SerializeField] private float maxPitchAngle = 85f;  // Max angle for looking up and down
+    [SerializeField] private float smoothing = 5f; // Smoothing factor
     private Vector2 accumulatedInput;
 
     private Vector3 currentMovementInput;
     private Vector3 currentVelocity;
+    private Vector3 currentRotation;
+    private Vector3 targetRotation;
 
     private void Awake()
     {
@@ -43,6 +46,13 @@ public class PlayerController : MonoBehaviour
             InputManager.Instance.OnMove -= ReceiveMovementInput;
             InputManager.Instance.OnCamMove -= ReceiveCamInput;
         }
+    }
+
+    private void Start()
+    {
+        // Initialize the current and target rotation to the current rotation of the camera
+        currentRotation = transform.localEulerAngles;
+        targetRotation = currentRotation;
     }
 
     private void FixedUpdate()
@@ -87,19 +97,20 @@ public class PlayerController : MonoBehaviour
         float inputX = accumulatedInput.y * xSensitivity;
         float inputY = accumulatedInput.x * ySensitivity;
 
-        Vector3 currentRotation = transform.localEulerAngles;
-
         // Calculate the new rotation while clamping the z rotation to 0
-        currentRotation.x -= inputX * Time.deltaTime * lookSpeed;
-        currentRotation.y += inputY * Time.deltaTime * lookSpeed;
+        targetRotation.x -= inputX * Time.deltaTime * lookSpeed;
+        targetRotation.y += inputY * Time.deltaTime * lookSpeed;
 
-        // Convert currentRotation.x to the range of -180 to 180 before clamping
-        if (currentRotation.x > 180) currentRotation.x -= 360;
+        // Convert targetRotation.x to the range of -180 to 180 before clamping
+        if (targetRotation.x > 180) targetRotation.x -= 360;
 
         // Clamp the x rotation to the specified min and max pitch angles
-        currentRotation.x = Mathf.Clamp(currentRotation.x, -maxPitchAngle, maxPitchAngle);
+        targetRotation.x = Mathf.Clamp(targetRotation.x, -maxPitchAngle, maxPitchAngle);
 
-        currentRotation.z = 0;
+        targetRotation.z = 0;
+
+        // Smoothly interpolate between the current rotation and the target rotation
+        currentRotation = Vector3.Lerp(currentRotation, targetRotation, smoothing * Time.deltaTime);
 
         transform.localEulerAngles = currentRotation;
 

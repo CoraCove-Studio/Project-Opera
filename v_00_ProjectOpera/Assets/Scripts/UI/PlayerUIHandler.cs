@@ -11,10 +11,14 @@ public class PlayerUIHandler : MonoBehaviour
     [SerializeField] private Image playerReticle;
     [SerializeField] private List<Sprite> reticles = new();
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject machineSpawnPanel;
     [SerializeField] private EventSystem eventSystem;
 
     [SerializeField] private List<TextMeshProUGUI> resourceLabels = new();
     [SerializeField] private TextMeshProUGUI timerLabel;
+
+    public GameObject currentPanel;
+    private MachineSlot currentMachineSlot;
 
     private readonly string[] labelText = {
         "CROPS: ",
@@ -29,19 +33,30 @@ public class PlayerUIHandler : MonoBehaviour
     private void Awake()
     {
         UpdateUI();
-
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void EnablePauseMenu()
+    public void PauseGame()
     {
         pauseMenu.SetActive(true);
+        currentPanel = pauseMenu;
         ToggleReticleVisibility(false);
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
-    public void DisablePauseMenu()
+    public void ResumeGame()
     {
-        pauseMenu.SetActive(false);
+        if (currentPanel == pauseMenu)
+        {
+            pauseMenu.SetActive(false);
+        }
+        else if (currentPanel == machineSpawnPanel)
+        {
+            machineSpawnPanel.SetActive(false);
+        }
+        currentPanel = null;
         ToggleReticleVisibility(true);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     #region Button Methods
@@ -135,5 +150,44 @@ public class PlayerUIHandler : MonoBehaviour
         };
 
         return resourceList;
+    }
+
+    public void ActivateMachineSpawnPanel(MachineSlot machineSlot)
+    {
+        GameManager.Instance.ActivateSubMenu();
+        currentMachineSlot = machineSlot;
+        // loop through the buttons of the spawn panel and make them interactable or not interactable based
+        // on whether or not the player has enough credits
+
+        machineSpawnPanel.SetActive(true);
+        currentPanel = machineSpawnPanel;
+        InputManager.Instance.PauseWithButton();
+        ToggleReticleVisibility(false);
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void DeactivateMachineSpawnPanel()
+    {
+        currentMachineSlot = null;
+        OnClickResumeButton();
+    }
+
+    public void OnSpawnButtonClick(string resourceType)
+    {
+        switch (resourceType.ToUpper())
+        {
+            case "CROP":
+                currentMachineSlot.SpawnMachine(ResourceTypes.CROP);
+                break;
+            case "PART":
+                currentMachineSlot.SpawnMachine(ResourceTypes.PART);
+                break;
+            case "NITROGEN":
+                currentMachineSlot.SpawnMachine(ResourceTypes.NITROGEN);
+                break;
+            default:
+                break;
+        }
+        DeactivateMachineSpawnPanel();
     }
 }

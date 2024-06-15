@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     #region Fields and Properties
 
-    public string mainGameSceneName = "TestZeb";
+    public string mainGameSceneName = "MainScene";
 
     private const int minResources = 0;
     private const int maxResources = 300;
@@ -70,6 +70,10 @@ public class GameManager : MonoBehaviour
             PlayerUI.UpdateGameTimer(gameTimer.TimeLeft.Item1, gameTimer.TimeLeft.Item2);
             CheckGameOver();
         }
+        if (Input.GetKeyDown(KeyCode.P)) // Debugging for other scenes
+        {
+            StartNewGame();
+        }
     }
 
 
@@ -77,7 +81,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameManager: StartNewGame: Starting new game.");
         PlayerUI = GameObject.Find("PlayerCanvas").GetComponent<PlayerUIHandler>();
-        gameTimer = GameObject.Find("GameTimer").GetComponent<GameTimer>();
+        GameObject.Find("GameTimer").TryGetComponent(out gameTimer);
         SetNewGameValues();
         if (PlayerUI != null)
         {
@@ -87,7 +91,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("PlayerUI not found by GameManager.");
         }
-        Cursor.lockState = CursorLockMode.Locked;
         if (GamePaused == true)
         {
             ToggleGamePause();
@@ -117,9 +120,8 @@ public class GameManager : MonoBehaviour
                 //Time.timeScale = 1;
                 if (PlayerUI != null)
                 {
-                    PlayerUI.DisablePauseMenu();
+                    PlayerUI.ResumeGame();
                 }
-                Cursor.lockState = CursorLockMode.Locked;
                 GamePaused = false;
             }
             else
@@ -128,19 +130,23 @@ public class GameManager : MonoBehaviour
                 //Time.timeScale = 0;
                 if (PlayerUI != null)
                 {
-                    PlayerUI.EnablePauseMenu();
+                    PlayerUI.PauseGame();
                 }
-                Cursor.lockState = CursorLockMode.Confined;
                 GamePaused = true;
             }
         }
+    }
+
+    public void ActivateSubMenu()
+    {
+        GamePaused = true;
     }
     public void SetNewGameValues()
     {
         playerCrops = 5;
         playerParts = 5;
         playerNitrogen = 5;
-        playerCredits = 0;
+        playerCredits = 300;
         gameDurationInSeconds = 300;
     }
 
@@ -169,7 +175,7 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         print("Current scene is: " + scene.name);
-        if (scene.name == mainGameSceneName)
+        if (scene.name == mainGameSceneName || scene.name == "TestZeb")
         {
             StartNewGame();
         }

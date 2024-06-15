@@ -163,4 +163,10 @@ public class InputManager : MonoBehaviour
         DisableUIControls();
         EnableCoreControls();
     }
+
+    public void PauseWithButton()
+    {
+        EnableUIControls();
+        DisableCoreControls();
+    }
 }
