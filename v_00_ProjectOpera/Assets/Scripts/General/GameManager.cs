@@ -247,21 +247,7 @@ public class GameManager : MonoBehaviour
 
     #region Add / Take Resource Methods
 
-    public void AddCropsToPlayer(int amount)
-    {
-        PlayerCrops += amount;
-    }
-
-    public void AddPartsToPlayer(int amount)
-    {
-        PlayerParts += amount;
-    }
-
-    public void AddNitrogenToPlayer(int amount)
-    {
-        PlayerNitrogen += amount;
-    }
-
+ 
     public void AddResourceToPlayer(int amount, ResourceTypes resourceType)
     {
         switch (resourceType)
@@ -286,27 +272,12 @@ public class GameManager : MonoBehaviour
         PlayerCredits += amount;
     }
 
-    public void TakeCropsFromPlayer(int amount)
-    {
-        PlayerCrops -= amount;
-    }
-
-    public void TakePartsFromPlayer(int amount)
-    {
-        PlayerParts -= amount;
-    }
-
-    public void TakeNitrogenFromPlayer(int amount)
-    {
-        PlayerNitrogen -= amount;
-    }
-
     public void TakeCreditsFromPlayer(int amount)
     {
         PlayerCredits -= amount;
     }
 
-    public void TakeResourceToPlayer(int amount, ResourceTypes resourceType)
+    public void TakeResourceFromPlayer(int amount, ResourceTypes resourceType)
     {
         switch (resourceType)
         {

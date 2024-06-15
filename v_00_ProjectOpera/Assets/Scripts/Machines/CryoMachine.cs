@@ -48,7 +48,7 @@ public class CryoMachine : MonoBehaviour
     //called to add resources to machine
     public void AddInput()
     {
-        GameManager.Instance.TakePartsFromPlayer(1);
+        GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.PART);
         resourceInput++;
     }
 

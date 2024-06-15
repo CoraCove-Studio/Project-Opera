@@ -45,9 +45,9 @@ public class PrinterMachine : MonoBehaviour
     }
 
     //called to add resources to machine
-    public void AddInput(int addedResource)
+    public void AddInput()
     {
-        GameManager.Instance.TakeCropsFromPlayer(1);
+        GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.CROP);
         resourceInput++;
     }
 
