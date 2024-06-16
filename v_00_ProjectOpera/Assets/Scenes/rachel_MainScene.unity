@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.02190221, g: 0.02242304, b: 0.0211519, a: 1}
+  m_IndirectSpecularColor: {r: 0.021902157, g: 0.02242304, b: 0.0211519, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -709,11 +709,6 @@ PrefabInstance:
       propertyPath: tutorialPanel
       value: 
       objectReference: {fileID: 1830773580}
-    - target: {fileID: 2105960852423186499, guid: 861285617ab285e4fb0db277f06f6569,
-        type: 3}
-      propertyPath: debugStartButton
-      value: 
-      objectReference: {fileID: 916884141}
     - target: {fileID: 2734002294436011970, guid: 861285617ab285e4fb0db277f06f6569,
         type: 3}
       propertyPath: m_Name
@@ -727,7 +722,7 @@ PrefabInstance:
     - target: {fileID: 2734002294436011970, guid: 861285617ab285e4fb0db277f06f6569,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2893679502775799219, guid: 861285617ab285e4fb0db277f06f6569,
         type: 3}
@@ -1058,11 +1053,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DebugStartButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 7650883291442197657, guid: 861285617ab285e4fb0db277f06f6569,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7973657684243085317, guid: 861285617ab285e4fb0db277f06f6569,
         type: 3}
@@ -2191,12 +2181,6 @@ CanvasRenderer:
 --- !u!1 &899699369 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5437705498468423174, guid: 861285617ab285e4fb0db277f06f6569,
-    type: 3}
-  m_PrefabInstance: {fileID: 241062220}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &916884141 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7650883291442197657, guid: 861285617ab285e4fb0db277f06f6569,
     type: 3}
   m_PrefabInstance: {fileID: 241062220}
   m_PrefabAsset: {fileID: 0}
