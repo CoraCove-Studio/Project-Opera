@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
         gameDurationInSeconds = 300;
     }
 
-    #region Resources Get/Set
+    #region Resources Properties
 
     public int PlayerCrops
     {
@@ -255,7 +255,22 @@ public class GameManager : MonoBehaviour
 
     #region Add / Take Resource Methods
 
- 
+    public int GetPlayerResourceValue(ResourceTypes resourceType)
+    {
+        switch (resourceType)
+        {
+            case ResourceTypes.CROP:
+                return PlayerCrops;
+            case ResourceTypes.PART:
+                return PlayerParts;
+            case ResourceTypes.NITROGEN:
+                return PlayerNitrogen;
+            default:
+                print("GameManager: GetPlayerResourceValue: Getting resource value failed, not recognized resource type.");
+                return 0;
+        }
+    }
+
     public void AddResourceToPlayer(int amount, ResourceTypes resourceType)
     {
         switch (resourceType)
@@ -270,7 +285,7 @@ public class GameManager : MonoBehaviour
                 PlayerNitrogen += amount;
                 break;
             default:
-                print("Adding resource failed, not recognized resource type.");
+                print("GameManager: AddResourceToPlayer: Adding resource failed, not recognized resource type.");
                 break;
         }
     }
