@@ -73,21 +73,54 @@ public class GameManager : MonoBehaviour
             PlayerUI.UpdateGameTimer(gameTimer.TimeLeft.Item1, gameTimer.TimeLeft.Item2);
             CheckGameOver();
         }
-        if (Input.GetKeyDown(KeyCode.P)) // Debugging for other scenes
+    }
+
+    #region Unity Event Methods
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        InputManager.Instance.OnPause += ToggleGamePause;
+        Application.quitting += Quitting;
+    }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        InputManager.Instance.OnPause -= ToggleGamePause;
+        Application.quitting -= Quitting;
+    }
+
+    private void Quitting()
+    {
+        Debug.Log("Application has begun quitting.");
+        isQuitting = true;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        print("Current scene is: " + scene.name);
+        if (scene.name == mainGameSceneName || scene.name == "TestZeb")
         {
             SetUpNewGame();
         }
+        else if (scene.name == "GameOver")
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
     }
+
+    #endregion
 
     public void StartGame()
     {
         ToggleGamePause();
         gameTimer.StartTimer();
         playerRigidBody.isKinematic = false;
+        IsInTutorial = false;
     }
     public void SetUpNewGame()
     {
-        Debug.Log("GameManager: StartNewGame: Starting new game.");
+        Debug.Log("GameManager: SetUpNewGame: Starting new game.");
         PlayerUI = GameObject.Find("PlayerCanvas").GetComponent<PlayerUIHandler>();
         GameObject.Find("GameTimer").TryGetComponent(out gameTimer);
         playerRigidBody = GameObject.Find("PlayerPrefab").GetComponent<Rigidbody>();
@@ -98,15 +131,16 @@ public class GameManager : MonoBehaviour
         {
             PlayerUI.UpdateUI();
             PlayerUI.ToggleReticleVisibility(false);
-            InputManager.Instance.PauseWithButton();
         }
         else
         {
             Debug.Log("PlayerUI not found by GameManager.");
         }
+
         if (gameTimer != null)
         {
             gameTimer.SetNewTimer(gameDurationInSeconds);
+            PlayerUI.UpdateGameTimer(gameTimer.TimeLeft.Item1, gameTimer.TimeLeft.Item2);
         }
     }
 
@@ -120,6 +154,9 @@ public class GameManager : MonoBehaviour
 
     public void ToggleGamePause()
     {
+        // This method is subscribed to the OnPause event from the InputHandler and 
+        // is called whenever the player presses `esc`
+
         if (SceneManager.GetActiveScene().name == mainGameSceneName)
         {
             if (GamePaused == true)
@@ -157,43 +194,6 @@ public class GameManager : MonoBehaviour
         playerCredits = 300;
         gameDurationInSeconds = 300;
     }
-
-    #region Unity Event Methods
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        InputManager.Instance.OnPause += ToggleGamePause;
-        Application.quitting += Quitting;
-    }
-
-    private void Quitting()
-    {
-        Debug.Log("Application has begun quitting.");
-        isQuitting = true;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        InputManager.Instance.OnPause -= ToggleGamePause;
-        Application.quitting -= Quitting;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        print("Current scene is: " + scene.name);
-        if (scene.name == mainGameSceneName || scene.name == "TestZeb")
-        {
-            SetUpNewGame();
-        }
-        else if (scene.name == "GameOver")
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-        }
-    }
-
-    #endregion
 
     #region Resources Get/Set
 
@@ -329,6 +329,10 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             // restart timer
+        }
+        if (Input.GetKeyDown(KeyCode.P)) // Debugging for other scenes
+        {
+            SetUpNewGame();
         }
     }
 

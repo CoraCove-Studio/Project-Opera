@@ -160,11 +160,13 @@ public class InputManager : MonoBehaviour
     {
         DisableUIControls();
         EnableCoreControls();
+        Debug.Log("InputManager: UnPauseWithButton: Core enabled, UI disabled.");
     }
 
     public void PauseWithButton()
     {
         EnableUIControls();
         DisableCoreControls();
+        Debug.Log("InputManager: PauseWithButton: Core disabled, UI enabled.");
     }
 }

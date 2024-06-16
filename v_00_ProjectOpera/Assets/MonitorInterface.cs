@@ -6,12 +6,15 @@ using UnityEngine;
 public class MonitorInterface : MonoBehaviour
 {
     [SerializeField] private GameObject monitorBody;
-    [SerializeField] private TextMeshProUGUI textField;
+
+    [Header("UI Elements")]
     [SerializeField] private GameObject tutorialPanel;
+    [SerializeField] private TextMeshProUGUI textField;
     [SerializeField] private GameObject startButton;
     [SerializeField] private GameObject nextButton;
     [SerializeField] private GameObject yesButton;
     [SerializeField] private GameObject noButton;
+    [SerializeField] private GameObject debugStartButton;
 
     private float textSpeed = 0.05f;
     private int currentTutTextIndex = 0;
@@ -24,6 +27,9 @@ public class MonitorInterface : MonoBehaviour
         tutText = new();
         endTutorialTextIndex = tutText.tutorialSteps.Length - 1;
         StartCoroutine(TypeTextEffect(GetNextTutText()));
+#if UNITY_EDITOR
+        debugStartButton.SetActive(true);
+#endif
     }
 
     private string GetNextTutText()

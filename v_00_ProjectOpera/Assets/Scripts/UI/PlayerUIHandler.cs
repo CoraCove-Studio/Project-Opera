@@ -37,6 +37,7 @@ public class PlayerUIHandler : MonoBehaviour
 
     public void PauseGame()
     {
+        Debug.Log("PlayerUIHandler: PauseGame: Pausing the game.");
         pauseMenu.SetActive(true);
         currentPanel = pauseMenu;
         ToggleReticleVisibility(false);
@@ -45,6 +46,7 @@ public class PlayerUIHandler : MonoBehaviour
 
     public void ResumeGame()
     {
+        Debug.Log("PlayerUIHandler: PauseGame: Resuming the game.");
         if (currentPanel != null)
         {
             if (currentPanel == pauseMenu)
