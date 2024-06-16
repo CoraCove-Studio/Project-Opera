@@ -328,7 +328,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            // restart timer
+            // restart outputInterval
         }
         if (Input.GetKeyDown(KeyCode.P)) // Debugging for other scenes
         {

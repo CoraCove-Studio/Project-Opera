@@ -13,7 +13,7 @@ public class TutorialText
         "Around your ship you will see machine slots. You can use them to build machines.",
         "Machines take input, and produce a product. Use the machines to multiply your resources over time!",
         "Then, when you have a surplus of something, you can sell it at the terminal for credits.",
-        "You can use credits to buy more machines, or pay off your debt to the corporation."
+        "You can use credits to buy more machines, or pay off your debt to the corporation.",
         "Okay, let's get started then!"
     };
 

@@ -1,59 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class MachineBehavior : MonoBehaviour
+public abstract class MachineBehavior : MonoBehaviour
 {
-    [SerializeField] private int resourceInput;
-    [SerializeField] private float timer;
+    [SerializeField] private int inputInventory;
+    [SerializeField] private int machineEfficiency = 4;
+    [SerializeField] private int outputInterval = 2;
     [SerializeField] private ObjectPooler objPooler;
     [SerializeField] private Transform outputPos;
+    private readonly Dictionary<ResourceTypes, ResourceTypes> resourceTypeRelationships = new();
+    public abstract ResourceTypes MachineType { get; }
+    private Coroutine productionCoroutine;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
-        StartCoroutine(Production(resourceInput, timer));
+        ConfigureRelationshipDictionary();
+        objPooler = GameObject.Find("ObjectPooler").GetComponent<ObjectPooler>();
+        productionCoroutine = StartCoroutine(Production());
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
-        StopCoroutine(Production(resourceInput, timer));
-    }
-
-
-    //only for testing if AddInput works
-    private void Update()
-    {
-        if(resourceInput <= 0)
+        if (productionCoroutine != null)
         {
-            AddInput(10);
+            StopCoroutine(productionCoroutine);
         }
     }
-    private IEnumerator Production(int input, float interval)
+
+    private void ConfigureRelationshipDictionary()
     {
-        GameObject crop;
-        while (input > 0)
+        resourceTypeRelationships.Add(ResourceTypes.CROP, ResourceTypes.NITROGEN);
+        resourceTypeRelationships.Add(ResourceTypes.PART, ResourceTypes.CROP);
+        resourceTypeRelationships.Add(ResourceTypes.NITROGEN, ResourceTypes.PART);
+    }
+
+    private IEnumerator Production()
+    {
+        GameObject product;
+
+        while (true)
         {
-            yield return new WaitForSeconds(interval);
-            resourceInput--;
-            crop = objPooler.ReturnCrop();
-            crop.transform.position = outputPos.position;
-            crop.SetActive(true);
+            if (inputInventory > 0)
+            {
+                inputInventory--;
+                product = objPooler.ReturnProduct(MachineType);
+                ConfigureProduct(product);
+            }
+            yield return new WaitForSeconds(outputInterval);
         }
-        input = resourceInput;
-        interval = timer;
     }
 
-    //called to add resources to machine
-    public void AddInput(int addedResource)
+    private void ConfigureProduct(GameObject product)
     {
-        resourceInput += addedResource;
+        product.transform.position = outputPos.position;
+        product.SetActive(true);
     }
 
-
-    //called when upgrade is purchased and applied
-    public void Upgrade(float reduction)
+    public void AddInput()
     {
-        timer -= reduction;
+        GameManager.Instance.TakeResourceFromPlayer(1, resourceTypeRelationships[MachineType]);
+        inputInventory += machineEfficiency;
     }
+
+    public abstract void Upgrade(float reduction);
 }

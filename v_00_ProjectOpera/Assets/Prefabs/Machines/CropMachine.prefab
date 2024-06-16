@@ -48,8 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba8337d6f38bdc44808819355c77a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceInput: 5
-  timer: 1
+  inputInventory: 0
+  machineEfficiency: 4
+  outputInterval: 8
   objPooler: {fileID: 0}
   outputPos: {fileID: 8637846780804999337}
 --- !u!114 &6229182032858423385

@@ -69,8 +69,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb240b3b31be60441b063b3337d8195c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceInput: 5
-  timer: 1
+  inputInventory: 0
+  machineEfficiency: 4
+  outputInterval: 8
   objPooler: {fileID: 0}
   outputPos: {fileID: 3552230780110768176}
 --- !u!114 &2702645883483869212
@@ -92,9 +93,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7178670231014221668}
-        m_TargetAssemblyTypeName: PrinterMachine, Assembly-CSharp
+        m_TargetAssemblyTypeName: MachineBehavior, Assembly-CSharp
         m_MethodName: AddInput
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
