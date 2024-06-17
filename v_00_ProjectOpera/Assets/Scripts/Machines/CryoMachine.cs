@@ -9,11 +9,12 @@ public class CryoMachine : MachineBehavior
     {
         if (machineEfficiencyLevel < 4)
         {
-            Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
+
             machineEfficiency += increase;
             machineEfficiencyLevel++;
             GameManager.Instance.TakeCreditsFromPlayer(50);
             //update machine level text
+            Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
         }
     }
 
@@ -21,11 +22,11 @@ public class CryoMachine : MachineBehavior
     {
         if (outputIntervalLevel < 4)
         {
-            Debug.Log(gameObject.name + "Upgraded to " + outputIntervalLevel);
             outputInterval -= reduction;
             outputIntervalLevel++;
             GameManager.Instance.TakeCreditsFromPlayer(50);
             //update machine level text
+            Debug.Log(gameObject.name + "Upgraded to " + outputIntervalLevel);
         }
     }
 
