@@ -71,7 +71,7 @@ public class InputManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == GameManager.Instance.mainGameSceneName)
+        if (scene.name == GameManager.Instance.mainGameSceneName || scene.name == GameManager.Instance.testScene1 || scene.name == GameManager.Instance.testScene2 || scene.name == "TestZeb")
         {
             EnableUIControls();
         }

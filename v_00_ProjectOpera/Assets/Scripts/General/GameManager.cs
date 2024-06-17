@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +7,8 @@ public class GameManager : MonoBehaviour
     #region Fields and Properties
 
     public string mainGameSceneName = "MainScene";
+    public string testScene1 = "emma_MainScene";
+    public string testScene2 = "rachel_MainScene";
 
     private const int minResources = 0;
     private const int maxResources = 300;
@@ -96,10 +95,10 @@ public class GameManager : MonoBehaviour
         isQuitting = true;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
     {
         print("Current scene is: " + scene.name);
-        if (scene.name == mainGameSceneName || scene.name == "TestZeb")
+        if (scene.name == mainGameSceneName || scene.name == "TestZeb" || scene.name == testScene1|| scene.name == testScene2)
         {
             SetUpNewGame();
         }
@@ -156,8 +155,8 @@ public class GameManager : MonoBehaviour
     {
         // This method is subscribed to the OnPause event from the InputHandler and 
         // is called whenever the player presses `esc`
-
-        if (SceneManager.GetActiveScene().name == mainGameSceneName)
+        UnityEngine.SceneManagement.Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == mainGameSceneName || scene.name == "TestZeb" || scene.name == testScene1 || scene.name == testScene2)
         {
             if (GamePaused == true)
             {
