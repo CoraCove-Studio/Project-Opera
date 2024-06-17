@@ -12,7 +12,7 @@ public abstract class MachineBehavior : MonoBehaviour
     [SerializeField] protected int machineEfficiencyLevel = 1;
     [SerializeField] private ObjectPooler objPooler;
     [SerializeField] private Transform outputPos;
-    //[SerializeField] private MachineUI machineUI;
+    [SerializeField] protected MachineUI machineUI;
 
     private readonly Dictionary<ResourceTypes, ResourceTypes> resourceTypeRelationships = new();
     public abstract ResourceTypes MachineType { get; }
@@ -22,7 +22,8 @@ public abstract class MachineBehavior : MonoBehaviour
     {
         ConfigureRelationshipDictionary();
         objPooler = GameObject.Find("ObjectPooler").GetComponent<ObjectPooler>();
-        //machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+        machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+        machineUI.SetSliderMaxValue(outputInterval);
         productionCoroutine = StartCoroutine(Production());
     }
 
@@ -50,10 +51,10 @@ public abstract class MachineBehavior : MonoBehaviour
             if (inputInventory > 0)
             {
                 inputInventory--;
-                //machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+                machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
                 product = objPooler.ReturnProduct(MachineType);
                 ConfigureProduct(product);
-                //machineUI.StartBarAnimation(outputInterval);
+                machineUI.StartBarAnimation(outputInterval);
             }
 
             yield return new WaitForSeconds(outputInterval);
@@ -74,7 +75,7 @@ public abstract class MachineBehavior : MonoBehaviour
 
             inputInventory += machineEfficiency;
             inputInventory = Mathf.Clamp(inputInventory, 0, maximumInventory);
-            //machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+            machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
         }
         else
         {

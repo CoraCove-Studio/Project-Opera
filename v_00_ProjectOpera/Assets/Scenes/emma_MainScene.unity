@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.021901425, g: 0.022422442, b: 0.021150706, a: 1}
+  m_IndirectSpecularColor: {r: 0.021901544, g: 0.022422444, b: 0.021150706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -306,11 +306,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 307112305236774737, guid: 295628648ad547142be7085b4141d532,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417309519680210540, guid: 295628648ad547142be7085b4141d532,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417309519680210540, guid: 295628648ad547142be7085b4141d532,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3835916526853765982, guid: 295628648ad547142be7085b4141d532,
         type: 3}
       propertyPath: m_Name
       value: CryoMachine
       objectReference: {fileID: 0}
+    - target: {fileID: 4001807769173574266, guid: 295628648ad547142be7085b4141d532,
+        type: 3}
+      propertyPath: machineUI
+      value: 
+      objectReference: {fileID: 196613762}
     - target: {fileID: 8552389781055827344, guid: 295628648ad547142be7085b4141d532,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -434,6 +454,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 161a7152061509c4399c1e21b19cdbd4, type: 3}
+--- !u!114 &196613762 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4039958213630473558, guid: 295628648ad547142be7085b4141d532,
+    type: 3}
+  m_PrefabInstance: {fileID: 126217263}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1bad520a670974ea049f347fc7fc08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &221722991
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1971,6 +2003,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 893193786921810789, guid: 41bf43f4c2dddcc4499927c8e28caec8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003390998210474584, guid: 41bf43f4c2dddcc4499927c8e28caec8,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003390998210474584, guid: 41bf43f4c2dddcc4499927c8e28caec8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4749518112991437960, guid: 41bf43f4c2dddcc4499927c8e28caec8,
         type: 3}
       propertyPath: m_Name
@@ -3952,6 +3999,21 @@ PrefabInstance:
     - target: {fileID: 6389369359058552551, guid: be64041af4a72ec4883a7555a7324a5a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6818037713931715514, guid: be64041af4a72ec4883a7555a7324a5a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6818037713931715514, guid: be64041af4a72ec4883a7555a7324a5a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6851955128148839047, guid: be64041af4a72ec4883a7555a7324a5a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

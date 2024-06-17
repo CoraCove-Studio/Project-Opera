@@ -1,23 +1,39 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MachineUI : MonoBehaviour
 {
     // private int prodStepValue = 24;
 
     [Header("References")]
-    [SerializeField] private TextMeshProUGUI levelNumberLabel;
+    [SerializeField] private TextMeshProUGUI efficiencyLevelNumberLabel;
+    [SerializeField] private TextMeshProUGUI outputLevelNumberLabel;
     [SerializeField] private TextMeshProUGUI inventoryNumberLabel;
-    [SerializeField] private GameObject progressBar;
+    [SerializeField] Slider progressBarSlider;
+
+    private void OnEnable()
+    {
+        progressBarSlider.value = 0;
+    }
+    public void SetSliderMaxValue(float maxValue)
+    {
+        progressBarSlider.maxValue = maxValue;
+    }
 
     private void OnDisable()
     {
         StopAllCoroutines();
     }
-    public void UpdateLevelText(int level)
+    public void UpdateEfficiencyLevelText(int level)
     {
-        levelNumberLabel.text = level.ToString();
+        efficiencyLevelNumberLabel.text = level.ToString();
+    }
+
+    public void UpdateOutputIntervalLevelText(int level)
+    {
+        outputLevelNumberLabel.text = level.ToString();
     }
 
     public void UpdateInventoryLabel(int currentInventory, int maximumInventory)
@@ -33,17 +49,14 @@ public class MachineUI : MonoBehaviour
 
     private IEnumerator AnimateProductionBar(int outputInterval)
     {
-        Vector3 fullBar = new(1, 0, 0);
-        float elapsedTime = 0f;
-        Debug.Log("AnimateProductionBar: coroutine started.");
 
-        while (elapsedTime < outputInterval)
+        float animationTime = 0f;
+        while (animationTime < outputInterval)
         {
-            Debug.Log("AnimateProductionBar: inside of while loop.");
-            progressBar.transform.localScale = Vector3.Lerp(progressBar.transform.localScale, fullBar, outputInterval);
-            elapsedTime += Time.deltaTime;
+            animationTime += Time.deltaTime;
+            float lerpValue = animationTime / outputInterval;
+            progressBarSlider.value = Mathf.Lerp(0, progressBarSlider.maxValue, lerpValue);
             yield return null;
         }
-
     }
 }
