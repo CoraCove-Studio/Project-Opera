@@ -156,6 +156,8 @@ public class PlayerUIHandler : MonoBehaviour
         return resourceList;
     }
 
+    #region Machine Spawn Panel Methods
+
     public void ActivateMachineSpawnPanel(MachineSlot machineSlot)
     {
         GameManager.Instance.ActivateSubMenu();
@@ -194,4 +196,5 @@ public class PlayerUIHandler : MonoBehaviour
         }
         DeactivateMachineSpawnPanel();
     }
+    #endregion
 }
