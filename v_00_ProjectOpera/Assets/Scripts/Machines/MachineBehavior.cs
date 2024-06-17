@@ -4,13 +4,15 @@ using UnityEngine;
 
 public abstract class MachineBehavior : MonoBehaviour
 {
-    [SerializeField] private int inputInventory;
-    [SerializeField] private int machineEfficiency = 4;
-    [SerializeField] private int outputInterval = 8;
-    [SerializeField] private int maximumInventory = 20;
+    [SerializeField] protected int inputInventory;
+    [SerializeField] protected int machineEfficiency = 4;
+    [SerializeField] protected int outputInterval = 8;
+    [SerializeField] protected int maximumInventory = 20;
+    [SerializeField] protected int outputIntervalLevel = 1;
+    [SerializeField] protected int machineEfficiencyLevel = 1;
     [SerializeField] private ObjectPooler objPooler;
     [SerializeField] private Transform outputPos;
-    [SerializeField] private MachineUI machineUI;
+    //[SerializeField] private MachineUI machineUI;
 
     private readonly Dictionary<ResourceTypes, ResourceTypes> resourceTypeRelationships = new();
     public abstract ResourceTypes MachineType { get; }
@@ -20,7 +22,7 @@ public abstract class MachineBehavior : MonoBehaviour
     {
         ConfigureRelationshipDictionary();
         objPooler = GameObject.Find("ObjectPooler").GetComponent<ObjectPooler>();
-        machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+        //machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
         productionCoroutine = StartCoroutine(Production());
     }
 
@@ -48,10 +50,10 @@ public abstract class MachineBehavior : MonoBehaviour
             if (inputInventory > 0)
             {
                 inputInventory--;
-                machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+                //machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
                 product = objPooler.ReturnProduct(MachineType);
                 ConfigureProduct(product);
-                machineUI.StartBarAnimation(outputInterval);
+                //machineUI.StartBarAnimation(outputInterval);
             }
 
             yield return new WaitForSeconds(outputInterval);
@@ -72,7 +74,7 @@ public abstract class MachineBehavior : MonoBehaviour
 
             inputInventory += machineEfficiency;
             inputInventory = Mathf.Clamp(inputInventory, 0, maximumInventory);
-            machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+            //machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
         }
         else
         {
@@ -81,5 +83,9 @@ public abstract class MachineBehavior : MonoBehaviour
 
     }
 
-    public abstract void Upgrade(float reduction);
+    //upgrades how many products are produced with one input
+    public abstract void UpgradeMachineEfficiency(int increase);
+
+    //upgrades how quickly the machines produce one product
+    public abstract void UpgradeOutputInterval(int reduction);
 }

@@ -65,6 +65,8 @@ Transform:
   m_Children:
   - {fileID: 7146690272879230672}
   - {fileID: 5902595334057746364}
+  - {fileID: 2057610559899465113}
+  - {fileID: 7103904814981711942}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7682271938878099046
@@ -101,8 +103,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputInventory: 0
-  machineEfficiency: 4
-  outputInterval: 6
+  machineEfficiency: 3
+  outputInterval: 8
+  maximumInventory: 20
+  outputIntervalLevel: 1
+  machineEfficiencyLevel: 1
   objPooler: {fileID: 0}
   outputPos: {fileID: 5902595334057746364}
 --- !u!114 &2387312065764864272
@@ -138,6 +143,199 @@ MonoBehaviour:
   LoseFocus:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &3002804629081411051
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8552389781055827344}
+    m_Modifications:
+    - target: {fileID: 50353309869176450, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: m_Name
+      value: UpgradeIntervalButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4001807769173574266}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickUpgradeOutputIntervalButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CryoMachine, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420707962792953261, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.948
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420707962792953261, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.498
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420707962792953261, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420707962792953261, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420707962792953261, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420707962792953261, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420707962792953261, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420707962792953261, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420707962792953261, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420707962792953261, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 185ac3c39c8db6d468cc75c9d197e535, type: 3}
+--- !u!4 &7103904814981711942 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5420707962792953261, guid: 185ac3c39c8db6d468cc75c9d197e535,
+    type: 3}
+  m_PrefabInstance: {fileID: 3002804629081411051}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5198212119373166456
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8552389781055827344}
+    m_Modifications:
+    - target: {fileID: 2478761569685010561, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: m_Name
+      value: UpgradeEfficiencyButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971007221240703963, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4001807769173574266}
+    - target: {fileID: 5971007221240703963, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickUpgradeMachineEfficiencyButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971007221240703963, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CryoMachine, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.948
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.689
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a75212da58794dd4b8068940d025fec1, type: 3}
+--- !u!4 &2057610559899465113 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
+    type: 3}
+  m_PrefabInstance: {fileID: 5198212119373166456}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7252094530030786875
 PrefabInstance:
   m_ObjectHideFlags: 0
