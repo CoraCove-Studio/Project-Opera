@@ -49,14 +49,18 @@ public abstract class MachineBehavior : MonoBehaviour
         {
             if (inputInventory > 0)
             {
+                // Don't reorder StartBarAnimation, inventory decrementation and WaitForSeconds()
+                machineUI.StartBarAnimation(outputInterval);
                 inputInventory--;
+                yield return new WaitForSeconds(outputInterval);
                 machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
                 product = objPooler.ReturnProduct(MachineType);
                 ConfigureProduct(product);
-                machineUI.StartBarAnimation(outputInterval);
             }
-
-            yield return new WaitForSeconds(outputInterval);
+            else
+            {
+                yield return new WaitForSeconds(0.2f);
+            }
         }
     }
 
@@ -71,7 +75,7 @@ public abstract class MachineBehavior : MonoBehaviour
         if (GameManager.Instance.CheckPlayerResourceValue(1, resourceTypeRelationships[MachineType]) && inputInventory < maximumInventory)
         {
             GameManager.Instance.TakeResourceFromPlayer(1, resourceTypeRelationships[MachineType]);
-
+            if (inputInventory == 0) machineUI.StartBarAnimation(outputInterval); // Touch this with care
             inputInventory += machineEfficiency;
             inputInventory = Mathf.Clamp(inputInventory, 0, maximumInventory);
             machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);

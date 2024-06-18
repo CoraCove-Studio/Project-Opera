@@ -58,5 +58,6 @@ public class MachineUI : MonoBehaviour
             progressBarSlider.value = Mathf.Lerp(0, progressBarSlider.maxValue, lerpValue);
             yield return null;
         }
+        progressBarSlider.value = 0;
     }
 }
