@@ -243,7 +243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 358.94, y: -222.2}
+  m_AnchoredPosition: {x: 358.94, y: -218}
   m_SizeDelta: {x: 280.56, y: 57.055}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2051105020755576691
@@ -276,8 +276,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ddf51d3474ca9cb41b90c070b03f46d1, type: 2}
+  m_sharedMaterial: {fileID: -7250375763479552742, guid: ddf51d3474ca9cb41b90c070b03f46d1,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -815,7 +816,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 358.94, y: -39.885}
+  m_AnchoredPosition: {x: 358.94, y: -33}
   m_SizeDelta: {x: 280.56, y: 55.6859}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4614165297813696857
@@ -848,8 +849,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ddf51d3474ca9cb41b90c070b03f46d1, type: 2}
+  m_sharedMaterial: {fileID: -7250375763479552742, guid: ddf51d3474ca9cb41b90c070b03f46d1,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1294,8 +1296,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 203, y: -40.134}
-  m_SizeDelta: {x: 192.0134, y: 64.5351}
+  m_AnchoredPosition: {x: 191, y: -40.133}
+  m_SizeDelta: {x: 183.0499, y: 56.246}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2767094606344516027
 CanvasRenderer:
@@ -1327,8 +1329,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00:00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ddf51d3474ca9cb41b90c070b03f46d1, type: 2}
+  m_sharedMaterial: {fileID: -7250375763479552742, guid: ddf51d3474ca9cb41b90c070b03f46d1,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3703,7 +3706,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 358.94, y: -130.2}
+  m_AnchoredPosition: {x: 358.94, y: -126}
   m_SizeDelta: {x: 280.5624, y: 57.049}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6933224972459463380
@@ -3736,8 +3739,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ddf51d3474ca9cb41b90c070b03f46d1, type: 2}
+  m_sharedMaterial: {fileID: -7250375763479552742, guid: ddf51d3474ca9cb41b90c070b03f46d1,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4006,8 +4010,9 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ddf51d3474ca9cb41b90c070b03f46d1, type: 2}
+  m_sharedMaterial: {fileID: -7250375763479552742, guid: ddf51d3474ca9cb41b90c070b03f46d1,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4239,7 +4244,7 @@ MonoBehaviour:
   - {fileID: 1116188799140846333}
   - {fileID: 4301134229949060388}
   - {fileID: 2763485821128970307}
-  tint: {r: 0.07847777, g: 0.6816453, b: 0.8050314, a: 0.8784314}
+  tint: {r: 1, g: 0.37421376, b: 0.86393553, a: 0.8784314}
 --- !u!1 &7821998498022384428
 GameObject:
   m_ObjectHideFlags: 0
