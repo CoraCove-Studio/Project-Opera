@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -22,21 +23,6 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private Controls controls;
-    private InputActionMap coreActionMap;
-    private InputActionMap UIActionMap;
-
-    public delegate void MoveInputHandler(Vector3 movement);
-    public event MoveInputHandler OnMove;
-
-    public delegate void CameraInputHandler(Vector2 movement);
-    public event CameraInputHandler OnCamMove;
-
-    public delegate void InteractHandler();
-    public event InteractHandler OnInteraction;
-
-    public delegate void PauseHandler();
-    public event PauseHandler OnPause;
 
     private void Awake()
     {
@@ -52,6 +38,21 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private Controls controls;
+    private InputActionMap coreActionMap;
+    private InputActionMap UIActionMap;
+
+    public delegate void MoveInputHandler(Vector3 movement);
+    public event MoveInputHandler OnMove;
+
+    public delegate void CameraInputHandler(Vector2 movement);
+    public event CameraInputHandler OnCamMove;
+
+    public delegate void InteractHandler();
+    public event InteractHandler OnInteraction;
+
+    public delegate void PauseHandler();
+    public event PauseHandler OnPause;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -71,11 +72,11 @@ public class InputManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == GameManager.Instance.mainGameSceneName || scene.name == GameManager.Instance.testScene1 || scene.name == GameManager.Instance.testScene2 || scene.name == "TestZeb")
+        if (GameManager.Instance.gameScenes.Contains(scene.name))
         {
             EnableUIControls();
         }
-        else if (scene.name == "GameOver")
+        else
         {
             DisableCoreControls();
             EnableUIControls();
@@ -138,7 +139,7 @@ public class InputManager : MonoBehaviour
 
     private void HandlePause(InputAction.CallbackContext context)
     {
-        if (context.performed && GameManager.Instance.IsInTutorial == false)
+        if (context.performed && GameManager.Instance.InTutorial == false)
         {
             if (coreActionMap.enabled)
             {

@@ -17,11 +17,6 @@ public class GameTimer : MonoBehaviour
 
     public bool TimerIsRunning { get; private set; } = false;
 
-    private void Start()
-    {
-        playerUI = GameManager.Instance.PlayerUI;
-    }
-
     private void Update()
     {
         TrackTime();
@@ -43,12 +38,14 @@ public class GameTimer : MonoBehaviour
                 secondsLeft = Mathf.FloorToInt(CountdownTimer - minutesLeft * 60);
                 TimeLeft = (minutesLeft, secondsLeft);
             }
+            playerUI.UpdateGameTimer(TimeLeft.Item1, TimeLeft.Item2);
         }
     }
 
     public void SetNewTimer(float timeInSeconds)
     {
         CountdownTimer = timeInSeconds;
+        playerUI.UpdateGameTimer(TimeLeft.Item1, TimeLeft.Item2);
     }
 
     public void StartTimer()

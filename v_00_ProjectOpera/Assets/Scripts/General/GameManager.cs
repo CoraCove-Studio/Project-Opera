@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,12 +7,9 @@ public class GameManager : MonoBehaviour
 {
     #region Fields and Properties
 
-    public string mainGameSceneName = "MainScene";
-    public string testScene1 = "emma_MainScene";
-    public string testScene2 = "rachel_MainScene";
+    public string[] gameScenes = { "MainScene", "emma_MainScene", "rachel_MainScene", "testZeb" };
 
-    private const int minResources = 0;
-    private const int maxResources = 300;
+    public string mainGameSceneName = "MainScene";
 
     public PlayerUIHandler PlayerUI { get; private set; }
     public GameObject Player { get; private set; }
@@ -19,14 +18,67 @@ public class GameManager : MonoBehaviour
     private float gameDurationInSeconds;
 
     public bool GamePaused { get; private set; } = true;
-    public bool IsInTutorial { get; private set; } = true;
+    public bool InTutorial { get; private set; } = true;
+    private static bool isQuitting = false;
+    private static bool currentlyInGameScene = true;
+
+    private const int MinResources = 0;
+    private const int MaxResources = 300;
+    private const int MaxCredits = 10000;
 
     private int playerCredits;
     private int playerCrops;
     private int playerParts;
     private int playerNitrogen;
 
-    private static bool isQuitting = false;
+    #region Resources Properties
+
+    public int PlayerCrops
+    {
+        get { return playerCrops; }
+        private set
+        {
+            playerCrops = Mathf.Clamp(value, MinResources, MaxResources);
+        }
+    }
+
+    public int PlayerParts
+    {
+        get { return playerParts; }
+        private set
+        {
+            playerParts = Mathf.Clamp(value, MinResources, MaxResources);
+        }
+    }
+
+    public int PlayerNitrogen
+    {
+        get { return playerNitrogen; }
+        private set
+        {
+            playerNitrogen = Mathf.Clamp(value, MinResources, MaxResources);
+        }
+    }
+
+    public int PlayerCredits
+    {
+        get { return playerCredits; }
+        private set
+        {
+            playerCredits = Mathf.Clamp(value, MinResources, MaxCredits);
+        }
+    }
+
+    #endregion
+
+    private readonly Dictionary<string, int> newGameValues = new()
+    {
+    { "Crops", 5 },
+    { "Parts", 5 },
+    { "Nitrogen", 5 },
+    { "Credits", 300 },
+    { "GameDuration", 300 }
+};
 
     #endregion
 
@@ -54,6 +106,18 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+#if UNITY_EDITOR 
+            // Hacky code to make this work if you play the game from the main scene in editor
+            if (gameScenes.Contains(SceneManager.GetActiveScene().name))
+            {
+                currentlyInGameScene = true;
+                SetUpNewGame();
+            }
+            else
+            {
+                currentlyInGameScene = false;
+            }
+#endif
         }
         else if (instance != this)
         {
@@ -66,7 +130,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         Cheatcodes();
-        if (gameTimer != null && PlayerUI != null && GamePaused == false)
+        if (GamePaused == false && currentlyInGameScene)
         {
             PlayerUI.UpdateGameTimer(gameTimer.TimeLeft.Item1, gameTimer.TimeLeft.Item2);
             CheckGameOver();
@@ -94,16 +158,18 @@ public class GameManager : MonoBehaviour
         isQuitting = true;
     }
 
-    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        print("Current scene is: " + scene.name);
-        if (scene.name == mainGameSceneName || scene.name == "TestZeb" || scene.name == testScene1|| scene.name == testScene2)
+        Cursor.lockState = CursorLockMode.Confined;
+        print("GameManager: OnSceneLoaded: Current scene is: " + scene.name);
+        if (gameScenes.Contains(scene.name))
         {
+            currentlyInGameScene = true;
             SetUpNewGame();
         }
-        else if (scene.name == "GameOver")
+        else
         {
-            Cursor.lockState = CursorLockMode.Confined;
+            currentlyInGameScene = false;
         }
     }
 
@@ -111,41 +177,57 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        InTutorial = false;
+        // Called when the player exits the tutorial using the "Start" button
         ToggleGamePause();
         gameTimer.StartTimer();
+        // TODO: move the player to new location here so they don't get launched
         playerRigidBody.isKinematic = false;
-        IsInTutorial = false;
     }
-    public void SetUpNewGame()
+    private void SetUpNewGame()
     {
-        Debug.Log("GameManager: SetUpNewGame: Starting new game.");
-        PlayerUI = GameObject.Find("PlayerCanvas").GetComponent<PlayerUIHandler>();
-        GameObject.Find("GameTimer").TryGetComponent(out gameTimer);
-        playerRigidBody = GameObject.Find("PlayerPrefab").GetComponent<Rigidbody>();
+        Debug.Log("GameManager: SetUpNewGame: Setting up new game.");
 
+        FindImportantReferences();
         SetNewGameValues();
+        PlayerUI.UpdateUI();
 
-        if (PlayerUI != null)
-        {
-            PlayerUI.UpdateUI();
-            PlayerUI.ToggleReticleVisibility(false);
-        }
-        else
-        {
-            Debug.Log("PlayerUI not found by GameManager.");
-        }
+        GamePaused = true;
+        InTutorial = true;
 
-        if (gameTimer != null)
-        {
-            gameTimer.SetNewTimer(gameDurationInSeconds);
-            PlayerUI.UpdateGameTimer(gameTimer.TimeLeft.Item1, gameTimer.TimeLeft.Item2);
-        }
+        gameTimer.SetNewTimer(gameDurationInSeconds);
+        PlayerUI.ToggleReticleVisibility(false);
+        Time.timeScale = 1;
+    }
+    private void SetNewGameValues()
+    {
+        playerCrops = newGameValues["Crops"];
+        playerParts = newGameValues["Parts"];
+        playerNitrogen = newGameValues["Nitrogen"];
+        playerCredits = newGameValues["Credits"];
+        gameDurationInSeconds = newGameValues["GameDuration"];
     }
 
-    public void CheckGameOver()
+    private void FindImportantReferences()
+    {
+        PlayerUI = GameObject.Find("PlayerCanvas").GetComponent<PlayerUIHandler>();
+        if (PlayerUI == null) Debug.Log("GameManager: FindImportantReferences: PlayerUI not found.");
+
+        GameObject.Find("GameTimer").TryGetComponent(out gameTimer);
+        if (gameTimer == null) Debug.Log("GameManager: FindImportantReferences: gameTimer not found.");
+
+        GameObject.Find("PlayerPrefab").TryGetComponent(out playerRigidBody);
+        if (playerRigidBody == null) Debug.Log("GameManager: FindImportantReferences: playerRigidBody not found.");
+    }
+
+    private void CheckGameOver()
     {
         if (gameTimer != null && gameTimer.CountdownTimer <= 0)
         {
+            if (GamePaused) // ensure that the game isn't paused to avoid weird bugs
+            {
+                ToggleGamePause();
+            }
             SceneManager.LoadScene("GameOver");
         }
     }
@@ -154,13 +236,13 @@ public class GameManager : MonoBehaviour
     {
         // This method is subscribed to the OnPause event from the InputHandler and 
         // is called whenever the player presses `esc`
-        UnityEngine.SceneManagement.Scene scene = SceneManager.GetActiveScene();
-        if (scene.name == mainGameSceneName || scene.name == "TestZeb" || scene.name == testScene1 || scene.name == testScene2)
+        Scene scene = SceneManager.GetActiveScene();
+        if (gameScenes.Contains(scene.name) && InTutorial == false)
         {
             if (GamePaused == true)
             {
                 Debug.Log("GameManager: ToggleGamePause: Resuming game.");
-                //Time.timeScale = 1;
+                Time.timeScale = 1;
                 if (PlayerUI != null)
                 {
                     PlayerUI.ResumeGame();
@@ -170,7 +252,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 Debug.Log("GameManager: ToggleGamePause: Pausing game.");
-                //Time.timeScale = 0;
+                Time.timeScale = 0;
                 if (PlayerUI != null)
                 {
                     PlayerUI.PauseGame();
@@ -178,94 +260,32 @@ public class GameManager : MonoBehaviour
                 GamePaused = true;
             }
         }
+        else
+        {
+            Debug.Log("GameManager: ToggleGamePause: Can't toggle.");
+        }
     }
 
     public void ActivateSubMenu()
     {
         GamePaused = true;
     }
-    public void SetNewGameValues()
-    {
-        playerCrops = 5;
-        playerParts = 5;
-        playerNitrogen = 5;
-        playerCredits = 300;
-        gameDurationInSeconds = 300;
-    }
-
-    #region Resources Properties
-
-    public int PlayerCrops
-    {
-        get { return playerCrops; }
-        private set
-        {
-            playerCrops = Mathf.Clamp(value, minResources, maxResources);
-            print($"Adding {value} to playerCrops. Current value is {playerCrops}");
-            if (PlayerUI != null)
-            {
-                PlayerUI.UpdateUI();
-            }
-        }
-    }
-
-    public int PlayerParts
-    {
-        get { return playerParts; }
-        private set
-        {
-            playerParts = Mathf.Clamp(value, minResources, maxResources);
-            if (PlayerUI != null)
-            {
-                PlayerUI.UpdateUI();
-            }
-        }
-    }
-
-    public int PlayerNitrogen
-    {
-        get { return playerNitrogen; }
-        private set
-        {
-            playerNitrogen = Mathf.Clamp(value, minResources, maxResources);
-            if (PlayerUI != null)
-            {
-                PlayerUI.UpdateUI();
-            }
-        }
-    }
-
-    public int PlayerCredits
-    {
-        get { return playerCredits; }
-        private set
-        {
-            playerCredits = Mathf.Clamp(value, minResources, 10000);
-            if (PlayerUI != null)
-            {
-                PlayerUI.UpdateUI();
-            }
-        }
-    }
-
-    #endregion
-
 
     #region Add / Take Resource Methods
 
-    public int GetPlayerResourceValue(ResourceTypes resourceType)
+    public bool CheckPlayerResourceValue(int value, ResourceTypes resourceType)
     {
         switch (resourceType)
         {
             case ResourceTypes.CROP:
-                return PlayerCrops;
+                return PlayerCrops >= value;
             case ResourceTypes.PART:
-                return PlayerParts;
+                return PlayerParts >= value;
             case ResourceTypes.NITROGEN:
-                return PlayerNitrogen;
+                return PlayerNitrogen >= value;
             default:
                 print("GameManager: GetPlayerResourceValue: Getting resource value failed, not recognized resource type.");
-                return 0;
+                return false;
         }
     }
 
@@ -275,27 +295,21 @@ public class GameManager : MonoBehaviour
         {
             case ResourceTypes.CROP:
                 PlayerCrops += amount;
+                Debug.Log($"GameManager: AddResourceToPlayer: Adding {amount} to PlayerCrops. Current value is {PlayerCrops}");
                 break;
             case ResourceTypes.PART:
                 PlayerParts += amount;
+                Debug.Log($"GameManager: AddResourceToPlayer: Adding {amount} to PlayerParts. Current value is {PlayerParts}");
                 break;
             case ResourceTypes.NITROGEN:
                 PlayerNitrogen += amount;
+                Debug.Log($"GameManager: AddResourceToPlayer: Adding {amount} to PlayerNitrogen. Current value is {PlayerNitrogen}");
                 break;
             default:
                 print("GameManager: AddResourceToPlayer: Adding resource failed, not recognized resource type.");
                 break;
         }
-    }
-
-    public void AddCreditsToPlayer(int amount)
-    {
-        PlayerCredits += amount;
-    }
-
-    public void TakeCreditsFromPlayer(int amount)
-    {
-        PlayerCredits -= amount;
+        PlayerUI.UpdateUI();
     }
 
     public void TakeResourceFromPlayer(int amount, ResourceTypes resourceType)
@@ -304,18 +318,36 @@ public class GameManager : MonoBehaviour
         {
             case ResourceTypes.CROP:
                 PlayerCrops -= amount;
+                Debug.Log($"GameManager: TakeResourceFromPlayer: Taking {amount} from PlayerCrops. Current value is {PlayerCrops}");
                 break;
             case ResourceTypes.PART:
                 PlayerParts -= amount;
+                Debug.Log($"GameManager: TakeResourceFromPlayer: Taking {amount} from PlayerParts. Current value is {PlayerParts}");
                 break;
             case ResourceTypes.NITROGEN:
                 PlayerNitrogen -= amount;
+                Debug.Log($"GameManager: TakeResourceFromPlayer: Taking {amount} from PlayerNitrogen. Current value is {PlayerNitrogen}");
                 break;
             default:
                 print("Taking resource failed, not recognized resource type.");
                 break;
         }
+        PlayerUI.UpdateUI();
     }
+    public void AddCreditsToPlayer(int amount)
+    {
+        PlayerCredits += amount;
+        Debug.Log($"GameManager: AddCreditsToPlayer: Adding {amount} to PlayerCredits. Current value is {PlayerCredits}");
+        PlayerUI.UpdateUI();
+    }
+
+    public void TakeCreditsFromPlayer(int amount)
+    {
+        PlayerCredits -= amount;
+        Debug.Log($"GameManager: TakeCreditsToPlayer: Taking {amount} from PlayerCredits. Current value is {PlayerCredits}");
+        PlayerUI.UpdateUI();
+    }
+
 
     #endregion
 

@@ -26,14 +26,12 @@ public class PlayerUIHandler : MonoBehaviour
         "CREDITS: "
     };
 
-
-    private bool firstButtonSelected = false;
-
     private void Awake()
     {
-        UpdateUI();
         Cursor.lockState = CursorLockMode.Confined;
     }
+
+    private bool firstButtonSelected = false;
 
     public void PauseGame()
     {

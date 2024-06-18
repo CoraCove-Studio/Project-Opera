@@ -10,17 +10,23 @@ public abstract class MachineBehavior : MonoBehaviour
     [SerializeField] protected int maximumInventory = 20;
     [SerializeField] protected int outputIntervalLevel = 1;
     [SerializeField] protected int machineEfficiencyLevel = 1;
+
     [SerializeField] private ObjectPooler objPooler;
     [SerializeField] private Transform outputPos;
     [SerializeField] protected MachineUI machineUI;
 
-    private readonly Dictionary<ResourceTypes, ResourceTypes> resourceTypeRelationships = new();
+    private readonly Dictionary<ResourceTypes, ResourceTypes> resourceTypeRelationships = new()
+    {
+        { ResourceTypes.CROP, ResourceTypes.NITROGEN },
+        { ResourceTypes.PART, ResourceTypes.CROP },
+        { ResourceTypes.NITROGEN, ResourceTypes.PART }
+    };
+
     public abstract ResourceTypes MachineType { get; }
     private Coroutine productionCoroutine;
 
     protected virtual void OnEnable()
     {
-        ConfigureRelationshipDictionary();
         objPooler = GameObject.Find("ObjectPooler").GetComponent<ObjectPooler>();
         machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
         machineUI.SetSliderMaxValue(outputInterval);
@@ -33,13 +39,6 @@ public abstract class MachineBehavior : MonoBehaviour
         {
             StopCoroutine(productionCoroutine);
         }
-    }
-
-    private void ConfigureRelationshipDictionary()
-    {
-        resourceTypeRelationships.Add(ResourceTypes.CROP, ResourceTypes.NITROGEN);
-        resourceTypeRelationships.Add(ResourceTypes.PART, ResourceTypes.CROP);
-        resourceTypeRelationships.Add(ResourceTypes.NITROGEN, ResourceTypes.PART);
     }
 
     private IEnumerator Production()
@@ -69,7 +68,7 @@ public abstract class MachineBehavior : MonoBehaviour
 
     public void AddInput()
     {
-        if (GameManager.Instance.GetPlayerResourceValue(resourceTypeRelationships[MachineType]) > 0 && inputInventory < maximumInventory)
+        if (GameManager.Instance.CheckPlayerResourceValue(1, resourceTypeRelationships[MachineType]) && inputInventory < maximumInventory)
         {
             GameManager.Instance.TakeResourceFromPlayer(1, resourceTypeRelationships[MachineType]);
 
@@ -79,7 +78,7 @@ public abstract class MachineBehavior : MonoBehaviour
         }
         else
         {
-            Debug.Log("MachineBehavior: AddInput: Tried to add input, player didn't have enough.");
+            Debug.Log($"MachineBehavior: AddInput: Couldn't add {resourceTypeRelationships[MachineType]}. Machine full or player didn't have enough.");
         }
 
     }
