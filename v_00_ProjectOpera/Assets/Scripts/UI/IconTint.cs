@@ -12,6 +12,11 @@ public class IconTint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ColorChange();
+    }
+
+    private void ColorChange()
+    {
         for (int i = 0; i < sprites.Length; i++)
         {
             sprites[i].color = tint;
