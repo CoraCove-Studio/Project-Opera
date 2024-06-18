@@ -19,13 +19,6 @@ public class PlayerUIHandler : MonoBehaviour
     public GameObject currentPanel;
     private MachineSlot currentMachineSlot;
 
-    private readonly string[] labelText = {
-        "CROPS: ",
-        "PARTS: ",
-        "NITROGEN: ",
-        "CREDITS: "
-    };
-
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Confined;
@@ -132,13 +125,13 @@ public class PlayerUIHandler : MonoBehaviour
 
         for (int i = 0; i < resourceLabels.Count; i++)
         {
-            resourceLabels[i].text = labelText[i] + playerResources[i].ToString();
+            resourceLabels[i].text = playerResources[i].ToString();
         }
     }
 
     public void UpdateGameTimer(int minutes, int seconds)
     {
-        timerLabel.text = string.Format("TIME TO DESTINATION: {0:00}:{1:00}", minutes, seconds);
+        timerLabel.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     private List<int> GetPlayerResources()
