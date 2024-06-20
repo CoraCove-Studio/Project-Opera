@@ -53,9 +53,12 @@ public abstract class MachineBehavior : MonoBehaviour
                 machineUI.StartBarAnimation(outputInterval);
                 inputInventory--;
                 yield return new WaitForSeconds(outputInterval);
-                machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
-                product = objPooler.ReturnProduct(MachineType);
-                ConfigureProduct(product);
+                for (int i = 0; i < machineEfficiency; i++)
+                {
+                    machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+                    product = objPooler.ReturnProduct(MachineType);
+                    ConfigureProduct(product);
+                }
             }
             else
             {
@@ -76,7 +79,7 @@ public abstract class MachineBehavior : MonoBehaviour
         {
             GameManager.Instance.TakeResourceFromPlayer(1, resourceTypeRelationships[MachineType]);
             if (inputInventory == 0) machineUI.StartBarAnimation(outputInterval); // Touch this with care
-            inputInventory += machineEfficiency;
+            inputInventory += 1;
             inputInventory = Mathf.Clamp(inputInventory, 0, maximumInventory);
             machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
         }
