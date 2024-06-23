@@ -512,6 +512,7 @@ MonoBehaviour:
   maximumInventory: 20
   machineDurability: 100
   maximumMachineDurability: 100
+  upgradeCost: 35
   objPooler: {fileID: 0}
   outputPos: {fileID: 5902595334057746364}
   machineUI: {fileID: 4039958213630473558}
@@ -529,7 +530,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Focus:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4001807769173574266}
+        m_TargetAssemblyTypeName: MachineBehavior, Assembly-CSharp
+        m_MethodName: DisplayInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   Interact:
     m_PersistentCalls:
       m_Calls:
@@ -1669,13 +1682,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
         type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4001807769173574266}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4001807769173574266}
     - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
         type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DisplayPrice
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnClickUpgradeOutputIntervalButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MachineBehavior, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
         type: 3}
@@ -1686,6 +1729,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5420707962792953261, guid: 185ac3c39c8db6d468cc75c9d197e535,
         type: 3}
@@ -1763,9 +1811,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5971007221240703963, guid: a75212da58794dd4b8068940d025fec1,
         type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971007221240703963, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971007221240703963, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4001807769173574266}
+    - target: {fileID: 5971007221240703963, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971007221240703963, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4001807769173574266}
+    - target: {fileID: 5971007221240703963, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DisplayPrice
+      objectReference: {fileID: 0}
     - target: {fileID: 5971007221240703963, guid: a75212da58794dd4b8068940d025fec1,
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -1773,8 +1846,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5971007221240703963, guid: a75212da58794dd4b8068940d025fec1,
         type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MachineBehavior, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971007221240703963, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: CryoMachine, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971007221240703963, guid: a75212da58794dd4b8068940d025fec1,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6101774441257648865, guid: a75212da58794dd4b8068940d025fec1,
         type: 3}
@@ -2103,6 +2186,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: base_DurabilityBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776252690278133416, guid: 508314e6f2f17c140801825d1c71c993,
+        type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776252690278133416, guid: 508314e6f2f17c140801825d1c71c993,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

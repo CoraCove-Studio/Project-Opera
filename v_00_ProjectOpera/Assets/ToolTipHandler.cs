@@ -125,6 +125,7 @@ public class ToolTipHandler : MonoBehaviour
                 resourceImage.sprite = listOfResourceSprites[2];
                 break;
             default:
+                Debug.Log("ToolTipHandler: SetNewResourceImage: Default switch case. Image not changed.");
                 break;
         }
     }

@@ -1047,6 +1047,7 @@ MonoBehaviour:
   maximumInventory: 20
   machineDurability: 100
   maximumMachineDurability: 100
+  upgradeCost: 35
   objPooler: {fileID: 0}
   outputPos: {fileID: 3552230780110768176}
   machineUI: {fileID: 5244542407064716331}
@@ -1064,7 +1065,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Focus:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7178670231014221668}
+        m_TargetAssemblyTypeName: MachineBehavior, Assembly-CSharp
+        m_MethodName: DisplayInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   Interact:
     m_PersistentCalls:
       m_Calls:
@@ -1897,7 +1910,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Focus:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7178670231014221668}
+        m_TargetAssemblyTypeName: MachineBehavior, Assembly-CSharp
+        m_MethodName: DisplayPrice
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   Interact:
     m_PersistentCalls:
       m_Calls:
@@ -2412,9 +2437,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
         type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7178670231014221668}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7178670231014221668}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DisplayPrice
+      objectReference: {fileID: 0}
     - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -2422,8 +2472,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
         type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MachineBehavior, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940362660307275286, guid: 185ac3c39c8db6d468cc75c9d197e535,
+        type: 3}
+      propertyPath: Focus.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5420707962792953261, guid: 185ac3c39c8db6d468cc75c9d197e535,
         type: 3}

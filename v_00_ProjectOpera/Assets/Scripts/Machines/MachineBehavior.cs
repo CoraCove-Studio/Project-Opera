@@ -43,7 +43,6 @@ public abstract class MachineBehavior : MonoBehaviour
             StopCoroutine(productionCoroutine);
         }
     }
-
     private IEnumerator Production()
     {
         GameObject product;
@@ -56,7 +55,6 @@ public abstract class MachineBehavior : MonoBehaviour
                 machineUI.StartBarAnimation(outputInterval);
                 inputInventory--;
                 machineDurability -= 10;
-                machineUI.UpdateDurabilityBar(machineDurability);
                 yield return new WaitForSeconds(outputInterval);
                 for (int i = 0; i < machineEfficiency; i++)
                 {
@@ -64,6 +62,7 @@ public abstract class MachineBehavior : MonoBehaviour
                     product = objPooler.ReturnProduct(MachineType);
                     ConfigureProduct(product);
                 }
+                machineUI.UpdateDurabilityBar(machineDurability);
             }
             else
             {
@@ -71,6 +70,7 @@ public abstract class MachineBehavior : MonoBehaviour
             }
         }
     }
+
 
     private void ConfigureProduct(GameObject product)
     {
@@ -97,7 +97,6 @@ public abstract class MachineBehavior : MonoBehaviour
 
     public void DisplayInput()
     {
-        //Debug.Log("Displaying input");
         GameManager.Instance.DisplayTooltip(resourceTypeRelationships[MachineType], -1);
     }
 
