@@ -1805,6 +1805,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2163875099178028445, guid: 508314e6f2f17c140801825d1c71c993,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4.5845184
+      objectReference: {fileID: 0}
     - target: {fileID: 2798106088935429615, guid: 508314e6f2f17c140801825d1c71c993,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1929,6 +1934,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: base_DurabilityBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776252690278133416, guid: 508314e6f2f17c140801825d1c71c993,
+        type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776252690278133416, guid: 508314e6f2f17c140801825d1c71c993,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
