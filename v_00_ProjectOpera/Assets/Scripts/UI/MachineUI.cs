@@ -12,6 +12,7 @@ public class MachineUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI outputLevelNumberLabel;
     [SerializeField] private TextMeshProUGUI inventoryNumberLabel;
     [SerializeField] Slider progressBarSlider;
+    [SerializeField] Slider durabilityBarSlider;
 
     private void OnEnable()
     {
@@ -40,6 +41,12 @@ public class MachineUI : MonoBehaviour
     {
         string newLabel = $"{currentInventory}/{maximumInventory}";
         inventoryNumberLabel.text = newLabel;
+    }
+
+    public void UpdateDurabilityBar(int durability)
+    {
+        Debug.Log("MachineUI: UpdateDurabilityBar: slider updated.");
+        durabilityBarSlider.value = durability;
     }
 
     public void StartBarAnimation(int outputInterval)

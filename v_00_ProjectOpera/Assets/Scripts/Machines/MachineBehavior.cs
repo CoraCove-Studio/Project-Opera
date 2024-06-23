@@ -7,9 +7,11 @@ public abstract class MachineBehavior : MonoBehaviour
     [SerializeField] protected int inputInventory;
     [SerializeField] protected int machineEfficiency = 4;
     [SerializeField] protected int outputInterval = 8;
-    [SerializeField] protected int maximumInventory = 20;
     [SerializeField] protected int outputIntervalLevel = 1;
     [SerializeField] protected int machineEfficiencyLevel = 1;
+    [SerializeField] protected int maximumInventory = 20;
+    [SerializeField] protected int machineDurability = 100;
+    [SerializeField] protected int maximumMachineDurability = 100;
 
     [SerializeField] private ObjectPooler objPooler;
     [SerializeField] private Transform outputPos;
@@ -47,11 +49,13 @@ public abstract class MachineBehavior : MonoBehaviour
 
         while (true)
         {
-            if (inputInventory > 0)
+            if (inputInventory > 0 & machineDurability > 0)
             {
                 // Don't reorder StartBarAnimation, inventory decrementation and WaitForSeconds()
                 machineUI.StartBarAnimation(outputInterval);
                 inputInventory--;
+                machineDurability -= 10;
+                machineUI.UpdateDurabilityBar(machineDurability);
                 yield return new WaitForSeconds(outputInterval);
                 for (int i = 0; i < machineEfficiency; i++)
                 {
@@ -75,7 +79,7 @@ public abstract class MachineBehavior : MonoBehaviour
 
     public void AddInput()
     {
-        if (GameManager.Instance.CheckPlayerResourceValue(1, resourceTypeRelationships[MachineType]) && inputInventory < maximumInventory)
+        if (GameManager.Instance.CheckPlayerResourceValue(1, resourceTypeRelationships[MachineType]) && inputInventory < maximumInventory && machineDurability > 0)
         {
             GameManager.Instance.TakeResourceFromPlayer(1, resourceTypeRelationships[MachineType]);
             if (inputInventory == 0) machineUI.StartBarAnimation(outputInterval); // Touch this with care
@@ -89,6 +93,9 @@ public abstract class MachineBehavior : MonoBehaviour
         }
 
     }
+
+    //repairs the machines for credits
+    public abstract void RepairMachine();
 
     //upgrades how many products are produced with one input
     public abstract void UpgradeMachineEfficiency(int increase);

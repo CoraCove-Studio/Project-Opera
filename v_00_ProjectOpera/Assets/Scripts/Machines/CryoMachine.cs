@@ -5,6 +5,16 @@ using UnityEngine;
 public class CryoMachine : MachineBehavior
 {
     public override ResourceTypes MachineType { get; } = ResourceTypes.NITROGEN;
+
+    public override void RepairMachine()
+    {
+        if (machineDurability < maximumMachineDurability)
+        {
+            machineDurability = maximumMachineDurability;
+            machineUI.UpdateDurabilityBar(machineDurability);
+        }
+    }
+
     public override void UpgradeMachineEfficiency(int increase)
     {
         if (machineEfficiencyLevel < 4 && GameManager.Instance.PlayerCredits >= 50)
@@ -39,5 +49,10 @@ public class CryoMachine : MachineBehavior
     public void OnClickUpgradeOutputIntervalButton(int amount)
     {
         UpgradeOutputInterval(amount);
+    }
+
+    public void OnClickRepairMachine()
+    {
+        RepairMachine();
     }
 }
