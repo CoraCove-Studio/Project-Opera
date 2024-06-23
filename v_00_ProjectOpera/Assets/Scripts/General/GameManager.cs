@@ -208,6 +208,20 @@ public class GameManager : MonoBehaviour
         gameDurationInSeconds = newGameValues["GameDuration"];
     }
 
+    public void DisplayTooltip(int value)
+    {
+        PlayerUI.DisplayTooltip(value);
+    }
+    public void DisplayTooltip(ResourceTypes resourceType, int value)
+    {
+        PlayerUI.DisplayTooltip(resourceType, value);
+    }
+
+    public void ClearTooltipDisplay()
+    {
+        PlayerUI.tooltipHandler.ClearDisplay();
+    }
+
     private void FindImportantReferences()
     {
         PlayerUI = GameObject.Find("PlayerCanvas").GetComponent<PlayerUIHandler>();

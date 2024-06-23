@@ -12,6 +12,7 @@ public abstract class MachineBehavior : MonoBehaviour
     [SerializeField] protected int maximumInventory = 20;
     [SerializeField] protected int machineDurability = 100;
     [SerializeField] protected int maximumMachineDurability = 100;
+    [SerializeField] protected int upgradeCost = 35;
 
     [SerializeField] private ObjectPooler objPooler;
     [SerializeField] private Transform outputPos;
@@ -92,6 +93,17 @@ public abstract class MachineBehavior : MonoBehaviour
             Debug.Log($"MachineBehavior: AddInput: Couldn't add {resourceTypeRelationships[MachineType]}. Machine full or player didn't have enough.");
         }
 
+    }
+
+    public void DisplayInput()
+    {
+        //Debug.Log("Displaying input");
+        GameManager.Instance.DisplayTooltip(resourceTypeRelationships[MachineType], -1);
+    }
+
+    public void DisplayPrice()
+    {
+        GameManager.Instance.DisplayTooltip(-upgradeCost);
     }
 
     //repairs the machines for credits

@@ -16,6 +16,8 @@ public class PlayerUIHandler : MonoBehaviour
     [SerializeField] private List<TextMeshProUGUI> resourceLabels = new();
     [SerializeField] private TextMeshProUGUI timerLabel;
 
+    public ToolTipHandler tooltipHandler;
+
     public GameObject currentPanel;
     private MachineSlot currentMachineSlot;
 
@@ -117,6 +119,25 @@ public class PlayerUIHandler : MonoBehaviour
     public void ToggleReticleVisibility(bool trueOrFalse)
     {
         playerReticle.gameObject.SetActive(trueOrFalse);
+        if (trueOrFalse)
+        {
+            tooltipHandler.EnableTooltipPanel();
+        }
+        else
+        {
+            tooltipHandler.DisableTooltipPanel();
+        }
+    }
+
+    public void DisplayTooltip(int value)
+    {
+
+        tooltipHandler.DisplayValue(value);
+    }
+
+    public void DisplayTooltip(ResourceTypes resourceType, int value)
+    {
+        tooltipHandler.DisplayResource(resourceType, value);
     }
 
     public void UpdateUI()
