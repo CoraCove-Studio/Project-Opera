@@ -12,4 +12,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe31d926eecaf2842bcbfec821c172df, type: 3}
   m_Name: Shape
   m_EditorClassIdentifier: 
-  planetRadius: 14.54
+  planetRadius: 1
+  noiseLayers:
+  - enabled: 1
+    useFirstLayerAsMask: 0
+    noiseSettings:
+      filterType: 0
+      simpleNoiseSettings:
+        strength: 0.12
+        numLayers: 4
+        baseRoughness: 0.43
+        roughness: 2.75
+        persistence: 0.5
+        centre: {x: 0, y: 0, z: 0}
+        minValue: 0.69
+      ridgidNoiseSettings:
+        strength: 1
+        numLayers: 1
+        baseRoughness: 1
+        roughness: 2
+        persistence: 0.5
+        centre: {x: 0, y: 0, z: 0}
+        minValue: 0
+        weightMultiplier: 0.8
+  - enabled: 1
+    useFirstLayerAsMask: 1
+    noiseSettings:
+      filterType: 0
+      simpleNoiseSettings:
+        strength: -0.08
+        numLayers: 4
+        baseRoughness: 0.39
+        roughness: 4.28
+        persistence: 0.5
+        centre: {x: 0, y: 0, z: 0}
+        minValue: 0
+      ridgidNoiseSettings:
+        strength: 1
+        numLayers: 1
+        baseRoughness: 1
+        roughness: 2
+        persistence: 0.5
+        centre: {x: 0, y: 0, z: 0}
+        minValue: 0
+        weightMultiplier: 0.8
+  - enabled: 1
+    useFirstLayerAsMask: 1
+    noiseSettings:
+      filterType: 1
+      simpleNoiseSettings:
+        strength: 1
+        numLayers: 1
+        baseRoughness: 1
+        roughness: 2
+        persistence: 0.5
+        centre: {x: 0, y: 0, z: 0}
+        minValue: 0
+      ridgidNoiseSettings:
+        strength: 0.32
+        numLayers: 3
+        baseRoughness: 2.76
+        roughness: 0.35
+        persistence: 0.1
+        centre: {x: 0, y: 0, z: 0}
+        minValue: -0.57
+        weightMultiplier: 1.2

@@ -43,7 +43,7 @@ public class PlayerInteraction : MonoBehaviour
         Ray ray = playerCam.ViewportPointToRay(interactRayPoint);
         Debug.DrawRay(ray.origin, ray.direction * interactDistance, Color.red);
 
-        if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject.layer == 3 )
+        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance) && hit.collider.gameObject.layer == 3)
         {
             // Check if the hit object's layer is in the interactableLayerMask
             if (((1 << hit.collider.gameObject.layer) & interactableLayerMask) != 0)
@@ -57,8 +57,12 @@ public class PlayerInteraction : MonoBehaviour
         }
         else
         {
-            currentInteractable = null;
-            playerUI.DisableInteractReticle();
+            if (currentInteractable != null)
+            {
+                currentInteractable.OnLoseFocus();
+                currentInteractable = null;
+                playerUI.DisableInteractReticle();
+            }
         }
     }
 

@@ -1,60 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PrinterMachine : MonoBehaviour
+public class PrinterMachine : MachineBehavior
 {
+    public override ResourceTypes MachineType { get; } = ResourceTypes.PART;
 
-    [SerializeField] private int resourceInput;
-    [SerializeField] private float timer;
-    [SerializeField] private ObjectPooler objPooler;
-    [SerializeField] private Transform outputPos;
-    private IEnumerator productionCoroutine;
-
-    private void OnEnable()
+    public override void RepairMachine()
     {
-        productionCoroutine = Production(resourceInput, timer);
-        StartCoroutine(productionCoroutine);
-    }
-
-    private void OnDisable()
-    {
-        StopCoroutine(productionCoroutine);
-    }
-
-    private IEnumerator Production(int input, float interval)
-    {
-        GameObject part;
-
-        while (true)
+        if(machineDurability < maximumMachineDurability)
         {
-            if (input > 0)
-            {
-                resourceInput--;
-                input--;
-                part = objPooler.ReturnPart();
-                part.transform.position = outputPos.position;
-                part.SetActive(true);
-            }
-            else
-            {
-                input = resourceInput;
-            }
-            yield return new WaitForSeconds(interval);
+            machineDurability = maximumMachineDurability;
+            machineUI.UpdateDurabilityBar(machineDurability);
+        }
+    }
+    public override void UpgradeMachineEfficiency(int increase)
+    {
+        if(machineEfficiencyLevel < 4 && GameManager.Instance.PlayerCredits >= upgradeCost)
+        {
+            
+            machineEfficiency += increase;
+            machineEfficiencyLevel++;
+            machineUI.UpdateEfficiencyLevelText(machineEfficiencyLevel);            
+            GameManager.Instance.TakeCreditsFromPlayer(upgradeCost);
+            Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
         }
     }
 
-    //called to add resources to machine
-    public void AddInput(int addedResource)
+    public override void UpgradeOutputInterval(int reduction)
     {
-        GameManager.Instance.TakeCropsFromPlayer(1);
-        resourceInput++;
+        if(outputIntervalLevel < 4 && GameManager.Instance.PlayerCredits >= upgradeCost)
+        {
+            outputInterval -= reduction;
+            outputIntervalLevel++;
+            machineUI.SetSliderMaxValue(outputInterval);
+            machineUI.UpdateOutputIntervalLevelText(outputIntervalLevel);
+            GameManager.Instance.TakeCreditsFromPlayer(upgradeCost);
+            Debug.Log(gameObject.name + "Upgraded to " + outputIntervalLevel);
+        }
     }
 
-
-    //called when upgrade is purchased and applied
-    public void Upgrade(float reduction)
+    public void OnClickUpgradeMachineEfficiencyButton(int amount)
     {
-        timer -= reduction;
+        UpgradeMachineEfficiency(amount);
+    }
+
+    public void OnClickUpgradeOutputIntervalButton(int amount)
+    {
+        UpgradeOutputInterval(amount);
+    }
+
+    public void OnClickRepairMachine()
+    {
+        RepairMachine();
     }
 }

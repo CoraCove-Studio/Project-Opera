@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -22,21 +23,6 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private Controls controls;
-    private InputActionMap coreActionMap;
-    private InputActionMap UIActionMap;
-
-    public delegate void MoveInputHandler(Vector3 movement);
-    public event MoveInputHandler OnMove;
-
-    public delegate void CameraInputHandler(Vector2 movement);
-    public event CameraInputHandler OnCamMove;
-
-    public delegate void InteractHandler();
-    public event InteractHandler OnInteraction;
-
-    public delegate void PauseHandler();
-    public event PauseHandler OnPause;
 
     private void Awake()
     {
@@ -52,16 +38,29 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private Controls controls;
+    private InputActionMap coreActionMap;
+    private InputActionMap UIActionMap;
+
+    public delegate void MoveInputHandler(Vector3 movement);
+    public event MoveInputHandler OnMove;
+
+    public delegate void CameraInputHandler(Vector2 movement);
+    public event CameraInputHandler OnCamMove;
+
+    public delegate void InteractHandler();
+    public event InteractHandler OnInteraction;
+
+    public delegate void PauseHandler();
+    public event PauseHandler OnPause;
     private void OnEnable()
     {
-        EnableCoreControls();
         SceneManager.sceneLoaded += OnSceneLoaded;
         Application.quitting += Quitting;
     }
 
     private void OnDisable()
     {
-        DisableCoreControls();
         SceneManager.sceneLoaded -= OnSceneLoaded;
         Application.quitting -= Quitting;
     }
@@ -73,11 +72,11 @@ public class InputManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == GameManager.Instance.mainGameSceneName)
+        if (GameManager.Instance.gameScenes.Contains(scene.name))
         {
-            EnableCoreControls();
+            EnableUIControls();
         }
-        else if (scene.name == "GameOver")
+        else
         {
             DisableCoreControls();
             EnableUIControls();
@@ -138,9 +137,9 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public void HandlePause(InputAction.CallbackContext context)
+    private void HandlePause(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && GameManager.Instance.InTutorial == false)
         {
             if (coreActionMap.enabled)
             {
@@ -162,5 +161,13 @@ public class InputManager : MonoBehaviour
     {
         DisableUIControls();
         EnableCoreControls();
+        Debug.Log("InputManager: UnPauseWithButton: Core enabled, UI disabled.");
+    }
+
+    public void PauseWithButton()
+    {
+        EnableUIControls();
+        DisableCoreControls();
+        Debug.Log("InputManager: PauseWithButton: Core disabled, UI enabled.");
     }
 }

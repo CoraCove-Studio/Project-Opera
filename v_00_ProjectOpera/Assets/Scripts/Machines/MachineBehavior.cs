@@ -1,59 +1,116 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class MachineBehavior : MonoBehaviour
+public abstract class MachineBehavior : MonoBehaviour
 {
-    [SerializeField] private int resourceInput;
-    [SerializeField] private float timer;
+    [SerializeField] protected int inputInventory;
+    [SerializeField] protected int machineEfficiency = 4;
+    [SerializeField] protected int outputInterval = 8;
+    [SerializeField] protected int outputIntervalLevel = 1;
+    [SerializeField] protected int machineEfficiencyLevel = 1;
+    [SerializeField] protected int maximumInventory = 20;
+    [SerializeField] protected int machineDurability = 100;
+    [SerializeField] protected int maximumMachineDurability = 100;
+    [SerializeField] protected int upgradeCost = 35;
+
     [SerializeField] private ObjectPooler objPooler;
     [SerializeField] private Transform outputPos;
+    [SerializeField] protected MachineUI machineUI;
 
-    private void OnEnable()
+    private readonly Dictionary<ResourceTypes, ResourceTypes> resourceTypeRelationships = new()
     {
-        StartCoroutine(Production(resourceInput, timer));
+        { ResourceTypes.CROP, ResourceTypes.NITROGEN },
+        { ResourceTypes.PART, ResourceTypes.CROP },
+        { ResourceTypes.NITROGEN, ResourceTypes.PART }
+    };
+
+    public abstract ResourceTypes MachineType { get; }
+    private Coroutine productionCoroutine;
+
+    protected virtual void OnEnable()
+    {
+        objPooler = GameObject.Find("ObjectPooler").GetComponent<ObjectPooler>();
+        machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+        machineUI.SetSliderMaxValue(outputInterval);
+        productionCoroutine = StartCoroutine(Production());
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
-        StopCoroutine(Production(resourceInput, timer));
-    }
-
-
-    //only for testing if AddInput works
-    private void Update()
-    {
-        if(resourceInput <= 0)
+        if (productionCoroutine != null)
         {
-            AddInput(10);
+            StopCoroutine(productionCoroutine);
         }
     }
-    private IEnumerator Production(int input, float interval)
+    private IEnumerator Production()
     {
-        GameObject crop;
-        while (input > 0)
+        GameObject product;
+
+        while (true)
         {
-            yield return new WaitForSeconds(interval);
-            resourceInput--;
-            crop = objPooler.ReturnCrop();
-            crop.transform.position = outputPos.position;
-            crop.SetActive(true);
+            if (inputInventory > 0 & machineDurability > 0)
+            {
+                // Don't reorder StartBarAnimation, inventory decrementation and WaitForSeconds()
+                machineUI.StartBarAnimation(outputInterval);
+                inputInventory--;
+                machineDurability -= 10;
+                yield return new WaitForSeconds(outputInterval);
+                for (int i = 0; i < machineEfficiency; i++)
+                {
+                    machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+                    product = objPooler.ReturnProduct(MachineType);
+                    ConfigureProduct(product);
+                }
+                machineUI.UpdateDurabilityBar(machineDurability);
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.2f);
+            }
         }
-        input = resourceInput;
-        interval = timer;
     }
 
-    //called to add resources to machine
-    public void AddInput(int addedResource)
+
+    private void ConfigureProduct(GameObject product)
     {
-        resourceInput += addedResource;
+        product.transform.position = outputPos.position;
+        product.SetActive(true);
     }
 
-
-    //called when upgrade is purchased and applied
-    public void Upgrade(float reduction)
+    public void AddInput()
     {
-        timer -= reduction;
+        if (GameManager.Instance.CheckPlayerResourceValue(1, resourceTypeRelationships[MachineType]) && inputInventory < maximumInventory && machineDurability > 0)
+        {
+            GameManager.Instance.TakeResourceFromPlayer(1, resourceTypeRelationships[MachineType]);
+            if (inputInventory == 0) machineUI.StartBarAnimation(outputInterval); // Touch this with care
+            inputInventory += 1;
+            inputInventory = Mathf.Clamp(inputInventory, 0, maximumInventory);
+            machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+        }
+        else
+        {
+            Debug.Log($"MachineBehavior: AddInput: Couldn't add {resourceTypeRelationships[MachineType]}. Machine full or player didn't have enough.");
+        }
+
     }
+
+    public void DisplayInput()
+    {
+        GameManager.Instance.DisplayTooltip(resourceTypeRelationships[MachineType], -1);
+    }
+
+    public void DisplayPrice()
+    {
+        GameManager.Instance.DisplayTooltip(-upgradeCost);
+    }
+
+    //repairs the machines for credits
+    public abstract void RepairMachine();
+
+    //upgrades how many products are produced with one input
+    public abstract void UpgradeMachineEfficiency(int increase);
+
+    //upgrades how quickly the machines produce one product
+    public abstract void UpgradeOutputInterval(int reduction);
 }

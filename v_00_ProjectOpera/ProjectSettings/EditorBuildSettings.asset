@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 9dea2daad7896f04184def5165dd17eb
   - enabled: 1
-    path: Assets/Scenes/TestZeb.unity
+    path: Assets/Scenes/MainScene.unity
     guid: b20ffa5618faa4a429c489b93c0e7d2d
   - enabled: 1
     path: Assets/Scenes/GameOver.unity

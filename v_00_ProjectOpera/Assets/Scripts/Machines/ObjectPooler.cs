@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,102 +14,110 @@ public class ObjectPooler : MonoBehaviour
     [SerializeField] List<GameObject> listOfNitrogenPrefabs = new();
 
     #region general methods
-    private GameObject ReturnInactiveObject(List<GameObject> listOfObjects)
+
+    public GameObject ReturnProduct(ResourceTypes resourceType)
     {
-        foreach (GameObject gameObject in listOfObjects)
+        GameObject productToReturn;
+        productToReturn = ReturnInactiveObject(resourceType);
+
+        if (productToReturn == null)
         {
-            if( gameObject.activeInHierarchy == false)
-            {
-                return gameObject;
-            }
+            productToReturn = GetNewObject(resourceType);
+        }
+        return productToReturn;
+    }
+    private GameObject ReturnInactiveObject(ResourceTypes resourceType)
+    {
+        switch (resourceType)
+        {
+            case ResourceTypes.CROP:
+                foreach (GameObject gameObject in listOfCrops)
+                {
+                    if (gameObject.activeInHierarchy == false)
+                    {
+                        return gameObject;
+                    }
+                }
+                break;
+
+            case ResourceTypes.PART:
+                foreach (GameObject gameObject in listOfParts)
+                {
+                    if (gameObject.activeInHierarchy == false)
+                    {
+                        return gameObject;
+                    }
+                }
+                break;
+
+            case ResourceTypes.NITROGEN:
+                foreach (GameObject gameObject in listOfNitrogen)
+                {
+                    if (gameObject.activeInHierarchy == false)
+                    {
+                        return gameObject;
+                    }
+                }
+                break;
+            default:
+                Debug.Log("ObjectPooler: ReturnInactiveObject: Error, default switch case.");
+                return _ = Instantiate(listOfCropPrefabs[0]);
         }
 
         return null;
     }
-    #endregion
 
-    #region crop methods
-
-    public GameObject ReturnCrop()
+private GameObject GetNewObject(ResourceTypes resourceType)
     {
-        GameObject crop;
-        crop = ReturnInactiveObject(listOfCrops);
+        GameObject newObject;
 
-        if (crop == null)
+        switch (resourceType)
         {
-            crop = GetNewCrop();
+            case ResourceTypes.CROP:
+                newObject = Instantiate(listOfCropPrefabs[0]);
+                ConfigureNewObject(newObject, resourceType);
+                return newObject;
+
+            case ResourceTypes.PART:
+                newObject = Instantiate(listOfPartPrefabs[0]);
+                ConfigureNewObject(newObject, resourceType);
+                return newObject;
+
+            case ResourceTypes.NITROGEN:
+                newObject = Instantiate(listOfNitrogenPrefabs[0]);
+                ConfigureNewObject(newObject, resourceType);
+                return newObject;
+            default:
+                Debug.Log("ObjectPooler: GetNewObject: Error, default switch case.");
+                return _ = Instantiate(listOfCropPrefabs[0]);
         }
-        return crop;
     }
 
-    //instantiates new crop if no crops inactive in hierarchy
-    private GameObject GetNewCrop()
+    private void ConfigureNewObject(GameObject newObject, ResourceTypes resourceType)
     {
-        GameObject crop;
-
-            crop = Instantiate(listOfCropPrefabs[0]);
-            Product _ = crop.GetComponent<Product>();
-            _.SetObjectPoolerReference(this);
-            listOfCrops.Add(crop);
-
-        crop.SetActive(false);
-        return crop;
-    }
-    #endregion
-
-    #region parts methods
-    public GameObject ReturnPart()
-    {
-        GameObject part;
-        part = ReturnInactiveObject(listOfParts);
-
-        if (part == null)
-        {
-            part = GetNewPart();
-        }
-        return part;
-    }
-
-    //instantiates new part if no parts inactive in hierarchy
-    private GameObject GetNewPart()
-    {
-        GameObject part;
-
-        part = Instantiate(listOfPartPrefabs[0]);
-        Product _ = part.GetComponent<Product>();
+        Product _ = newObject.GetComponent<Product>();
         _.SetObjectPoolerReference(this);
-        listOfParts.Add(part);
 
-        part.SetActive(false);
-        return part;
+        AddNewObjectToListOfExistingObjects(newObject, resourceType);
+
+        newObject.SetActive(false);
     }
-    #endregion
 
-    #region nitrogen methods
-    public GameObject ReturnNitrogen()
+    private void AddNewObjectToListOfExistingObjects(GameObject newObject, ResourceTypes resourceType)
     {
-        GameObject nitrogen;
-        nitrogen = ReturnInactiveObject(listOfNitrogen);
-
-        if (nitrogen == null)
+        switch (resourceType)
         {
-            nitrogen = GetNewNitrogen();
+            case ResourceTypes.CROP:
+                listOfCrops.Add(newObject);
+                break;
+            case ResourceTypes.PART:
+                listOfParts.Add(newObject);
+                break;
+            case ResourceTypes.NITROGEN:
+                listOfNitrogen.Add(newObject);
+                break;
         }
-        return nitrogen;
     }
 
-    //instantiates new nitrogen if no nitrogen inactive in hierarchy
-    private GameObject GetNewNitrogen()
-    {
-        GameObject nitrogen;
-
-        nitrogen = Instantiate(listOfNitrogenPrefabs[0]);
-        Product _ = nitrogen.GetComponent<Product>();
-        _.SetObjectPoolerReference(this);
-        listOfNitrogen.Add(nitrogen);
-
-        nitrogen.SetActive(false);
-        return nitrogen;
-    }
     #endregion
 }

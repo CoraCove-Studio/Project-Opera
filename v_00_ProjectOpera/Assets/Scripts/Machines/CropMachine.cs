@@ -1,61 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CropMachine : MonoBehaviour
+public class CropMachine : MachineBehavior
 {
-
-    [SerializeField] private int resourceInput;
-    [SerializeField] private float timer;
-    [SerializeField] private ObjectPooler objPooler;
-    [SerializeField] private Transform outputPos;
-
-    private IEnumerator productionCoroutine;
-
-    private void OnEnable()
+    public override ResourceTypes MachineType { get; } = ResourceTypes.CROP;
+    public override void RepairMachine()
     {
-        productionCoroutine = Production(resourceInput, timer);
-        StartCoroutine(productionCoroutine);
-    }
-
-    private void OnDisable()
-    {
-        StopCoroutine(productionCoroutine);
-    }
-
-    private IEnumerator Production(int input, float interval)
-    {
-        GameObject crop;
-
-        while (true)
+        if (machineDurability < maximumMachineDurability)
         {
-            if (input > 0)
-            {
-                resourceInput--;
-                input--;
-                crop = objPooler.ReturnCrop();
-                crop.transform.position = outputPos.position;
-                crop.SetActive(true);
-            }
-            else
-            {
-                input = resourceInput;
-            }
-            yield return new WaitForSeconds(interval);
+            machineDurability = maximumMachineDurability;
+            machineUI.UpdateDurabilityBar(machineDurability);
         }
     }
 
-    //called to add resources to machine
-    public void AddInput()
+    public override void UpgradeMachineEfficiency(int increase)
     {
-        GameManager.Instance.TakeNitrogenFromPlayer(1);
-        resourceInput++;
+        if (machineEfficiencyLevel < 4 && GameManager.Instance.PlayerCredits >= 50)
+        {
+            machineEfficiency += increase;
+            machineEfficiencyLevel++;
+            machineUI.UpdateEfficiencyLevelText(machineEfficiencyLevel);
+            GameManager.Instance.TakeCreditsFromPlayer(50);
+            Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
+        }
     }
 
-
-    //called when upgrade is purchased and applied
-    public void Upgrade(float reduction)
+    public override void UpgradeOutputInterval(int reduction)
     {
-        timer -= reduction;
+        if (outputIntervalLevel < 4 && GameManager.Instance.PlayerCredits >= 50)
+        {
+            outputInterval -= reduction;
+            outputIntervalLevel++;
+            machineUI.SetSliderMaxValue(outputInterval);
+            machineUI.UpdateOutputIntervalLevelText(outputIntervalLevel);
+            GameManager.Instance.TakeCreditsFromPlayer(50);
+            Debug.Log(gameObject.name + "Upgraded to " + outputIntervalLevel);
+        }
+    }
+
+    public void OnClickUpgradeMachineEfficiencyButton(int amount)
+    {
+        UpgradeMachineEfficiency(amount);
+    }
+
+    public void OnClickUpgradeOutputIntervalButton(int amount)
+    {
+        UpgradeOutputInterval(amount);
+    }
+
+    public void OnClickRepairMachine()
+    {
+        RepairMachine();
     }
 }

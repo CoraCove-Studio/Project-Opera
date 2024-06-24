@@ -1,47 +1,59 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 public class PlayerUIHandler : MonoBehaviour
 {
     [SerializeField] private Image playerReticle;
     [SerializeField] private List<Sprite> reticles = new();
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject machineSpawnPanel;
     [SerializeField] private EventSystem eventSystem;
 
     [SerializeField] private List<TextMeshProUGUI> resourceLabels = new();
     [SerializeField] private TextMeshProUGUI timerLabel;
 
-    private readonly string[] labelText = {
-        "CROPS: ",
-        "PARTS: ",
-        "NITROGEN: ",
-        "CREDITS: "
-    };
+    public ToolTipHandler tooltipHandler;
 
-
-    private bool firstButtonSelected = false;
+    public GameObject currentPanel;
+    private MachineSlot currentMachineSlot;
 
     private void Awake()
     {
-        UpdateUI();
-
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
-    public void EnablePauseMenu()
+    private bool firstButtonSelected = false;
+
+    public void PauseGame()
     {
+        Debug.Log("PlayerUIHandler: PauseGame: Pausing the game.");
         pauseMenu.SetActive(true);
+        currentPanel = pauseMenu;
         ToggleReticleVisibility(false);
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
-    public void DisablePauseMenu()
+    public void ResumeGame()
     {
-        pauseMenu.SetActive(false);
+        Debug.Log("PlayerUIHandler: PauseGame: Resuming the game.");
+        if (currentPanel != null)
+        {
+            if (currentPanel == pauseMenu)
+            {
+                pauseMenu.SetActive(false);
+            }
+            else if (currentPanel == machineSpawnPanel)
+            {
+                machineSpawnPanel.SetActive(false);
+            }
+            currentPanel = null;
+        }
         ToggleReticleVisibility(true);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     #region Button Methods
@@ -107,6 +119,25 @@ public class PlayerUIHandler : MonoBehaviour
     public void ToggleReticleVisibility(bool trueOrFalse)
     {
         playerReticle.gameObject.SetActive(trueOrFalse);
+        if (trueOrFalse)
+        {
+            tooltipHandler.EnableTooltipPanel();
+        }
+        else
+        {
+            tooltipHandler.DisableTooltipPanel();
+        }
+    }
+
+    public void DisplayTooltip(int value)
+    {
+
+        tooltipHandler.DisplayValue(value);
+    }
+
+    public void DisplayTooltip(ResourceTypes resourceType, int value)
+    {
+        tooltipHandler.DisplayResource(resourceType, value);
     }
 
     public void UpdateUI()
@@ -115,13 +146,13 @@ public class PlayerUIHandler : MonoBehaviour
 
         for (int i = 0; i < resourceLabels.Count; i++)
         {
-            resourceLabels[i].text = labelText[i] + playerResources[i].ToString();
+            resourceLabels[i].text = playerResources[i].ToString();
         }
     }
 
     public void UpdateGameTimer(int minutes, int seconds)
     {
-        timerLabel.text = string.Format("TIME TO DESTINATION: {0:00}:{1:00}", minutes, seconds);
+        timerLabel.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     private List<int> GetPlayerResources()
@@ -136,4 +167,46 @@ public class PlayerUIHandler : MonoBehaviour
 
         return resourceList;
     }
+
+    #region Machine Spawn Panel Methods
+
+    public void ActivateMachineSpawnPanel(MachineSlot machineSlot)
+    {
+        GameManager.Instance.ActivateSubMenu();
+        currentMachineSlot = machineSlot;
+        // loop through the buttons of the spawn panel and make them interactable or not interactable based
+        // on whether or not the player has enough credits
+
+        machineSpawnPanel.SetActive(true);
+        currentPanel = machineSpawnPanel;
+        InputManager.Instance.PauseWithButton();
+        ToggleReticleVisibility(false);
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void DeactivateMachineSpawnPanel()
+    {
+        currentMachineSlot = null;
+        OnClickResumeButton();
+    }
+
+    public void OnSpawnButtonClick(string resourceType)
+    {
+        switch (resourceType.ToUpper())
+        {
+            case "CROP":
+                currentMachineSlot.SpawnMachine(ResourceTypes.CROP);
+                break;
+            case "PART":
+                currentMachineSlot.SpawnMachine(ResourceTypes.PART);
+                break;
+            case "NITROGEN":
+                currentMachineSlot.SpawnMachine(ResourceTypes.NITROGEN);
+                break;
+            default:
+                break;
+        }
+        DeactivateMachineSpawnPanel();
+    }
+    #endregion
 }

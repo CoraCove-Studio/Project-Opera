@@ -8,7 +8,7 @@ public class TradeInterface : MonoBehaviour
     {
         if(GameManager.Instance.PlayerCrops > 0)
         {
-            GameManager.Instance.TakeCropsFromPlayer(1);
+            GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.CROP);
             GameManager.Instance.AddCreditsToPlayer(5);
         }
     }
@@ -17,7 +17,7 @@ public class TradeInterface : MonoBehaviour
     {
         if(GameManager.Instance.PlayerParts > 0)
         {
-            GameManager.Instance.TakePartsFromPlayer(1);
+            GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.PART);
             GameManager.Instance.AddCreditsToPlayer(5);
         }
     }
@@ -26,7 +26,7 @@ public class TradeInterface : MonoBehaviour
     {
         if(GameManager.Instance.PlayerNitrogen > 0)
         {
-            GameManager.Instance.TakeNitrogenFromPlayer(1);
+            GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.NITROGEN);
             GameManager.Instance.AddCreditsToPlayer(5);
         }
     }

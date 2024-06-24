@@ -11,17 +11,16 @@ public class InteractableObject : Interactable
 
     public override void OnFocus()
     {
-        print("LOOKING AT " + gameObject.name);
+        Focus.Invoke();
     }
 
     public override void OnInteract()
     {
-        print("INTERACTED WITH " + gameObject.name);
         Interact.Invoke();
     }
 
     public override void OnLoseFocus()
     {
-        print("STOPPED LOOKING AT " + gameObject.name);
+        GameManager.Instance.ClearTooltipDisplay();
     }
 }
