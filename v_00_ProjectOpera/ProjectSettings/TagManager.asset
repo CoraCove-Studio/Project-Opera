@@ -8,6 +8,7 @@ TagManager:
   - Part
   - Nitrogen
   - CollectionDetector
+  - TradingHub
   layers:
   - Default
   - TransparentFX
