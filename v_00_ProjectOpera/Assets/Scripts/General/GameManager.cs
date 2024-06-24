@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
     { "Parts", 5 },
     { "Nitrogen", 5 },
     { "Credits", 300 },
-    { "GameDuration", 300 }
+    { "GameDuration", 600 }
 };
 
     #endregion
