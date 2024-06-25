@@ -19,6 +19,7 @@ public class TradeInterface : MonoBehaviour
     private void Start()
     {
         activePlanet = planets[0];
+        ResetValueOfProducts();
     }
     private void OnTriggerEnter(Collider other)
     {
