@@ -41,8 +41,9 @@ public class AudioManager: MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
-            // Initialize availableBeats list from beats array
+            // Initialize and shuffle availableBeats list from beats array
             availableBeats = new List<AudioClip>(beats);
+            ShuffleBeats();
             if (beats.Length > 0)
             {
                 beatDuration = beats[0].length; // Assuming all beats have the same length
@@ -90,6 +91,17 @@ public class AudioManager: MonoBehaviour
     public float GetBeatDuration(AudioClip beat)
     {
         return beat.length;
+    }
+
+    private void ShuffleBeats()
+    {
+        for (int i = 0; i < availableBeats.Count; i++)
+        {
+            AudioClip temp = availableBeats[i];
+            int randomIndex = UnityEngine.Random.Range(i, availableBeats.Count);
+            availableBeats[i] = availableBeats[randomIndex];
+            availableBeats[randomIndex] = temp;
+        }
     }
 
     //public void PlayMusic(string name)
