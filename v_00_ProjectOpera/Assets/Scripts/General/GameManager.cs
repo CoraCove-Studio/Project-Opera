@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
         GamePaused = true;
         InTutorial = true;
 
-        gameTimer.SetNewTimer(gameDurationInSeconds);
+        gameTimer.SetNewTimer(600);
         PlayerUI.ToggleReticleVisibility(false);
         Time.timeScale = 1;
     }
@@ -206,6 +206,7 @@ public class GameManager : MonoBehaviour
         playerNitrogen = newGameValues["Nitrogen"];
         playerCredits = newGameValues["Credits"];
         gameDurationInSeconds = newGameValues["GameDuration"];
+        Debug.Log("GameManager: SetNewGameValues: " + gameDurationInSeconds);
     }
 
     public void DisplayTooltip(int value)

@@ -45,7 +45,9 @@ public class GameTimer : MonoBehaviour
     public void SetNewTimer(float timeInSeconds)
     {
         CountdownTimer = timeInSeconds;
+        TimeLeft = (10, 0);
         playerUI.UpdateGameTimer(TimeLeft.Item1, TimeLeft.Item2);
+        Debug.Log("GameTimer: SetNewTimer: Timer set to: " + TimeLeft.Item1 + TimeLeft.Item2);
     }
 
     public void StartTimer()
