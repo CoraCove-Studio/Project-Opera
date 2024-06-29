@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
     { "Parts", 5 },
     { "Nitrogen", 5 },
     { "Credits", 300 },
-    { "GameDuration", 600 }
+    { "GameDuration", 20 }
 };
 
     #endregion
@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
         GamePaused = true;
         InTutorial = true;
 
-        gameTimer.SetNewTimer(600);
+        gameTimer.SetNewTimer(gameDurationInSeconds);
         PlayerUI.ToggleReticleVisibility(false);
         Time.timeScale = 1;
     }
