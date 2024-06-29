@@ -6,22 +6,41 @@ using UnityEngine.Audio;
 
 public class AudioManager: MonoBehaviour
 {
-    [SerializeField] public Sound[] sfxSounds, ambienceSounds;
-    [SerializeField] public AudioClip[] beats;
-    [SerializeField] public AudioSource sfxSource, ambienceSource;
+    [SerializeField] private Sound[] sfxSounds, ambienceSounds;
+    [SerializeField] private AudioClip[] beats;
+    [SerializeField] private AudioSource sfxSource, ambienceSource;
 
+    private static bool isQuitting = false;
     private static AudioManager instance;
 
     public static AudioManager Instance
     {
         get
         {
-            if (instance == null)
+            if (instance == null && isQuitting != true)
             {
-                Debug.LogError("Audio Manager is NULL!");
+                GameObject audioManager = new("AudioManager");
+                instance = audioManager.AddComponent<AudioManager>();
+                DontDestroyOnLoad(audioManager);
+                Debug.Log("New AudioManager has been created.");
             }
             return instance;
         }
+    }
+
+    private void OnEnable()
+    {
+        Application.quitting += Quitting;
+    }
+
+    private void OnDisable()
+    {
+        Application.quitting -= Quitting;
+    }
+
+    private void Quitting()
+    {
+        isQuitting = true;
     }
 
     [Header("Audio Mixers")]
