@@ -29,6 +29,16 @@ public class TradeInterface : MonoBehaviour
             valueOfPart = basePartValue * other.GetComponent<PlanetTradingHub>().partPriceBoost;
             valueOfNitrogen = baseNitrogenValue * other.GetComponent <PlanetTradingHub>().nitrogenPriceBoost;
         }
+        else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_ACTIVATOR))
+        {
+            Debug.Log("TradeInterface: OnTriggerEnter: Warp Speed Activated");
+            //activate particle effects here
+        }
+        else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_DEACTIVATOR))
+        {
+            Debug.Log("TradeInterface: OnTriggerEnter: Warp Speed Deactivated");
+            //deactivate particle effects here
+        }
     }
 
     private void OnTriggerExit(Collider other)
