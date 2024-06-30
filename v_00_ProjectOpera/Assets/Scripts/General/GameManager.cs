@@ -232,10 +232,10 @@ public class GameManager : MonoBehaviour
         GameObject.Find("GameTimer").TryGetComponent(out gameTimer);
         if (gameTimer == null) Debug.Log("GameManager: FindImportantReferences: gameTimer not found.");
 
-        GameObject player = GameObject.Find("PlayerPrefab");
-        player.TryGetComponent(out playerRigidBody);
+        GameObject.Find("PlayerPrefab").TryGetComponent(out playerRigidBody);
         if (playerRigidBody == null) Debug.Log("GameManager: FindImportantReferences: playerRigidBody not found.");
-        player.TryGetComponent(out playerAudioSource);
+
+        GameObject.Find("SFX AudioSource").TryGetComponent(out playerAudioSource);
         if (playerAudioSource == null) Debug.Log("GameManager: FindImportantReferences: playerAudioSource not found.");
     }
 

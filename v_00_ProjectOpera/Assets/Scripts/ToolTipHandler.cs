@@ -68,7 +68,7 @@ public class ToolTipHandler : MonoBehaviour
     public void ClearDisplay()
     {
         StopAllCoroutines();
-        if (currentDisplay != null)
+        if (tooltipPanel.activeInHierarchy)
         {
             StartCoroutine(DeactivateDisplay());
         }

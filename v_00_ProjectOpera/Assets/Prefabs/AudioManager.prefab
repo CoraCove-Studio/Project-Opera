@@ -89,7 +89,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 1865512974525965942, guid: 9400992c9d5419e4ba4d6b7338d8ce91,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -217,7 +217,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 6530253822907047204, guid: 9400992c9d5419e4ba4d6b7338d8ce91,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 9c25082e58171764883a4caa3e075872, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 67e45e01618682e418d755c1c3832928, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -355,36 +355,6 @@ MonoBehaviour:
   beats: []
   sfxSource: {fileID: 7026963840762018210}
   ambienceSource: {fileID: 6826614131005694444}
-  menuThemeMusic: {fileID: 8300000, guid: 9c25082e58171764883a4caa3e075872, type: 3}
-  mainMusic: {fileID: 8300000, guid: 67e45e01618682e418d755c1c3832928, type: 3}
-  boopTonesSaw: []
-  boopTonesSquare: []
-  boopTonesSine: []
-  gentleTones: []
-  keyRolls: []
-  tinkles: []
-  machineProductionLoops:
-  - {fileID: 8300000, guid: 79f4ff2540c557b4fb5eb2a5260a0506, type: 3}
-  - {fileID: 8300000, guid: 4b95082f4143e304eb00fd79fbd85bec, type: 3}
-  - {fileID: 8300000, guid: 310fe3d4afe0f73479d193ad4bfed800, type: 3}
-  - {fileID: 8300000, guid: 2abac9feb20562c459e38ddedbf1c425, type: 3}
-  - {fileID: 8300000, guid: 432c22bdd5efd3f4aadfe6de590dbbf6, type: 3}
-  - {fileID: 8300000, guid: 14f8d3b12e5aca845b1b6e4a7bcc7763, type: 3}
-  blips: []
-  muteTones: []
-  spaceEchos: []
-  bounceNoises: []
-  smallBong: {fileID: 0}
-  eightBitClick: {fileID: 8300000, guid: 0a8bea03ce9882140ba56253f527a37f, type: 3}
-  cropsGrowing: {fileID: 0}
-  bubbleSound: {fileID: 0}
-  engineSound: {fileID: 0}
-  happyUpwardArp: {fileID: 0}
-  introspectiveArp: {fileID: 0}
-  lowBassLoop: {fileID: 0}
-  metalImpact: {fileID: 0}
-  pacmanWaka: {fileID: 0}
-  wahwahwah: {fileID: 0}
   masterMixer: {fileID: 24100000, guid: 9400992c9d5419e4ba4d6b7338d8ce91, type: 2}
   musicGroup: {fileID: 7444483187120030595, guid: 9400992c9d5419e4ba4d6b7338d8ce91,
     type: 2}

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioManager: MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
     [SerializeField] private Sound[] sfxSounds, ambienceSounds;
     [SerializeField] private AudioClip[] beats;
@@ -17,76 +17,17 @@ public class AudioManager: MonoBehaviour
     //private double nextStartTime;
     //private float beatDuration;
 
-
-
-    private static bool isQuitting = false;
-    private static AudioManager instance;
-    public static GameObject audioManagerPrefab;
-
-    public static AudioManager Instance
-    {
-        get
-        {
-            if (instance == null && isQuitting != true)
-            {
-                if (audioManagerPrefab == null)
-                {
-                    Debug.LogError("AudioManager prefab is not assigned.");
-                    return null;
-                }
-
-                GameObject audioManager = Instantiate(audioManagerPrefab);
-                
-                if (!audioManager.TryGetComponent(out instance))
-                {
-                    Debug.LogError("The AudioManager prefab does not have an AudioManager component.");
-                    return null;
-                }
-
-                DontDestroyOnLoad(audioManager);
-                Debug.Log("New AudioManager has been created.");
-            }
-            return instance;
-        }
-    }
-
     private void Awake()
     {
-        // Ensure only one instance of AudioManager exists
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
 
-            // Initialize and shuffle availableBeats list from beats array
-            // availableBeats = new List<AudioClip>(beats);
-            // ShuffleBeats();
-            //if (beats.Length > 0)
-            //{
-            //    beatDuration = beats[0].length; // Assuming all beats have the same length
-            //}
-            // nextStartTime = AudioSettings.dspTime; // Initialize the next start time
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-    }
-
-    private void OnEnable()
-    {
-        Application.quitting += Quitting;
-    }
-
-    private void OnDisable()
-    {
-        Application.quitting -= Quitting;
-    }
-
-    private void Quitting()
-    {
-        isQuitting = true;
+        // Initialize and shuffle availableBeats list from beats array
+        // availableBeats = new List<AudioClip>(beats);
+        // ShuffleBeats();
+        //if (beats.Length > 0)
+        //{
+        //    beatDuration = beats[0].length; // Assuming all beats have the same length
+        //}
+        // nextStartTime = AudioSettings.dspTime; // Initialize the next start time
     }
 
     //public AudioClip ReturnRandomMachineProductionClip()
