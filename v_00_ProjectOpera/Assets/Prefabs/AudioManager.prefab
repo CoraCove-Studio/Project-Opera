@@ -352,15 +352,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxSounds: []
   ambienceSounds: []
-  beats:
-  - {fileID: 8300000, guid: af398d2f09a258b4d9a06d9ec11f1a9f, type: 3}
-  - {fileID: 8300000, guid: 423e0f73b80bf3948ba4389db64215b5, type: 3}
-  - {fileID: 8300000, guid: 0cae62fac9e7ffe4eb3859b42c40bc91, type: 3}
-  sfxSource: {fileID: 0}
-  ambienceSource: {fileID: 0}
+  beats: []
+  sfxSource: {fileID: 7026963840762018210}
+  ambienceSource: {fileID: 6826614131005694444}
   masterMixer: {fileID: 24100000, guid: 9400992c9d5419e4ba4d6b7338d8ce91, type: 2}
   musicGroup: {fileID: 7444483187120030595, guid: 9400992c9d5419e4ba4d6b7338d8ce91,
     type: 2}
   sfxGroup: {fileID: 1865512974525965942, guid: 9400992c9d5419e4ba4d6b7338d8ce91,
     type: 2}
-  ambienceGroup: {fileID: 0}
