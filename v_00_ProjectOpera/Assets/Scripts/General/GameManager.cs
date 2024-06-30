@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public PlayerUIHandler PlayerUI { get; private set; }
     public GameObject Player { get; private set; }
     private Rigidbody playerRigidBody;
-    public AudioSource playerAudioSource;
+    public AudioManager audioManager;
     private GameTimer gameTimer;
     private float gameDurationInSeconds;
 
@@ -235,8 +235,8 @@ public class GameManager : MonoBehaviour
         GameObject.Find("PlayerPrefab").TryGetComponent(out playerRigidBody);
         if (playerRigidBody == null) Debug.Log("GameManager: FindImportantReferences: playerRigidBody not found.");
 
-        GameObject.Find("SFX AudioSource").TryGetComponent(out playerAudioSource);
-        if (playerAudioSource == null) Debug.Log("GameManager: FindImportantReferences: playerAudioSource not found.");
+        GameObject.Find("AudioManager").TryGetComponent(out audioManager);
+        if (audioManager == null) Debug.Log("GameManager: FindImportantReferences: audioManager not found.");
     }
 
     private void CheckGameOver()

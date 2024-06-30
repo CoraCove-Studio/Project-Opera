@@ -6,7 +6,8 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField] private Sound[] sfxSounds, ambienceSounds;
     [SerializeField] private AudioClip[] beats;
-    [SerializeField] private AudioSource sfxSource, ambienceSource;
+    [SerializeField] private List<AudioSource> sfxSources;
+    [SerializeField] private AudioSource ambienceSource;
 
     [Header("Audio Mixers")]
     public AudioMixer masterMixer;
@@ -85,19 +86,17 @@ public class AudioManager : MonoBehaviour
     //    }
     //}
 
-    //public void PlaySFX(string name)
-    //{
-    //    Sound s = Array.Find(sfxSounds, x => x.name == name);
-
-    //    if (s == null)
-    //    {
-    //        Debug.Log(name + " audio file could not be found.");
-    //    }
-    //    else
-    //    {
-    //        sfxSource.PlayOneShot(s.clip);
-    //    }
-    //}
+    public void PlaySFX(AudioClip clip)
+    {
+        foreach (var source in sfxSources)
+        {
+            if (source.isPlaying == false)
+            {
+                source.PlayOneShot(clip);
+                return;
+            }
+        }
+    }
 
     #endregion
 }

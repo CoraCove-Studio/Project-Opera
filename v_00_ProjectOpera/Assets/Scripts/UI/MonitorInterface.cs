@@ -16,7 +16,10 @@ public class MonitorInterface : MonoBehaviour
     [SerializeField] private GameObject noButton;
     [SerializeField] private GameObject debugStartButton;
 
-    private float textSpeed = 0.05f;
+    [SerializeField] private AudioClip clickNoise;
+    [SerializeField] private AudioClip gameStartNoise;
+
+    private readonly float textSpeed = 0.025f;
     private int currentTutTextIndex = 0;
     private int endTutorialTextIndex;
 
@@ -46,11 +49,13 @@ public class MonitorInterface : MonoBehaviour
     public void OnClickStartButton()
     {
         GameManager.Instance.StartGame();
+        GameManager.Instance.audioManager.PlaySFX(gameStartNoise);
         InputManager.Instance.UnpauseWithButton();
     }
 
     public void OnClickNextButton()
     {
+        GameManager.Instance.audioManager.PlaySFX(clickNoise);
         nextButton.SetActive(false);
         if (currentTutTextIndex == 4)
         {

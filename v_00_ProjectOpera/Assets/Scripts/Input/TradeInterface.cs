@@ -13,6 +13,7 @@ public class TradeInterface : MonoBehaviour
     private int valueOfNitrogen;
 
     [SerializeField] List<GameObject> planets;
+    [SerializeField] List<AudioClip> sellingNoises;
     private int round = 1;
     private GameObject activePlanet;
 
@@ -84,6 +85,11 @@ public class TradeInterface : MonoBehaviour
         }
     }
 
+    private AudioClip GetRandomNoiseClip()
+    {
+        return sellingNoises[Random.Range(0, sellingNoises.Count)];
+    }
+
 
     public void OnClickSellCrops()
     {
@@ -91,6 +97,7 @@ public class TradeInterface : MonoBehaviour
         {
             GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.CROP);
             GameManager.Instance.AddCreditsToPlayer(valueOfCrop);
+            GameManager.Instance.audioManager.PlaySFX(GetRandomNoiseClip());
         }
     }
 
@@ -100,6 +107,7 @@ public class TradeInterface : MonoBehaviour
         {
             GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.PART);
             GameManager.Instance.AddCreditsToPlayer(valueOfPart);
+            GameManager.Instance.audioManager.PlaySFX(GetRandomNoiseClip());
         }
     }
 
@@ -109,6 +117,7 @@ public class TradeInterface : MonoBehaviour
         {
             GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.NITROGEN);
             GameManager.Instance.AddCreditsToPlayer(valueOfNitrogen);
+            GameManager.Instance.audioManager.PlaySFX(GetRandomNoiseClip());
         }
     }
 }

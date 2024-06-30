@@ -121,12 +121,16 @@ MonoBehaviour:
   startPosition: {x: 0, y: 0, z: 0}
   resourceType: 0
   listOfCollectionClips:
-  - {fileID: 8300000, guid: 4ac05247ed3df294aa02ac2c879f880d, type: 3}
-  - {fileID: 8300000, guid: dcb5acafe832c314bbbceed287459564, type: 3}
-  - {fileID: 8300000, guid: ac5264c70fd7cb64a8aee0af807fa64a, type: 3}
-  - {fileID: 8300000, guid: 27ec02b7d7d189a4b9dca0d1876dd411, type: 3}
-  - {fileID: 8300000, guid: d2ae0cea02767214eb8fd17d22d76797, type: 3}
-  - {fileID: 8300000, guid: b3cfe0a4ac6cd4e4aba3c5073b50f9bc, type: 3}
+  - {fileID: 8300000, guid: 0a548ead669c3814a9e81f7ada3b68d0, type: 3}
+  - {fileID: 8300000, guid: ddcc1b1110d9886429388f73c4b1b48a, type: 3}
+  - {fileID: 8300000, guid: 0053ea03bbe33254d875a23967741315, type: 3}
+  - {fileID: 8300000, guid: 047da314686129149886aa32bfdad2ec, type: 3}
+  - {fileID: 8300000, guid: 740da56a1cc075a4b918ba6fec543df5, type: 3}
+  - {fileID: 8300000, guid: 7d475f72dc89ef24993a6eff92422ec9, type: 3}
+  - {fileID: 8300000, guid: 9e373fbee5cab1e4aa0f25b208eba7a5, type: 3}
+  - {fileID: 8300000, guid: a5101831729d198419925203ab433e8e, type: 3}
+  - {fileID: 8300000, guid: 1a88adcb97caeb246af2aba5b57dad9b, type: 3}
+  - {fileID: 8300000, guid: d4d4a2c637ef2a8468c3f718223d2215, type: 3}
 --- !u!1001 &4789849851734401466
 PrefabInstance:
   m_ObjectHideFlags: 0

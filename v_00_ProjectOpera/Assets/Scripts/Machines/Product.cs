@@ -25,7 +25,7 @@ public class Product : MonoBehaviour
         if (other.gameObject.CompareTag(TagManager.PLAYER))
         {
             GameManager.Instance.AddResourceToPlayer(1, resourceType);
-            GameManager.Instance.playerAudioSource.PlayOneShot(GetRandomCollectionClip());
+            GameManager.Instance.audioManager.PlaySFX(GetRandomCollectionClip());
             gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag(TagManager.COLLECTION))
