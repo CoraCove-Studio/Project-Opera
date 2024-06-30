@@ -61,13 +61,13 @@ public class AudioManager: MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             // Initialize and shuffle availableBeats list from beats array
-            availableBeats = new List<AudioClip>(beats);
-            ShuffleBeats();
-            if (beats.Length > 0)
-            {
-                beatDuration = beats[0].length; // Assuming all beats have the same length
-            }
-            nextStartTime = AudioSettings.dspTime; // Initialize the next start time
+            // availableBeats = new List<AudioClip>(beats);
+            // ShuffleBeats();
+            //if (beats.Length > 0)
+            //{
+            //    beatDuration = beats[0].length; // Assuming all beats have the same length
+            //}
+            // nextStartTime = AudioSettings.dspTime; // Initialize the next start time
         }
         else
         {
@@ -85,76 +85,58 @@ public class AudioManager: MonoBehaviour
         }
     }
 
-    public AudioClip GetUniqueBeat()
-    {
-        if (availableBeats.Count == 0)
-        {
-            Debug.LogError("No available beats!");
-            return null;
-        }
-        AudioClip beat = availableBeats[0];
-        availableBeats.RemoveAt(0);
-        return beat;
-    }
-
-    public void ReturnBeat(AudioClip beat)
-    {
-        availableBeats.Add(beat);
-    }
-
-    public double GetNextStartTime()
-    {
-        return nextStartTime;
-    }
-
-    public float GetBeatDuration(AudioClip beat)
-    {
-        return beat.length;
-    }
-
-    private void ShuffleBeats()
-    {
-        for (int i = 0; i < availableBeats.Count; i++)
-        {
-            AudioClip temp = availableBeats[i];
-            int randomIndex = UnityEngine.Random.Range(i, availableBeats.Count);
-            availableBeats[i] = availableBeats[randomIndex];
-            availableBeats[randomIndex] = temp;
-        }
-    }
-
-    //public void PlayMusic(string name)
+    #region Rachel's Methods
+    //public AudioClip GetUniqueBeat()
     //{
-    //    Sound s = Array.Find(musicSounds, x => x.name == name);
+    //    if (availableBeats.Count == 0)
+    //    {
+    //        Debug.LogError("No available beats!");
+    //        return null;
+    //    }
+    //    AudioClip beat = availableBeats[0];
+    //    availableBeats.RemoveAt(0);
+    //    return beat;
+    //}
+
+    //public void ReturnBeat(AudioClip beat)
+    //{
+    //    availableBeats.Add(beat);
+    //}
+
+    //public double GetNextStartTime()
+    //{
+    //    return nextStartTime;
+    //}
+
+    //public float GetBeatDuration(AudioClip beat)
+    //{
+    //    return beat.length;
+    //}
+
+    //private void ShuffleBeats()
+    //{
+    //    for (int i = 0; i < availableBeats.Count; i++)
+    //    {
+    //        AudioClip temp = availableBeats[i];
+    //        int randomIndex = UnityEngine.Random.Range(i, availableBeats.Count);
+    //        availableBeats[i] = availableBeats[randomIndex];
+    //        availableBeats[randomIndex] = temp;
+    //    }
+    //}
+
+    //public void PlaySFX(string name)
+    //{
+    //    Sound s = Array.Find(sfxSounds, x => x.name == name);
 
     //    if (s == null)
     //    {
-    //        Debug.Log( name + " audio file could not be found.");
+    //        Debug.Log(name + " audio file could not be found.");
     //    }
     //    else
     //    {
-    //        musicSource.clip = s.clip;
-    //        musicSource.Play();
+    //        sfxSource.PlayOneShot(s.clip);
     //    }
     //}
 
-    public void PlaySFX(string name)
-    {
-        Sound s = Array.Find(sfxSounds, x => x.name == name);
-
-        if (s == null)
-        {
-            Debug.Log(name + " audio file could not be found.");
-        }
-        else
-        {
-            sfxSource.PlayOneShot(s.clip);
-        }
-    }
-
-    //public void StopMusic()
-    //{
-    //    musicSource.Stop();
-    //    musicSource.clip = null;
-    //}
+    #endregion
 }
