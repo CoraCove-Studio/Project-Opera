@@ -68,7 +68,10 @@ public class ToolTipHandler : MonoBehaviour
     public void ClearDisplay()
     {
         StopAllCoroutines();
-        StartCoroutine(DeactivateDisplay());
+        if (currentDisplay != null)
+        {
+            StartCoroutine(DeactivateDisplay());
+        }
     }
 
     private IEnumerator ActivateDisplay(CanvasGroup display)
