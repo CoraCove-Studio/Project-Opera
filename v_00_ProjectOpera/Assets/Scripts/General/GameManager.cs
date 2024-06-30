@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public PlayerUIHandler PlayerUI { get; private set; }
     public GameObject Player { get; private set; }
     private Rigidbody playerRigidBody;
+    public AudioSource playerAudioSource;
     private GameTimer gameTimer;
     private float gameDurationInSeconds;
 
@@ -231,8 +232,11 @@ public class GameManager : MonoBehaviour
         GameObject.Find("GameTimer").TryGetComponent(out gameTimer);
         if (gameTimer == null) Debug.Log("GameManager: FindImportantReferences: gameTimer not found.");
 
-        GameObject.Find("PlayerPrefab").TryGetComponent(out playerRigidBody);
+        GameObject player = GameObject.Find("PlayerPrefab");
+        player.TryGetComponent(out playerRigidBody);
         if (playerRigidBody == null) Debug.Log("GameManager: FindImportantReferences: playerRigidBody not found.");
+        player.TryGetComponent(out playerAudioSource);
+        if (playerAudioSource == null) Debug.Log("GameManager: FindImportantReferences: playerAudioSource not found.");
     }
 
     private void CheckGameOver()
@@ -258,6 +262,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("GameManager: ToggleGamePause: Resuming game.");
                 Time.timeScale = 1;
+                AudioListener.pause = false;
                 if (PlayerUI != null)
                 {
                     PlayerUI.ResumeGame();
@@ -268,6 +273,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("GameManager: ToggleGamePause: Pausing game.");
                 Time.timeScale = 0;
+                AudioListener.pause = true;
                 if (PlayerUI != null)
                 {
                     PlayerUI.PauseGame();

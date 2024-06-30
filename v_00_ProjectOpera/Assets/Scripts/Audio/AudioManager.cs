@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.Audio;
 
 public class AudioManager: MonoBehaviour
@@ -10,8 +8,20 @@ public class AudioManager: MonoBehaviour
     [SerializeField] private AudioClip[] beats;
     [SerializeField] private AudioSource sfxSource, ambienceSource;
 
+    [Header("Audio Mixers")]
+    public AudioMixer masterMixer;
+    public AudioMixerGroup musicGroup;
+    public AudioMixerGroup sfxGroup;
+
+    private List<AudioClip> availableBeats;
+    //private double nextStartTime;
+    //private float beatDuration;
+
+
+
     private static bool isQuitting = false;
     private static AudioManager instance;
+    public static GameObject audioManagerPrefab;
 
     public static AudioManager Instance
     {
@@ -19,38 +29,26 @@ public class AudioManager: MonoBehaviour
         {
             if (instance == null && isQuitting != true)
             {
-                GameObject audioManager = new("AudioManager");
-                instance = audioManager.AddComponent<AudioManager>();
+                if (audioManagerPrefab == null)
+                {
+                    Debug.LogError("AudioManager prefab is not assigned.");
+                    return null;
+                }
+
+                GameObject audioManager = Instantiate(audioManagerPrefab);
+                
+                if (!audioManager.TryGetComponent(out instance))
+                {
+                    Debug.LogError("The AudioManager prefab does not have an AudioManager component.");
+                    return null;
+                }
+
                 DontDestroyOnLoad(audioManager);
                 Debug.Log("New AudioManager has been created.");
             }
             return instance;
         }
     }
-
-    private void OnEnable()
-    {
-        Application.quitting += Quitting;
-    }
-
-    private void OnDisable()
-    {
-        Application.quitting -= Quitting;
-    }
-
-    private void Quitting()
-    {
-        isQuitting = true;
-    }
-
-    [Header("Audio Mixers")]
-    public AudioMixer masterMixer;
-    public AudioMixerGroup musicGroup;
-    public AudioMixerGroup sfxGroup;
-
-    private List<AudioClip> availableBeats;
-    private double nextStartTime;
-    private float beatDuration;
 
     private void Awake()
     {
@@ -76,16 +74,38 @@ public class AudioManager: MonoBehaviour
         }
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        // Continuously update the next start time to maintain synchronization
-        if (AudioSettings.dspTime >= nextStartTime)
-        {
-            nextStartTime += beatDuration;
-        }
+        Application.quitting += Quitting;
     }
 
+    private void OnDisable()
+    {
+        Application.quitting -= Quitting;
+    }
+
+    private void Quitting()
+    {
+        isQuitting = true;
+    }
+
+    //public AudioClip ReturnRandomMachineProductionClip()
+    //{
+    //    Debug.Log("AudioManager: ReturnRandomMachineProductionClip: Returning clip.");
+    //    Debug.Log($"machineProductionLoops list contains {machineProductionLoops.Count} elements.");
+    //    return machineProductionLoops[Random.Range(0, machineProductionLoops.Count - 1)];
+    //}
+
+
     #region Rachel's Methods
+    //private void Update()
+    //{
+    //    // Continuously update the next start time to maintain synchronization
+    //    if (AudioSettings.dspTime >= nextStartTime)
+    //    {
+    //        nextStartTime += beatDuration;
+    //    }
+    //}
     //public AudioClip GetUniqueBeat()
     //{
     //    if (availableBeats.Count == 0)

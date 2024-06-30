@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public abstract class MachineBehavior : MonoBehaviour
 {
     [SerializeField] protected int inputInventory;
@@ -18,6 +19,7 @@ public abstract class MachineBehavior : MonoBehaviour
     [SerializeField] private Transform outputPos;
     [SerializeField] protected MachineUI machineUI;
 
+
     private readonly Dictionary<ResourceTypes, ResourceTypes> resourceTypeRelationships = new()
     {
         { ResourceTypes.CROP, ResourceTypes.NITROGEN },
@@ -28,11 +30,19 @@ public abstract class MachineBehavior : MonoBehaviour
     public abstract ResourceTypes MachineType { get; }
     private Coroutine productionCoroutine;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private List<AudioClip> machineProductionLoops;
+    [SerializeField] private AudioClip productInstantiationNoise;
+
     protected virtual void OnEnable()
     {
         objPooler = GameObject.Find("ObjectPooler").GetComponent<ObjectPooler>();
         machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
         machineUI.SetSliderMaxValue(outputInterval);
+        audioSource = GetComponent<AudioSource>();
+        GetProductionAudioClip();
+        audioSource.loop = true;
         productionCoroutine = StartCoroutine(Production());
     }
 
@@ -51,6 +61,7 @@ public abstract class MachineBehavior : MonoBehaviour
         {
             if (inputInventory > 0 & machineDurability > 0)
             {
+                audioSource.Play();
                 // Don't reorder StartBarAnimation, inventory decrementation and WaitForSeconds()
                 machineUI.StartBarAnimation(outputInterval);
                 inputInventory--;
@@ -66,6 +77,7 @@ public abstract class MachineBehavior : MonoBehaviour
             }
             else
             {
+                audioSource.Stop();
                 yield return new WaitForSeconds(0.2f);
             }
         }
@@ -76,6 +88,7 @@ public abstract class MachineBehavior : MonoBehaviour
     {
         product.transform.position = outputPos.position;
         product.SetActive(true);
+        audioSource.PlayOneShot(productInstantiationNoise);
     }
 
     public void AddInput()
@@ -103,6 +116,11 @@ public abstract class MachineBehavior : MonoBehaviour
     public void DisplayPrice()
     {
         GameManager.Instance.DisplayTooltip(-upgradeCost);
+    }
+
+    private void GetProductionAudioClip()
+    {
+        audioSource.clip = machineProductionLoops[Random.Range(0, machineProductionLoops.Count)];
     }
 
     //repairs the machines for credits

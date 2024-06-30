@@ -120,6 +120,13 @@ MonoBehaviour:
   collectionDuration: 2
   startPosition: {x: 0, y: 0, z: 0}
   resourceType: 2
+  listOfCollectionClips:
+  - {fileID: 8300000, guid: 360890d5d0a51b94cb680026f0565d15, type: 3}
+  - {fileID: 8300000, guid: 609372bef01baab4aa9b35ab05b614f8, type: 3}
+  - {fileID: 8300000, guid: ef6c5d74fc107b34095bfb15df7080c7, type: 3}
+  - {fileID: 8300000, guid: d4e220f683bac564880d568e8553da5d, type: 3}
+  - {fileID: 8300000, guid: b9e80f5a96a11014791d433e18f03e9c, type: 3}
+  - {fileID: 8300000, guid: e664e5da77f7ede45ba4910330b7d56d, type: 3}
 --- !u!1001 &2050997737248566078
 PrefabInstance:
   m_ObjectHideFlags: 0
