@@ -7,9 +7,19 @@ public class PlayerCollisionDetection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(TagManager.CROP) || other.CompareTag(TagManager.PART) || other.CompareTag(TagManager.NITROGEN))
+        if (other.CompareTag(TagManager.DOOR))
         {
-            print(other.gameObject + " detected");
+            other.gameObject.GetComponent<DoorAnim>().SetBoolTrue();
+            Debug.Log("PlayerCollisionDetection: OnTriggerEnter: Door Anim Set to True");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(TagManager.DOOR))
+        {
+            other.gameObject.GetComponent<DoorAnim>().SetBoolFalse();
+            Debug.Log("PlayerCollisionDetection: OnTriggerEnter: Door Anim Set to False");
         }
     }
 }

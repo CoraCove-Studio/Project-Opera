@@ -83,6 +83,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vertical Door
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 68eb376a4e56781418fffc0565dce43e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 68eb376a4e56781418fffc0565dce43e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
     - target: {fileID: 3160997667482556802, guid: 68eb376a4e56781418fffc0565dce43e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -104,6 +114,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8767105112921933084}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 68eb376a4e56781418fffc0565dce43e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 72098605921522524}
     - targetCorrespondingSourceObject: {fileID: -5823794005265101071, guid: 68eb376a4e56781418fffc0565dce43e,
         type: 3}
       insertIndex: -1
@@ -231,8 +245,20 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.8573105, y: 3.8340764, z: 1.314334}
-  m_Center: {x: 0.02989459, y: 1.9020255, z: 3.6495016}
+  m_Size: {x: 2.8573105, y: 3.8340764, z: 2.5172756}
+  m_Center: {x: 0.02989459, y: 1.9020255, z: 3.6995714}
+--- !u!114 &72098605921522524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2585402675666514688}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a131e62366d1d40a08cf4a4896d5ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6934240127017405693 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3523216300759416148, guid: 68eb376a4e56781418fffc0565dce43e,
