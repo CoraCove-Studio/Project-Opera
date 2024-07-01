@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.022089114, g: 0.022612767, b: 0.021326404, a: 1}
+  m_IndirectSpecularColor: {r: 0.021901544, g: 0.022422442, b: 0.021150468, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -538,7 +538,8 @@ PrefabInstance:
       value: 0.596
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7540249100400831567, guid: 2f9ea7db546bac545b3a6e850a2d2a8b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f9ea7db546bac545b3a6e850a2d2a8b, type: 3}
@@ -3347,17 +3348,17 @@ PrefabInstance:
     - target: {fileID: 6739546984936805453, guid: 16b7fe929586fc54484d73f47989cd23,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.976
+      value: 0.018999979
       objectReference: {fileID: 0}
     - target: {fileID: 6739546984936805453, guid: 16b7fe929586fc54484d73f47989cd23,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.69
+      value: 5.305
       objectReference: {fileID: 0}
     - target: {fileID: 6739546984936805453, guid: 16b7fe929586fc54484d73f47989cd23,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.968
+      value: 3.323
       objectReference: {fileID: 0}
     - target: {fileID: 6739546984936805453, guid: 16b7fe929586fc54484d73f47989cd23,
         type: 3}
@@ -3612,17 +3613,17 @@ PrefabInstance:
     - target: {fileID: 8255295065427464169, guid: b7b505c934c06a74da1d943ded97c1fb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.056
+      value: -0.061
       objectReference: {fileID: 0}
     - target: {fileID: 8255295065427464169, guid: b7b505c934c06a74da1d943ded97c1fb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.625
+      value: 7.24
       objectReference: {fileID: 0}
     - target: {fileID: 8255295065427464169, guid: b7b505c934c06a74da1d943ded97c1fb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.968
+      value: 3.323
       objectReference: {fileID: 0}
     - target: {fileID: 8255295065427464169, guid: b7b505c934c06a74da1d943ded97c1fb,
         type: 3}
@@ -4829,7 +4830,6 @@ MonoBehaviour:
   m_Script: {fileID: 1854693422}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Entries: []
 --- !u!4 &1413403249
 Transform:
   m_ObjectHideFlags: 19
