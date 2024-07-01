@@ -38,7 +38,7 @@ public class MachineSlot : MonoBehaviour
             default:
                 break;
         }
-
+        GameManager.Instance.TakeCreditsFromPlayer(50);
         interactableComponent.enabled = false;
         gameObject.layer = 0;
     }
