@@ -1028,7 +1028,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4555807, y: 2.027509, z: 1}
+  m_Size: {x: 1.5709802, y: 2.027509, z: 1.2622112}
   m_Center: {x: 0, y: 1.0199627, z: 0}
 --- !u!114 &7178670231014221668
 MonoBehaviour:
@@ -1061,6 +1061,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 79f4ff2540c557b4fb5eb2a5260a0506, type: 3}
   productInstantiationNoise: {fileID: 8300000, guid: 9e9866e2736fea94a95ad6bbb60b3050,
     type: 3}
+  armAnimation: {fileID: 6258548118990003222}
 --- !u!114 &2702645883483869212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2154,6 +2155,12 @@ PrefabInstance:
 --- !u!4 &4694396635955150708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 137681265268091814, guid: 1810a906d12710b46b35d0d005d6be89,
+    type: 3}
+  m_PrefabInstance: {fileID: 4669384814374343890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6258548118990003222 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1591504483114043588, guid: 1810a906d12710b46b35d0d005d6be89,
     type: 3}
   m_PrefabInstance: {fileID: 4669384814374343890}
   m_PrefabAsset: {fileID: 0}

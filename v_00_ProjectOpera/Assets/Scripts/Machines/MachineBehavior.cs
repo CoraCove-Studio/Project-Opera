@@ -15,7 +15,7 @@ public abstract class MachineBehavior : MonoBehaviour
     [SerializeField] protected int maximumMachineDurability = 100;
     [SerializeField] protected int upgradeCost = 35;
 
-    [SerializeField] private ObjectPooler objPooler;
+    [SerializeField] protected ObjectPooler objPooler;
     [SerializeField] private Transform outputPos;
     [SerializeField] protected MachineUI machineUI;
 
@@ -31,8 +31,8 @@ public abstract class MachineBehavior : MonoBehaviour
     private Coroutine productionCoroutine;
 
     [Header("Audio")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private List<AudioClip> machineProductionLoops;
+    [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected List<AudioClip> machineProductionLoops;
     [SerializeField] private AudioClip productInstantiationNoise;
 
     protected virtual void OnEnable()
@@ -53,7 +53,7 @@ public abstract class MachineBehavior : MonoBehaviour
             StopCoroutine(productionCoroutine);
         }
     }
-    private IEnumerator Production()
+    protected virtual IEnumerator Production()
     {
         GameObject product;
 
@@ -84,7 +84,7 @@ public abstract class MachineBehavior : MonoBehaviour
     }
 
 
-    private void ConfigureProduct(GameObject product)
+    protected void ConfigureProduct(GameObject product)
     {
         product.transform.position = outputPos.position;
         product.SetActive(true);
