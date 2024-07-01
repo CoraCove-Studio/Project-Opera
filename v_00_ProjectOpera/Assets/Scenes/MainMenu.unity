@@ -1961,7 +1961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cc1c9ac1f67a8429b4c0beb53440d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button_Animator: {fileID: 1066367036}
+  buttonAnimator: {fileID: 1066367036}
 --- !u!95 &1066367036
 Animator:
   serializedVersion: 5
@@ -2029,7 +2029,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1066367035}
         m_TargetAssemblyTypeName: ButtonAnims, Assembly-CSharp
-        m_MethodName: SetAnimBool
+        m_MethodName: TogglePanelAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2845,7 +2845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cc1c9ac1f67a8429b4c0beb53440d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button_Animator: {fileID: 1276617180}
+  buttonAnimator: {fileID: 1276617180}
 --- !u!95 &1276617180
 Animator:
   serializedVersion: 5
@@ -2913,7 +2913,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1276617179}
         m_TargetAssemblyTypeName: ButtonAnims, Assembly-CSharp
-        m_MethodName: SetAnimBool
+        m_MethodName: TogglePanelAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3191,7 +3191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cc1c9ac1f67a8429b4c0beb53440d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button_Animator: {fileID: 1445458633}
+  buttonAnimator: {fileID: 1445458633}
 --- !u!95 &1445458633
 Animator:
   serializedVersion: 5
@@ -3259,7 +3259,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1445458632}
         m_TargetAssemblyTypeName: ButtonAnims, Assembly-CSharp
-        m_MethodName: SetAnimBool
+        m_MethodName: TogglePanelAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

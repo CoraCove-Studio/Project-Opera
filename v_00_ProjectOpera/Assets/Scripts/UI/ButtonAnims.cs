@@ -4,29 +4,38 @@ using UnityEngine;
 
 public class ButtonAnims : MonoBehaviour
 {
-    [SerializeField] private Animator button_Animator;
+    [SerializeField] private Animator buttonAnimator;
 
-    private bool clickedToTurnOffPanel = false;
-    private bool triggerChecked = false;
+    private bool isPanelOff = false;
+    private bool isTriggerChecked = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        button_Animator = GetComponent<Animator>();
+        if (buttonAnimator == null)
+        {
+            buttonAnimator = GetComponent<Animator>();
+        }
     }
 
-    public void SetAnimBool()
+    public void TogglePanelAnimation()
     {
-        if (!clickedToTurnOffPanel && triggerChecked == false)
+        if (buttonAnimator == null)
         {
-            button_Animator.SetBool("isPanelOff", true);
-            triggerChecked = true;
+            Debug.LogWarning("Animator component is missing. Cannot toggle animation.");
+            return;
+        }
+
+        if (!isPanelOff && !isTriggerChecked)
+        {
+            buttonAnimator.SetBool("isPanelOff", true);
+            isTriggerChecked = true;
         }
         else
         {
-            button_Animator.SetBool("isPanelOff", clickedToTurnOffPanel);
-            triggerChecked = false;
+            isPanelOff = !isPanelOff;
+            buttonAnimator.SetBool("isPanelOff", isPanelOff);
+            isTriggerChecked = false;
         }
     }
-
 }
