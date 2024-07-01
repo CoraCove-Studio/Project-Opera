@@ -3,7 +3,17 @@ guid: 3a31e7acd4ce0d34996667d5c7cb73da
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crop_Base
+    second: {fileID: 2100000, guid: 06ff2dbb51a0d034c9d7dcf5827c2c3a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crop_Glass
+    second: {fileID: 2100000, guid: 66fd3bbe08566a44ba5249d9024bc2d3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
