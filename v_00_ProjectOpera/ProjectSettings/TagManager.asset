@@ -9,6 +9,8 @@ TagManager:
   - Nitrogen
   - CollectionDetector
   - TradingHub
+  - WarpSpeedActivator
+  - WarpSpeedDeactivator
   layers:
   - Default
   - TransparentFX
