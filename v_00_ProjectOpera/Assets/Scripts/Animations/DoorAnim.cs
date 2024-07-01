@@ -13,12 +13,12 @@ public class DoorAnim : MonoBehaviour
 
     public void SetBoolTrue()
     {
-        anim.SetBool("IsClicked", true);
+        anim.SetBool("Open", true);
     }
 
     public void SetBoolFalse()
     {
-        anim.SetBool("IsClicked", false);
+        anim.SetBool("Open", false);
     }
 
 }

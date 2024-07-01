@@ -112,7 +112,7 @@ AnimatorController:
   m_Name: VerticalDoor
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: IsClicked
+  - m_Name: Open
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0

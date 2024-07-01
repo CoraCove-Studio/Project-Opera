@@ -19,7 +19,7 @@ public class PlayerCollisionDetection : MonoBehaviour
         if (other.CompareTag(TagManager.DOOR))
         {
             other.gameObject.GetComponent<DoorAnim>().SetBoolFalse();
-            Debug.Log("PlayerCollisionDetection: OnTriggerEnter: Door Anim Set to False");
+            Debug.Log("PlayerCollisionDetection: OnTriggerExit: Door Anim Set to False");
         }
     }
 }

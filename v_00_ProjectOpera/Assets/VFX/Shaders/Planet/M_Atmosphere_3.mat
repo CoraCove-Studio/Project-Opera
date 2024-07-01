@@ -68,7 +68,7 @@ Material:
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 1
     - _AlphaSrcBlend: 1
-    - _Atmosphere_Size: 4.56
+    - _Atmosphere_Size: 5.58
     - _BlendMode: 1
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
@@ -115,7 +115,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.43367603, g: 6.129289, b: 3.2429862, a: 0}
+    - _Color: {r: 3.7793033, g: 0.6304567, b: 4.091541, a: 0}
     - _DiffusionProfileAsset: {r: -1.0144955e-33, g: -0.000000338718, b: -0.033338346,
         a: -1.6551476e-23}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}

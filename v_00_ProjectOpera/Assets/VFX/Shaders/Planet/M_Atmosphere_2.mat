@@ -115,7 +115,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.43367603, g: 6.129289, b: 3.2429862, a: 0}
+    - _Color: {r: 9.263866, g: 3.562019, b: 0, a: 0}
     - _DiffusionProfileAsset: {r: -1.0144955e-33, g: -0.000000338718, b: -0.033338346,
         a: -1.6551476e-23}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
