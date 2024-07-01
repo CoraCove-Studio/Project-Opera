@@ -171,8 +171,8 @@ MonoBehaviour:
   Interact:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MachineSlot, Assembly-CSharp
+      - m_Target: {fileID: 4055660662712672381}
+        m_TargetAssemblyTypeName: InteractableObject, Assembly-CSharp
         m_MethodName: OnInteract
         m_Mode: 1
         m_Arguments:
