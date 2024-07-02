@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,22 +23,25 @@ public class MachineSlot : MonoBehaviour
 
     public void SpawnMachine(ResourceTypes resourceType)
     {
-        switch (resourceType)
-{
-            case ResourceTypes.CROP:
-                Instantiate(machinePrefabs[0], spawnLocation.position, spawnLocation.rotation);
-                break;
-            case ResourceTypes.PART:
-                Instantiate(machinePrefabs[1], spawnLocation.position, spawnLocation.rotation);
-                break;
-            case ResourceTypes.NITROGEN:
-                Instantiate(machinePrefabs[2], spawnLocation.position, spawnLocation.rotation);
-                break;
-            default:
-                break;
+        if (GameManager.Instance.PlayerCredits >= 50)
+        {
+            switch (resourceType)
+            {
+                case ResourceTypes.CROP:
+                    Instantiate(machinePrefabs[0], spawnLocation.position, spawnLocation.rotation);
+                    break;
+                case ResourceTypes.PART:
+                    Instantiate(machinePrefabs[1], spawnLocation.position, spawnLocation.rotation);
+                    break;
+                case ResourceTypes.NITROGEN:
+                    Instantiate(machinePrefabs[2], spawnLocation.position, spawnLocation.rotation);
+                    break;
+                default:
+                    break;
+            }
+            GameManager.Instance.TakeCreditsFromPlayer(50);
+            interactableComponent.enabled = false;
+            gameObject.layer = 0;
         }
-        GameManager.Instance.TakeCreditsFromPlayer(50);
-        interactableComponent.enabled = false;
-        gameObject.layer = 0;
     }
 }
