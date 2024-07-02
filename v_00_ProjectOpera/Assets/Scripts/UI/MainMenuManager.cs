@@ -13,13 +13,18 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject helpPanel;
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject creditsPanel;
-
+    [SerializeField] private List<AudioClip> buttonSelectClips;
+    private AudioSource audioSource;
     private bool firstButtonSelected = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
- 
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private AudioClip GetRandomNoiseClip()
+    {
+        return buttonSelectClips[Random.Range(0, buttonSelectClips.Count)];
     }
 
     #region Button Methods
@@ -29,17 +34,25 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene(GameManager.Instance.mainGameSceneName);
     }
 
+    public void PlayClickNoise()
+    {
+        audioSource.PlayOneShot(GetRandomNoiseClip());
+    }
+
     public void OnClickHelpButton()
     {
         SwapActivePanel(helpPanel);
+        PlayClickNoise();
     }
     public void OnClickSettingsButton()
     {
         SwapActivePanel(settingsPanel);
+        PlayClickNoise();
     }
     public void OnClickCreditsButton()
     {
         SwapActivePanel(creditsPanel);
+        PlayClickNoise();
     }
 
     public void OnClickQuit()

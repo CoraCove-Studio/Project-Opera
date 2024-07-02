@@ -172,6 +172,10 @@ public class GameManager : MonoBehaviour
         {
             currentlyInGameScene = false;
         }
+        if (scene.name == "MainMenu")
+        {
+            AudioListener.pause = false;
+        }
     }
 
     #endregion
