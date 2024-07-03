@@ -9,7 +9,6 @@ public class MachineUI : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private TextMeshProUGUI efficiencyLevelNumberLabel;
-    [SerializeField] private TextMeshProUGUI outputLevelNumberLabel;
     [SerializeField] private TextMeshProUGUI inventoryNumberLabel;
     [SerializeField] Slider progressBarSlider;
     [SerializeField] Slider durabilityBarSlider;
@@ -29,12 +28,7 @@ public class MachineUI : MonoBehaviour
     }
     public void UpdateEfficiencyLevelText(int level)
     {
-        efficiencyLevelNumberLabel.text = level.ToString();
-    }
-
-    public void UpdateOutputIntervalLevelText(int level)
-    {
-        outputLevelNumberLabel.text = level.ToString();
+        efficiencyLevelNumberLabel.text = $"{level}/6";
     }
 
     public void UpdateInventoryLabel(int currentInventory, int maximumInventory)

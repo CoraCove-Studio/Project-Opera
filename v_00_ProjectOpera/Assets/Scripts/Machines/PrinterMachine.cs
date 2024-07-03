@@ -16,29 +16,17 @@ public class PrinterMachine : MachineBehavior
             machineUI.UpdateDurabilityBar(machineDurability);
         }
     }
-    public override void UpgradeMachineEfficiency(int increase)
+    public override void UpgradeMachineEfficiency(int change)
     {
-        if(machineEfficiencyLevel < 4 && GameManager.Instance.PlayerCredits >= upgradeCost)
+        if (machineEfficiencyLevel < 6 && GameManager.Instance.PlayerCredits >= upgradeCost)
         {
-            
-            machineEfficiency += increase;
+            machineEfficiency += change;
+            outputInterval -= change;
             machineEfficiencyLevel++;
-            machineUI.UpdateEfficiencyLevelText(machineEfficiencyLevel);            
+            machineUI.SetSliderMaxValue(outputInterval);
+            machineUI.UpdateEfficiencyLevelText(machineEfficiencyLevel);
             GameManager.Instance.TakeCreditsFromPlayer(upgradeCost);
             Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
-        }
-    }
-
-    public override void UpgradeOutputInterval(int reduction)
-    {
-        if(outputIntervalLevel < 4 && GameManager.Instance.PlayerCredits >= upgradeCost)
-        {
-            outputInterval -= reduction;
-            outputIntervalLevel++;
-            machineUI.SetSliderMaxValue(outputInterval);
-            machineUI.UpdateOutputIntervalLevelText(outputIntervalLevel);
-            GameManager.Instance.TakeCreditsFromPlayer(upgradeCost);
-            Debug.Log(gameObject.name + "Upgraded to " + outputIntervalLevel);
         }
     }
 
@@ -74,14 +62,9 @@ public class PrinterMachine : MachineBehavior
         }
     }
 
-    public void OnClickUpgradeMachineEfficiencyButton(int amount)
+    public void OnClickUpgradeMachineEfficiencyButton(int change)
     {
-        UpgradeMachineEfficiency(amount);
-    }
-
-    public void OnClickUpgradeOutputIntervalButton(int amount)
-    {
-        UpgradeOutputInterval(amount);
+        UpgradeMachineEfficiency(change);
     }
 
     public void OnClickRepairMachine()

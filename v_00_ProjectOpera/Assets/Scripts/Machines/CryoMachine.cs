@@ -15,42 +15,24 @@ public class CryoMachine : MachineBehavior
         }
     }
 
-    public override void UpgradeMachineEfficiency(int increase)
+    public override void UpgradeMachineEfficiency(int change)
     {
-        if (machineEfficiencyLevel < 4 && GameManager.Instance.PlayerCredits >= upgradeCost)
+        if (machineEfficiencyLevel < 8 && GameManager.Instance.PlayerCredits >= upgradeCost)
         {
-
-            machineEfficiency += increase;
+            machineEfficiency += change;
+            outputInterval -= change;
             machineEfficiencyLevel++;
+            machineUI.SetSliderMaxValue(outputInterval);
             machineUI.UpdateEfficiencyLevelText(machineEfficiencyLevel);
             GameManager.Instance.TakeCreditsFromPlayer(upgradeCost);
             Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
         }
     }
 
-    public override void UpgradeOutputInterval(int reduction)
+    public void OnClickUpgradeMachineEfficiencyButton(int change)
     {
-        if (outputIntervalLevel < 4 && GameManager.Instance.PlayerCredits >= upgradeCost)
-        {
-            outputInterval -= reduction;
-            outputIntervalLevel++;
-            machineUI.SetSliderMaxValue(outputInterval);
-            machineUI.UpdateOutputIntervalLevelText(outputIntervalLevel);
-            GameManager.Instance.TakeCreditsFromPlayer(upgradeCost);
-            Debug.Log(gameObject.name + "Upgraded to " + outputIntervalLevel);
-        }
+        UpgradeMachineEfficiency(change);
     }
-
-    public void OnClickUpgradeMachineEfficiencyButton(int amount)
-    {
-        UpgradeMachineEfficiency(amount);
-    }
-
-    public void OnClickUpgradeOutputIntervalButton(int amount)
-    {
-        UpgradeOutputInterval(amount);
-    }
-
     public void OnClickRepairMachine()
     {
         RepairMachine();

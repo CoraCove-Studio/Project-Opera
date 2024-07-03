@@ -127,8 +127,5 @@ public abstract class MachineBehavior : MonoBehaviour
     public abstract void RepairMachine();
 
     //upgrades how many products are produced with one input
-    public abstract void UpgradeMachineEfficiency(int increase);
-
-    //upgrades how quickly the machines produce one product
-    public abstract void UpgradeOutputInterval(int reduction);
+    public abstract void UpgradeMachineEfficiency(int change);
 }
