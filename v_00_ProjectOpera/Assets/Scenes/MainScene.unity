@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.021901442, g: 0.022422092, b: 0.021150567, a: 1}
+  m_IndirectSpecularColor: {r: 0.021901427, g: 0.022422092, b: 0.021150567, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1166,6 +1166,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 144296687}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &150266126 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3498537661835318279, guid: b7b505c934c06a74da1d943ded97c1fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1699119622}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &152948663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2490,6 +2502,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 558.0805, y: 355.6}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &336712217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7416209887089242281, guid: b7b505c934c06a74da1d943ded97c1fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1699119622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &347604575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5337,6 +5355,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 793290459}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &794899008 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7552445714592604276, guid: b7b505c934c06a74da1d943ded97c1fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1699119622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &796471493 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2943462995211756284, guid: 0e83cd8d6949a4e4f9fd55763ec52dc0,
@@ -5512,6 +5536,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1887160909490089886, guid: 1ea4a3ab96ac06f4ea44f7dfd80a7fe3,
     type: 3}
   m_PrefabInstance: {fileID: 802011424}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &808091244 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9047451318287035999, guid: b7b505c934c06a74da1d943ded97c1fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1699119622}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &808520705
 GameObject:
@@ -7000,6 +7030,56 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5729980958182232782, guid: 16b7fe929586fc54484d73f47989cd23,
         type: 3}
+      propertyPath: sellAllButton
+      value: 
+      objectReference: {fileID: 1894813988}
+    - target: {fileID: 5729980958182232782, guid: 16b7fe929586fc54484d73f47989cd23,
+        type: 3}
+      propertyPath: cropPriceLabel
+      value: 
+      objectReference: {fileID: 150266126}
+    - target: {fileID: 5729980958182232782, guid: 16b7fe929586fc54484d73f47989cd23,
+        type: 3}
+      propertyPath: partPriceLabel
+      value: 
+      objectReference: {fileID: 1460583452}
+    - target: {fileID: 5729980958182232782, guid: 16b7fe929586fc54484d73f47989cd23,
+        type: 3}
+      propertyPath: sellCropButton
+      value: 
+      objectReference: {fileID: 1580550644}
+    - target: {fileID: 5729980958182232782, guid: 16b7fe929586fc54484d73f47989cd23,
+        type: 3}
+      propertyPath: sellPartButton
+      value: 
+      objectReference: {fileID: 794899008}
+    - target: {fileID: 5729980958182232782, guid: 16b7fe929586fc54484d73f47989cd23,
+        type: 3}
+      propertyPath: nitroPriceLabel
+      value: 
+      objectReference: {fileID: 1893899517}
+    - target: {fileID: 5729980958182232782, guid: 16b7fe929586fc54484d73f47989cd23,
+        type: 3}
+      propertyPath: sellNitroButton
+      value: 
+      objectReference: {fileID: 1373628993}
+    - target: {fileID: 5729980958182232782, guid: 16b7fe929586fc54484d73f47989cd23,
+        type: 3}
+      propertyPath: priceButtonLabels
+      value: 
+      objectReference: {fileID: 994228476}
+    - target: {fileID: 5729980958182232782, guid: 16b7fe929586fc54484d73f47989cd23,
+        type: 3}
+      propertyPath: sellProductLabels
+      value: 
+      objectReference: {fileID: 808091244}
+    - target: {fileID: 5729980958182232782, guid: 16b7fe929586fc54484d73f47989cd23,
+        type: 3}
+      propertyPath: sellAllButtonLabel
+      value: 
+      objectReference: {fileID: 336712217}
+    - target: {fileID: 5729980958182232782, guid: 16b7fe929586fc54484d73f47989cd23,
+        type: 3}
       propertyPath: planets.Array.data[0]
       value: 
       objectReference: {fileID: 1650091874}
@@ -7499,6 +7579,12 @@ Transform:
   - {fileID: 1345919486}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &994228476 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4549426965182444090, guid: b7b505c934c06a74da1d943ded97c1fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1699119622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1030140805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9925,6 +10011,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 862701215}
   m_LocalEulerAnglesHint: {x: 129.709, y: -86.51898, z: 0}
+--- !u!1 &1373628993 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1010335393561569760, guid: b7b505c934c06a74da1d943ded97c1fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1699119622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1402205816
 GameObject:
   m_ObjectHideFlags: 0
@@ -10441,6 +10533,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1651542698935508933, guid: 060572fb8571f1d4dbb434b4f57eb52d, type: 3}
+--- !u!114 &1460583452 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8646918778320789681, guid: b7b505c934c06a74da1d943ded97c1fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1699119622}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1477439911
 GameObject:
   m_ObjectHideFlags: 0
@@ -10984,6 +11088,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a839f3641f08b2c4c88aa4fdf37ea773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1580550644 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2707108429797017835, guid: b7b505c934c06a74da1d943ded97c1fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1699119622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1592763551
 GameObject:
   m_ObjectHideFlags: 0
@@ -11710,6 +11820,11 @@ PrefabInstance:
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2050362463}
+    - target: {fileID: 2035797065453619355, guid: b7b505c934c06a74da1d943ded97c1fb,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickSellCrops
+      objectReference: {fileID: 0}
     - target: {fileID: 3656188807421842328, guid: b7b505c934c06a74da1d943ded97c1fb,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -11735,6 +11850,21 @@ PrefabInstance:
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2050362463}
+    - target: {fileID: 4022946799703353744, guid: b7b505c934c06a74da1d943ded97c1fb,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickSellNitrogen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549426965182444090, guid: b7b505c934c06a74da1d943ded97c1fb,
+        type: 3}
+      propertyPath: m_Name
+      value: SellPriceButtonLabels
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549426965182444090, guid: b7b505c934c06a74da1d943ded97c1fb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5260524683520468743, guid: b7b505c934c06a74da1d943ded97c1fb,
         type: 3}
       propertyPath: m_Layer
@@ -11745,6 +11875,21 @@ PrefabInstance:
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2050362463}
+    - target: {fileID: 5845288861044285444, guid: b7b505c934c06a74da1d943ded97c1fb,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickSellParts
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101380650390362469, guid: b7b505c934c06a74da1d943ded97c1fb,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2050362463}
+    - target: {fileID: 6101380650390362469, guid: b7b505c934c06a74da1d943ded97c1fb,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickSellAll
+      objectReference: {fileID: 0}
     - target: {fileID: 6542552164031794005, guid: b7b505c934c06a74da1d943ded97c1fb,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -11832,8 +11977,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9047451318287035999, guid: b7b505c934c06a74da1d943ded97c1fb,
         type: 3}
+      propertyPath: m_Name
+      value: SellProductLabels
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047451318287035999, guid: b7b505c934c06a74da1d943ded97c1fb,
+        type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047451318287035999, guid: b7b505c934c06a74da1d943ded97c1fb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12804,6 +12959,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 862701215}
   m_LocalEulerAnglesHint: {x: 93.337006, y: 0, z: 0}
+--- !u!114 &1893899517 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5565350795626028510, guid: b7b505c934c06a74da1d943ded97c1fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1699119622}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1894813988 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7889597376083826965, guid: b7b505c934c06a74da1d943ded97c1fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1699119622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1896677427
 PrefabInstance:
   m_ObjectHideFlags: 0

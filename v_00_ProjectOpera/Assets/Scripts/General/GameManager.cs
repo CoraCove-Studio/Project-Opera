@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     private const int MinResources = 0;
     private const int MaxResources = 5000;
-    private const int MaxCredits = 1000000;
+    private const int MaxCredits = 10000000;
 
     private int playerCredits;
     private int playerCrops;

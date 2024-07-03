@@ -17,7 +17,7 @@ public class CryoMachine : MachineBehavior
 
     public override void UpgradeMachineEfficiency(int change)
     {
-        if (machineEfficiencyLevel < 8 && GameManager.Instance.PlayerCredits >= upgradeCost)
+        if (machineEfficiencyLevel < 6 && GameManager.Instance.PlayerCredits >= upgradeCost)
         {
             machineEfficiency += change;
             outputInterval -= change;
