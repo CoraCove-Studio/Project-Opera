@@ -21,4 +21,19 @@ public class DoorAnim : MonoBehaviour
         anim.SetBool("Open", false);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SetBoolTrue();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SetBoolFalse();
+        }
+    }
 }
