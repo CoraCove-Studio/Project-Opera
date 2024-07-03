@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     #region Fields and Properties
 
-    public string[] gameScenes = { "MainScene", "emma_MainScene", "rachel_MainScene", "testZeb" };
+    public string[] gameScenes = { "MainScene", "emma_MainScene", "rachel_MainScene", "Tutorial" };
 
     public string mainGameSceneName = "MainScene";
 
@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Cursor.lockState = CursorLockMode.Confined;
-        print("GameManager: OnSceneLoaded: Current scene is: " + scene.name);
+        Debug.Log("GameManager: OnSceneLoaded: Current scene is: " + scene.name);
         if (gameScenes.Contains(scene.name))
         {
             currentlyInGameScene = true;

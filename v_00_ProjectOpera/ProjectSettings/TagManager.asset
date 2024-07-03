@@ -11,6 +11,7 @@ TagManager:
   - TradingHub
   - WarpSpeedActivator
   - WarpSpeedDeactivator
+  - Door
   layers:
   - Default
   - TransparentFX

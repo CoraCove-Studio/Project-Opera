@@ -7,6 +7,8 @@ public class MachineSlot : MonoBehaviour
     private InteractableObject interactableComponent;
     [SerializeField] List<GameObject> machinePrefabs;
     [SerializeField] Transform spawnLocation;
+    [SerializeField] GameObject machineUICanvas;
+
 
     private PlayerUIHandler playerUI;
 
@@ -40,6 +42,7 @@ public class MachineSlot : MonoBehaviour
                     break;
             }
             GameManager.Instance.TakeCreditsFromPlayer(50);
+            machineUICanvas.SetActive(false);
             interactableComponent.enabled = false;
             gameObject.layer = 0;
         }
