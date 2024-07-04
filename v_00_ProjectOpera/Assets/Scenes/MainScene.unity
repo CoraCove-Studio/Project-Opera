@@ -10573,6 +10573,7 @@ MonoBehaviour:
   m_Script: {fileID: 1854693422}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Entries: []
 --- !u!4 &1413403249
 Transform:
   m_ObjectHideFlags: 19
@@ -16269,14 +16270,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3942725376311248601, guid: 7c9eeee814b401842a694843c3bbd582,
         type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942725376311248601, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942725376311248601, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
       propertyPath: m_CollisionDetection
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
         type: 3}
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 1402205818}
+    - target: {fileID: 5459323019042966855, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: lookSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459323019042966855, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: smoothing
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459323019042966855, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: acceleration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459323019042966855, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6719195014343107136, guid: 7c9eeee814b401842a694843c3bbd582,
         type: 3}
       propertyPath: m_Name
