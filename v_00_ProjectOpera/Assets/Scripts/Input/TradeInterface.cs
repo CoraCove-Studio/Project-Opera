@@ -1,15 +1,154 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TradeInterface : MonoBehaviour
 {
+    private int baseCropValue = 8;
+    private int basePartValue = 18;
+    private int baseNitrogenValue = 14;
+
+    private int valueOfCrop;
+    private int valueOfPart;
+    private int valueOfNitrogen;
+
+    [SerializeField] List<GameObject> planets;
+    [SerializeField] List<AudioClip> sellingNoises;
+    private int round = 0;
+    private GameObject activePlanet;
+
+    [Header("Price Labels")]
+    [SerializeField] private TextMeshProUGUI partPriceLabel;
+    [SerializeField] private TextMeshProUGUI nitroPriceLabel;
+    [SerializeField] private TextMeshProUGUI cropPriceLabel; 
+
+    [Header("Buttons")]
+    [SerializeField] private GameObject sellPartButton;
+    [SerializeField] private GameObject sellCropButton;
+    [SerializeField] private GameObject sellNitroButton;
+    [SerializeField] private GameObject sellAllButton;
+
+    [Header("Button Text")]
+    [SerializeField] private GameObject priceButtonLabels;
+    [SerializeField] private GameObject sellProductLabels;
+    [SerializeField] private GameObject sellAllButtonLabel;
+
+    [SerializeField] private AudioClip moneyNoise;
+    private bool playerSoldItem = false;
+
+    private void Start()
+    {
+        activePlanet = planets[0];
+        ResetValueOfProducts();
+        UpdatePriceLabels();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(TagManager.TRADING_HUB))
+        {
+            valueOfCrop = baseCropValue * other.GetComponent<PlanetTradingHub>().cropPriceBoost;
+            valueOfPart = basePartValue * other.GetComponent<PlanetTradingHub>().partPriceBoost;
+            valueOfNitrogen = baseNitrogenValue * other.GetComponent <PlanetTradingHub>().nitrogenPriceBoost;
+            UpdatePriceLabels();
+        }
+        else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_ACTIVATOR))
+        {
+            Debug.Log("TradeInterface: OnTriggerEnter: Warp Speed Activated");
+            //activate particle effects here
+        }
+        else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_DEACTIVATOR))
+        {
+            Debug.Log("TradeInterface: OnTriggerEnter: Warp Speed Deactivated");
+            if(round == 2)
+            {
+                DeactivateSellingButtons();
+                ActivateSellAllButton();
+            }
+            //deactivate particle effects here
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag(TagManager.TRADING_HUB))
+        {
+            Debug.Log("TradeInterface: OnTriggerExit: round completed");
+            ResetValueOfProducts();
+            round++;
+            UpdatePriceLabels();
+            if (round <= 2) { SetActivePlanet(round); }
+        }
+    }
+
+    private void UpdatePriceLabels()
+    {
+        partPriceLabel.text = $"{valueOfPart} CREDITS";
+        nitroPriceLabel.text = $"{valueOfNitrogen} CREDITS";
+        cropPriceLabel.text = $"{valueOfCrop} CREDITS";
+    }
+
+    private void ActivateSellAllButton()
+    {
+        sellAllButton.SetActive(true);
+        sellAllButtonLabel.SetActive(true);
+    }
+
+    private void DeactivateSellingButtons()
+    {
+        sellCropButton.SetActive(false);
+        sellNitroButton.SetActive(false);
+        sellPartButton.SetActive(false);
+
+        priceButtonLabels.SetActive(false);
+        sellProductLabels.SetActive(false);
+    }
+
+    private void ResetValueOfProducts()
+    {
+        valueOfCrop = baseCropValue;
+        valueOfPart = basePartValue;
+        valueOfNitrogen= baseNitrogenValue;
+    }
+
+    private void SetActivePlanet(int round)
+    {
+        switch (round)
+        {
+            case 0:
+                activePlanet.SetActive(false);
+                activePlanet = planets[0];
+                activePlanet.SetActive(true);
+                break;
+            case 1:
+                activePlanet.SetActive(false);
+                activePlanet = planets[1];
+                activePlanet.SetActive(true);
+                break;
+            case 2:
+                activePlanet.SetActive(false);
+                activePlanet = planets[2];
+                activePlanet.SetActive(true);
+                break;
+            default:
+                Debug.Log("TradeInterface: SetActivePlanet: Error setting active planet");
+                break;
+        }
+    }
+
+    private AudioClip GetRandomNoiseClip()
+    {
+        return sellingNoises[Random.Range(0, sellingNoises.Count)];
+    }
+
+
     public void OnClickSellCrops()
     {
         if(GameManager.Instance.PlayerCrops > 0)
         {
             GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.CROP);
-            GameManager.Instance.AddCreditsToPlayer(5);
+            GameManager.Instance.AddCreditsToPlayer(valueOfCrop);
+            GameManager.Instance.audioManager.PlaySFX(GetRandomNoiseClip());
+            playerSoldItem = true;
         }
     }
 
@@ -18,7 +157,9 @@ public class TradeInterface : MonoBehaviour
         if(GameManager.Instance.PlayerParts > 0)
         {
             GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.PART);
-            GameManager.Instance.AddCreditsToPlayer(5);
+            GameManager.Instance.AddCreditsToPlayer(valueOfPart);
+            GameManager.Instance.audioManager.PlaySFX(GetRandomNoiseClip());
+            playerSoldItem = true;
         }
     }
 
@@ -27,7 +168,29 @@ public class TradeInterface : MonoBehaviour
         if(GameManager.Instance.PlayerNitrogen > 0)
         {
             GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.NITROGEN);
-            GameManager.Instance.AddCreditsToPlayer(5);
+            GameManager.Instance.AddCreditsToPlayer(valueOfNitrogen);
+            GameManager.Instance.audioManager.PlaySFX(GetRandomNoiseClip());
+            playerSoldItem = true;
         }
+    }
+
+    public void OnClickSellAll()
+    {
+        int value = (GameManager.Instance.PlayerCrops * valueOfCrop) + (GameManager.Instance.PlayerNitrogen * valueOfNitrogen) + (GameManager.Instance.PlayerParts * valueOfPart);
+        GameManager.Instance.AddCreditsToPlayer(value);
+
+        GameManager.Instance.TakeResourceFromPlayer(GameManager.Instance.PlayerCrops, ResourceTypes.CROP);
+        GameManager.Instance.TakeResourceFromPlayer(GameManager.Instance.PlayerNitrogen, ResourceTypes.NITROGEN);
+        GameManager.Instance.TakeResourceFromPlayer(GameManager.Instance.PlayerParts, ResourceTypes.PART);
+        GameManager.Instance.audioManager.PlaySFX(moneyNoise);
+    }
+
+    public void PlayerLeftCollider()
+    {
+        if (playerSoldItem)
+        {
+            GameManager.Instance.audioManager.PlaySFX(moneyNoise);
+        }
+        playerSoldItem = false;
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -13,17 +14,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float ySensitivity = 0.5f;
     [SerializeField] private float maxPitchAngle = 85f;  // Max angle for looking up and down
     [SerializeField] private float smoothing = 5f; // Smoothing factor
-    private Vector2 accumulatedInput;
 
+    private Vector2 accumulatedInput;
     private Vector3 currentMovementInput;
     private Vector3 currentVelocity;
-    private Vector3 currentRotation;
-    private Vector3 targetRotation;
+    private Quaternion currentRotation;
+    private Quaternion targetRotation;
+
+    private readonly WaitForFixedUpdate _waitForFixedUpdate = new();
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        StartCoroutine(LateFixedUpdate());
     }
 
     private void OnEnable()
@@ -35,7 +38,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            print("No input manager found.");
+            Debug.Log("No input manager found.");
         }
     }
 
@@ -51,8 +54,13 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         // Initialize the current and target rotation to the current rotation of the camera
-        currentRotation = transform.localEulerAngles;
+        currentRotation = transform.rotation;
         targetRotation = currentRotation;
+    }
+
+    private void Update()
+    {
+        AccumulateInput();
     }
 
     private void FixedUpdate()
@@ -65,6 +73,15 @@ public class PlayerController : MonoBehaviour
         HandleCamera();
     }
 
+    private IEnumerator LateFixedUpdate()
+    {
+        while (true)
+        {
+            yield return _waitForFixedUpdate;
+            HandleCamera();
+        }
+    }
+
     private void HandleMovement()
     {
         if (currentMovementInput.sqrMagnitude > 0.001f)
@@ -74,45 +91,55 @@ public class PlayerController : MonoBehaviour
                                   transform.up * currentMovementInput.y +
                                   transform.right * currentMovementInput.x;
 
-            // Accelerate the current velocity towards the input direction
-            currentVelocity += acceleration * Time.fixedDeltaTime * inputVector;
+            // Calculate the force to be added based on the input direction and acceleration
+            Vector3 force = acceleration * inputVector;
 
-            // Clamp the velocity to the maximum movement speed
-            if (currentVelocity.magnitude > movementSpeed)
-            {
-                currentVelocity = currentVelocity.normalized * movementSpeed;
-            }
+            // Apply the force to the rigidbody
+            rb.AddForce(force, ForceMode.Acceleration);
         }
-
-        // Apply drag to the current velocity to simulate gradual slowing down
-        currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, drag * Time.fixedDeltaTime);
-
-        // Move the rigidbody using the updated velocity
-        rb.MovePosition(rb.position + currentVelocity * Time.fixedDeltaTime);
+        // Note: Rigidbody's drag property will handle this over time, no need to manually apply drag
     }
 
-    private void HandleCamera()
+    private void AccumulateInput()
     {
         // Have to flip the x and y from the input
         float inputX = accumulatedInput.y * xSensitivity;
         float inputY = accumulatedInput.x * ySensitivity;
 
         // Calculate the new rotation while clamping the z rotation to 0
-        targetRotation.x -= inputX * Time.deltaTime * lookSpeed;
-        targetRotation.y += inputY * Time.deltaTime * lookSpeed;
+        targetRotation *= Quaternion.Euler(-inputX * lookSpeed * Time.deltaTime, inputY * lookSpeed * Time.deltaTime, 0);
 
-        // Convert targetRotation.x to the range of -180 to 180 before clamping
-        if (targetRotation.x > 180) targetRotation.x -= 360;
+        // Convert targetRotation.eulerAngles.x to the range of -180 to 180 before clamping
+        Vector3 targetEulerAngles = targetRotation.eulerAngles;
+        if (targetEulerAngles.x > 180) targetEulerAngles.x -= 360;
 
         // Clamp the x rotation to the specified min and max pitch angles
-        targetRotation.x = Mathf.Clamp(targetRotation.x, -maxPitchAngle, maxPitchAngle);
+        targetEulerAngles.x = Mathf.Clamp(targetEulerAngles.x, -maxPitchAngle, maxPitchAngle);
 
-        targetRotation.z = 0;
+        // Clamp the z rotation to 0
+        targetEulerAngles.z = 0;
 
+        // Apply the clamped rotation back to targetRotation
+        targetRotation = Quaternion.Euler(targetEulerAngles);
+
+    }
+
+    private void HandleCamera()
+    {
         // Smoothly interpolate between the current rotation and the target rotation
-        currentRotation = Vector3.Lerp(currentRotation, targetRotation, smoothing * Time.deltaTime);
+        Quaternion interpolatedRotation = Quaternion.Slerp(currentRotation, targetRotation, smoothing * Time.deltaTime);
 
-        transform.localEulerAngles = currentRotation;
+        // Convert the interpolated rotation to Euler angles
+        Vector3 interpolatedEulerAngles = interpolatedRotation.eulerAngles;
+
+        // Clamp the z rotation to 0
+        interpolatedEulerAngles.z = 0;
+
+        // Apply the clamped rotation back to the transform
+        transform.localRotation = Quaternion.Euler(interpolatedEulerAngles);
+
+        // Update the current rotation
+        currentRotation = transform.localRotation;
 
         // Reset accumulated input
         accumulatedInput = Vector2.zero;

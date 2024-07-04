@@ -40,12 +40,20 @@ public class GameTimer : MonoBehaviour
             }
             playerUI.UpdateGameTimer(TimeLeft.Item1, TimeLeft.Item2);
         }
+        if(TimerIsRunning && CountdownTimer <= 0)
+        {
+            TimeLeft = (0, 0);
+            Debug.Log("GameTimer: TrackTime: Timer up, TimeLeft set to " + TimeLeft.Item1 + TimeLeft.Item2);
+            playerUI.UpdateGameTimer(TimeLeft.Item1, TimeLeft.Item2);
+        }
     }
 
     public void SetNewTimer(float timeInSeconds)
     {
         CountdownTimer = timeInSeconds;
+        TimeLeft = (10, 0);
         playerUI.UpdateGameTimer(TimeLeft.Item1, TimeLeft.Item2);
+        Debug.Log("GameTimer: SetNewTimer: Timer set to: " + TimeLeft.Item1 + TimeLeft.Item2);
     }
 
     public void StartTimer()

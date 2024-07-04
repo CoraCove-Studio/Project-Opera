@@ -8,6 +8,10 @@ TagManager:
   - Part
   - Nitrogen
   - CollectionDetector
+  - TradingHub
+  - WarpSpeedActivator
+  - WarpSpeedDeactivator
+  - Door
   layers:
   - Default
   - TransparentFX

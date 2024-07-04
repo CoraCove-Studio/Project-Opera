@@ -155,6 +155,11 @@ public class PlayerUIHandler : MonoBehaviour
         timerLabel.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
+    public void ActivateTradeTimer()
+    {
+        // timerLabel.fontSize 
+    }
+
     private List<int> GetPlayerResources()
     {
         List<int> resourceList = new()

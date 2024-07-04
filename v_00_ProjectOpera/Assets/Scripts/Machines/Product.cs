@@ -8,6 +8,7 @@ public class Product : MonoBehaviour
     [SerializeField] private float collectionDuration = 5.0f;
     [SerializeField] private Vector3 startPosition;
     [SerializeField] private ResourceTypes resourceType;
+    [SerializeField] private List<AudioClip> listOfCollectionClips;
 
     private void OnEnable()
     {
@@ -24,6 +25,7 @@ public class Product : MonoBehaviour
         if (other.gameObject.CompareTag(TagManager.PLAYER))
         {
             GameManager.Instance.AddResourceToPlayer(1, resourceType);
+            GameManager.Instance.audioManager.PlaySFX(GetRandomCollectionClip());
             gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag(TagManager.COLLECTION))
@@ -31,6 +33,11 @@ public class Product : MonoBehaviour
             print("collector detected");
             StartCoroutine(MoveToEndPosition(other.gameObject));
         }
+    }
+
+    private AudioClip GetRandomCollectionClip()
+    {
+        return listOfCollectionClips[Random.Range(0, listOfCollectionClips.Count)];
     }
 
     private IEnumerator MoveToEndPosition(GameObject player)

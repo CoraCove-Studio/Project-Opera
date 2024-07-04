@@ -7,13 +7,14 @@ public class GameManager : MonoBehaviour
 {
     #region Fields and Properties
 
-    public string[] gameScenes = { "MainScene", "emma_MainScene", "rachel_MainScene", "testZeb" };
+    public string[] gameScenes = { "MainScene", "emma_MainScene", "rachel_MainScene", "Tutorial" };
 
     public string mainGameSceneName = "MainScene";
 
     public PlayerUIHandler PlayerUI { get; private set; }
     public GameObject Player { get; private set; }
     private Rigidbody playerRigidBody;
+    public AudioManager audioManager;
     private GameTimer gameTimer;
     private float gameDurationInSeconds;
 
@@ -23,8 +24,8 @@ public class GameManager : MonoBehaviour
     private static bool currentlyInGameScene = true;
 
     private const int MinResources = 0;
-    private const int MaxResources = 300;
-    private const int MaxCredits = 10000;
+    private const int MaxResources = 5000;
+    private const int MaxCredits = 10000000;
 
     private int playerCredits;
     private int playerCrops;
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour
     { "Parts", 5 },
     { "Nitrogen", 5 },
     { "Credits", 300 },
-    { "GameDuration", 300 }
+    { "GameDuration", 600 }
 };
 
     #endregion
@@ -161,7 +162,7 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Cursor.lockState = CursorLockMode.Confined;
-        print("GameManager: OnSceneLoaded: Current scene is: " + scene.name);
+        Debug.Log("GameManager: OnSceneLoaded: Current scene is: " + scene.name);
         if (gameScenes.Contains(scene.name))
         {
             currentlyInGameScene = true;
@@ -170,6 +171,10 @@ public class GameManager : MonoBehaviour
         else
         {
             currentlyInGameScene = false;
+        }
+        if (scene.name == "MainMenu")
+        {
+            AudioListener.pause = false;
         }
     }
 
@@ -206,6 +211,7 @@ public class GameManager : MonoBehaviour
         playerNitrogen = newGameValues["Nitrogen"];
         playerCredits = newGameValues["Credits"];
         gameDurationInSeconds = newGameValues["GameDuration"];
+        Debug.Log("GameManager: SetNewGameValues: " + gameDurationInSeconds);
     }
 
     public void DisplayTooltip(int value)
@@ -232,6 +238,9 @@ public class GameManager : MonoBehaviour
 
         GameObject.Find("PlayerPrefab").TryGetComponent(out playerRigidBody);
         if (playerRigidBody == null) Debug.Log("GameManager: FindImportantReferences: playerRigidBody not found.");
+
+        GameObject.Find("AudioManager").TryGetComponent(out audioManager);
+        if (audioManager == null) Debug.Log("GameManager: FindImportantReferences: audioManager not found.");
     }
 
     private void CheckGameOver()
@@ -257,6 +266,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("GameManager: ToggleGamePause: Resuming game.");
                 Time.timeScale = 1;
+                AudioListener.pause = false;
                 if (PlayerUI != null)
                 {
                     PlayerUI.ResumeGame();
@@ -267,6 +277,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("GameManager: ToggleGamePause: Pausing game.");
                 Time.timeScale = 0;
+                AudioListener.pause = true;
                 if (PlayerUI != null)
                 {
                     PlayerUI.PauseGame();
@@ -371,28 +382,25 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            AddResourceToPlayer(1, ResourceTypes.CROP);
+            AddResourceToPlayer(5, ResourceTypes.CROP);
         }
         if (Input.GetKeyDown(KeyCode.U))
         {
-            AddResourceToPlayer(1, ResourceTypes.PART);
+            AddResourceToPlayer(5, ResourceTypes.PART);
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            AddResourceToPlayer(1, ResourceTypes.NITROGEN);
+            AddResourceToPlayer(5, ResourceTypes.NITROGEN);
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            AddCreditsToPlayer(1);
+            AddCreditsToPlayer(5);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             // restart outputInterval
         }
-        if (Input.GetKeyDown(KeyCode.P)) // Debugging for other scenes
-        {
-            SetUpNewGame();
-        }
+        
     }
 
     #endregion

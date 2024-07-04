@@ -1,50 +1,97 @@
+using System.Collections;
 using UnityEngine;
 
 public class CropMachine : MachineBehavior
 {
     public override ResourceTypes MachineType { get; } = ResourceTypes.CROP;
+    [SerializeField] private Animator cropAnimator;
+
     public override void RepairMachine()
     {
         if (machineDurability < maximumMachineDurability)
         {
             machineDurability = maximumMachineDurability;
             machineUI.UpdateDurabilityBar(machineDurability);
+            // Play a repair noise, drill sound?
         }
     }
 
-    public override void UpgradeMachineEfficiency(int increase)
+    public override void UpgradeMachineEfficiency(int change)
     {
-        if (machineEfficiencyLevel < 4 && GameManager.Instance.PlayerCredits >= 50)
+        if (machineEfficiencyLevel < 6 && GameManager.Instance.PlayerCredits >= upgradeCost)
         {
-            machineEfficiency += increase;
+            machineEfficiency += change;
+            outputInterval -= change;
             machineEfficiencyLevel++;
-            machineUI.UpdateEfficiencyLevelText(machineEfficiencyLevel);
-            GameManager.Instance.TakeCreditsFromPlayer(50);
-            Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
-        }
-    }
-
-    public override void UpgradeOutputInterval(int reduction)
-    {
-        if (outputIntervalLevel < 4 && GameManager.Instance.PlayerCredits >= 50)
-        {
-            outputInterval -= reduction;
-            outputIntervalLevel++;
             machineUI.SetSliderMaxValue(outputInterval);
-            machineUI.UpdateOutputIntervalLevelText(outputIntervalLevel);
-            GameManager.Instance.TakeCreditsFromPlayer(50);
-            Debug.Log(gameObject.name + "Upgraded to " + outputIntervalLevel);
+            machineUI.UpdateEfficiencyLevelText(machineEfficiencyLevel);
+            GameManager.Instance.TakeCreditsFromPlayer(upgradeCost);
+            Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
+            SetNewAnimationSpeed(outputInterval);
+            // Play a successful noise: level up sound?
         }
     }
 
-    public void OnClickUpgradeMachineEfficiencyButton(int amount)
+    private void SetNewAnimationSpeed(int outputInterval)
     {
-        UpgradeMachineEfficiency(amount);
+        switch (outputInterval)
+        {
+            case 7:
+                cropAnimator.SetFloat("speedMultiplier", 1.143f);
+                break;
+            case 6:
+                cropAnimator.SetFloat("speedMultiplier", 1.333f);
+                break;
+            case 5:
+                cropAnimator.SetFloat("speedMultiplier", 1.6f);
+                break;
+            case 4:
+                cropAnimator.SetFloat("speedMultiplier", 2f);
+                break;
+            case 3:
+                cropAnimator.SetFloat("speedMultiplier", 2.666f);
+                break;
+            default:
+                cropAnimator.SetFloat("speedMultiplier", 8f);
+                break;
+        }
     }
 
-    public void OnClickUpgradeOutputIntervalButton(int amount)
+    protected override IEnumerator Production()
     {
-        UpgradeOutputInterval(amount);
+        GameObject product;
+
+        while (true)
+        {
+            if (inputInventory > 0 & machineDurability > 0)
+            {
+                audioSource.Play();
+                cropAnimator.SetBool("isGrowing", true);
+                // Don't reorder StartBarAnimation, inventory decrementation and WaitForSeconds()
+                machineUI.StartBarAnimation(outputInterval);
+                inputInventory--;
+                machineDurability -= 10;
+                yield return new WaitForSeconds(outputInterval);
+                for (int i = 0; i < machineEfficiency; i++)
+                {
+                    machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+                    product = objPooler.ReturnProduct(MachineType);
+                    ConfigureProduct(product);
+                }
+                machineUI.UpdateDurabilityBar(machineDurability);
+            }
+            else
+            {
+                audioSource.Stop();
+                cropAnimator.SetBool("isGrowing", false);
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+    }
+
+    public void OnClickUpgradeMachineEfficiencyButton(int change)
+    {
+        UpgradeMachineEfficiency(change);
     }
 
     public void OnClickRepairMachine()

@@ -6,6 +6,7 @@ using UnityEngine;
 public class PrinterMachine : MachineBehavior
 {
     public override ResourceTypes MachineType { get; } = ResourceTypes.PART;
+    [SerializeField] private Animator armAnimation;
 
     public override void RepairMachine()
     {
@@ -15,40 +16,55 @@ public class PrinterMachine : MachineBehavior
             machineUI.UpdateDurabilityBar(machineDurability);
         }
     }
-    public override void UpgradeMachineEfficiency(int increase)
+    public override void UpgradeMachineEfficiency(int change)
     {
-        if(machineEfficiencyLevel < 4 && GameManager.Instance.PlayerCredits >= upgradeCost)
+        if (machineEfficiencyLevel < 6 && GameManager.Instance.PlayerCredits >= upgradeCost)
         {
-            
-            machineEfficiency += increase;
+            machineEfficiency += change;
+            outputInterval -= change;
             machineEfficiencyLevel++;
-            machineUI.UpdateEfficiencyLevelText(machineEfficiencyLevel);            
+            machineUI.SetSliderMaxValue(outputInterval);
+            machineUI.UpdateEfficiencyLevelText(machineEfficiencyLevel);
             GameManager.Instance.TakeCreditsFromPlayer(upgradeCost);
             Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
         }
     }
 
-    public override void UpgradeOutputInterval(int reduction)
+    protected override IEnumerator Production()
     {
-        if(outputIntervalLevel < 4 && GameManager.Instance.PlayerCredits >= upgradeCost)
+        GameObject product;
+
+        while (true)
         {
-            outputInterval -= reduction;
-            outputIntervalLevel++;
-            machineUI.SetSliderMaxValue(outputInterval);
-            machineUI.UpdateOutputIntervalLevelText(outputIntervalLevel);
-            GameManager.Instance.TakeCreditsFromPlayer(upgradeCost);
-            Debug.Log(gameObject.name + "Upgraded to " + outputIntervalLevel);
+            if (inputInventory > 0 & machineDurability > 0)
+            {
+                audioSource.Play();
+                armAnimation.SetBool("IsPrinting", true);
+                // Don't reorder StartBarAnimation, inventory decrementation and WaitForSeconds()
+                machineUI.StartBarAnimation(outputInterval);
+                inputInventory--;
+                machineDurability -= 10;
+                yield return new WaitForSeconds(outputInterval);
+                for (int i = 0; i < machineEfficiency; i++)
+                {
+                    machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+                    product = objPooler.ReturnProduct(MachineType);
+                    ConfigureProduct(product);
+                }
+                machineUI.UpdateDurabilityBar(machineDurability);
+            }
+            else
+            {
+                audioSource.Stop();
+                armAnimation.SetBool("IsPrinting", false);
+                yield return new WaitForSeconds(0.2f);
+            }
         }
     }
 
-    public void OnClickUpgradeMachineEfficiencyButton(int amount)
+    public void OnClickUpgradeMachineEfficiencyButton(int change)
     {
-        UpgradeMachineEfficiency(amount);
-    }
-
-    public void OnClickUpgradeOutputIntervalButton(int amount)
-    {
-        UpgradeOutputInterval(amount);
+        UpgradeMachineEfficiency(change);
     }
 
     public void OnClickRepairMachine()
