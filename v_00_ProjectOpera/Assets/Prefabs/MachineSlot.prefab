@@ -293,6 +293,9 @@ MonoBehaviour:
   - {fileID: 3835916526853765982, guid: 295628648ad547142be7085b4141d532, type: 3}
   spawnLocation: {fileID: 7205541073126397342}
   machineUICanvas: {fileID: 2879303157995614249}
+  floatingIconImage: {fileID: 3015298562503021947}
+  bitcoinIcon: {fileID: 21300000, guid: b88b3261a9230ce428cc08a132fd5332, type: 3}
+  machineIcon: {fileID: 21300000, guid: 9da1331f11c4e114292b517c43a4e3d0, type: 3}
 --- !u!1 &7766506838224459563
 GameObject:
   m_ObjectHideFlags: 0

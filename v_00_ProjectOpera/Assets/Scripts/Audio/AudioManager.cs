@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private List<AudioSource> sfxSources;
     [SerializeField] private AudioSource ambienceSource;
 
+    [SerializeField] private AudioClip errorNoise;
+
     [Header("Audio Mixers")]
     public AudioMixer masterMixer;
     public AudioMixerGroup musicGroup;
@@ -17,6 +19,11 @@ public class AudioManager : MonoBehaviour
     private List<AudioClip> availableBeats;
     //private double nextStartTime;
     //private float beatDuration;
+
+    public void PlayErrorNoise()
+    {
+        PlaySFX(errorNoise);
+    }
 
     private void Awake()
     {

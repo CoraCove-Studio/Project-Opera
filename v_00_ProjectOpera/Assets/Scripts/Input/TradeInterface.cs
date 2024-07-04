@@ -33,6 +33,9 @@ public class TradeInterface : MonoBehaviour
     [SerializeField] private GameObject sellProductLabels;
     [SerializeField] private GameObject sellAllButtonLabel;
 
+    [SerializeField] private AudioClip moneyNoise;
+    private bool playerSoldItem = false;
+
     private void Start()
     {
         activePlanet = planets[0];
@@ -145,6 +148,7 @@ public class TradeInterface : MonoBehaviour
             GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.CROP);
             GameManager.Instance.AddCreditsToPlayer(valueOfCrop);
             GameManager.Instance.audioManager.PlaySFX(GetRandomNoiseClip());
+            playerSoldItem = true;
         }
     }
 
@@ -155,6 +159,7 @@ public class TradeInterface : MonoBehaviour
             GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.PART);
             GameManager.Instance.AddCreditsToPlayer(valueOfPart);
             GameManager.Instance.audioManager.PlaySFX(GetRandomNoiseClip());
+            playerSoldItem = true;
         }
     }
 
@@ -165,6 +170,7 @@ public class TradeInterface : MonoBehaviour
             GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.NITROGEN);
             GameManager.Instance.AddCreditsToPlayer(valueOfNitrogen);
             GameManager.Instance.audioManager.PlaySFX(GetRandomNoiseClip());
+            playerSoldItem = true;
         }
     }
 
@@ -176,6 +182,15 @@ public class TradeInterface : MonoBehaviour
         GameManager.Instance.TakeResourceFromPlayer(GameManager.Instance.PlayerCrops, ResourceTypes.CROP);
         GameManager.Instance.TakeResourceFromPlayer(GameManager.Instance.PlayerNitrogen, ResourceTypes.NITROGEN);
         GameManager.Instance.TakeResourceFromPlayer(GameManager.Instance.PlayerParts, ResourceTypes.PART);
-        GameManager.Instance.audioManager.PlaySFX(GetRandomNoiseClip());
+        GameManager.Instance.audioManager.PlaySFX(moneyNoise);
+    }
+
+    public void PlayerLeftCollider()
+    {
+        if (playerSoldItem)
+        {
+            GameManager.Instance.audioManager.PlaySFX(moneyNoise);
+        }
+        playerSoldItem = false;
     }
 }

@@ -750,6 +750,21 @@ PrefabInstance:
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6256298603236078601, guid: 0893c80acb357d844854eccf00ab929b,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5028904979806672113}
+    - target: {fileID: 6256298603236078601, guid: 0893c80acb357d844854eccf00ab929b,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickRepairMachine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256298603236078601, guid: 0893c80acb357d844854eccf00ab929b,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CropMachine, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8048636390972256883, guid: 0893c80acb357d844854eccf00ab929b,
         type: 3}
       propertyPath: efficiencyLevelNumberLabel

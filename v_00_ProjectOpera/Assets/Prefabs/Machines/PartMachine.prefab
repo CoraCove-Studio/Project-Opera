@@ -739,6 +739,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6256298603236078601, guid: ea78e71af722e0547b9daecf28c95270,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7178670231014221668}
+    - target: {fileID: 6256298603236078601, guid: ea78e71af722e0547b9daecf28c95270,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickRepairMachine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256298603236078601, guid: ea78e71af722e0547b9daecf28c95270,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PrinterMachine, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8048636390972256883, guid: ea78e71af722e0547b9daecf28c95270,
         type: 3}
       propertyPath: efficiencyLevelNumberLabel
