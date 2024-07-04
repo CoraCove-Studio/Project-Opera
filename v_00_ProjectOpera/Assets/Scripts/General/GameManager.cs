@@ -382,28 +382,25 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            AddResourceToPlayer(1, ResourceTypes.CROP);
+            AddResourceToPlayer(5, ResourceTypes.CROP);
         }
         if (Input.GetKeyDown(KeyCode.U))
         {
-            AddResourceToPlayer(1, ResourceTypes.PART);
+            AddResourceToPlayer(5, ResourceTypes.PART);
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            AddResourceToPlayer(1, ResourceTypes.NITROGEN);
+            AddResourceToPlayer(5, ResourceTypes.NITROGEN);
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            AddCreditsToPlayer(1);
+            AddCreditsToPlayer(5);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             // restart outputInterval
         }
-        if (Input.GetKeyDown(KeyCode.P)) // Debugging for other scenes
-        {
-            SetUpNewGame();
-        }
+        
     }
 
     #endregion
