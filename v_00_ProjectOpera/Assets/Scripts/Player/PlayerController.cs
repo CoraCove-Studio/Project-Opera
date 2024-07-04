@@ -74,22 +74,32 @@ public class PlayerController : MonoBehaviour
                                   transform.up * currentMovementInput.y +
                                   transform.right * currentMovementInput.x;
 
-            // Accelerate the current velocity towards the input direction
-            currentVelocity += acceleration * Time.fixedDeltaTime * inputVector;
+            // Calculate the force to be added based on the input direction and acceleration
+            Vector3 force = acceleration * inputVector;
 
-            // Clamp the velocity to the maximum movement speed
-            if (currentVelocity.magnitude > movementSpeed)
-            {
-                currentVelocity = currentVelocity.normalized * movementSpeed;
-            }
+            // Apply the force to the rigidbody
+            rb.AddForce(force, ForceMode.Acceleration);
         }
 
         // Apply drag to the current velocity to simulate gradual slowing down
-        currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, drag * Time.fixedDeltaTime);
-
-        // Move the rigidbody using the updated velocity
-        rb.MovePosition(rb.position + currentVelocity * Time.fixedDeltaTime);
+        // Note: Rigidbody's drag property will handle this over time, no need to manually apply drag
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.layer == 0)
+    //    {
+    //        currentVelocity = Vector3.zero;
+    //    }
+    //}
+
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.gameObject.layer == 0)
+    //    {
+    //        currentVelocity = Vector3.zero;
+    //    }
+    //}
 
     private void HandleCamera()
     {
