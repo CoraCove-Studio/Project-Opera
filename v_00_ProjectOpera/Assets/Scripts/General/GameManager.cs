@@ -309,7 +309,7 @@ public class GameManager : MonoBehaviour
             case ResourceTypes.NITROGEN:
                 return PlayerNitrogen >= value;
             default:
-                print("GameManager: GetPlayerResourceValue: Getting resource value failed, not recognized resource type.");
+                Debug.Log("GameManager: GetPlayerResourceValue: Getting resource value failed, not recognized resource type.");
                 return false;
         }
     }
@@ -354,7 +354,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log($"GameManager: TakeResourceFromPlayer: Taking {amount} from PlayerNitrogen. Current value is {PlayerNitrogen}");
                 break;
             default:
-                print("Taking resource failed, not recognized resource type.");
+                Debug.Log("Taking resource failed, not recognized resource type.");
                 break;
         }
         PlayerUI.UpdateUI();

@@ -6,9 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
 
-    [SerializeField] private float movementSpeed = 4f;
     [SerializeField] private float acceleration = 10f;
-    [SerializeField] private float drag = 2f;
     [SerializeField] private float lookSpeed = 2f;
     [SerializeField] private float xSensitivity = 0.5f;
     [SerializeField] private float ySensitivity = 0.5f;
@@ -17,7 +15,6 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 accumulatedInput;
     private Vector3 currentMovementInput;
-    private Vector3 currentVelocity;
     private Quaternion currentRotation;
     private Quaternion targetRotation;
 

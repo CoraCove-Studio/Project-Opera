@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,11 @@ public class PlayerUIHandler : MonoBehaviour
 
     [SerializeField] private List<TextMeshProUGUI> resourceLabels = new();
     [SerializeField] private TextMeshProUGUI timerLabel;
+
+    private float fadeTime = 0.2f;
+    private float smallTextSize = 55f;
+    private float largeTextSize = 75f;
+    private Dictionary<TextMeshProUGUI, Coroutine> activeCoroutines = new();
 
     public ToolTipHandler tooltipHandler;
 
@@ -76,7 +82,6 @@ public class PlayerUIHandler : MonoBehaviour
 
     #endregion
 
-
     #region EventSystem Methods
 
     public void OnPointerEnter(GameObject self)
@@ -131,7 +136,6 @@ public class PlayerUIHandler : MonoBehaviour
 
     public void DisplayTooltip(int value)
     {
-
         tooltipHandler.DisplayValue(value);
     }
 
@@ -144,10 +148,58 @@ public class PlayerUIHandler : MonoBehaviour
     {
         List<int> playerResources = GetPlayerResources();
 
+        if (playerResources.Count != resourceLabels.Count)
+        {
+            Debug.LogError("Resource labels count does not match player resources count.");
+            return;
+        }
+
         for (int i = 0; i < resourceLabels.Count; i++)
         {
-            resourceLabels[i].text = playerResources[i].ToString();
+            var currentLabel = resourceLabels[i];
+            if (int.TryParse(currentLabel.text, out int labelToInt))
+            {
+                if (labelToInt < playerResources[i])
+                {
+                    StartDisplayLabelChange(currentLabel, Color.green);
+                }
+                else if (labelToInt > playerResources[i])
+                {
+                    StartDisplayLabelChange(currentLabel, Color.red);
+                }
+                currentLabel.text = playerResources[i].ToString();
+            }
+            else
+            {
+                Debug.LogWarning($"Failed to parse text in label {i} to int.");
+            }
         }
+    }
+
+    private void StartDisplayLabelChange(TextMeshProUGUI textLabel, Color color)
+    {
+        if (activeCoroutines.ContainsKey(textLabel))
+        {
+            StopCoroutine(activeCoroutines[textLabel]);
+            activeCoroutines.Remove(textLabel);
+        }
+        Coroutine coroutine = StartCoroutine(DisplayColorChange(textLabel, color));
+        activeCoroutines[textLabel] = coroutine;
+    }
+
+    private IEnumerator DisplayColorChange(TextMeshProUGUI textLabel, Color color)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeTime)
+        {
+            textLabel.color = Color.Lerp(color, Color.white, elapsedTime / fadeTime);
+            textLabel.fontSize = Mathf.Lerp(smallTextSize, largeTextSize, elapsedTime / fadeTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        textLabel.color = Color.white;
+        textLabel.fontSize = smallTextSize;
+        activeCoroutines.Remove(textLabel);
     }
 
     public void UpdateGameTimer(int minutes, int seconds)
