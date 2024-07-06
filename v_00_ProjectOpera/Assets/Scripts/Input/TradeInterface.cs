@@ -79,7 +79,7 @@ public class TradeInterface : MonoBehaviour
         {
             Debug.Log("TradeInterface: OnTriggerExit: round completed");
             ResetValueOfProducts();
-            round++;
+            if (!GameManager.Instance.InTutorial) { round++; }
             UpdatePriceLabels();
             GameManager.Instance.PlayerUI.ActivateTicker();
             GameManager.Instance.PlayerUI.SendTimedNotification("Get back to work!");

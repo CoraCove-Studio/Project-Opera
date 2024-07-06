@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class DebtInterface : MonoBehaviour
 {
+    [SerializeField] private GameObject debtUIActivator;
     [Header("Number Labels")]
     [SerializeField] private TextMeshProUGUI debtNumberLabel;
     [SerializeField] private TextMeshProUGUI netProfitNumberLabel;
@@ -13,6 +14,15 @@ public class DebtInterface : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemsProducedNumberLabel;
     [SerializeField] private TextMeshProUGUI itemsCollectedNumberLabel;
 
+    public void ActivateDebtUI()
+    {
+        debtUIActivator.SetActive(true);
+    }
+
+    public void DeactivateDebtUI()
+    {
+        debtUIActivator.SetActive(false);
+    }
     public void UpdateStatistics(Dictionary<string, int> statistics)
     {
         debtNumberLabel.text = statistics["Player Debt"].ToString();
