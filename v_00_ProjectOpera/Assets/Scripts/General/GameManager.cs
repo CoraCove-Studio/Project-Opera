@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,11 +27,13 @@ public class GameManager : MonoBehaviour
     private const int MinResources = 0;
     private const int MaxResources = 5000;
     private const int MaxCredits = 10000000;
+    private const int MaxDebt = 35000;
 
     private int playerCredits;
     private int playerCrops;
     private int playerParts;
     private int playerNitrogen;
+    private int playerDebt;
 
     #region Resources Properties
 
@@ -69,7 +72,6 @@ public class GameManager : MonoBehaviour
             playerCredits = Mathf.Clamp(value, MinResources, MaxCredits);
         }
     }
-
     #endregion
 
     private readonly Dictionary<string, int> newGameValues = new()
@@ -81,6 +83,31 @@ public class GameManager : MonoBehaviour
     { "GameDuration", 600 }
 };
 
+    #endregion
+
+    #region Statistics And Debt
+
+    public DebtInterface DebtUI { get; private set; }
+
+    private readonly Dictionary<string, int> playerStatistics = new()
+    {
+        { "Player Debt", 35000 },
+        { "Net Profit", 0 },
+        { "Credits Earned", 0 },
+        { "Credits Spent", 0 },
+        { "Machines Broken", 0 },
+        { "Items Produced", 0 },
+        { "Items Collected", 0 },
+    };
+
+    public int PlayerDebt
+    {
+        get { return playerDebt; }
+        private set
+        {
+            playerDebt = Mathf.Clamp(value, MinResources, MaxDebt);
+        }
+    }
     #endregion
 
     #region Singleton pattern
@@ -241,6 +268,9 @@ public class GameManager : MonoBehaviour
 
         GameObject.Find("AudioManager").TryGetComponent(out audioManager);
         if (audioManager == null) Debug.Log("GameManager: FindImportantReferences: audioManager not found.");
+
+        DebtUI = GameObject.Find("DebtUI").GetComponent<DebtInterface>();
+        if (DebtUI == null) Debug.Log("GameManager: FindImportantReferences: DebtUI not found.");
     }
 
     private void CheckGameOver()
