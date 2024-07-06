@@ -2426,7 +2426,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8417549463567203342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 663}
+  m_LocalPosition: {x: 0, y: 0, z: 498}
   m_LocalScale: {x: 2.2846477, y: 1.7941871, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2434,7 +2434,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 7.3125, y: -25.490112}
+  m_AnchoredPosition: {x: 7, y: -25.490112}
   m_SizeDelta: {x: -3719.5842, y: -1437.5283}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3088850994210445124
@@ -2458,7 +2458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 0.7529412}
+  m_Color: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 0.972549}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2944,7 +2944,7 @@ PrefabInstance:
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
@@ -2968,6 +2968,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5389125998062619014}
+    - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
+        type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -2989,7 +2994,7 @@ PrefabInstance:
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: OnClickPayAllDebt
       objectReference: {fileID: 0}
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
@@ -3009,7 +3014,7 @@ PrefabInstance:
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TradeInterface, Assembly-CSharp
+      value: DebtInterface, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
@@ -3158,12 +3163,12 @@ PrefabInstance:
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
@@ -3180,6 +3185,11 @@ PrefabInstance:
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5389125998062619014}
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -3203,7 +3213,7 @@ PrefabInstance:
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: OnClickMakePayment
       objectReference: {fileID: 0}
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
@@ -3223,7 +3233,7 @@ PrefabInstance:
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TradeInterface, Assembly-CSharp
+      value: DebtInterface, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
@@ -3239,6 +3249,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}

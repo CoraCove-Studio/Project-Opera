@@ -75,7 +75,7 @@ public abstract class MachineBehavior : MonoBehaviour
         {
             if (isEmpty == false & isBroken == false)
             {
-                Debug.Log("Starting Production loop.");
+                //Debug.Log("Starting Production loop.");
                 loopAudioSource.Play();
                 if (animatorController != null)
                 {
@@ -101,7 +101,7 @@ public abstract class MachineBehavior : MonoBehaviour
             }
             else // must be empty or broken
             {
-                Debug.Log("Machine must be empty or broken.");
+                //Debug.Log("Machine must be empty or broken.");
                 yield return new WaitForSeconds(0.2f);
             }
         }
@@ -132,14 +132,14 @@ public abstract class MachineBehavior : MonoBehaviour
     {
         if (machineDurability < maximumMachineDurability)
         {
-            Debug.Log("Working machine repaired.");
+            //Debug.Log("Working machine repaired.");
             machineDurability = maximumMachineDurability;
             machineUI.UpdateDurabilityBar(machineDurability);
             sfxAudioSource.PlayOneShot(repairNoise);
         }
         if (isBroken)
         {
-            Debug.Log("Broken machine repaired.");
+            //Debug.Log("Broken machine repaired.");
             loopAudioSource.Stop();
             brokenEffect.SetActive(true);
             loopAudioSource.clip = machineProductionLoop;
@@ -215,7 +215,7 @@ public abstract class MachineBehavior : MonoBehaviour
         if (inputInventory == 0)
         {
             isEmpty = true;
-            Debug.Log("Machine empty!");
+            //Debug.Log("Machine empty!");
             loopAudioSource.Stop();
         }
     }
@@ -225,7 +225,7 @@ public abstract class MachineBehavior : MonoBehaviour
         if (machineDurability <= 0)
         {
             isBroken = true;
-            Debug.Log("Machine broken!");
+            //Debug.Log("Machine broken!");
             sfxAudioSource.PlayOneShot(glitchTransitionNoise);
             brokenEffect.SetActive(true);
             SwitchToBrokenNoiseLoop();
