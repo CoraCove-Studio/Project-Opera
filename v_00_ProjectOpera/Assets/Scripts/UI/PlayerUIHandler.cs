@@ -159,13 +159,16 @@ public class PlayerUIHandler : MonoBehaviour
             var currentLabel = resourceLabels[i];
             if (int.TryParse(currentLabel.text, out int labelToInt))
             {
-                if (labelToInt < playerResources[i])
+                if (GameManager.Instance.GamePaused == false)
                 {
-                    StartDisplayLabelChange(currentLabel, Color.green);
-                }
-                else if (labelToInt > playerResources[i])
-                {
-                    StartDisplayLabelChange(currentLabel, Color.red);
+                    if (labelToInt < playerResources[i])
+                    {
+                        StartDisplayLabelChange(currentLabel, Color.green);
+                    }
+                    else if (labelToInt > playerResources[i])
+                    {
+                        StartDisplayLabelChange(currentLabel, Color.red);
+                    }
                 }
                 currentLabel.text = playerResources[i].ToString();
             }
