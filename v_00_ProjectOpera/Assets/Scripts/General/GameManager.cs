@@ -400,7 +400,16 @@ public class GameManager : MonoBehaviour
         {
             // restart outputInterval
         }
-        
+
+        if (Input.GetKey(KeyCode.Return))
+        {
+            Time.timeScale = 3;
+        }
+        if (Input.GetKeyUp(KeyCode.Return))
+        {
+            Time.timeScale = 1;
+        }
+
     }
 
     #endregion
