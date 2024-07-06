@@ -50,6 +50,11 @@ public class TradeInterface : MonoBehaviour
             valueOfPart = basePartValue * other.GetComponent<PlanetTradingHub>().partPriceBoost;
             valueOfNitrogen = baseNitrogenValue * other.GetComponent <PlanetTradingHub>().nitrogenPriceBoost;
             UpdatePriceLabels();
+            if(round == 2)
+            {
+                DeactivateSellingButtons();
+                ActivateSellAllButton();
+            }
         }
         else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_ACTIVATOR))
         {
@@ -59,11 +64,6 @@ public class TradeInterface : MonoBehaviour
         else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_DEACTIVATOR))
         {
             Debug.Log("TradeInterface: OnTriggerEnter: Warp Speed Deactivated");
-            if(round == 2)
-            {
-                DeactivateSellingButtons();
-                ActivateSellAllButton();
-            }
             //deactivate particle effects here
         }
     }
