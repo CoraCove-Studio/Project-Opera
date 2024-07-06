@@ -26,6 +26,10 @@ public class DebtInterface : MonoBehaviour
 
     public void OnClickMakePayment(int amount)
     {
+        if (GameManager.Instance.InTutorial)
+        {
+            amount = GameManager.Instance.PlayerCredits;
+        }
         if(GameManager.Instance.PlayerCredits >= amount && GameManager.Instance.PlayerDebt >= amount && GameManager.Instance.PlayerDebt > 0)
         {
             GameManager.Instance.TakeCreditsFromPlayer(amount);

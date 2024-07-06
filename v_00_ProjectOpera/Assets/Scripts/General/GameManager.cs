@@ -17,10 +17,13 @@ public class GameManager : MonoBehaviour
     private Rigidbody playerRigidBody;
     public AudioManager audioManager;
     private GameTimer gameTimer;
+    private PlanetRotation planetRotation;
+    public TutorialHandler TutorialHandler { get; private set; }
     private float gameDurationInSeconds;
 
     public bool GamePaused { get; private set; } = true;
-    public bool InTutorial { get; private set; } = true;
+    public bool InTutorial { get; private set; } = false;
+    public bool InTutorialMonitor { get; private set; } = true;
     private static bool isQuitting = false;
     private static bool currentlyInGameScene = true;
 
@@ -194,7 +197,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         Cheatcodes();
-        if (GamePaused == false && currentlyInGameScene)
+        if (GamePaused == false && currentlyInGameScene && InTutorial == false)
         {
             PlayerUI.UpdateGameTimer(gameTimer.TimeLeft.Item1, gameTimer.TimeLeft.Item2);
             CheckGameOver();
@@ -247,10 +250,31 @@ public class GameManager : MonoBehaviour
     {
         InTutorial = false;
         // Called when the player exits the tutorial using the "Start" button
-        ToggleGamePause();
+        if (GamePaused) ToggleGamePause();
         gameTimer.StartTimer();
-        // TODO: move the player to new location here so they don't get launched
         playerRigidBody.isKinematic = false;
+        planetRotation.StartRotationCoroutine();
+        Debug.Log("GameManager: StartGame: Game started in normal mode.");
+    }
+
+    public void StartTutorial()
+    {
+        InTutorial = true;
+        if (GamePaused) ToggleGamePause();
+        playerRigidBody.isKinematic = false;
+        Debug.Log("GameManager: StartTutorial: Game started in tutorial mode.");
+        // other things going to happen
+
+        TutorialHandler.StartTutorialCoroutine();
+    }
+
+    public void StartGameFromTutorial()
+    {
+        InTutorial = false;
+
+        gameTimer.StartTimer();
+        planetRotation.StartRotationCoroutine();
+        Debug.Log("GameManager: StartGameFromTutorial: Starting a game from the tutorial.");
     }
     private void SetUpNewGame()
     {
@@ -263,7 +287,6 @@ public class GameManager : MonoBehaviour
         DebtUI.UpdateStatistics(playerStatistics);
 
         GamePaused = true;
-        InTutorial = true;
 
         gameTimer.SetNewTimer(gameDurationInSeconds);
         PlayerUI.ToggleReticleVisibility(false);
@@ -310,6 +333,11 @@ public class GameManager : MonoBehaviour
 
         DebtUI = GameObject.Find("DebtUI").GetComponent<DebtInterface>();
         if (DebtUI == null) Debug.Log("GameManager: FindImportantReferences: DebtUI not found.");
+
+        TutorialHandler = GameObject.Find("TutorialHandler").GetComponent<TutorialHandler>();
+        if (TutorialHandler == null) Debug.Log("GameManager: FindImportantReferences: TutorialHandler not found.");
+
+        if (!GameObject.Find("PlanetRotation").TryGetComponent(out planetRotation)) Debug.Log("GameManager: FindImportantReferences: PlanetRotation not found.");
     }
 
     private void CheckGameOver()
@@ -324,12 +352,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void CloseTutorialMonitor()
+    {
+        InTutorialMonitor = false;
+    }
+
     public void ToggleGamePause()
     {
         // This method is subscribed to the OnPause event from the InputHandler and 
         // is called whenever the player presses `esc`
         Scene scene = SceneManager.GetActiveScene();
-        if (gameScenes.Contains(scene.name) && InTutorial == false)
+        if (gameScenes.Contains(scene.name) && InTutorialMonitor == false)
         {
             if (GamePaused == true)
             {
@@ -478,11 +511,11 @@ public class GameManager : MonoBehaviour
             // restart outputInterval
         }
 
-        if (Input.GetKey(KeyCode.Return))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             Time.timeScale = 3;
         }
-        if (Input.GetKeyUp(KeyCode.Return))
+        if (Input.GetKeyUp(KeyCode.RightArrow))
         {
             Time.timeScale = 1;
         }

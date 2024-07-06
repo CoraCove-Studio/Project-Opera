@@ -52,6 +52,11 @@ public class PlayerUIHandler : MonoBehaviour
         notificationTab.ShowConditionalNotification(message);
     }
 
+    public void CloseConditionalNotification()
+    {
+        notificationTab.MeetCondition();
+    }
+
     public void PauseGame()
     {
         Debug.Log("PlayerUIHandler: PauseGame: Pausing the game.");
@@ -253,7 +258,7 @@ public class PlayerUIHandler : MonoBehaviour
         GameManager.Instance.ActivateSubMenu();
         currentMachineSlot = machineSlot;
         // loop through the buttons of the spawn panel and make them interactable or not interactable based
-        // on whether or not the player has enough credits
+        // on whether or not the player is in the right tutorial stage
 
         machineSpawnPanel.SetActive(true);
         currentPanel = machineSpawnPanel;

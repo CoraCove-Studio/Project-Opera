@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class MachineSlot : MonoBehaviour
 {
-    private GameObject spawnedMachine;
-    private InteractableObject interactableComponent;
+    public GameObject SpawnedMachine { get; private set; }
+    public InteractableObject InteractableComponent { get; private set; }
     [SerializeField] List<GameObject> machinePrefabs;
     [SerializeField] Transform spawnLocation;
     [SerializeField] GameObject machineUICanvas;
@@ -24,7 +24,7 @@ public class MachineSlot : MonoBehaviour
     private void Start()
     {
         playerUI = GameManager.Instance.PlayerUI;
-        interactableComponent = GetComponent<InteractableObject>();
+        InteractableComponent = GetComponent<InteractableObject>();
     }
 
     public void OnInteract()
@@ -48,20 +48,23 @@ public class MachineSlot : MonoBehaviour
             switch (resourceType)
             {
                 case ResourceTypes.CROP:
-                    Instantiate(machinePrefabs[0], spawnLocation.position, spawnLocation.rotation);
+                    SpawnedMachine = Instantiate(machinePrefabs[0], spawnLocation.position, spawnLocation.rotation);
+                    if (GameManager.Instance.InTutorial) GameManager.Instance.TutorialHandler.PlacedCropsMachine();
                     break;
                 case ResourceTypes.PART:
-                    Instantiate(machinePrefabs[1], spawnLocation.position, spawnLocation.rotation);
+                    SpawnedMachine = Instantiate(machinePrefabs[1], spawnLocation.position, spawnLocation.rotation);
+                    if (GameManager.Instance.InTutorial) GameManager.Instance.TutorialHandler.PlacedPartsMachine();
                     break;
                 case ResourceTypes.NITROGEN:
-                    Instantiate(machinePrefabs[2], spawnLocation.position, spawnLocation.rotation);
+                    SpawnedMachine = Instantiate(machinePrefabs[2], spawnLocation.position, spawnLocation.rotation);
+                    if (GameManager.Instance.InTutorial) GameManager.Instance.TutorialHandler.PlacedNitrogenMachine();
                     break;
                 default:
                     break;
             }
             GameManager.Instance.TakeCreditsFromPlayer(50);
             machineUICanvas.SetActive(false);
-            interactableComponent.enabled = false;
+            InteractableComponent.enabled = false;
             gameObject.layer = 0;
         }
         else

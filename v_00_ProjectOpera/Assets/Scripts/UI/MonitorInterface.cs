@@ -22,6 +22,7 @@ public class MonitorInterface : MonoBehaviour
     private readonly float textSpeed = 0.025f;
     private int currentTutTextIndex = 0;
     private int endTutorialTextIndex;
+    private bool playerSelectedTutorial = false;
 
     private TutorialText tutText;
 
@@ -48,7 +49,15 @@ public class MonitorInterface : MonoBehaviour
 
     public void OnClickStartButton()
     {
-        GameManager.Instance.StartGame();
+        GameManager.Instance.CloseTutorialMonitor();
+        if (playerSelectedTutorial)
+        {
+            GameManager.Instance.StartTutorial();
+        }
+        else
+        {
+            GameManager.Instance.StartGame();
+        }
         GameManager.Instance.audioManager.PlaySFX(gameStartNoise);
         InputManager.Instance.UnpauseWithButton();
     }
@@ -56,8 +65,9 @@ public class MonitorInterface : MonoBehaviour
     public void OnClickNextButton()
     {
         GameManager.Instance.audioManager.PlaySFX(clickNoise);
+        playerSelectedTutorial = true;
         nextButton.SetActive(false);
-        if (currentTutTextIndex == 4)
+        if (currentTutTextIndex == 2)
         {
             yesButton.SetActive(false);
             noButton.SetActive(false);
@@ -70,6 +80,7 @@ public class MonitorInterface : MonoBehaviour
         yesButton.SetActive(false);
         noButton.SetActive(false);
         currentTutTextIndex = endTutorialTextIndex;
+        playerSelectedTutorial = false;
         StartCoroutine(TypeTextEffect(GetNextTutText()));
     }
 
@@ -88,17 +99,16 @@ public class MonitorInterface : MonoBehaviour
             UpdateTextField(new string(outputCharList.ToArray())); // Convert List<char> to string
             yield return new WaitForSeconds(textSpeed);
         }
-
         ActivateAppropriateButtons();
     }
 
     private void ActivateAppropriateButtons()
     {
-        if (currentTutTextIndex < 4 || currentTutTextIndex > 4 && currentTutTextIndex < tutText.tutorialSteps.Length - 1)
+        if (currentTutTextIndex < 2 || currentTutTextIndex > 2 && currentTutTextIndex < tutText.tutorialSteps.Length - 1)
         {
             nextButton.SetActive(true);
         }
-        else if (currentTutTextIndex == 4)
+        else if (currentTutTextIndex == 2)
         {
             yesButton.SetActive(true);
             noButton.SetActive(true);

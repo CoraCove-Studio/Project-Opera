@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class NotificationTab : MonoBehaviour
     private Vector2 overshootPosition;
     private bool isShowing = false;
     private bool conditionMet;
+    private Coroutine notificationCoroutine;
+    private Queue<IEnumerator> notificationQueue = new Queue<IEnumerator>();
 
     private void Start()
     {
@@ -23,28 +26,69 @@ public class NotificationTab : MonoBehaviour
         notificationTab.anchoredPosition = hiddenPosition;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ShowConditionalNotification("This is a conditional notification. Press 'M' to meet the condition.");
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            MeetCondition();
+        }
+    }
+
     public void ShowTimedNotification(string message)
     {
-        if (isShowing == false)
+        var notificationCoroutine = ShowTimedNotificationCoroutine(message, displayTime);
+        if (!isShowing)
         {
-            StopAllCoroutines();
-            StartCoroutine(ShowTimedNotificationCoroutine(message, displayTime));
+            StartNotification(notificationCoroutine);
+        }
+        else
+        {
+            notificationQueue.Enqueue(notificationCoroutine);
         }
     }
 
     public void ShowConditionalNotification(string message)
     {
-        if (isShowing == false)
+        var notificationCoroutine = ShowConditionalNotificationCoroutine(message);
+        if (!isShowing)
         {
-            conditionMet = false;
-            StopAllCoroutines();
-            StartCoroutine(ShowConditionalNotificationCoroutine(message));
+            StartNotification(notificationCoroutine);
+        }
+        else
+        {
+            notificationQueue.Enqueue(notificationCoroutine);
         }
     }
 
     public void MeetCondition()
     {
         conditionMet = true;
+    }
+
+    private void StartNotification(IEnumerator coroutine)
+    {
+        if (notificationCoroutine != null)
+        {
+            StopCoroutine(notificationCoroutine);
+        }
+        notificationCoroutine = StartCoroutine(coroutine);
+    }
+
+    private void OnNotificationComplete()
+    {
+        isShowing = false;
+        conditionMet = false;
+        notificationCoroutine = null;
+        if (notificationQueue.Count > 0)
+        {
+            var nextNotification = notificationQueue.Dequeue();
+            StartNotification(nextNotification);
+        }
     }
 
     private IEnumerator ShowTimedNotificationCoroutine(string message, float displayDuration)
@@ -60,7 +104,7 @@ public class NotificationTab : MonoBehaviour
 
         // Lerp out of view
         yield return StartCoroutine(LerpPosition(visiblePosition, hiddenPosition, lerpTime));
-        isShowing = false;
+        OnNotificationComplete();
     }
 
     private IEnumerator ShowConditionalNotificationCoroutine(string message)
@@ -72,14 +116,14 @@ public class NotificationTab : MonoBehaviour
         yield return StartCoroutine(LerpPosition(overshootPosition, visiblePosition, lerpTime * 0.2f));
 
         // Wait for condition to be met
-        while (conditionMet == false)
+        while (!conditionMet)
         {
             yield return new WaitForSeconds(0.2f);
         }
 
         // Lerp out of view
         yield return StartCoroutine(LerpPosition(visiblePosition, hiddenPosition, lerpTime));
-        isShowing = false;
+        OnNotificationComplete();
     }
 
     private IEnumerator LerpPosition(Vector2 from, Vector2 to, float duration)

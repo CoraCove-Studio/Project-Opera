@@ -420,7 +420,6 @@ GameObject:
   - component: {fileID: 4633246880354440106}
   - component: {fileID: 3206632757063974277}
   - component: {fileID: 7876253362705753972}
-  - component: {fileID: 2908239499458508081}
   m_Layer: 0
   m_Name: canvas_DebtInterface
   m_TagString: Untagged
@@ -519,22 +518,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2908239499458508081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2564333442699605178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac1bad520a670974ea049f347fc7fc08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  efficiencyLevelNumberLabel: {fileID: 0}
-  inventoryNumberLabel: {fileID: 0}
-  progressBarSlider: {fileID: 0}
-  durabilityBarSlider: {fileID: 0}
 --- !u!1 &3087685060381928063
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,10 +5,6 @@ public class PlanetRotation : MonoBehaviour
 {
     [SerializeField] private GameObject planetRotator;
 
-    private void Start()
-    {
-        StartRotationCoroutine();
-    }
     public void StartRotationCoroutine()
     {
         StartCoroutine(Rotate(600));

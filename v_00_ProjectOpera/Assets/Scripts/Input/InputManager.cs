@@ -139,7 +139,7 @@ public class InputManager : MonoBehaviour
 
     private void HandlePause(InputAction.CallbackContext context)
     {
-        if (context.performed && GameManager.Instance.InTutorial == false)
+        if (context.performed && GameManager.Instance.InTutorialMonitor == false)
         {
             if (coreActionMap.enabled)
             {
