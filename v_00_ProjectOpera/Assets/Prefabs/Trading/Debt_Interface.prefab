@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3743911448730731228}
+  - component: {fileID: 5389125998062619014}
   m_Layer: 3
   m_Name: Debt_Interface
   m_TagString: Untagged
@@ -34,6 +35,25 @@ Transform:
   - {fileID: 4478077886371499482}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &5389125998062619014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140795232339555079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432227f47df8aa0419a155b4157424f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debtNumberLabel: {fileID: 1428011264712145028}
+  netProfitNumberLabel: {fileID: 7767562994337594407}
+  creditsEarnedNumberLabel: {fileID: 547073189619817815}
+  creditsSpentNumberLabel: {fileID: 4683995400052754792}
+  machinesBrokenNumberLabel: {fileID: 6736249705624051437}
+  itemsProducedNumberLabel: {fileID: 2552471231021891539}
+  itemsCollectedNumberLabel: {fileID: 7317099116775247641}
 --- !u!1 &346856186961190855
 GameObject:
   m_ObjectHideFlags: 0

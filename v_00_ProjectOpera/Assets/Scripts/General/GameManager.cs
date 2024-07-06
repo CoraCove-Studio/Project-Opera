@@ -80,7 +80,8 @@ public class GameManager : MonoBehaviour
     { "Parts", 5 },
     { "Nitrogen", 5 },
     { "Credits", 300 },
-    { "GameDuration", 600 }
+    { "GameDuration", 600 },
+    { "PlayerDebt", 35000 }
 };
 
     #endregion
@@ -89,15 +90,15 @@ public class GameManager : MonoBehaviour
 
     public DebtInterface DebtUI { get; private set; }
 
-    private readonly Dictionary<string, int> playerStatistics = new()
+    private Dictionary<string, int> playerStatistics = new()
     {
-        { "Player Debt", 35000 },
-        { "Net Profit", 0 },
-        { "Credits Earned", 0 },
-        { "Credits Spent", 0 },
-        { "Machines Broken", 0 },
-        { "Items Produced", 0 },
-        { "Items Collected", 0 },
+        { "Player Debt", 35000 },   //updated via void method
+        { "Net Profit", 0 },        //updated via void method
+        { "Credits Earned", 0 },    //updated in game manager
+        { "Credits Spent", 0 },     //updated in game manager
+        { "Machines Broken", 0 },   //updated via void method
+        { "Items Produced", 0 },    //updated via void method
+        { "Items Collected", 0 }    //updated in game manager
     };
 
     public int PlayerDebt
@@ -107,6 +108,30 @@ public class GameManager : MonoBehaviour
         {
             playerDebt = Mathf.Clamp(value, MinResources, MaxDebt);
         }
+    }
+    public void PayDebt(int amount)
+    {
+        PlayerDebt -= amount;
+        playerStatistics["Player Debt"] -= amount;
+        DebtUI.UpdateStatistics(playerStatistics);
+    }
+
+    public void UpdateNetProfit()
+    {
+        playerStatistics["Net Profit"] = playerStatistics["CreditsEarned"] - playerStatistics["Credits Spent"] - MaxDebt;
+        DebtUI.UpdateStatistics(playerStatistics);
+    }
+
+    public void UpdateMachinesBroken()
+    {
+        playerStatistics["Machines Broken"]++;
+        DebtUI.UpdateStatistics(playerStatistics);
+    }
+
+    public void UpdateItemsProduced()
+    {
+        playerStatistics["Items Produced"]++;
+        DebtUI.UpdateStatistics(playerStatistics);
     }
     #endregion
 
@@ -238,6 +263,7 @@ public class GameManager : MonoBehaviour
         playerNitrogen = newGameValues["Nitrogen"];
         playerCredits = newGameValues["Credits"];
         gameDurationInSeconds = newGameValues["GameDuration"];
+        playerDebt = newGameValues["PlayerDebt"];
         Debug.Log("GameManager: SetNewGameValues: " + gameDurationInSeconds);
     }
 
@@ -325,7 +351,7 @@ public class GameManager : MonoBehaviour
     {
         GamePaused = true;
     }
-
+    
     #region Add / Take Resource Methods
 
     public bool CheckPlayerResourceValue(int value, ResourceTypes resourceType)
@@ -365,6 +391,8 @@ public class GameManager : MonoBehaviour
                 break;
         }
         PlayerUI.UpdateUI();
+        playerStatistics["Items Collected"] += amount;
+        DebtUI.UpdateStatistics(playerStatistics);
     }
 
     public void TakeResourceFromPlayer(int amount, ResourceTypes resourceType)
@@ -394,6 +422,8 @@ public class GameManager : MonoBehaviour
         PlayerCredits += amount;
         Debug.Log($"GameManager: AddCreditsToPlayer: Adding {amount} to PlayerCredits. Current value is {PlayerCredits}");
         PlayerUI.UpdateUI();
+        playerStatistics["Credits Earned"] += amount;
+        DebtUI.UpdateStatistics(playerStatistics);
     }
 
     public void TakeCreditsFromPlayer(int amount)
@@ -401,6 +431,8 @@ public class GameManager : MonoBehaviour
         PlayerCredits -= amount;
         Debug.Log($"GameManager: TakeCreditsToPlayer: Taking {amount} from PlayerCredits. Current value is {PlayerCredits}");
         PlayerUI.UpdateUI();
+        playerStatistics["Credits Spent"] += amount;
+        DebtUI.UpdateStatistics(playerStatistics);
     }
 
 

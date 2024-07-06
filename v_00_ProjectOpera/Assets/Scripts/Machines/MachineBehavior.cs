@@ -92,6 +92,7 @@ public abstract class MachineBehavior : MonoBehaviour
                     machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
                     product = objPooler.ReturnProduct(MachineType);
                     ConfigureProduct(product);
+                    GameManager.Instance.UpdateItemsProduced();
                 }
                 CheckIfEmpty();
                 CheckIfBroken();
@@ -222,6 +223,7 @@ public abstract class MachineBehavior : MonoBehaviour
             sfxAudioSource.PlayOneShot(glitchTransitionNoise);
             brokenEffect.SetActive(true);
             SwitchToBrokenNoiseLoop();
+            GameManager.Instance.UpdateMachinesBroken();
         }
     }
 
