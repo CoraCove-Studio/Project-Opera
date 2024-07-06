@@ -38,7 +38,7 @@ public class TradeInterface : MonoBehaviour
 
     private void Start()
     {
-        activePlanet = planets[0];
+        SetActivePlanet(round);
         ResetValueOfProducts();
         UpdatePriceLabels();
     }
@@ -53,7 +53,7 @@ public class TradeInterface : MonoBehaviour
             valueOfPart = basePartValue * tradingHub.partPriceBoost;
             valueOfNitrogen = baseNitrogenValue * tradingHub.nitrogenPriceBoost;
             UpdatePriceLabels();
-            if(round == 2)
+            if(round == 3)
             {
                 DeactivateSellingButtons();
                 ActivateSellAllButton();
@@ -81,13 +81,23 @@ public class TradeInterface : MonoBehaviour
             ResetValueOfProducts();
             round++;
             UpdatePriceLabels();
-            if (round <= 2) { SetActivePlanet(round); }
             GameManager.Instance.PlayerUI.ActivateTicker();
             GameManager.Instance.PlayerUI.SendTimedNotification("Get back to work!");
         }
         else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_DEACTIVATOR))
         {
-            GameManager.Instance.PlayerUI.SendTimedNotification("Planet incoming!");
+            if (round == 3)
+            {
+                GameManager.Instance.PlayerUI.SendTimedNotification("Last planet incoming!");
+            }
+            else
+            {
+                GameManager.Instance.PlayerUI.SendTimedNotification("Planet incoming!");
+            }
+        }
+        else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_ACTIVATOR))
+        {
+            if (round <= 3) { SetActivePlanet(round); }
         }
     }
 
@@ -126,9 +136,7 @@ public class TradeInterface : MonoBehaviour
         switch (round)
         {
             case 0:
-                activePlanet.SetActive(false);
                 activePlanet = planets[0];
-                activePlanet.SetActive(true);
                 break;
             case 1:
                 activePlanet.SetActive(false);
