@@ -248,6 +248,7 @@ public class GameManager : MonoBehaviour
         FindImportantReferences();
         SetNewGameValues();
         PlayerUI.UpdateUI();
+        DebtUI.UpdateStatistics(playerStatistics);
 
         GamePaused = true;
         InTutorial = true;
@@ -456,7 +457,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            AddCreditsToPlayer(5);
+            AddCreditsToPlayer(5000);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
