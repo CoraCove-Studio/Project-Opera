@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateNetProfit()
     {
-        playerStatistics["Net Profit"] = playerStatistics["CreditsEarned"] - playerStatistics["Credits Spent"] - MaxDebt;
+        playerStatistics["Net Profit"] = playerStatistics["Credits Earned"] - playerStatistics["Credits Spent"] - MaxDebt;
         DebtUI.UpdateStatistics(playerStatistics);
     }
 
@@ -132,6 +132,17 @@ public class GameManager : MonoBehaviour
     {
         playerStatistics["Items Produced"]++;
         DebtUI.UpdateStatistics(playerStatistics);
+    }
+
+    private void ResetPlayerStatistics()
+    {
+        playerStatistics["Player Debt"] = MaxDebt;
+        playerStatistics["Net Profit"] = 0;
+        playerStatistics["Credits Earned"] = 0;
+        playerStatistics["Credits Spent"] = 0;
+        playerStatistics["Machines Broken"] = 0;
+        playerStatistics["Items Produced"] = 0;
+        playerStatistics["Items Collected"] = 0;
     }
     #endregion
 
@@ -248,6 +259,7 @@ public class GameManager : MonoBehaviour
         FindImportantReferences();
         SetNewGameValues();
         PlayerUI.UpdateUI();
+        ResetPlayerStatistics();
         DebtUI.UpdateStatistics(playerStatistics);
 
         GamePaused = true;
@@ -424,6 +436,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"GameManager: AddCreditsToPlayer: Adding {amount} to PlayerCredits. Current value is {PlayerCredits}");
         PlayerUI.UpdateUI();
         playerStatistics["Credits Earned"] += amount;
+        UpdateNetProfit();
         DebtUI.UpdateStatistics(playerStatistics);
     }
 
@@ -433,6 +446,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"GameManager: TakeCreditsToPlayer: Taking {amount} from PlayerCredits. Current value is {PlayerCredits}");
         PlayerUI.UpdateUI();
         playerStatistics["Credits Spent"] += amount;
+        UpdateNetProfit();
         DebtUI.UpdateStatistics(playerStatistics);
     }
 
