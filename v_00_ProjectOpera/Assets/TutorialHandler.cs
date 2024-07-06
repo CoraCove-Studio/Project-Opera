@@ -7,10 +7,15 @@ public class TutorialHandler : MonoBehaviour
     private GameManager gameManager;
     private float checkInterval = 0.2f;
 
+    private int cropsPlacedInMachine;
+    private int partsPlacedInMachine;
+    private int nitrogenPlacedInMachine;
+
     [SerializeField] private List<Collider> doorColliders; // index 0 is the main door
     [SerializeField] private List<GameObject> machineSlots;
 
-    [SerializeField] private Dictionary<string, bool> conditions = new()
+    [SerializeField]
+    private Dictionary<string, bool> conditions = new()
 {
     { "PlacedPartsMachine",             false },
     { "PlacedNitrogenMachine",          false },
@@ -56,43 +61,140 @@ public class TutorialHandler : MonoBehaviour
 
     public void StartTutorialCoroutine()
     {
-        Debug.Log("Trying to start tutorial coroutine.");
         StartCoroutine(TutorialCoroutine());
     }
 
     private IEnumerator TutorialCoroutine()
     {
-        Debug.Log("Tutorial coroutine started.");
         while (gameManager.InTutorial)
         {
-            Debug.Log("Tutorial started.");
             SetUpTutorial();
 
-            // Set floating blue indicator
+            #region Placing Printer Machine
             gameManager.PlayerUI.SendConditionalNotification("Place a printer!");
-
             while (conditions["PlacedPartsMachine"] == false)
             {
                 yield return new WaitForSeconds(checkInterval);
             }
-
             Debug.Log("Tutorialhandler: Main Routine: Parts machine was placed.");
             gameManager.PlayerUI.CloseConditionalNotification();
+            #endregion
 
+            #region Placing Nitrogen Machine
             machineSlots[1].SetActive(true);
 
-            gameManager.PlayerUI.SendConditionalNotification("Place a cryopod!");
 
+            gameManager.PlayerUI.SendConditionalNotification("Place a nitrogen machine!");
             while (conditions["PlacedNitrogenMachine"] == false)
             {
                 yield return new WaitForSeconds(checkInterval);
             }
-
             Debug.Log("Tutorialhandler: Main Routine: Nitrogen machine was placed.");
             gameManager.PlayerUI.CloseConditionalNotification();
+            #endregion
+
+            #region Placing Crop Machine
+            machineSlots[2].SetActive(true);
+
+            gameManager.PlayerUI.SendConditionalNotification("Place a crop machine!");
+            while (conditions["PlacedCropsMachine"] == false)
+            {
+                yield return new WaitForSeconds(checkInterval);
+            }
+            Debug.Log("Tutorialhandler: Main Routine: Crops machine was placed.");
+            gameManager.PlayerUI.CloseConditionalNotification();
+            #endregion
+
+            #region Loading 5 Crops
+            gameManager.PlayerUI.SendConditionalNotification("Place 5 crops into the parts machine!");
+            while (conditions["FiveCropsInPartsMachine"] == false)
+            {
+                yield return new WaitForSeconds(checkInterval);
+            }
+            Debug.Log("Tutorialhandler: Main Routine: Five crops put in parts machine.");
+            gameManager.PlayerUI.CloseConditionalNotification();
+            #endregion
+
+            #region Loading 5 Parts
+            gameManager.PlayerUI.SendConditionalNotification("Place 5 parts into the nitrogen machine!");
+            while (conditions["FivePartsInNitrogenMachine"] == false)
+            {
+                yield return new WaitForSeconds(checkInterval);
+            }
+            Debug.Log("Tutorialhandler: Main Routine: Five parts put in nitrogen machine.");
+            gameManager.PlayerUI.CloseConditionalNotification();
+            #endregion
+
+            #region Loading 5 Nitrogen
+            gameManager.PlayerUI.SendConditionalNotification("Place 5 nitrogen into the crop machine!");
+            while (conditions["FiveNitrogenInCropMachine"] == false)
+            {
+                yield return new WaitForSeconds(checkInterval);
+            }
+            Debug.Log("Tutorialhandler: Main Routine: Five nitrogen put in crop machine.");
+            gameManager.PlayerUI.CloseConditionalNotification();
+            #endregion
+
+            #region Repairing Machine
+            // IMPORTANT: break a machine!
+            gameManager.PlayerUI.SendTimedNotification("A machine broke!");
+            gameManager.PlayerUI.SendConditionalNotification("Repair the machine!");
+            while (conditions["RepairedMachine"] == false)
+            {
+                yield return new WaitForSeconds(checkInterval);
+            }
+            Debug.Log("Tutorialhandler: Main Routine: Repaired machine.");
+            gameManager.PlayerUI.CloseConditionalNotification();
+            #endregion
+
+            #region Upgrading Machine
+            gameManager.PlayerUI.SendConditionalNotification("Upgrade a machine!");
+            while (conditions["UpgradedMachine"] == false)
+            {
+                yield return new WaitForSeconds(checkInterval);
+            }
+            Debug.Log("Tutorialhandler: Main Routine: Upgraded machine.");
+            gameManager.PlayerUI.CloseConditionalNotification();
+            #endregion
+
+            #region Waiting For a Minute
+            gameManager.PlayerUI.SendConditionalNotification("Work for a minute!");
+            while (conditions["1MinutePassed"] == false)
+            {
+                // Ideally, start a visible game clock
+                yield return new WaitForSeconds(60);
+                OneMinutePassed();
+            }
+            Debug.Log("Tutorialhandler: Main Routine: One minute passed.");
+            gameManager.PlayerUI.CloseConditionalNotification();
+            #endregion
+
+
+            #region A Planet Arrives
+
+            yield return new WaitForSeconds(5);
+            FiveSecondsPassed();
+            gameManager.PlayerUI.SendTimedNotification("We're approaching a planet!");
+            gameManager.PlayerUI.SendTimedNotification("Go upstairs to trade!");
+            UnlockMainDoor();
+            // Activate indications to go upstairs
+            // Disable debt interface
+            // Place a planet in view of the cockpit
+            // Turn trade interface into boosted mode
+            yield return new WaitForSeconds(5);
+            #endregion
+
+
+            UnlockMainDoor();
 
             gameManager.StartGameFromTutorial(); // Sets InTutorial to false
         }
+    }
+
+
+    private void UnlockMainDoor()
+    {
+        doorColliders[0].enabled = true;
     }
 
     private void ToggleAllDoors(bool unlocked)
@@ -100,6 +202,27 @@ public class TutorialHandler : MonoBehaviour
         foreach (Collider doorCollider in doorColliders)
         {
             doorCollider.enabled = unlocked;
+        }
+    }
+
+    public void PlacedResourceInMachine(ResourceTypes resourceType)
+    {
+        switch (resourceType)
+        {
+            case ResourceTypes.CROP:
+                cropsPlacedInMachine++;
+                if (cropsPlacedInMachine == 5) FiveCropsInPartsMachine();
+                break;
+            case ResourceTypes.PART:
+                partsPlacedInMachine++;
+                if (partsPlacedInMachine == 5) FivePartsInNitrogenMachine();
+                break;
+            case ResourceTypes.NITROGEN:
+                nitrogenPlacedInMachine++;
+                if (nitrogenPlacedInMachine == 5) FiveNitrogenInCropsMachine();
+                break;
+            default:
+                break;
         }
     }
 
