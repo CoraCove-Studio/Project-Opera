@@ -46,9 +46,12 @@ public class TradeInterface : MonoBehaviour
     {
         if (other.gameObject.CompareTag(TagManager.TRADING_HUB))
         {
-            valueOfCrop = baseCropValue * other.GetComponent<PlanetTradingHub>().cropPriceBoost;
-            valueOfPart = basePartValue * other.GetComponent<PlanetTradingHub>().partPriceBoost;
-            valueOfNitrogen = baseNitrogenValue * other.GetComponent <PlanetTradingHub>().nitrogenPriceBoost;
+            GameManager.Instance.PlayerUI.ActivateTicker();
+            GameManager.Instance.PlayerUI.SendTimedNotification("Trade now!");
+            var tradingHub = other.GetComponent<PlanetTradingHub>();
+            valueOfCrop = baseCropValue * tradingHub.cropPriceBoost;
+            valueOfPart = basePartValue * tradingHub.partPriceBoost;
+            valueOfNitrogen = baseNitrogenValue * tradingHub.nitrogenPriceBoost;
             UpdatePriceLabels();
             if(round == 2)
             {
@@ -59,11 +62,13 @@ public class TradeInterface : MonoBehaviour
         else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_ACTIVATOR))
         {
             Debug.Log("TradeInterface: OnTriggerEnter: Warp Speed Activated");
+            GameManager.Instance.PlayerUI.SendTimedNotification("Entering warp speed!");
             //activate particle effects here
         }
         else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_DEACTIVATOR))
         {
             Debug.Log("TradeInterface: OnTriggerEnter: Warp Speed Deactivated");
+            GameManager.Instance.PlayerUI.SendTimedNotification("Exiting warp speed.");
             //deactivate particle effects here
         }
     }
@@ -77,6 +82,12 @@ public class TradeInterface : MonoBehaviour
             round++;
             UpdatePriceLabels();
             if (round <= 2) { SetActivePlanet(round); }
+            GameManager.Instance.PlayerUI.ActivateTicker();
+            GameManager.Instance.PlayerUI.SendTimedNotification("Get back to work!");
+        }
+        else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_DEACTIVATOR))
+        {
+            GameManager.Instance.PlayerUI.SendTimedNotification("Planet incoming!");
         }
     }
 

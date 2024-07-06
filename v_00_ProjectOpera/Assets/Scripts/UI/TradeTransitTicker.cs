@@ -10,18 +10,18 @@ public class TradeTransitTicker : MonoBehaviour
 
     private bool inTransit = true;
     private Quaternion rotationIncrement = Quaternion.Euler(-90, 0, 0);
-    private Quaternion currentRotation;
     private float rotationTime = 0.5f;
     private bool isRotating = false;
 
 
-    private void Update()
+    public void ActivateTicker()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isRotating)
+        if (isRotating == false)
         {
             StartCoroutine(RotateTickerForward());
         }
     }
+
 
     private IEnumerator RotateTickerForward()
     {

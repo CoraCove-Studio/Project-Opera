@@ -27,12 +27,30 @@ public class PlayerUIHandler : MonoBehaviour
     public GameObject currentPanel;
     private MachineSlot currentMachineSlot;
 
+    [SerializeField] private TradeTransitTicker transitTicker;
+    [SerializeField] private NotificationTab notificationTab;
+
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Confined;
     }
 
     private bool firstButtonSelected = false;
+
+    public void ActivateTicker()
+    {
+        transitTicker.ActivateTicker();
+    }
+
+    public void SendTimedNotification(string message)
+    {
+        notificationTab.ShowTimedNotification(message);
+    }
+
+    public void SendConditionalNotification(string message)
+    {
+        notificationTab.ShowConditionalNotification(message);
+    }
 
     public void PauseGame()
     {
