@@ -5,20 +5,25 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public abstract class MachineBehavior : MonoBehaviour
 {
-    [SerializeField] protected int inputInventory;
-    [SerializeField] protected int machineEfficiency = 4;
-    [SerializeField] protected int outputInterval = 8;
-    [SerializeField] protected int outputIntervalLevel = 1;
-    [SerializeField] protected int machineEfficiencyLevel = 1;
-    [SerializeField] protected int maximumInventory = 20;
-    [SerializeField] protected int machineDurability = 100;
-    [SerializeField] protected int maximumMachineDurability = 100;
-    [SerializeField] protected int upgradeCost = 35;
+    [Header("Parameters")]
+    [SerializeField] private int inputInventory;
+    [SerializeField] private int machineEfficiency = 4;
+    [SerializeField] private int outputInterval = 8;
+    [SerializeField] private int machineEfficiencyLevel = 1;
+    [SerializeField] private int maximumInventory = 20;
+    [SerializeField] private int machineDurability = 100;
+    [SerializeField] private int maximumMachineDurability = 100;
+    [SerializeField] private int upgradeCost = 35;
+    [SerializeField] private bool isBroken = false;
+    [SerializeField] private bool isEmpty = true;
 
-    [SerializeField] protected ObjectPooler objPooler;
+    [SerializeField] private ObjectPooler objPooler;
     [SerializeField] private Transform outputPos;
-    [SerializeField] protected MachineUI machineUI;
+    [SerializeField] private MachineUI machineUI;
+    [SerializeField] private GameObject brokenEffect;
+    [SerializeField] private Animator animatorController;
 
+    private List<string> animatorParameters;
 
     private readonly Dictionary<ResourceTypes, ResourceTypes> resourceTypeRelationships = new()
     {
@@ -31,41 +36,56 @@ public abstract class MachineBehavior : MonoBehaviour
     private Coroutine productionCoroutine;
 
     [Header("Audio")]
-    [SerializeField] protected AudioSource audioSource;
-    [SerializeField] protected List<AudioClip> machineProductionLoops;
-    [SerializeField] private AudioClip productInstantiationNoise;
+    [SerializeField] private AudioSource loopAudioSource;
+    [SerializeField] private AudioSource sfxAudioSource;
 
-    protected virtual void OnEnable()
+    [SerializeField] private AudioClip machineProductionLoop;
+    [SerializeField] private AudioClip brokenLoop;
+    [SerializeField] private AudioClip machineInstantiationNoise;
+    [SerializeField] private AudioClip glitchTransitionNoise;
+    [SerializeField] private AudioClip productInstantiationNoise;
+    [SerializeField] private AudioClip repairNoise;
+
+    [SerializeField] private List<AudioClip> upgradeNoises;
+
+    private void OnEnable()
     {
         objPooler = GameObject.Find("ObjectPooler").GetComponent<ObjectPooler>();
-        machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
-        machineUI.SetSliderMaxValue(outputInterval);
-        audioSource = GetComponent<AudioSource>();
-        GetProductionAudioClip();
-        audioSource.loop = true;
+        if (animatorController != null) animatorParameters = GetAllAnimatorParameters(animatorController);
+        SetUpMachineUI();
+        SetUpAudio();
+
         productionCoroutine = StartCoroutine(Production());
     }
 
-    protected virtual void OnDisable()
+    private void OnDisable()
     {
         if (productionCoroutine != null)
         {
             StopCoroutine(productionCoroutine);
         }
     }
-    protected virtual IEnumerator Production()
+
+    #region Core Methods
+    private IEnumerator Production()
     {
         GameObject product;
 
         while (true)
         {
-            if (inputInventory > 0 & machineDurability > 0)
+            if (isEmpty == false & isBroken == false)
             {
-                audioSource.Play();
+                loopAudioSource.Play();
+                if (animatorController != null)
+                {
+                    animatorController.SetBool(animatorParameters[1], true);
+                    SetNewAnimationSpeed(outputInterval);
+                }
                 // Don't reorder StartBarAnimation, inventory decrementation and WaitForSeconds()
                 machineUI.StartBarAnimation(outputInterval);
                 inputInventory--;
                 machineDurability -= 10;
+                machineUI.UpdateDurabilityBar(machineDurability);
                 yield return new WaitForSeconds(outputInterval);
                 for (int i = 0; i < machineEfficiency; i++)
                 {
@@ -73,33 +93,31 @@ public abstract class MachineBehavior : MonoBehaviour
                     product = objPooler.ReturnProduct(MachineType);
                     ConfigureProduct(product);
                 }
-                machineUI.UpdateDurabilityBar(machineDurability);
+                CheckIfEmpty();
+                CheckIfBroken();
+                if (animatorController != null && isEmpty || isBroken) animatorController.SetBool(animatorParameters[1], false);
             }
-            else
+            else // must be empty or broken
             {
-                audioSource.Stop();
                 yield return new WaitForSeconds(0.2f);
             }
         }
     }
 
-
-    protected void ConfigureProduct(GameObject product)
-    {
-        product.transform.position = outputPos.position;
-        product.SetActive(true);
-        audioSource.PlayOneShot(productInstantiationNoise);
-    }
-
     public void AddInput()
     {
-        if (GameManager.Instance.CheckPlayerResourceValue(1, resourceTypeRelationships[MachineType]) && inputInventory < maximumInventory && machineDurability > 0)
+        if (GameManager.Instance.CheckPlayerResourceValue(1, resourceTypeRelationships[MachineType]) && inputInventory < maximumInventory)
         {
             GameManager.Instance.TakeResourceFromPlayer(1, resourceTypeRelationships[MachineType]);
             if (inputInventory == 0) machineUI.StartBarAnimation(outputInterval); // Touch this with care
             inputInventory += 1;
             inputInventory = Mathf.Clamp(inputInventory, 0, maximumInventory);
             machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+            if (isEmpty)
+            {
+                isEmpty = false;
+                // turn off empty display
+            }
         }
         else
         {
@@ -107,7 +125,120 @@ public abstract class MachineBehavior : MonoBehaviour
         }
 
     }
+    private void RepairMachine()
+    {
+        if (machineDurability < maximumMachineDurability)
+        {
+            machineDurability = maximumMachineDurability;
+            machineUI.UpdateDurabilityBar(machineDurability);
+            sfxAudioSource.PlayOneShot(repairNoise);
+        }
+        if (isBroken)
+        {
+            loopAudioSource.Stop();
+            brokenEffect.SetActive(true);
+            loopAudioSource.clip = machineProductionLoop;
+            brokenEffect.SetActive(false);
+            isBroken = false;
+        }
+    }
 
+    private void UpgradeMachineEfficiency(int change)
+    {
+        if (machineEfficiencyLevel < 6 && GameManager.Instance.PlayerCredits >= upgradeCost)
+        {
+            sfxAudioSource.PlayOneShot(upgradeNoises[machineEfficiencyLevel - 1]);
+            machineEfficiency += change;
+            outputInterval -= change;
+            machineEfficiencyLevel++;
+            machineUI.SetSliderMaxValue(outputInterval);
+            machineUI.UpdateEfficiencyLevelText(machineEfficiencyLevel);
+            GameManager.Instance.TakeCreditsFromPlayer(upgradeCost);
+            Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
+        }
+        else
+        {
+            GameManager.Instance.audioManager.PlayErrorNoise();
+        }
+    }
+
+    #endregion
+
+    #region Utility Methods
+    private void SetUpAudio()
+    {
+        if (loopAudioSource != null)
+        {
+            loopAudioSource = GetComponent<AudioSource>();
+            loopAudioSource.clip = machineProductionLoop;
+            loopAudioSource.loop = true;
+
+        }
+        else
+        {
+            Debug.Log($"{gameObject.name}: MachineBehavior: loopAudioSource not found!");
+        }
+
+        if (sfxAudioSource != null)
+        {
+            sfxAudioSource.PlayOneShot(machineInstantiationNoise);
+
+        }
+        else
+        {
+            Debug.Log($"{gameObject.name}: MachineBehavior: sfxAudioSource not found!");
+        }
+    }
+
+    private void SetUpMachineUI()
+    {
+        machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+        machineUI.SetSliderMaxValue(outputInterval);
+    }
+    private List<string> GetAllAnimatorParameters(Animator animator)
+    {
+        List<string> resultingList = new();
+        var numParams = animator.parameterCount;
+        for (int i = 0; i < numParams; i++)
+        {
+            resultingList.Add(animator.GetParameter(i).name);
+        }
+        return resultingList;
+    }
+    private void CheckIfEmpty()
+    {
+        if (inputInventory == 0)
+        {
+            isEmpty = true;
+            loopAudioSource.Stop();
+        }
+    }
+
+    private void CheckIfBroken()
+    {
+        if (machineDurability <= 0)
+        {
+            isBroken = true;
+            sfxAudioSource.PlayOneShot(glitchTransitionNoise);
+            brokenEffect.SetActive(true);
+            SwitchToBrokenNoiseLoop();
+        }
+    }
+
+    private void SwitchToBrokenNoiseLoop()
+    {
+        loopAudioSource.Stop();
+        loopAudioSource.clip = brokenLoop;
+        loopAudioSource.Play();
+    }
+
+
+    private void ConfigureProduct(GameObject product)
+    {
+        product.transform.position = outputPos.position;
+        product.SetActive(true);
+        sfxAudioSource.PlayOneShot(productInstantiationNoise);
+    }
     public void DisplayInput()
     {
         GameManager.Instance.DisplayTooltip(resourceTypeRelationships[MachineType], -1);
@@ -118,14 +249,40 @@ public abstract class MachineBehavior : MonoBehaviour
         GameManager.Instance.DisplayTooltip(-upgradeCost);
     }
 
-    private void GetProductionAudioClip()
+    protected void OnClickUpgradeMachineEfficiencyButton(int change)
     {
-        audioSource.clip = machineProductionLoops[Random.Range(0, machineProductionLoops.Count)];
+        UpgradeMachineEfficiency(change);
     }
 
-    //repairs the machines for credits
-    public abstract void RepairMachine();
+    protected void OnClickRepairMachine()
+    {
+        RepairMachine();
+    }
 
-    //upgrades how many products are produced with one input
-    public abstract void UpgradeMachineEfficiency(int change);
+    private void SetNewAnimationSpeed(int outputInterval)
+    {
+        switch (outputInterval)
+        {
+            case 7:
+                animatorController.SetFloat(animatorParameters[0], 1.143f);
+                break;
+            case 6:
+                animatorController.SetFloat(animatorParameters[0], 1.333f);
+                break;
+            case 5:
+                animatorController.SetFloat(animatorParameters[0], 1.6f);
+                break;
+            case 4:
+                animatorController.SetFloat(animatorParameters[0], 2f);
+                break;
+            case 3:
+                animatorController.SetFloat(animatorParameters[0], 2.666f);
+                break;
+            default:
+                animatorController.SetFloat(animatorParameters[0], 1f);
+                break;
+        }
+    }
+
+    #endregion
 }
