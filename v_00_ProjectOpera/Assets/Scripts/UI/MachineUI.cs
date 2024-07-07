@@ -10,6 +10,8 @@ public class MachineUI : MonoBehaviour
     [Header("References")]
     [SerializeField] private TextMeshProUGUI efficiencyLevelNumberLabel;
     [SerializeField] private TextMeshProUGUI inventoryNumberLabel;
+    [SerializeField] private TextMeshProUGUI errorMessageLabel;
+    [SerializeField] private TextMeshProUGUI updateButtonCostLabel;
     [SerializeField] Slider progressBarSlider;
     [SerializeField] Slider durabilityBarSlider;
 
@@ -35,6 +37,35 @@ public class MachineUI : MonoBehaviour
     {
         string newLabel = $"{currentInventory}/{maximumInventory}";
         inventoryNumberLabel.text = newLabel;
+    }
+
+    public void UpdateButtonCostLabel(int cost)
+    {
+        updateButtonCostLabel.text = $"{cost} CREDITS";
+    }
+    
+    public void UpdateErrorMessage(string error)
+    {
+        switch (error)
+        {
+            case "CLEAR":
+                errorMessageLabel.text = "";
+                errorMessageLabel.color = Color.white;
+                break;
+            case "BROKEN":
+                errorMessageLabel.text = "BROKEN";
+                errorMessageLabel.color = Color.red;
+                Debug.Log("MachineUI: UpdateErrorMessage: error message set to broken.");
+                break;
+            case "EMPTY":
+                errorMessageLabel.text = "EMPTY";
+                errorMessageLabel.color = Color.yellow;
+                break;
+            default:
+                errorMessageLabel.text = "";
+                Debug.Log("MachineUI: UpdateErrorMessage: Machine failed to update error message");
+                break;
+        }
     }
 
     public void UpdateDurabilityBar(int durability)

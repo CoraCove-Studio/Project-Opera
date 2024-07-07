@@ -10,7 +10,7 @@ public abstract class MachineBehavior : MonoBehaviour
     [SerializeField] private int machineEfficiency = 4;
     [SerializeField] private int outputInterval = 8;
     [SerializeField] private int machineEfficiencyLevel = 1;
-    [SerializeField] private int maximumInventory = 20;
+    [SerializeField] private int maximumInventory = 10;
     [SerializeField] private int machineDurability = 100;
     [SerializeField] private int maximumMachineDurability = 100;
     [SerializeField] private int upgradeCost = 35;
@@ -55,6 +55,7 @@ public abstract class MachineBehavior : MonoBehaviour
         SetUpMachineUI();
         SetUpAudio();
 
+        HandleErrorMessagePriority();
         productionCoroutine = StartCoroutine(Production());
     }
 
@@ -120,7 +121,7 @@ public abstract class MachineBehavior : MonoBehaviour
             if (isEmpty)
             {
                 isEmpty = false;
-                // turn off empty display
+                HandleErrorMessagePriority();
             }
         }
         else
@@ -146,6 +147,7 @@ public abstract class MachineBehavior : MonoBehaviour
             loopAudioSource.clip = machineProductionLoop;
             brokenEffect.SetActive(false);
             isBroken = false;
+            HandleErrorMessagePriority();
             if (GameManager.Instance.InTutorial) GameManager.Instance.TutorialHandler.RepairedMachine();
         }
     }
@@ -157,10 +159,14 @@ public abstract class MachineBehavior : MonoBehaviour
             sfxAudioSource.PlayOneShot(upgradeNoises[machineEfficiencyLevel - 1]);
             machineEfficiency += change;
             outputInterval -= change;
+            maximumInventory += (change * 2);
             machineEfficiencyLevel++;
             machineUI.SetSliderMaxValue(outputInterval);
             machineUI.UpdateEfficiencyLevelText(machineEfficiencyLevel);
+            machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
             GameManager.Instance.TakeCreditsFromPlayer(upgradeCost);
+            upgradeCost += 15;
+            machineUI.UpdateButtonCostLabel(upgradeCost);
             Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
             if (GameManager.Instance.InTutorial) GameManager.Instance.TutorialHandler.UpgradedMachine();
         }
@@ -218,8 +224,9 @@ public abstract class MachineBehavior : MonoBehaviour
         if (inputInventory == 0)
         {
             isEmpty = true;
-            //Debug.Log("Machine empty!");
+            //Debug.Log("Machine empty!");      
             loopAudioSource.Stop();
+            HandleErrorMessagePriority();
         }
     }
 
@@ -239,7 +246,24 @@ public abstract class MachineBehavior : MonoBehaviour
             sfxAudioSource.PlayOneShot(glitchTransitionNoise);
             brokenEffect.SetActive(true);
             SwitchToBrokenNoiseLoop();
+            HandleErrorMessagePriority();
             GameManager.Instance.UpdateMachinesBroken();
+        }
+    }
+
+    private void HandleErrorMessagePriority()
+    {
+        if(isBroken && isEmpty || isBroken)
+        {
+            machineUI.UpdateErrorMessage("BROKEN");                        
+        }
+        else if (!isBroken && isEmpty)
+        {
+            machineUI.UpdateErrorMessage("EMPTY");                        
+        }
+        else
+        {
+            machineUI.UpdateErrorMessage("CLEAR");                        
         }
     }
 
@@ -267,12 +291,12 @@ public abstract class MachineBehavior : MonoBehaviour
         GameManager.Instance.DisplayTooltip(-upgradeCost);
     }
 
-    protected void OnClickUpgradeMachineEfficiencyButton(int change)
+    public void OnClickUpgradeMachineEfficiencyButton(int change)
     {
         UpgradeMachineEfficiency(change);
     }
 
-    protected void OnClickRepairMachine()
+    public void OnClickRepairMachine()
     {
         RepairMachine();
     }
