@@ -1,4 +1,4 @@
-﻿Shader "02_Selection/Fullscreen"
+﻿Shader "Selection/Fullscreen"
 {
     properties
     {

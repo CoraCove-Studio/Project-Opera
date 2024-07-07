@@ -1,4 +1,4 @@
-﻿Shader "02_Selection/Objects"
+﻿Shader "Selection/Objects"
 {
     Properties
     {

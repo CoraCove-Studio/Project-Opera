@@ -12,6 +12,7 @@ TagManager:
   - WarpSpeedActivator
   - WarpSpeedDeactivator
   - Door
+  - CustomPassVolume
   layers:
   - Default
   - TransparentFX
