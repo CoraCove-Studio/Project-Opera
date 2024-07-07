@@ -284,8 +284,6 @@ public class GameManager : MonoBehaviour
 
         FindImportantReferences();
         GamePaused = true;
-
-        gameTimer.SetNewTimer(gameDurationInSeconds);
         PlayerUI.ToggleReticleVisibility(false);
         Time.timeScale = 1;
     }
@@ -293,9 +291,11 @@ public class GameManager : MonoBehaviour
     private void SetUpPlayerValuesAndUI(bool inTutorial)
     {
         SetNewGameValues(inTutorial);
+        gameTimer.SetNewTimer(gameDurationInSeconds);
         PlayerUI.UpdateUI();
         ResetPlayerStatistics();
         DebtUI.UpdateStatistics(playerStatistics);
+
     }
     private void SetNewGameValues(bool inTutorial)
     {
@@ -304,9 +304,6 @@ public class GameManager : MonoBehaviour
             playerCrops = 1;
             playerParts = 0;
             playerNitrogen = 0;
-            playerCredits = newGameValues["Credits"];
-            gameDurationInSeconds = newGameValues["GameDuration"];
-            playerDebt = newGameValues["PlayerDebt"];
             Debug.Log("GameManager: SetNewGameValues: Set new game values for normal game.");
         }
         else
@@ -314,11 +311,11 @@ public class GameManager : MonoBehaviour
             playerCrops = newGameValues["Crops"];
             playerParts = newGameValues["Parts"];
             playerNitrogen = newGameValues["Nitrogen"];
-            playerCredits = newGameValues["Credits"];
-            gameDurationInSeconds = newGameValues["GameDuration"];
-            playerDebt = newGameValues["PlayerDebt"];
             Debug.Log("GameManager: SetNewGameValues: Set new game values for normal game.");
         }
+        playerCredits = newGameValues["Credits"];
+        gameDurationInSeconds = newGameValues["GameDuration"];
+        playerDebt = newGameValues["PlayerDebt"];
     }
 
     public void DisplayTooltip(int value)
@@ -408,7 +405,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("GameManager: ToggleGamePause: Can't toggle.");
+            Debug.Log("GameManager: ToggleGamePause: Can't toggle. (This is correct if not in MainScene)");
         }
     }
 
