@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.02190223, g: 0.022422817, b: 0.021151997, a: 1}
+  m_IndirectSpecularColor: {r: 0.021901442, g: 0.022422152, b: 0.021150567, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1359,6 +1359,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 918605488799995664, guid: 344acf3683f596f4ba4d3932366d8250,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickMakePayment
+      objectReference: {fileID: 0}
     - target: {fileID: 1036883057296091879, guid: 344acf3683f596f4ba4d3932366d8250,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1418,6 +1423,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1944742781306489126, guid: 344acf3683f596f4ba4d3932366d8250,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickPayAllDebt
       objectReference: {fileID: 0}
     - target: {fileID: 2331511566587403552, guid: 344acf3683f596f4ba4d3932366d8250,
         type: 3}

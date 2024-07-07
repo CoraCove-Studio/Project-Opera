@@ -3077,7 +3077,7 @@ PrefabInstance:
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: OnClickPayAllDebt
       objectReference: {fileID: 0}
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
@@ -3300,7 +3300,7 @@ PrefabInstance:
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
       propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: OnClickMakePayment
       objectReference: {fileID: 0}
     - target: {fileID: 3948570906217562847, guid: c7e78ab6ccc2b8e46a1355dc036ded08,
         type: 3}
