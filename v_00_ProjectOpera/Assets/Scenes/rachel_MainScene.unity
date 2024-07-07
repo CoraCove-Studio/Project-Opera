@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.021901442, g: 0.022422092, b: 0.021150567, a: 1}
+  m_IndirectSpecularColor: {r: 0.021901427, g: 0.02242233, b: 0.021150567, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9191,6 +9191,176 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: customPasses.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: customPasses.Array.data[2]
+      value: 282831936682983424
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424]
+      value: Unity.RenderPipelines.HighDefinition.Runtime UnityEngine.Rendering.HighDefinition.ObjectIDCustomPass
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].m_Name
+      value: Custom Pass
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].m_Version
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].clearFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].depthWrite
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].shaderPass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].passFoldout
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].overrideMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].filterFoldout
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].overrideShader
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].overrideStencil
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].renderQueueType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].rendererFoldout
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].sortingCriteria
+      value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].stencilReadMask
+      value: 192
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].layerMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].overrideMaterial
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].stencilWriteMask
+      value: 192
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].targetColorBuffer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].targetDepthBuffer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].overrideDepthState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].depthCompareFunction
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].stencilFailOperation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].stencilPassOperation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].stencilReferenceValue
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].overrideShaderPassName
+      value: Forward
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].stencilCompareFunction
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].overrideShaderPassIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].overrideMaterialPassName
+      value: ForwardOnly
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].overrideMaterialPassIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[282831936682983424].stencilDepthFailOperation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5760003062222315077, guid: 0d05f7d188e212a40a703869cc1f3aee,
         type: 3}
       propertyPath: m_Name
