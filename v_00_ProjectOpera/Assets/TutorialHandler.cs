@@ -55,6 +55,7 @@ public class TutorialHandler : MonoBehaviour
             Debug.Log("TutorialHandler: SetUpTutorial: MachineSlots turned off.");
         }
 
+        gameManager.PlanetRotation.StartTutorialRotationCoroutine();
         // place arrow indicator over the one left?
 
     }
@@ -106,7 +107,7 @@ public class TutorialHandler : MonoBehaviour
             #endregion
 
             #region Loading 5 Crops
-            gameManager.PlayerUI.SendConditionalNotification("Place 5 crops into the parts machine!");
+            gameManager.PlayerUI.SendConditionalNotification("Place 5 crops into the printer!");
             while (conditions["FiveCropsInPartsMachine"] == false)
             {
                 yield return new WaitForSeconds(checkInterval);
@@ -116,7 +117,7 @@ public class TutorialHandler : MonoBehaviour
             #endregion
 
             #region Loading 5 Parts
-            gameManager.PlayerUI.SendConditionalNotification("Place 5 parts into the nitrogen machine!");
+            gameManager.PlayerUI.SendConditionalNotification("Place 5 parts into the cryopod!");
             while (conditions["FivePartsInNitrogenMachine"] == false)
             {
                 yield return new WaitForSeconds(checkInterval);
@@ -126,19 +127,23 @@ public class TutorialHandler : MonoBehaviour
             #endregion
 
             #region Loading 5 Nitrogen
-            gameManager.PlayerUI.SendConditionalNotification("Place 5 nitrogen into the crop machine!");
-            while (conditions["FiveNitrogenInCropMachine"] == false)
+            gameManager.PlayerUI.SendConditionalNotification("Place 5 nitrogen into the greenhouse!");
+            while (conditions["FiveNitrogenInCropsMachine"] == false)
             {
                 yield return new WaitForSeconds(checkInterval);
             }
             Debug.Log("Tutorialhandler: Main Routine: Five nitrogen put in crop machine.");
             gameManager.PlayerUI.CloseConditionalNotification();
+
             #endregion
 
             #region Repairing Machine
-            // IMPORTANT: break a machine!
+            machineSlots[0].GetComponent<MachineSlot>().SpawnedMachine.TryGetComponent(out MachineBehavior machine);
+            machine.BreakMachine();
+
             gameManager.PlayerUI.SendTimedNotification("A machine broke!");
             gameManager.PlayerUI.SendConditionalNotification("Repair the machine!");
+
             while (conditions["RepairedMachine"] == false)
             {
                 yield return new WaitForSeconds(checkInterval);
@@ -169,26 +174,54 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
-
             #region A Planet Arrives
-
             yield return new WaitForSeconds(5);
             FiveSecondsPassed();
             gameManager.PlayerUI.SendTimedNotification("We're approaching a planet!");
             gameManager.PlayerUI.SendTimedNotification("Go upstairs to trade!");
             UnlockMainDoor();
             // Activate indications to go upstairs
-            // Disable debt interface
-            // Place a planet in view of the cockpit
-            // Turn trade interface into boosted mode
+            gameManager.DebtUI.DeactivateDebtUI();
             yield return new WaitForSeconds(5);
             #endregion
 
+            #region Make 600 Credits
+            gameManager.PlayerUI.SendConditionalNotification("Make 600 credits!");
+            while (conditions["Made600Credits"] == false)
+            {
+                if (GameManager.Instance.PlayerCredits >= 600) Made600Credits();
+                yield return new WaitForSeconds(checkInterval);
+            }
+            Debug.Log("Tutorialhandler: Main Routine: Made 600 credits.");
+            gameManager.PlayerUI.CloseConditionalNotification();
+            #endregion
 
-            UnlockMainDoor();
+            #region Make Debt Payment
+            gameManager.DebtUI.ActivateDebtUI();
+            gameManager.PlayerUI.SendConditionalNotification("Make a debt payment!");
+            while (conditions["MadeDebtPayment"] == false)
+            {
+                yield return new WaitForSeconds(checkInterval);
+            }
+            Debug.Log("Tutorialhandler: Main Routine: Made debt payment.");
+            gameManager.PlayerUI.CloseConditionalNotification();
+            #endregion
 
+            gameManager.PlayerUI.SendTimedNotification("Thank you for your payment.");
+
+            yield return new WaitForSeconds(5);
+
+            gameManager.PlayerUI.SendTimedNotification("Now get back to work!");
+
+            UnSetUpTutorial();
             gameManager.StartGameFromTutorial(); // Sets InTutorial to false
         }
+    }
+
+    private void UnSetUpTutorial()
+    {
+        machineSlots[3].SetActive(true);
+        gameManager.PlanetRotation.StartReturnToStartingRotationCoroutine();
     }
 
 

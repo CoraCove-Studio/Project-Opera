@@ -17,8 +17,9 @@ public class GameManager : MonoBehaviour
     private Rigidbody playerRigidBody;
     public AudioManager audioManager;
     private GameTimer gameTimer;
-    private PlanetRotation planetRotation;
+    public PlanetRotation PlanetRotation { get; private set; }
     public TutorialHandler TutorialHandler { get; private set; }
+    public DebtInterface DebtUI { get; private set; }
     private float gameDurationInSeconds;
 
     public bool GamePaused { get; private set; } = true;
@@ -91,7 +92,7 @@ public class GameManager : MonoBehaviour
 
     #region Statistics And Debt
 
-    public DebtInterface DebtUI { get; private set; }
+
 
     private Dictionary<string, int> playerStatistics = new()
     {
@@ -253,7 +254,7 @@ public class GameManager : MonoBehaviour
         if (GamePaused) ToggleGamePause();
         gameTimer.StartTimer();
         playerRigidBody.isKinematic = false;
-        planetRotation.StartRotationCoroutine();
+        PlanetRotation.StartRotationCoroutine();
         Debug.Log("GameManager: StartGame: Game started in normal mode.");
     }
 
@@ -273,7 +274,7 @@ public class GameManager : MonoBehaviour
         InTutorial = false;
 
         gameTimer.StartTimer();
-        planetRotation.StartRotationCoroutine();
+        PlanetRotation.StartRotationCoroutine();
         Debug.Log("GameManager: StartGameFromTutorial: Starting a game from the tutorial.");
     }
     private void SetUpNewGame()
@@ -337,7 +338,8 @@ public class GameManager : MonoBehaviour
         TutorialHandler = GameObject.Find("TutorialHandler").GetComponent<TutorialHandler>();
         if (TutorialHandler == null) Debug.Log("GameManager: FindImportantReferences: TutorialHandler not found.");
 
-        if (!GameObject.Find("PlanetRotation").TryGetComponent(out planetRotation)) Debug.Log("GameManager: FindImportantReferences: PlanetRotation not found.");
+        PlanetRotation = GameObject.Find("PlanetRotation").GetComponent<PlanetRotation>();
+        if (PlanetRotation == null) Debug.Log("GameManager: FindImportantReferences: PlanetRotation not found.");
     }
 
     private void CheckGameOver()

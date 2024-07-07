@@ -116,6 +116,7 @@ public abstract class MachineBehavior : MonoBehaviour
             inputInventory += 1;
             inputInventory = Mathf.Clamp(inputInventory, 0, maximumInventory);
             machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+            if (GameManager.Instance.InTutorial) GameManager.Instance.TutorialHandler.PlacedResourceInMachine(resourceTypeRelationships[MachineType]);
             if (isEmpty)
             {
                 isEmpty = false;
@@ -145,6 +146,7 @@ public abstract class MachineBehavior : MonoBehaviour
             loopAudioSource.clip = machineProductionLoop;
             brokenEffect.SetActive(false);
             isBroken = false;
+            if (GameManager.Instance.InTutorial) GameManager.Instance.TutorialHandler.RepairedMachine();
         }
     }
 
@@ -160,6 +162,7 @@ public abstract class MachineBehavior : MonoBehaviour
             machineUI.UpdateEfficiencyLevelText(machineEfficiencyLevel);
             GameManager.Instance.TakeCreditsFromPlayer(upgradeCost);
             Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
+            if (GameManager.Instance.InTutorial) GameManager.Instance.TutorialHandler.UpgradedMachine();
         }
         else
         {
@@ -218,6 +221,13 @@ public abstract class MachineBehavior : MonoBehaviour
             //Debug.Log("Machine empty!");
             loopAudioSource.Stop();
         }
+    }
+
+    public void BreakMachine()
+    {
+        machineDurability = 0;
+        machineUI.UpdateDurabilityBar(machineDurability);
+        CheckIfBroken();
     }
 
     private void CheckIfBroken()

@@ -16401,8 +16401,8 @@ MonoBehaviour:
   doorColliders:
   - {fileID: 1801912426}
   - {fileID: 1779304712}
-  - {fileID: 2086149818}
   - {fileID: 404390831}
+  - {fileID: 2086149818}
   - {fileID: 1647988532}
   machineSlots:
   - {fileID: 1240996294}

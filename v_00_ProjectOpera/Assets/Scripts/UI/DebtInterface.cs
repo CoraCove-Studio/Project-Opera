@@ -1,6 +1,6 @@
-using UnityEngine;
-using TMPro;
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public class DebtInterface : MonoBehaviour
 {
@@ -38,22 +38,29 @@ public class DebtInterface : MonoBehaviour
     {
         if (GameManager.Instance.InTutorial)
         {
-            amount = GameManager.Instance.PlayerCredits;
+            GameManager.Instance.TakeCreditsFromPlayer(GameManager.Instance.PlayerCredits);
+            GameManager.Instance.PayDebt(GameManager.Instance.PlayerCredits);
+            GameManager.Instance.TutorialHandler.MadeDebtPayment();
         }
-        if(GameManager.Instance.PlayerCredits >= amount && GameManager.Instance.PlayerDebt >= amount && GameManager.Instance.PlayerDebt > 0)
+        else
         {
-            GameManager.Instance.TakeCreditsFromPlayer(amount);
-            GameManager.Instance.PayDebt(amount);
+
+            if (GameManager.Instance.PlayerCredits >= amount && GameManager.Instance.PlayerDebt >= amount && GameManager.Instance.PlayerDebt > 0)
+            {
+                GameManager.Instance.TakeCreditsFromPlayer(amount);
+                GameManager.Instance.PayDebt(amount);
+            }
+            else if (GameManager.Instance.PlayerCredits >= GameManager.Instance.PlayerDebt && GameManager.Instance.PlayerDebt < amount && GameManager.Instance.PlayerDebt > 0)
+            {
+                OnClickPayAllDebt();
+            }
         }
-        else if(GameManager.Instance.PlayerCredits >= GameManager.Instance.PlayerDebt && GameManager.Instance.PlayerDebt < amount && GameManager.Instance.PlayerDebt > 0)
-        {
-            OnClickPayAllDebt();
-        }
+
     }
 
     public void OnClickPayAllDebt()
     {
-        if(GameManager.Instance.PlayerCredits >= GameManager.Instance.PlayerDebt && GameManager.Instance.PlayerDebt > 0)
+        if (GameManager.Instance.PlayerCredits >= GameManager.Instance.PlayerDebt && GameManager.Instance.PlayerDebt > 0)
         {
             GameManager.Instance.PayDebt(GameManager.Instance.PlayerDebt);
             GameManager.Instance.TakeCreditsFromPlayer(GameManager.Instance.PlayerDebt);
