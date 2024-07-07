@@ -62,8 +62,9 @@ public class DebtInterface : MonoBehaviour
     {
         if (GameManager.Instance.PlayerCredits >= GameManager.Instance.PlayerDebt && GameManager.Instance.PlayerDebt > 0)
         {
-            GameManager.Instance.PayDebt(GameManager.Instance.PlayerDebt);
+            Debug.Log("DebtInterface: OnClickPayAllDebt: debt paid.");
             GameManager.Instance.TakeCreditsFromPlayer(GameManager.Instance.PlayerDebt);
+            GameManager.Instance.PayDebt(GameManager.Instance.PlayerDebt);
         }
     }
 }
