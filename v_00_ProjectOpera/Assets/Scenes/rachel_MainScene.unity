@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.021901427, g: 0.02242233, b: 0.021150567, a: 1}
+  m_IndirectSpecularColor: {r: 0.021901442, g: 0.022422092, b: 0.021150567, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9193,14 +9193,34 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
         type: 3}
-      propertyPath: customPasses.Array.size
-      value: 3
+      propertyPath: fadeRadius
+      value: 2.11
       objectReference: {fileID: 0}
     - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
         type: 3}
-      propertyPath: customPasses.Array.data[2]
-      value: 282831936682983424
+      propertyPath: m_IsGlobal
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: m_TargetCamera
+      value: 
+      objectReference: {fileID: 1139455783}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: useTargetCamera
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[0].layerMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
+        type: 3}
+      propertyPath: managedReferences[0].overrideMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d1a1d2c1850b074399eb05a2009d138, type: 2}
     - target: {fileID: -8498401518627060002, guid: 0d05f7d188e212a40a703869cc1f3aee,
         type: 3}
       propertyPath: managedReferences[282831936682983424]
@@ -9419,7 +9439,7 @@ PrefabInstance:
     - target: {fileID: 8436617061557465952, guid: 0d05f7d188e212a40a703869cc1f3aee,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.16060656
+      value: 40.529
       objectReference: {fileID: 0}
     - target: {fileID: 8436617061557465952, guid: 0d05f7d188e212a40a703869cc1f3aee,
         type: 3}
@@ -9444,12 +9464,12 @@ PrefabInstance:
     - target: {fileID: 8436617061557465952, guid: 0d05f7d188e212a40a703869cc1f3aee,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.9223819
+      value: 56.437
       objectReference: {fileID: 0}
     - target: {fileID: 8436617061557465952, guid: 0d05f7d188e212a40a703869cc1f3aee,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 3.31
       objectReference: {fileID: 0}
     - target: {fileID: 8436617061557465952, guid: 0d05f7d188e212a40a703869cc1f3aee,
         type: 3}

@@ -36,7 +36,7 @@ Material:
     - _AlphaCutoff: 0.5
     - _BehindFactor: 0
     - _OutlineWidth: 3.23
-    - _SamplePrecision: 1.639
+    - _SamplePrecision: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _InnerColor: {r: 0.24296893, g: 0.6182301, b: 0.735849, a: 0.2509804}
