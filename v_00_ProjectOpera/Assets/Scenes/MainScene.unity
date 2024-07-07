@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0031893817, g: 0.0032647632, b: 0.003079346, a: 1}
+  m_IndirectSpecularColor: {r: 0.036420252, g: 0.03177417, b: 0.026156377, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10698,6 +10698,7 @@ MonoBehaviour:
   m_Script: {fileID: 1854693422}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Entries: []
 --- !u!4 &1413403249
 Transform:
   m_ObjectHideFlags: 19
@@ -16380,6 +16381,41 @@ PrefabInstance:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 1402205818}
+    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: machineSelectionButtons.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: machineSelectionButtons.Array.data[0]
+      value: 
+      objectReference: {fileID: 187506167}
+    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: machineSelectionButtons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1839995722}
+    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: machineSelectionButtons.Array.data[2]
+      value: 
+      objectReference: {fileID: 1848588958}
+    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: machineSelectionButtons.Array.data[3]
+      value: 
+      objectReference: {fileID: 2143777370}
+    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: machineSelectionButtons.Array.data[4]
+      value: 
+      objectReference: {fileID: 138358503}
+    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: machineSelectionButtons.Array.data[5]
+      value: 
+      objectReference: {fileID: 1653537776}
     - target: {fileID: 6719195014343107136, guid: 7c9eeee814b401842a694843c3bbd582,
         type: 3}
       propertyPath: m_Name

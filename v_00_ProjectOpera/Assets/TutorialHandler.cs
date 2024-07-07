@@ -48,6 +48,8 @@ public class TutorialHandler : MonoBehaviour
     private void SetUpTutorial()
     {
         ToggleAllDoors(false);
+        machineSelectionButtons = gameManager.PlayerUI.ReturnListOfMachineSelectionButtons();
+        ToggleMachineButtons(true, false, false);
         Debug.Log("TutorialHandler: SetUpTutorial: Doors turned off.");
 
         // Turn all but one of the machine slot interactable componenets off
@@ -75,7 +77,6 @@ public class TutorialHandler : MonoBehaviour
             yield return new WaitForSeconds(5);
 
             #region Placing Printer Machine
-            ToggleMachineButtons(true, false, false);
             gameManager.PlayerUI.SendConditionalNotification("Place a printer!");
             while (conditions["PlacedPartsMachine"] == false)
             {

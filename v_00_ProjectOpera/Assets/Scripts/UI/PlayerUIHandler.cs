@@ -15,6 +15,7 @@ public class PlayerUIHandler : MonoBehaviour
     [SerializeField] private EventSystem eventSystem;
 
     [SerializeField] private List<TextMeshProUGUI> resourceLabels = new();
+    [SerializeField] private List<Button> machineSelectionButtons;
     [SerializeField] private TextMeshProUGUI timerLabel;
 
     private float fadeTime = 0.2f;
@@ -55,6 +56,11 @@ public class PlayerUIHandler : MonoBehaviour
     public void CloseConditionalNotification()
     {
         notificationTab.MeetCondition();
+    }
+
+    public List<Button> ReturnListOfMachineSelectionButtons()
+    {
+        return machineSelectionButtons;
     }
 
     public void PauseGame()
