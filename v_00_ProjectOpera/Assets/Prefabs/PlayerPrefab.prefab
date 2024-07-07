@@ -594,13 +594,13 @@ GameObject:
   - component: {fileID: 511883166019553529}
   - component: {fileID: 2121543922748582388}
   - component: {fileID: 4683816191181181979}
-  - component: {fileID: 1734387130778944471}
+  - component: {fileID: 1953311968722002988}
   m_Layer: 0
   m_Name: Collision Detection
   m_TagString: CollectionDetector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &511883166019553529
 Transform:
@@ -667,8 +667,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1734387130778944471
-SphereCollider:
+--- !u!136 &1953311968722002988
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -685,9 +685,11 @@ SphereCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Radius: 1.8258395
+  m_Height: 4.531832
+  m_Direction: 0
+  m_Center: {x: 0.05658698, y: 0.79865694, z: 0}
 --- !u!1 &441102595098381641
 GameObject:
   m_ObjectHideFlags: 0
@@ -5925,7 +5927,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.75
-  m_Height: 2.25
+  m_Height: 1.95
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3942725376311248601
