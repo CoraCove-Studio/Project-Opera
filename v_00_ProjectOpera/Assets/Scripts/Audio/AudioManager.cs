@@ -10,6 +10,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource ambienceSource;
 
     [SerializeField] private AudioClip errorNoise;
+    [SerializeField] private AudioClip notificationNoise;
+    [SerializeField] private AudioClip debtPaymentNoise;
+
+    [SerializeField] private List<AudioClip> inputNoises;
 
     [Header("Audio Mixers")]
     public AudioMixer masterMixer;
@@ -23,6 +27,21 @@ public class AudioManager : MonoBehaviour
     public void PlayErrorNoise()
     {
         PlaySFX(errorNoise);
+    }
+
+    public void PlayNotificationNoise()
+    {
+        PlaySFX(notificationNoise);
+    }
+
+    public void PlayDebtPaymentNoise()
+    {
+        PlaySFX(debtPaymentNoise);
+    }
+
+    public AudioClip ReturnRandomInputNoise()
+    {
+        return inputNoises[Random.Range(0, inputNoises.Count)];
     }
 
     private void Awake()

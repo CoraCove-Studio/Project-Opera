@@ -22,6 +22,7 @@ public abstract class MachineBehavior : MonoBehaviour
     [SerializeField] private MachineUI machineUI;
     [SerializeField] private GameObject brokenEffect;
     [SerializeField] private Animator animatorController;
+    public InteractableObject InteractableComponent { get; private set; }
 
     private List<string> animatorParameters;
 
@@ -54,7 +55,7 @@ public abstract class MachineBehavior : MonoBehaviour
         if (animatorController != null) animatorParameters = GetAllAnimatorParameters(animatorController);
         SetUpMachineUI();
         SetUpAudio();
-
+        InteractableComponent = GetComponent<InteractableObject>();
         HandleErrorMessagePriority();
         productionCoroutine = StartCoroutine(Production());
     }
@@ -117,6 +118,7 @@ public abstract class MachineBehavior : MonoBehaviour
             inputInventory += 1;
             inputInventory = Mathf.Clamp(inputInventory, 0, maximumInventory);
             machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
+            sfxAudioSource.PlayOneShot(GameManager.Instance.audioManager.ReturnRandomInputNoise());
             if (GameManager.Instance.InTutorial) GameManager.Instance.TutorialHandler.PlacedResourceInMachine(resourceTypeRelationships[MachineType]);
             if (isEmpty)
             {

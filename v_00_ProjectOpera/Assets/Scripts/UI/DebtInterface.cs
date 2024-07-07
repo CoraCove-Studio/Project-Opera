@@ -14,6 +14,13 @@ public class DebtInterface : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemsProducedNumberLabel;
     [SerializeField] private TextMeshProUGUI itemsCollectedNumberLabel;
 
+    GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
+
     public void ActivateDebtUI()
     {
         debtUIActivator.SetActive(true);
@@ -36,35 +43,40 @@ public class DebtInterface : MonoBehaviour
 
     public void OnClickMakePayment(int amount)
     {
-        if (GameManager.Instance.InTutorial)
+        bool madePayment = false;
+        if (gameManager.InTutorial)
         {
-            GameManager.Instance.TakeCreditsFromPlayer(GameManager.Instance.PlayerCredits);
-            GameManager.Instance.PayDebt(GameManager.Instance.PlayerCredits);
-            GameManager.Instance.TutorialHandler.MadeDebtPayment();
+            gameManager.TakeCreditsFromPlayer(gameManager.PlayerCredits);
+            gameManager.PayDebt(gameManager.PlayerCredits);
+            gameManager.TutorialHandler.MadeDebtPayment();
+            madePayment = true;
         }
         else
         {
 
-            if (GameManager.Instance.PlayerCredits >= amount && GameManager.Instance.PlayerDebt >= amount && GameManager.Instance.PlayerDebt > 0)
+            if (gameManager.PlayerCredits >= amount && gameManager.PlayerDebt >= amount && gameManager.PlayerDebt > 0)
             {
-                GameManager.Instance.TakeCreditsFromPlayer(amount);
-                GameManager.Instance.PayDebt(amount);
+                gameManager.TakeCreditsFromPlayer(amount);
+                gameManager.PayDebt(amount);
+                madePayment = true;
             }
-            else if (GameManager.Instance.PlayerCredits >= GameManager.Instance.PlayerDebt && GameManager.Instance.PlayerDebt < amount && GameManager.Instance.PlayerDebt > 0)
+            else if (gameManager.PlayerCredits >= gameManager.PlayerDebt && gameManager.PlayerDebt < amount && gameManager.PlayerDebt > 0)
             {
                 OnClickPayAllDebt();
+                madePayment = true;
             }
         }
+        if (madePayment) gameManager.audioManager.PlayDebtPaymentNoise();
 
     }
 
     public void OnClickPayAllDebt()
     {
-        if (GameManager.Instance.PlayerCredits >= GameManager.Instance.PlayerDebt && GameManager.Instance.PlayerDebt > 0)
+        if (gameManager.PlayerCredits >= gameManager.PlayerDebt && gameManager.PlayerDebt > 0)
         {
             Debug.Log("DebtInterface: OnClickPayAllDebt: debt paid.");
-            GameManager.Instance.TakeCreditsFromPlayer(GameManager.Instance.PlayerDebt);
-            GameManager.Instance.PayDebt(GameManager.Instance.PlayerDebt);
+            gameManager.TakeCreditsFromPlayer(gameManager.PlayerDebt);
+            gameManager.PayDebt(gameManager.PlayerDebt);
         }
     }
 }

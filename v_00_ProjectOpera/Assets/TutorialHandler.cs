@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TutorialHandler : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class TutorialHandler : MonoBehaviour
 
     [SerializeField] private List<Collider> doorColliders; // index 0 is the main door
     [SerializeField] private List<GameObject> machineSlots;
+    [SerializeField] private List<Button> machineSelectionButtons;
 
     [SerializeField]
     private Dictionary<string, bool> conditions = new()
@@ -70,7 +72,10 @@ public class TutorialHandler : MonoBehaviour
         {
             SetUpTutorial();
 
+            yield return new WaitForSeconds(5);
+
             #region Placing Printer Machine
+            ToggleMachineButtons(true, false, false);
             gameManager.PlayerUI.SendConditionalNotification("Place a printer!");
             while (conditions["PlacedPartsMachine"] == false)
             {
@@ -80,10 +85,12 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
+            yield return new WaitForSeconds(5);
+
             #region Placing Nitrogen Machine
             machineSlots[1].SetActive(true);
 
-
+            ToggleMachineButtons(false, true, false);
             gameManager.PlayerUI.SendConditionalNotification("Place a cryopod!");
             while (conditions["PlacedNitrogenMachine"] == false)
             {
@@ -93,9 +100,12 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
+            yield return new WaitForSeconds(5);
+
             #region Placing Crop Machine
             machineSlots[2].SetActive(true);
 
+            ToggleMachineButtons(false, false, true);
             gameManager.PlayerUI.SendConditionalNotification("Place a greenhouse!");
             while (conditions["PlacedCropsMachine"] == false)
             {
@@ -104,6 +114,8 @@ public class TutorialHandler : MonoBehaviour
             Debug.Log("Tutorialhandler: Main Routine: Crops machine was placed.");
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
+
+            yield return new WaitForSeconds(5);
 
             #region Loading 1 Crop
             gameManager.PlayerUI.SendConditionalNotification("Place 1 crop into the printer!");
@@ -115,6 +127,8 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
+            yield return new WaitForSeconds(5);
+
             #region Loading 2 Parts
             gameManager.PlayerUI.SendConditionalNotification("Place 2 parts into the cryopod!");
             while (conditions["TwoPartsInNitrogenMachine"] == false)
@@ -124,6 +138,8 @@ public class TutorialHandler : MonoBehaviour
             Debug.Log("Tutorialhandler: Main Routine: Two parts put in nitrogen machine.");
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
+
+            yield return new WaitForSeconds(5);
 
             #region Loading 6 Nitrogen
             gameManager.PlayerUI.SendConditionalNotification("Place 6 nitrogen into the greenhouse!");
@@ -135,6 +151,8 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.CloseConditionalNotification();
 
             #endregion
+
+            yield return new WaitForSeconds(5);
 
             #region Repairing Machine
             machineSlots[0].GetComponent<MachineSlot>().SpawnedMachine.TryGetComponent(out MachineBehavior machine);
@@ -221,6 +239,7 @@ public class TutorialHandler : MonoBehaviour
     private void UnSetUpTutorial()
     {
         machineSlots[3].SetActive(true);
+        ToggleMachineButtons(true, true, true);
         gameManager.PlanetRotation.StartReturnToStartingRotationCoroutine();
     }
 
@@ -236,6 +255,18 @@ public class TutorialHandler : MonoBehaviour
         {
             doorCollider.enabled = unlocked;
         }
+    }
+
+    private void ToggleMachineButtons(bool machineOne, bool machineTwo, bool machineThree)
+    {
+        machineSelectionButtons[0].interactable = machineOne;
+        machineSelectionButtons[1].interactable = machineOne;
+
+        machineSelectionButtons[2].interactable = machineTwo;
+        machineSelectionButtons[3].interactable = machineTwo;
+
+        machineSelectionButtons[4].interactable = machineThree;
+        machineSelectionButtons[5].interactable = machineThree;
     }
 
     public void PlacedResourceInMachine(ResourceTypes resourceType)

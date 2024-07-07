@@ -18,25 +18,12 @@ public class NotificationTab : MonoBehaviour
     private bool isShowing = false;
     private bool conditionMet;
     private Coroutine notificationCoroutine;
-    private Queue<IEnumerator> notificationQueue = new Queue<IEnumerator>();
+    private Queue<IEnumerator> notificationQueue = new();
 
     private void Start()
     {
         overshootPosition = visiblePosition + new Vector2(0, overshootAmount);
         notificationTab.anchoredPosition = hiddenPosition;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ShowConditionalNotification("This is a conditional notification. Press 'M' to meet the condition.");
-        }
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            MeetCondition();
-        }
     }
 
     public void ShowTimedNotification(string message)
@@ -95,9 +82,10 @@ public class NotificationTab : MonoBehaviour
     {
         notificationTextBody.text = message;
         isShowing = true;
+        GameManager.Instance.audioManager.PlayNotificationNoise();
         // Lerp into view with overshoot
         yield return StartCoroutine(LerpPosition(hiddenPosition, overshootPosition, lerpTime * 0.8f));
-        yield return StartCoroutine(LerpPosition(overshootPosition, visiblePosition, lerpTime * 0.2f));
+        yield return StartCoroutine(LerpPosition(overshootPosition, visiblePosition, lerpTime * 0.4f));
 
         // Wait for display duration
         yield return new WaitForSeconds(displayDuration);
@@ -111,6 +99,7 @@ public class NotificationTab : MonoBehaviour
     {
         notificationTextBody.text = message;
         isShowing = true;
+        GameManager.Instance.audioManager.PlayNotificationNoise();
         // Lerp into view with overshoot
         yield return StartCoroutine(LerpPosition(hiddenPosition, overshootPosition, lerpTime * 0.8f));
         yield return StartCoroutine(LerpPosition(overshootPosition, visiblePosition, lerpTime * 0.2f));

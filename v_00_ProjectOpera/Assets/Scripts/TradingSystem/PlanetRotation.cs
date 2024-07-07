@@ -4,6 +4,12 @@ using UnityEngine;
 public class PlanetRotation : MonoBehaviour
 {
     [SerializeField] private GameObject planetRotator;
+    private Vector3 newGamePosition;
+
+    private void Start()
+    {
+        newGamePosition = transform.eulerAngles;
+    }
 
     public void StartRotationCoroutine()
     {
@@ -60,7 +66,7 @@ public class PlanetRotation : MonoBehaviour
     {
         Vector3 startRotation = transform.eulerAngles;
         Debug.Log("PlanetRotation: Rotate: starting rotation " + startRotation);
-        float endRotation = startRotation.y + 20.0f;
+        float endRotation = newGamePosition.y;
         float t = 0.0f;
         while (t < duration)
         {

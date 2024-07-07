@@ -61,7 +61,7 @@ public class TradeInterface : MonoBehaviour
         }
         else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_ACTIVATOR))
         {
-            Debug.Log("TradeInterface: OnTriggerEnter: Warp Speed Activated");
+            Debug.Log("TradeInterface: OnTriggerEnter: Warp Speed Activated.");
             GameManager.Instance.PlayerUI.SendTimedNotification("Entering warp speed!");
             //activate particle effects here
         }
@@ -82,7 +82,6 @@ public class TradeInterface : MonoBehaviour
             if (!GameManager.Instance.InTutorial) { round++; }
             UpdatePriceLabels();
             GameManager.Instance.PlayerUI.ActivateTicker();
-            GameManager.Instance.PlayerUI.SendTimedNotification("Get back to work!");
         }
         else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_DEACTIVATOR))
         {

@@ -2020,7 +2020,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 4755290845168835325}
+  m_TargetGraphic: {fileID: 2706302241553222489}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3501,7 +3501,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 5224977734368688845}
+  m_TargetGraphic: {fileID: 4763072958495445988}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5274,7 +5274,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1431772102266619354}
+  m_TargetGraphic: {fileID: 401263430158320535}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -7716,7 +7716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitPanel: {fileID: 7283662054709334057}
   tradePanel: {fileID: 5931982496205970367}
-  tradeClick: {fileID: 8300000, guid: 3cc7ea52b6c6569438cf19fc2850c39c, type: 3}
+  tradeClick: {fileID: 8300000, guid: dd09a369e9788644cbbe9a76860306bf, type: 3}
   transitClick: {fileID: 8300000, guid: 2942d1d908ae7fa4986f1c8163bc3a1b, type: 3}
 --- !u!1 &8749689003128182735
 GameObject:

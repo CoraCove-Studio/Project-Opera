@@ -522,14 +522,10 @@ public class GameManager : MonoBehaviour
         {
             AddCreditsToPlayer(5000);
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            // restart outputInterval
-        }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            Time.timeScale = 3;
+            Time.timeScale = 5;
         }
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
