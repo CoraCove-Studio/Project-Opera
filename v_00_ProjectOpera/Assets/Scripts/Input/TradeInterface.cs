@@ -46,7 +46,7 @@ public class TradeInterface : MonoBehaviour
     {
         if (other.gameObject.CompareTag(TagManager.TRADING_HUB))
         {
-            // if (GameManager.Instance.InTutorial == false) GameManager.Instance.PlayerUI.ActivateTicker();
+            GameManager.Instance.PlayerUI.ActivateTicker();
             if (GameManager.Instance.InTutorial == false) GameManager.Instance.PlayerUI.SendTimedNotification("Trade now!");
             var tradingHub = other.GetComponent<PlanetTradingHub>();
             valueOfCrop = baseCropValue * tradingHub.cropPriceBoost;

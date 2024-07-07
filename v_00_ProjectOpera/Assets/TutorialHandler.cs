@@ -55,7 +55,6 @@ public class TutorialHandler : MonoBehaviour
             Debug.Log("TutorialHandler: SetUpTutorial: MachineSlots turned off.");
         }
 
-        gameManager.PlanetRotation.StartTutorialRotationCoroutine();
         // place arrow indicator over the one left?
 
     }
@@ -178,6 +177,7 @@ public class TutorialHandler : MonoBehaviour
             yield return new WaitForSeconds(5);
             FiveSecondsPassed();
             gameManager.PlayerUI.SendTimedNotification("We're approaching a planet!");
+            gameManager.PlanetRotation.StartTutorialRotationCoroutine();
             gameManager.PlayerUI.SendTimedNotification("Go upstairs to trade!");
             UnlockMainDoor();
             // Activate indications to go upstairs
@@ -244,15 +244,15 @@ public class TutorialHandler : MonoBehaviour
         {
             case ResourceTypes.CROP:
                 cropsPlacedInMachine++;
-                if (cropsPlacedInMachine == 1) OneCropInPartsMachine();
+                if (cropsPlacedInMachine >= 1) OneCropInPartsMachine();
                 break;
             case ResourceTypes.PART:
                 partsPlacedInMachine++;
-                if (partsPlacedInMachine == 2) TwoPartsInNitrogenMachine();
+                if (partsPlacedInMachine >= 2) TwoPartsInNitrogenMachine();
                 break;
             case ResourceTypes.NITROGEN:
                 nitrogenPlacedInMachine++;
-                if (nitrogenPlacedInMachine == 6) SixNitrogenInCropsMachine();
+                if (nitrogenPlacedInMachine >= 6) SixNitrogenInCropsMachine();
                 break;
             default:
                 break;
