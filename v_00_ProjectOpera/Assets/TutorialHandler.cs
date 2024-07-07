@@ -21,9 +21,9 @@ public class TutorialHandler : MonoBehaviour
     { "PlacedNitrogenMachine",          false },
     { "PlacedCropsMachine",             false },
 
-    { "FiveCropsInPartsMachine",        false },
-    { "FivePartsInNitrogenMachine",     false },
-    { "FiveNitrogenInCropsMachine",     false },
+    { "OneCropInPartsMachine",          false },
+    { "TwoPartsInNitrogenMachine",      false },
+    { "SixNitrogenInCropsMachine",      false },
 
     { "RepairedMachine",                false },
     { "UpgradedMachine",                false },
@@ -85,7 +85,7 @@ public class TutorialHandler : MonoBehaviour
             machineSlots[1].SetActive(true);
 
 
-            gameManager.PlayerUI.SendConditionalNotification("Place a nitrogen machine!");
+            gameManager.PlayerUI.SendConditionalNotification("Place a cryopod!");
             while (conditions["PlacedNitrogenMachine"] == false)
             {
                 yield return new WaitForSeconds(checkInterval);
@@ -97,7 +97,7 @@ public class TutorialHandler : MonoBehaviour
             #region Placing Crop Machine
             machineSlots[2].SetActive(true);
 
-            gameManager.PlayerUI.SendConditionalNotification("Place a crop machine!");
+            gameManager.PlayerUI.SendConditionalNotification("Place a greenhouse!");
             while (conditions["PlacedCropsMachine"] == false)
             {
                 yield return new WaitForSeconds(checkInterval);
@@ -106,33 +106,33 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
-            #region Loading 5 Crops
-            gameManager.PlayerUI.SendConditionalNotification("Place 5 crops into the printer!");
-            while (conditions["FiveCropsInPartsMachine"] == false)
+            #region Loading 1 Crop
+            gameManager.PlayerUI.SendConditionalNotification("Place 1 crop into the printer!");
+            while (conditions["OneCropInPartsMachine"] == false)
             {
                 yield return new WaitForSeconds(checkInterval);
             }
-            Debug.Log("Tutorialhandler: Main Routine: Five crops put in parts machine.");
+            Debug.Log("Tutorialhandler: Main Routine: One crop put in parts machine.");
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
-            #region Loading 5 Parts
-            gameManager.PlayerUI.SendConditionalNotification("Place 5 parts into the cryopod!");
-            while (conditions["FivePartsInNitrogenMachine"] == false)
+            #region Loading 2 Parts
+            gameManager.PlayerUI.SendConditionalNotification("Place 2 parts into the cryopod!");
+            while (conditions["TwoPartsInNitrogenMachine"] == false)
             {
                 yield return new WaitForSeconds(checkInterval);
             }
-            Debug.Log("Tutorialhandler: Main Routine: Five parts put in nitrogen machine.");
+            Debug.Log("Tutorialhandler: Main Routine: Two parts put in nitrogen machine.");
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
-            #region Loading 5 Nitrogen
-            gameManager.PlayerUI.SendConditionalNotification("Place 5 nitrogen into the greenhouse!");
-            while (conditions["FiveNitrogenInCropsMachine"] == false)
+            #region Loading 6 Nitrogen
+            gameManager.PlayerUI.SendConditionalNotification("Place 6 nitrogen into the greenhouse!");
+            while (conditions["SixNitrogenInCropsMachine"] == false)
             {
                 yield return new WaitForSeconds(checkInterval);
             }
-            Debug.Log("Tutorialhandler: Main Routine: Five nitrogen put in crop machine.");
+            Debug.Log("Tutorialhandler: Main Routine: Six nitrogen put in crop machine.");
             gameManager.PlayerUI.CloseConditionalNotification();
 
             #endregion
@@ -244,15 +244,15 @@ public class TutorialHandler : MonoBehaviour
         {
             case ResourceTypes.CROP:
                 cropsPlacedInMachine++;
-                if (cropsPlacedInMachine == 5) FiveCropsInPartsMachine();
+                if (cropsPlacedInMachine == 1) OneCropInPartsMachine();
                 break;
             case ResourceTypes.PART:
                 partsPlacedInMachine++;
-                if (partsPlacedInMachine == 5) FivePartsInNitrogenMachine();
+                if (partsPlacedInMachine == 2) TwoPartsInNitrogenMachine();
                 break;
             case ResourceTypes.NITROGEN:
                 nitrogenPlacedInMachine++;
-                if (nitrogenPlacedInMachine == 5) FiveNitrogenInCropsMachine();
+                if (nitrogenPlacedInMachine == 6) SixNitrogenInCropsMachine();
                 break;
             default:
                 break;
@@ -275,19 +275,19 @@ public class TutorialHandler : MonoBehaviour
         conditions["PlacedCropsMachine"] = true;
     }
 
-    public void FiveCropsInPartsMachine()
+    public void OneCropInPartsMachine()
     {
-        conditions["FiveCropsInPartsMachine"] = true;
+        conditions["OneCropInPartsMachine"] = true;
     }
 
-    public void FivePartsInNitrogenMachine()
+    public void TwoPartsInNitrogenMachine()
     {
-        conditions["FivePartsInNitrogenMachine"] = true;
+        conditions["TwoPartsInNitrogenMachine"] = true;
     }
 
-    public void FiveNitrogenInCropsMachine()
+    public void SixNitrogenInCropsMachine()
     {
-        conditions["FiveNitrogenInCropsMachine"] = true;
+        conditions["SixNitrogenInCropsMachine"] = true;
     }
 
     public void RepairedMachine()

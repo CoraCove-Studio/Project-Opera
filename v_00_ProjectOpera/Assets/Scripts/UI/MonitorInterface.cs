@@ -16,6 +16,8 @@ public class MonitorInterface : MonoBehaviour
     [SerializeField] private GameObject noButton;
     [SerializeField] private GameObject debugStartButton;
 
+    private List<GameObject> allButtons;
+
     [SerializeField] private AudioClip clickNoise;
     [SerializeField] private AudioClip gameStartNoise;
 
@@ -34,6 +36,22 @@ public class MonitorInterface : MonoBehaviour
 #if UNITY_EDITOR
         debugStartButton.SetActive(true);
 #endif
+        allButtons = new()
+        {
+            startButton,
+            nextButton,
+            yesButton,
+            noButton,
+            debugStartButton
+        };
+    }
+
+    private void TurnAllButtonsOff()
+    {
+        foreach (GameObject button in allButtons)
+        {
+            button.SetActive(false);
+        }
     }
 
     private string GetNextTutText()
@@ -49,17 +67,21 @@ public class MonitorInterface : MonoBehaviour
 
     public void OnClickStartButton()
     {
-        GameManager.Instance.CloseTutorialMonitor();
-        if (playerSelectedTutorial)
+        if (GameManager.Instance.InTutorialMonitor)
         {
-            GameManager.Instance.StartTutorial();
+            GameManager.Instance.CloseTutorialMonitor();
+            if (playerSelectedTutorial)
+            {
+                GameManager.Instance.StartTutorial();
+            }
+            else
+            {
+                GameManager.Instance.StartGame();
+            }
+            GameManager.Instance.audioManager.PlaySFX(gameStartNoise);
+            InputManager.Instance.UnpauseWithButton();
+            TurnAllButtonsOff();
         }
-        else
-        {
-            GameManager.Instance.StartGame();
-        }
-        GameManager.Instance.audioManager.PlaySFX(gameStartNoise);
-        InputManager.Instance.UnpauseWithButton();
     }
 
     public void OnClickNextButton()

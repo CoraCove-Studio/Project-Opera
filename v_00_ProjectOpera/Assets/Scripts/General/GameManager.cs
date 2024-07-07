@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -250,6 +249,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         InTutorial = false;
+        SetUpPlayerValuesAndUI(InTutorial);
         // Called when the player exits the tutorial using the "Start" button
         if (GamePaused) ToggleGamePause();
         gameTimer.StartTimer();
@@ -261,6 +261,7 @@ public class GameManager : MonoBehaviour
     public void StartTutorial()
     {
         InTutorial = true;
+        SetUpPlayerValuesAndUI(InTutorial);
         if (GamePaused) ToggleGamePause();
         playerRigidBody.isKinematic = false;
         Debug.Log("GameManager: StartTutorial: Game started in tutorial mode.");
@@ -282,26 +283,42 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager: SetUpNewGame: Setting up new game.");
 
         FindImportantReferences();
-        SetNewGameValues();
-        PlayerUI.UpdateUI();
-        ResetPlayerStatistics();
-        DebtUI.UpdateStatistics(playerStatistics);
-
         GamePaused = true;
 
         gameTimer.SetNewTimer(gameDurationInSeconds);
         PlayerUI.ToggleReticleVisibility(false);
         Time.timeScale = 1;
     }
-    private void SetNewGameValues()
+
+    private void SetUpPlayerValuesAndUI(bool inTutorial)
     {
-        playerCrops = newGameValues["Crops"];
-        playerParts = newGameValues["Parts"];
-        playerNitrogen = newGameValues["Nitrogen"];
-        playerCredits = newGameValues["Credits"];
-        gameDurationInSeconds = newGameValues["GameDuration"];
-        playerDebt = newGameValues["PlayerDebt"];
-        Debug.Log("GameManager: SetNewGameValues: " + gameDurationInSeconds);
+        SetNewGameValues(inTutorial);
+        PlayerUI.UpdateUI();
+        ResetPlayerStatistics();
+        DebtUI.UpdateStatistics(playerStatistics);
+    }
+    private void SetNewGameValues(bool inTutorial)
+    {
+        if (inTutorial == true)
+        {
+            playerCrops = 1;
+            playerParts = 0;
+            playerNitrogen = 0;
+            playerCredits = newGameValues["Credits"];
+            gameDurationInSeconds = newGameValues["GameDuration"];
+            playerDebt = newGameValues["PlayerDebt"];
+            Debug.Log("GameManager: SetNewGameValues: Set new game values for normal game.");
+        }
+        else
+        {
+            playerCrops = newGameValues["Crops"];
+            playerParts = newGameValues["Parts"];
+            playerNitrogen = newGameValues["Nitrogen"];
+            playerCredits = newGameValues["Credits"];
+            gameDurationInSeconds = newGameValues["GameDuration"];
+            playerDebt = newGameValues["PlayerDebt"];
+            Debug.Log("GameManager: SetNewGameValues: Set new game values for normal game.");
+        }
     }
 
     public void DisplayTooltip(int value)
@@ -399,7 +416,7 @@ public class GameManager : MonoBehaviour
     {
         GamePaused = true;
     }
-    
+
     #region Add / Take Resource Methods
 
     public bool CheckPlayerResourceValue(int value, ResourceTypes resourceType)
