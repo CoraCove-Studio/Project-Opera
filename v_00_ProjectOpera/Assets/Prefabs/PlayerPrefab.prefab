@@ -686,10 +686,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.8258395
-  m_Height: 4.531832
+  m_Radius: 2.7312179
+  m_Height: 6.93
   m_Direction: 0
-  m_Center: {x: 0.05658698, y: 0.79865694, z: 0}
+  m_Center: {x: 0, y: 1.69, z: 0}
 --- !u!1 &441102595098381641
 GameObject:
   m_ObjectHideFlags: 0
@@ -6785,6 +6785,7 @@ MonoBehaviour:
   - {fileID: 7830485941363745202}
   - {fileID: 7600410302971260052}
   - {fileID: 8282455638154342125}
+  machineSelectionButtons: []
   timerLabel: {fileID: 2125003618741038577}
   tooltipHandler: {fileID: 4763839215858527695}
   currentPanel: {fileID: 0}
