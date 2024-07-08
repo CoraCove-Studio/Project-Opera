@@ -20,9 +20,9 @@ public class WarpSpeed : MonoBehaviour
 
     void Start()
     {
+        gameObject.SetActive(true);
         warpSpeedVFX.Stop();
         warpSpeedVFX.SetFloat("WarpAmount", 0);
-
         movingSwirlFX.material.SetFloat("_Active", 0f);
     }
 
@@ -44,6 +44,21 @@ public class WarpSpeed : MonoBehaviour
             warpCoroutine_Mesh = StartCoroutine(ActivateShader());
         }
     }
+
+    public void EnteringWarp()
+    {
+        warpActive = true;
+        warpCoroutine = StartCoroutine(ActivateWarp());
+        warpCoroutine_Mesh = StartCoroutine(ActivateShader());
+    }
+
+    public void LeavingWarp()
+    {
+        warpActive = false;
+        warpCoroutine = StartCoroutine(ActivateWarp());
+        warpCoroutine_Mesh = StartCoroutine(ActivateShader());
+    }
+
 
     IEnumerator ActivateWarp()
     {

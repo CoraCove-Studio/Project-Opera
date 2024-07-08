@@ -36,6 +36,9 @@ public class TradeInterface : MonoBehaviour
     [SerializeField] private AudioClip moneyNoise;
     private bool playerSoldItem = false;
 
+    [Header("WarpSpeed VFX")]
+    [SerializeField] private GameObject warpSpeedVFX;
+
     private void Start()
     {
         SetActivePlanet(round);
@@ -63,6 +66,8 @@ public class TradeInterface : MonoBehaviour
         {
             Debug.Log("TradeInterface: OnTriggerEnter: Warp Speed Activated.");
             GameManager.Instance.PlayerUI.SendTimedNotification("Entering warp speed!");
+
+            warpSpeedVFX.GetComponent<WarpSpeed>().EnteringWarp();
             //activate particle effects here
         }
         else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_DEACTIVATOR))
@@ -70,6 +75,8 @@ public class TradeInterface : MonoBehaviour
             Debug.Log("TradeInterface: OnTriggerEnter: Warp Speed Deactivated");
             GameManager.Instance.PlayerUI.SendTimedNotification("Exiting warp speed.");
             //deactivate particle effects here
+
+            warpSpeedVFX.GetComponent<WarpSpeed>().LeavingWarp();
         }
     }
 
