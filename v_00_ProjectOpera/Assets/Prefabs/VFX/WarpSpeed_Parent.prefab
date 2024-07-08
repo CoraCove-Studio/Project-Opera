@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2269789025253024338}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 53.65, y: 4.9, z: 102.3}
+  m_LocalPosition: {x: 53.65, y: 4.4, z: 102.3}
   m_LocalScale: {x: 22, y: 16.4, z: 28.2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -102,16 +102,16 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 977
+      - m_Value: 1217
         m_Name: WarpStrength
         m_Overridden: 1
       - m_Value: 1
         m_Name: WarpAmount
         m_Overridden: 1
-      - m_Value: 5
+      - m_Value: 3.24
         m_Name: Speed
         m_Overridden: 1
-      - m_Value: 20
+      - m_Value: 24.88
         m_Name: Force
         m_Overridden: 1
     m_Vector2f:
@@ -193,7 +193,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bfee021af9990c940bfb713f20416d16,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 62.4
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bfee021af9990c940bfb713f20416d16,
         type: 3}
@@ -208,12 +208,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bfee021af9990c940bfb713f20416d16,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 0.011
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bfee021af9990c940bfb713f20416d16,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.454
+      value: 2.032
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bfee021af9990c940bfb713f20416d16,
         type: 3}
