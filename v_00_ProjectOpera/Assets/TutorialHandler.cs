@@ -75,7 +75,7 @@ public class TutorialHandler : MonoBehaviour
         {
             SetUpTutorial();
 
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1);
 
             #region Placing Printer Machine
             gameManager.PlayerUI.SendConditionalNotification("Place a printer!");
@@ -129,10 +129,18 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
-            //while (conditions["UpgradedMachine"] == false)
-            //{
-            //    yield return new WaitForSeconds(checkInterval);
-            //}
+            float startTime = Time.time;
+            bool extraMessageDisplayed = false;
+            while (gameManager.PlayerParts < 2)
+            {
+                yield return new WaitForSeconds(checkInterval);
+                float elapsedTime = Time.time - startTime;
+                if (elapsedTime > 12f && extraMessageDisplayed == false)
+                {
+                    gameManager.PlayerUI.SendTimedNotification("Find all of the parts!");
+                    extraMessageDisplayed = true;
+                }
+            }
 
             #region Loading 2 Parts
             gameManager.PlayerUI.SendConditionalNotification("Place 2 parts into the cryopod!");
@@ -144,10 +152,23 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
-            //while (conditions["UpgradedMachine"] == false)
-            //{
-            //    yield return new WaitForSeconds(checkInterval);
-            //}
+            startTime = Time.time;
+            extraMessageDisplayed = false;
+            while (gameManager.PlayerNitrogen < 6)
+            {
+                yield return new WaitForSeconds(checkInterval);
+                float elapsedTime = Time.time - startTime;
+                if (elapsedTime > 20f && extraMessageDisplayed == false)
+                {
+                    gameManager.PlayerUI.SendTimedNotification("Find all of the nitrogems!");
+                    extraMessageDisplayed = true;
+                }
+                if (elapsedTime > 30f && extraMessageDisplayed == false)
+                {
+                    gameManager.PlayerUI.SendTimedNotification("There must be more nitrogems!");
+                    extraMessageDisplayed = true;
+                }
+            }
 
             #region Loading 6 Nitrogen
             gameManager.PlayerUI.SendConditionalNotification("Place 6 nitrogen into the greenhouse!");
