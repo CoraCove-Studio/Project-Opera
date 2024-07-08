@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0031624434, g: 0.003237509, b: 0.0030537536, a: 1}
+  m_IndirectSpecularColor: {r: 0.0031624096, g: 0.003237509, b: 0.0030537543, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2800,6 +2800,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1780313356541254006, guid: f798abe798f5b9f49a40fbddfb2ea572, type: 3}
+--- !u!1 &307029769 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1339266114077081779, guid: 6d1b37c57f94bcf4083695d881f824b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 800135414}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &329413972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6418,6 +6424,76 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 260058116}
     m_Modifications:
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 307029769}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 307029769}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: Interact.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6164096282532495668, guid: 6d1b37c57f94bcf4083695d881f824b1,
         type: 3}
       propertyPath: m_Name
@@ -7303,6 +7379,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4792638998211417880, guid: 23f693ccd5ce4544384b7bb7797a43fb,
     type: 3}
   m_PrefabInstance: {fileID: 854893078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &859769072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1339266114077081779, guid: 6d1b37c57f94bcf4083695d881f824b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1169344283}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &862701214
 GameObject:
@@ -9231,6 +9313,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 260058116}
     m_Modifications:
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 859769072}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753219392840336782, guid: 6d1b37c57f94bcf4083695d881f824b1,
+        type: 3}
+      propertyPath: LoseFocus.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6164096282532495668, guid: 6d1b37c57f94bcf4083695d881f824b1,
         type: 3}
       propertyPath: m_Name

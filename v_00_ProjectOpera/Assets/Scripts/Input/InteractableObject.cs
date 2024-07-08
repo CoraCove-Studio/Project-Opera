@@ -21,6 +21,7 @@ public class InteractableObject : Interactable
 
     public override void OnLoseFocus()
     {
+        LoseFocus.Invoke();
         GameManager.Instance.ClearTooltipDisplay();
     }
 }
