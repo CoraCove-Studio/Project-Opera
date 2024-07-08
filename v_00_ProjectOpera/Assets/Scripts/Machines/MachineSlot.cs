@@ -10,6 +10,7 @@ public class MachineSlot : MonoBehaviour
     [SerializeField] List<GameObject> machinePrefabs;
     [SerializeField] Transform spawnLocation;
     [SerializeField] GameObject machineUICanvas;
+    [SerializeField] GameObject machine_Base_Highlight;
 
     [SerializeField] Image floatingIconImage;
     [SerializeField] private Sprite bitcoinIcon;
@@ -65,6 +66,7 @@ public class MachineSlot : MonoBehaviour
             GameManager.Instance.TakeCreditsFromPlayer(50);
             machineUICanvas.SetActive(false);
             InteractableComponent.enabled = false;
+            machine_Base_Highlight.SetActive(false);
             gameObject.layer = 0;
         }
         else
