@@ -58,6 +58,13 @@ public abstract class MachineBehavior : MonoBehaviour
         InteractableComponent = GetComponent<InteractableObject>();
         HandleErrorMessagePriority();
         productionCoroutine = StartCoroutine(Production());
+        
+        if (GameManager.Instance.InTutorial)
+        {
+            GameManager.Instance.TutorialHandler.AddMachineBehaviorToList(this);
+            machineUI.ToggleRepairingButton(false);
+            machineUI.ToggleUpgradingButton(false);
+        }
     }
 
     private void OnDisable()
@@ -171,6 +178,7 @@ public abstract class MachineBehavior : MonoBehaviour
             machineUI.UpdateButtonCostLabel(upgradeCost);
             Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
             if (GameManager.Instance.InTutorial) GameManager.Instance.TutorialHandler.UpgradedMachine();
+
         }
         else
         {
@@ -181,6 +189,17 @@ public abstract class MachineBehavior : MonoBehaviour
     #endregion
 
     #region Utility Methods
+    
+    public void ToggleMachineUIRepairButton(bool isEnabled)
+    {
+        machineUI.ToggleRepairingButton(isEnabled);
+    }
+
+    public void ToggleMachineUIUpgradeButton(bool isEnabled)
+    {
+        machineUI.ToggleUpgradingButton(isEnabled);
+    }
+
     private void SetUpAudio()
     {
         if (loopAudioSource != null)

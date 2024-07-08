@@ -12,12 +12,24 @@ public class MachineUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI inventoryNumberLabel;
     [SerializeField] private TextMeshProUGUI errorMessageLabel;
     [SerializeField] private TextMeshProUGUI updateButtonCostLabel;
+    [SerializeField] private GameObject upgradingButton;
+    [SerializeField] private GameObject repairingButton;
     [SerializeField] Slider progressBarSlider;
     [SerializeField] Slider durabilityBarSlider;
 
     private void OnEnable()
     {
         progressBarSlider.value = 0;
+    }
+
+    public void ToggleUpgradingButton(bool isEnabled)
+    {
+        upgradingButton.SetActive(isEnabled);
+    }
+
+    public void ToggleRepairingButton(bool isEnabled)
+    {
+        repairingButton.SetActive(isEnabled);
     }
     public void SetSliderMaxValue(float maxValue)
     {

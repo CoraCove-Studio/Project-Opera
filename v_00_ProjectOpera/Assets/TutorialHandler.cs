@@ -16,7 +16,8 @@ public class TutorialHandler : MonoBehaviour
     [SerializeField] private List<GameObject> machineSlots;
     [SerializeField] private List<Button> machineSelectionButtons;
 
-    [SerializeField]
+    [SerializeField] private List<MachineBehavior> machineBehaviors;
+
     private Dictionary<string, bool> conditions = new()
 {
     { "PlacedPartsMachine",             false },
@@ -74,7 +75,7 @@ public class TutorialHandler : MonoBehaviour
         {
             SetUpTutorial();
 
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(3);
 
             #region Placing Printer Machine
             gameManager.PlayerUI.SendConditionalNotification("Place a printer!");
@@ -86,7 +87,7 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(1);
 
             #region Placing Nitrogen Machine
             machineSlots[1].SetActive(true);
@@ -101,7 +102,7 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(1);
 
             #region Placing Crop Machine
             machineSlots[2].SetActive(true);
@@ -116,7 +117,7 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(1);
 
             #region Loading 1 Crop
             gameManager.PlayerUI.SendConditionalNotification("Place 1 crop into the printer!");
@@ -128,7 +129,10 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
-            yield return new WaitForSeconds(5);
+            //while (conditions["UpgradedMachine"] == false)
+            //{
+            //    yield return new WaitForSeconds(checkInterval);
+            //}
 
             #region Loading 2 Parts
             gameManager.PlayerUI.SendConditionalNotification("Place 2 parts into the cryopod!");
@@ -140,7 +144,10 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
-            yield return new WaitForSeconds(5);
+            //while (conditions["UpgradedMachine"] == false)
+            //{
+            //    yield return new WaitForSeconds(checkInterval);
+            //}
 
             #region Loading 6 Nitrogen
             gameManager.PlayerUI.SendConditionalNotification("Place 6 nitrogen into the greenhouse!");
@@ -153,31 +160,39 @@ public class TutorialHandler : MonoBehaviour
 
             #endregion
 
-            yield return new WaitForSeconds(5);
-
             #region Repairing Machine
             machineSlots[0].GetComponent<MachineSlot>().SpawnedMachine.TryGetComponent(out MachineBehavior machine);
             machine.BreakMachine();
 
             gameManager.PlayerUI.SendTimedNotification("A machine broke!");
+            yield return new WaitForSeconds(3);
             gameManager.PlayerUI.SendConditionalNotification("Repair the machine!");
+            ToggleRepairButtons(true, false, false);
 
             while (conditions["RepairedMachine"] == false)
             {
+                Debug.Log($"Inside of RepairingMachineLoop.  RepairedMachineCondition: {conditions["RepairedMachine"]} ");
                 yield return new WaitForSeconds(checkInterval);
             }
+
             Debug.Log("Tutorialhandler: Main Routine: Repaired machine.");
             gameManager.PlayerUI.CloseConditionalNotification();
+            ToggleRepairButtons(true, true, true);
             #endregion
 
+            yield return new WaitForSeconds(3);
+
             #region Upgrading Machine
+            if (conditions["UpgradedMachine"] == false) gameManager.AddCreditsToPlayer(35);
             gameManager.PlayerUI.SendConditionalNotification("Upgrade a machine!");
+            ToggleUpgradeButtons(true, false, false);
             while (conditions["UpgradedMachine"] == false)
             {
                 yield return new WaitForSeconds(checkInterval);
             }
             Debug.Log("Tutorialhandler: Main Routine: Upgraded machine.");
             gameManager.PlayerUI.CloseConditionalNotification();
+            ToggleUpgradeButtons(true, true, true);
             #endregion
 
             #region Waiting For a Minute
@@ -237,6 +252,11 @@ public class TutorialHandler : MonoBehaviour
         }
     }
 
+    public void AddMachineBehaviorToList(MachineBehavior machineBehavior)
+    {
+        machineBehaviors.Add(machineBehavior);
+    }
+
     private void UnSetUpTutorial()
     {
         machineSlots[3].SetActive(true);
@@ -268,6 +288,24 @@ public class TutorialHandler : MonoBehaviour
 
         machineSelectionButtons[4].interactable = machineThree;
         machineSelectionButtons[5].interactable = machineThree;
+    }
+
+    private void ToggleRepairButtons(bool machineOne, bool machineTwo, bool machineThree)
+    {
+        machineBehaviors[0].ToggleMachineUIRepairButton(machineOne);
+
+        machineBehaviors[1].ToggleMachineUIRepairButton(machineTwo);
+
+        machineBehaviors[2].ToggleMachineUIRepairButton(machineThree);
+    }
+
+    private void ToggleUpgradeButtons(bool machineOne, bool machineTwo, bool machineThree)
+    {
+        machineBehaviors[0].ToggleMachineUIUpgradeButton(machineOne);
+
+        machineBehaviors[1].ToggleMachineUIUpgradeButton(machineTwo);
+
+        machineBehaviors[2].ToggleMachineUIUpgradeButton(machineThree);
     }
 
     public void PlacedResourceInMachine(ResourceTypes resourceType)

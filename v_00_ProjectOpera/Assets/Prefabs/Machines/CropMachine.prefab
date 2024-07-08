@@ -949,6 +949,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2988652365832549846, guid: 78faf1ea68d3a9149b91a03fab5cd27e,
+        type: 3}
+      propertyPath: repairingButton
+      value: 
+      objectReference: {fileID: 491993684023528979}
+    - target: {fileID: 2988652365832549846, guid: 78faf1ea68d3a9149b91a03fab5cd27e,
+        type: 3}
+      propertyPath: upgradingButton
+      value: 
+      objectReference: {fileID: 6889969847879349086}
     - target: {fileID: 4700636367709031418, guid: 78faf1ea68d3a9149b91a03fab5cd27e,
         type: 3}
       propertyPath: m_Name
@@ -986,9 +996,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac1bad520a670974ea049f347fc7fc08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &491993684023528979 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3010809557173875676, guid: 78faf1ea68d3a9149b91a03fab5cd27e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3394415531418615247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3043247171981204729 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 369484134514467126, guid: 78faf1ea68d3a9149b91a03fab5cd27e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3394415531418615247}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6889969847879349086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8108016323885682321, guid: 78faf1ea68d3a9149b91a03fab5cd27e,
     type: 3}
   m_PrefabInstance: {fileID: 3394415531418615247}
   m_PrefabAsset: {fileID: 0}
