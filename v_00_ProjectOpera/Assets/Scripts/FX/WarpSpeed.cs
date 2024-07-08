@@ -11,7 +11,19 @@ public class WarpSpeed : MonoBehaviour
     public Volume volume;
     public MeshRenderer movingSwirlFX;
 
+    public GameObject planet1;
+    public GameObject planet2;
+    public GameObject planet3;
+
+    public GameObject planet_1_fresnal;
+    public GameObject planet_2_fresnal;
+    public GameObject planet_3_fresnal;
+
     private bool warpActive;
+    private bool planet1passed = false;
+    private bool planet2passed = false;
+    private bool planet3passed = false;
+
     private Coroutine warpCoroutine;
     private Coroutine warpCoroutine_Mesh;
 
@@ -28,21 +40,21 @@ public class WarpSpeed : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("j"))
-        {
-            Debug.Log("you are holding it down");
-            warpActive = true;
-            warpCoroutine = StartCoroutine(ActivateWarp());
-            warpCoroutine_Mesh = StartCoroutine(ActivateShader());
-        }
+        //if (Input.GetKeyDown("j"))
+        //{
+        //    Debug.Log("you are holding it down");
+        //    warpActive = true;
+        //    warpCoroutine = StartCoroutine(ActivateWarp());
+        //    warpCoroutine_Mesh = StartCoroutine(ActivateShader());
+        //}
 
-        if (Input.GetKeyUp("j"))
-        {
-            Debug.Log("And you let it go!");
-            warpActive = false;
-            warpCoroutine = StartCoroutine(ActivateWarp());
-            warpCoroutine_Mesh = StartCoroutine(ActivateShader());
-        }
+        //if (Input.GetKeyUp("j"))
+        //{
+        //    Debug.Log("And you let it go!");
+        //    warpActive = false;
+        //    warpCoroutine = StartCoroutine(ActivateWarp());
+        //    warpCoroutine_Mesh = StartCoroutine(ActivateShader());
+        //}
     }
 
     public void EnteringWarp()
@@ -50,6 +62,10 @@ public class WarpSpeed : MonoBehaviour
         warpActive = true;
         warpCoroutine = StartCoroutine(ActivateWarp());
         warpCoroutine_Mesh = StartCoroutine(ActivateShader());
+
+        IsPlanetOneActive(planet1);
+
+        IsPlanetTwoActive(planet2);
     }
 
     public void LeavingWarp()
@@ -57,6 +73,58 @@ public class WarpSpeed : MonoBehaviour
         warpActive = false;
         warpCoroutine = StartCoroutine(ActivateWarp());
         warpCoroutine_Mesh = StartCoroutine(ActivateShader());
+
+        if (planet1passed)
+        {
+            TurnItOn(planet_1_fresnal);
+        }
+
+        if (planet2passed)
+        {
+            TurnItOn(planet_2_fresnal);
+        }
+
+        if (planet3passed)
+        {
+            TurnItOn(planet_3_fresnal);
+        }
+    }
+
+    void IsPlanetOneActive(GameObject planet)
+    {
+        if (planet == enabled && !planet1passed)
+        {
+            planet1passed = true;
+            TurnItOff(planet_1_fresnal);
+        }
+    }
+
+    void IsPlanetTwoActive(GameObject planet)
+    {
+        if (planet == enabled && !planet2passed)
+        {
+            planet2passed = true;
+            TurnItOff(planet_2_fresnal);
+        }
+    }
+
+    void IsPlanetThreeActive(GameObject planet)
+    {
+        if (planet == enabled && !planet3passed)
+        {
+            planet3passed = true;
+            TurnItOff(planet_3_fresnal);
+        }
+    }
+
+    void TurnItOff(GameObject fresnalFX)
+    {
+        fresnalFX.SetActive(false);
+    }
+
+    void TurnItOn(GameObject fresnalFX)
+    {
+        fresnalFX .SetActive(true);
     }
 
 
@@ -92,7 +160,7 @@ public class WarpSpeed : MonoBehaviour
                 if (volume.profile.TryGet<PhysicallyBasedSky>(out var physicallyBasedSky))
                 {
                     // Modify the intensityMultiplier parameter
-                    physicallyBasedSky.multiplier.value = 40f * rate * 15f; // Set your desired intensity multiplier value
+                    physicallyBasedSky.multiplier.value = 50f * rate * 35f; // Set your desired intensity multiplier value
                 }
 
                 if (amount <= 0)
