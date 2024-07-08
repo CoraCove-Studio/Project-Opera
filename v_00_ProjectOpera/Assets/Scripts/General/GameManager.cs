@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    private Dictionary<string, int> playerStatistics = new()
+    public Dictionary<string, int> playerStatistics = new()
     {
         { "Player Debt", 35000 },   //updated via void method
         { "Net Profit", 0 },        //updated via void method
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         { "Items Produced", 0 },    //updated via void method
         { "Items Collected", 0 }    //updated in game manager
     };
-
+    
     public int PlayerDebt
     {
         get { return playerDebt; }

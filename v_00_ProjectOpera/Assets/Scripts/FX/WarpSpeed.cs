@@ -22,7 +22,7 @@ public class WarpSpeed : MonoBehaviour
     {
         gameObject.SetActive(true);
         warpSpeedVFX.Stop();
-        warpSpeedVFX.SetFloat("WarpAmount", 0);
+        warpSpeedVFX.SetFloat("WarpAmount", 0f);
         movingSwirlFX.material.SetFloat("_Active", 0f);
     }
 
