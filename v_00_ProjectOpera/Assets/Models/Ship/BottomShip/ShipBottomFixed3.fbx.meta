@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 008062639c58af74e92b33660b4f56e0
+guid: 9ad3fc188c03963418a4485d4aad8d48
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -18,7 +18,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Glow
-    second: {fileID: 2100000, guid: 2ceaa83f9875fb94c973301236ec637d, type: 2}
+    second: {fileID: 2100000, guid: e1fd63e76bb7d7d47b210f8f5c98bfbd, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
