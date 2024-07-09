@@ -11,19 +11,18 @@ public class WarpSpeed : MonoBehaviour
     public Volume volume;
     public MeshRenderer movingSwirlFX;
 
-    public GameObject planet1;
-    public GameObject planet2;
-    public GameObject planet3;
+    //public GameObject planet1;
+    //public GameObject planet2;
+    //public GameObject planet3;
 
-    public GameObject planet_1_fresnal;
-    public GameObject planet_2_fresnal;
-    public GameObject planet_3_fresnal;
+    //private GameObject planet_1_fresnal;
+    //private GameObject planet_2_fresnal;
+    //private GameObject planet_3_fresnal;
+    //private bool planet1passed = false;
+    //private bool planet2passed = false;
+    //private bool planet3passed = false;
 
     private bool warpActive;
-    private bool planet1passed = false;
-    private bool planet2passed = false;
-    private bool planet3passed = false;
-
     private Coroutine warpCoroutine;
     private Coroutine warpCoroutine_Mesh;
 
@@ -63,9 +62,11 @@ public class WarpSpeed : MonoBehaviour
         warpCoroutine = StartCoroutine(ActivateWarp());
         warpCoroutine_Mesh = StartCoroutine(ActivateShader());
 
-        IsPlanetOneActive(planet1);
+        //IsPlanetOneActive(planet1);
 
-        IsPlanetTwoActive(planet2);
+        //IsPlanetTwoActive(planet2);
+
+        //IsPlanetThreeActive(planet3);
     }
 
     public void LeavingWarp()
@@ -74,58 +75,58 @@ public class WarpSpeed : MonoBehaviour
         warpCoroutine = StartCoroutine(ActivateWarp());
         warpCoroutine_Mesh = StartCoroutine(ActivateShader());
 
-        if (planet1passed)
-        {
-            TurnItOn(planet_1_fresnal);
-        }
+        //if (planet1passed)
+        //{
+        //    TurnItOn(planet_1_fresnal);
+        //}
 
-        if (planet2passed)
-        {
-            TurnItOn(planet_2_fresnal);
-        }
+        //if (planet2passed)
+        //{
+        //    TurnItOn(planet_2_fresnal);
+        //}
 
-        if (planet3passed)
-        {
-            TurnItOn(planet_3_fresnal);
-        }
+        //if (planet3passed)
+        //{
+        //    TurnItOn(planet_3_fresnal);
+        //}
     }
 
-    void IsPlanetOneActive(GameObject planet)
-    {
-        if (planet == enabled && !planet1passed)
-        {
-            planet1passed = true;
-            TurnItOff(planet_1_fresnal);
-        }
-    }
+    //void IsPlanetOneActive(GameObject planet)
+    //{
+    //    if (planet == enabled && !planet1passed)
+    //    {
+    //        planet1passed = true;
+    //        TurnItOff(planet_1_fresnal);
+    //    }
+    //}
 
-    void IsPlanetTwoActive(GameObject planet)
-    {
-        if (planet == enabled && !planet2passed)
-        {
-            planet2passed = true;
-            TurnItOff(planet_2_fresnal);
-        }
-    }
+    //void IsPlanetTwoActive(GameObject planet)
+    //{
+    //    if (planet == enabled && !planet2passed && planet1passed)
+    //    {
+    //        planet2passed = true;
+    //        TurnItOff(planet_2_fresnal);
+    //    }
+    //}
 
-    void IsPlanetThreeActive(GameObject planet)
-    {
-        if (planet == enabled && !planet3passed)
-        {
-            planet3passed = true;
-            TurnItOff(planet_3_fresnal);
-        }
-    }
+    //void IsPlanetThreeActive(GameObject planet)
+    //{
+    //    if (planet == enabled && !planet3passed && planet2passed)
+    //    {
+    //        planet3passed = true;
+    //        TurnItOff(planet_3_fresnal);
+    //    }
+    //}
 
-    void TurnItOff(GameObject fresnalFX)
-    {
-        fresnalFX.SetActive(false);
-    }
+    //void TurnItOff(GameObject fresnalFX)
+    //{
+    //    fresnalFX.SetActive(false);
+    //}
 
-    void TurnItOn(GameObject fresnalFX)
-    {
-        fresnalFX .SetActive(true);
-    }
+    //void TurnItOn(GameObject fresnalFX)
+    //{
+    //    fresnalFX .SetActive(true);
+    //}
 
 
     IEnumerator ActivateWarp()

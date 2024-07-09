@@ -67,7 +67,7 @@ public class TradeInterface : MonoBehaviour
             Debug.Log("TradeInterface: OnTriggerEnter: Warp Speed Activated.");
             GameManager.Instance.PlayerUI.SendTimedNotification("Entering warp speed!");
 
-            //warpSpeedVFX.GetComponent<WarpSpeed>().EnteringWarp();
+            warpSpeedVFX.GetComponent<WarpSpeed>().EnteringWarp();
             //activate particle effects here
         }
         else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_DEACTIVATOR))
@@ -76,7 +76,7 @@ public class TradeInterface : MonoBehaviour
             GameManager.Instance.PlayerUI.SendTimedNotification("Exiting warp speed.");
             //deactivate particle effects here
 
-            //warpSpeedVFX.GetComponent<WarpSpeed>().LeavingWarp();
+            warpSpeedVFX.GetComponent<WarpSpeed>().LeavingWarp();
         }
     }
 
