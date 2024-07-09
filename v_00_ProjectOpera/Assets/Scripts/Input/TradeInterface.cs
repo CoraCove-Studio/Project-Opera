@@ -168,34 +168,46 @@ public class TradeInterface : MonoBehaviour
 
     public void OnClickSellCrops()
     {
-        if(GameManager.Instance.PlayerCrops > 0)
+        if(GameManager.Instance.PlayerCrops > 1)
         {
             GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.CROP);
             GameManager.Instance.AddCreditsToPlayer(valueOfCrop);
             GameManager.Instance.audioManager.PlaySFX(GetRandomNoiseClip());
             playerSoldItem = true;
         }
+        else
+        {
+            GameManager.Instance.audioManager.PlayErrorNoise();
+        }
     }
 
     public void OnClickSellParts()
     {
-        if(GameManager.Instance.PlayerParts > 0)
+        if(GameManager.Instance.PlayerParts > 1)
         {
             GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.PART);
             GameManager.Instance.AddCreditsToPlayer(valueOfPart);
             GameManager.Instance.audioManager.PlaySFX(GetRandomNoiseClip());
             playerSoldItem = true;
         }
+        else
+        {
+            GameManager.Instance.audioManager.PlayErrorNoise();
+        }
     }
 
     public void OnClickSellNitrogen()
     {
-        if(GameManager.Instance.PlayerNitrogen > 0)
+        if(GameManager.Instance.PlayerNitrogen > 1)
         {
             GameManager.Instance.TakeResourceFromPlayer(1, ResourceTypes.NITROGEN);
             GameManager.Instance.AddCreditsToPlayer(valueOfNitrogen);
             GameManager.Instance.audioManager.PlaySFX(GetRandomNoiseClip());
             playerSoldItem = true;
+        }
+        else
+        {
+            GameManager.Instance.audioManager.PlayErrorNoise();
         }
     }
 
