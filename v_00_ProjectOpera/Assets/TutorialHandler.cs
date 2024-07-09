@@ -282,6 +282,7 @@ public class TutorialHandler : MonoBehaviour
     {
         machineSlots[3].SetActive(true);
         ToggleMachineButtons(true, true, true);
+        ToggleAllDoors(true);
         gameManager.PlanetRotation.StartReturnToStartingRotationCoroutine();
     }
 

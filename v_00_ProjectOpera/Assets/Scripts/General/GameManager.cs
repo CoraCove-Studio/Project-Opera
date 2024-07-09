@@ -241,6 +241,9 @@ public class GameManager : MonoBehaviour
         if (scene.name == "MainMenu")
         {
             AudioListener.pause = false;
+            InTutorial = false;
+            InTutorialMonitor = true;
+            GamePaused = true;
         }
     }
 
@@ -526,6 +529,10 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             Time.timeScale = 5;
+        }
+        if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftControl))
+        {
+            Time.timeScale = 10;
         }
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {

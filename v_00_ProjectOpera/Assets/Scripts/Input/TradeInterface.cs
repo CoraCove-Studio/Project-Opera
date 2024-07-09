@@ -56,7 +56,7 @@ public class TradeInterface : MonoBehaviour
             valueOfPart = basePartValue * tradingHub.partPriceBoost;
             valueOfNitrogen = baseNitrogenValue * tradingHub.nitrogenPriceBoost;
             UpdatePriceLabels();
-            if(round == 3)
+            if(round == 2)
             {
                 DeactivateSellingButtons();
                 ActivateSellAllButton();
@@ -86,13 +86,13 @@ public class TradeInterface : MonoBehaviour
         {
             Debug.Log("TradeInterface: OnTriggerExit: round completed");
             ResetValueOfProducts();
-            if (!GameManager.Instance.InTutorial) { round++; }
+            if (!GameManager.Instance.InTutorial) round++;
             UpdatePriceLabels();
             GameManager.Instance.PlayerUI.ActivateTicker();
         }
         else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_DEACTIVATOR))
         {
-            if (round == 3)
+            if (round == 2)
             {
                 GameManager.Instance.PlayerUI.SendTimedNotification("Last planet incoming!");
             }

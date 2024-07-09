@@ -3,7 +3,7 @@ public class TutorialText
     public string[] tutorialSteps = new string[] {
         "Welcome, to Trade 'n Transit!",
         "Would you like a refresher on how to run the ship?",
-        "Okay! Let's talk nuts and bolts.",
+        "Okay! your ship is equipped with a lossless recycling system.",
         "Here at T&T, we do the right thing. So your ship is equipped with a lossless recycling system.",
         "That means that we don't waste anything!",
         "Don't sell everything right away! You're going to need it.",
