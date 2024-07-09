@@ -13,6 +13,7 @@ public class TradeInterface : MonoBehaviour
     private int valueOfNitrogen;
 
     [SerializeField] List<GameObject> planets;
+    [SerializeField] List<GameObject> planetAtmospheres;
     [SerializeField] List<AudioClip> sellingNoises;
     private int round = 0;
     private GameObject activePlanet;
@@ -100,6 +101,7 @@ public class TradeInterface : MonoBehaviour
             {
                 GameManager.Instance.PlayerUI.SendTimedNotification("Planet incoming!");
             }
+            if (round <= 3) { SetActivePlanetAtmosphere(round); }
         }
         else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_ACTIVATOR))
         {
@@ -152,6 +154,29 @@ public class TradeInterface : MonoBehaviour
             case 2:
                 activePlanet.SetActive(false);
                 activePlanet = planets[2];
+                activePlanet.SetActive(true);
+                break;
+            default:
+                Debug.Log("TradeInterface: SetActivePlanet: Error setting active planet");
+                break;
+        }
+    }
+
+    private void SetActivePlanetAtmosphere(int round)
+    {
+        switch (round)
+        {
+            case 0:
+                activePlanet = planetAtmospheres[0];
+                break;
+            case 1:
+                activePlanet.SetActive(false);
+                activePlanet = planetAtmospheres[1];
+                activePlanet.SetActive(true);
+                break;
+            case 2:
+                activePlanet.SetActive(false);
+                activePlanet = planetAtmospheres[2];
                 activePlanet.SetActive(true);
                 break;
             default:
