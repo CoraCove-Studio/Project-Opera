@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 53.65, y: 4.4, z: 102.3}
-  m_LocalScale: {x: 22, y: 16.4, z: 28.2}
+  m_LocalScale: {x: 54.2, y: 46.7, z: 96.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2199362461986566168}
@@ -108,7 +108,7 @@ VisualEffect:
       - m_Value: 1
         m_Name: WarpAmount
         m_Overridden: 1
-      - m_Value: 3.24
+      - m_Value: 1.48
         m_Name: Speed
         m_Overridden: 1
       - m_Value: 24.88

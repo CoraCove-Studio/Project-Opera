@@ -17995,7 +17995,6 @@ MonoBehaviour:
   m_Script: {fileID: 1854693422}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Entries: []
 --- !u!4 &1413403249
 Transform:
   m_ObjectHideFlags: 19
@@ -20463,26 +20462,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 975117170372183168, guid: b1374fddf64c58645a9431df5074b852,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1445565812449673256, guid: b1374fddf64c58645a9431df5074b852,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 54.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1445565812449673256, guid: b1374fddf64c58645a9431df5074b852,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 46.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1445565812449673256, guid: b1374fddf64c58645a9431df5074b852,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 96.2
-      objectReference: {fileID: 0}
     - target: {fileID: 1445565812449673256, guid: b1374fddf64c58645a9431df5074b852,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20538,51 +20517,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WarpSpeed_Parent
       objectReference: {fileID: 0}
-    - target: {fileID: 2269789025253024338, guid: b1374fddf64c58645a9431df5074b852,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2849234446583583260, guid: b1374fddf64c58645a9431df5074b852,
-        type: 3}
-      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[2].m_Value
-      value: 1.48
-      objectReference: {fileID: 0}
     - target: {fileID: 7986139697438114756, guid: b1374fddf64c58645a9431df5074b852,
         type: 3}
       propertyPath: volume
       value: 
       objectReference: {fileID: 1958346676}
-    - target: {fileID: 7986139697438114756, guid: b1374fddf64c58645a9431df5074b852,
-        type: 3}
-      propertyPath: planet1
-      value: 
-      objectReference: {fileID: 1650091874}
-    - target: {fileID: 7986139697438114756, guid: b1374fddf64c58645a9431df5074b852,
-        type: 3}
-      propertyPath: planet2
-      value: 
-      objectReference: {fileID: 1568455950}
-    - target: {fileID: 7986139697438114756, guid: b1374fddf64c58645a9431df5074b852,
-        type: 3}
-      propertyPath: planet3
-      value: 
-      objectReference: {fileID: 988669254}
-    - target: {fileID: 7986139697438114756, guid: b1374fddf64c58645a9431df5074b852,
-        type: 3}
-      propertyPath: planet_1_fresnal
-      value: 
-      objectReference: {fileID: 1182199907}
-    - target: {fileID: 7986139697438114756, guid: b1374fddf64c58645a9431df5074b852,
-        type: 3}
-      propertyPath: planet_2_fresnal
-      value: 
-      objectReference: {fileID: 1182199906}
-    - target: {fileID: 7986139697438114756, guid: b1374fddf64c58645a9431df5074b852,
-        type: 3}
-      propertyPath: planet_3_fresnal
-      value: 
-      objectReference: {fileID: 1182199905}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
