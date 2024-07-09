@@ -204,7 +204,7 @@ public class WarpSpeed : MonoBehaviour
                 if (volume.profile.TryGet<PhysicallyBasedSky>(out var physicallyBasedSky))
                 {
                     // Modify the intensityMultiplier parameter
-                    physicallyBasedSky.multiplier.value = 40f * rate * 15f; // Set your desired intensity multiplier value
+                    physicallyBasedSky.multiplier.value = 36f; // Set your desired intensity multiplier value
                 }
 
                 if (amount <= 0)
