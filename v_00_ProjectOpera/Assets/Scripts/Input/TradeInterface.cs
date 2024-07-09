@@ -17,6 +17,7 @@ public class TradeInterface : MonoBehaviour
     [SerializeField] List<AudioClip> sellingNoises;
     private int round = 0;
     private GameObject activePlanet;
+    [SerializeField] private GameObject activePlanetAtmosphere;
 
     [Header("Price Labels")]
     [SerializeField] private TextMeshProUGUI partPriceLabel;
@@ -43,6 +44,7 @@ public class TradeInterface : MonoBehaviour
     private void Start()
     {
         SetActivePlanet(round);
+        SetActivePlanetAtmosphere(round);
         ResetValueOfProducts();
         UpdatePriceLabels();
     }
@@ -67,7 +69,7 @@ public class TradeInterface : MonoBehaviour
         {
             Debug.Log("TradeInterface: OnTriggerEnter: Warp Speed Activated.");
             GameManager.Instance.PlayerUI.SendTimedNotification("Entering warp speed!");
-
+            activePlanetAtmosphere.SetActive(false);
             warpSpeedVFX.GetComponent<WarpSpeed>().EnteringWarp();
             //activate particle effects here
         }
@@ -78,6 +80,7 @@ public class TradeInterface : MonoBehaviour
             //deactivate particle effects here
 
             warpSpeedVFX.GetComponent<WarpSpeed>().LeavingWarp();
+            if (round <= 3) { SetActivePlanetAtmosphere(round); }
         }
     }
 
@@ -101,7 +104,6 @@ public class TradeInterface : MonoBehaviour
             {
                 GameManager.Instance.PlayerUI.SendTimedNotification("Planet incoming!");
             }
-            if (round <= 3) { SetActivePlanetAtmosphere(round); }
         }
         else if (other.gameObject.CompareTag(TagManager.WARP_SPEED_ACTIVATOR))
         {
@@ -167,20 +169,30 @@ public class TradeInterface : MonoBehaviour
         switch (round)
         {
             case 0:
-                activePlanet = planetAtmospheres[0];
+                activePlanetAtmosphere = planetAtmospheres[0];
+                activePlanetAtmosphere.SetActive(true);
+                Debug.Log("TradeInterface: SetActivePlanet: Set first atmosphere active");
                 break;
             case 1:
-                activePlanet.SetActive(false);
-                activePlanet = planetAtmospheres[1];
-                activePlanet.SetActive(true);
+                activePlanetAtmosphere.SetActive(false);
+                activePlanetAtmosphere = planetAtmospheres[1];
+                Debug.Log("TradeInterface: SetActivePlanet: Set first atmosphere active");
+                activePlanetAtmosphere.SetActive(true);
                 break;
             case 2:
-                activePlanet.SetActive(false);
-                activePlanet = planetAtmospheres[2];
-                activePlanet.SetActive(true);
+                activePlanetAtmosphere.SetActive(false);
+                activePlanetAtmosphere = planetAtmospheres[2];
+                Debug.Log("TradeInterface: SetActivePlanet: Set second atmosphere active");
+                activePlanetAtmosphere.SetActive(true);
+                break;
+            case 3:
+                activePlanetAtmosphere.SetActive(false);
+                activePlanetAtmosphere = planetAtmospheres[2];
+                Debug.Log("TradeInterface: SetActivePlanet: Set third atmosphere active");
+                activePlanetAtmosphere.SetActive(true);
                 break;
             default:
-                Debug.Log("TradeInterface: SetActivePlanet: Error setting active planet");
+                Debug.Log("TradeInterface: SetActivePlanet: Error setting active atmosphere");
                 break;
         }
     }
