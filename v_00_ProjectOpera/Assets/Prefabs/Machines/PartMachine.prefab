@@ -190,8 +190,8 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 90f1354ec287421449c66d694a39c4e4, type: 2}
-  - {fileID: 2100000, guid: eb50d63f5854cf645b41ea3581e579e2, type: 2}
-  - {fileID: 2100000, guid: f2890f3f8e638e84ca14d6ea69c34012, type: 2}
+  - {fileID: 2100000, guid: f02e406e4ddbb54448948207c210ebf8, type: 2}
+  - {fileID: 2100000, guid: f02e406e4ddbb54448948207c210ebf8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -616,6 +616,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1270587653529014473, guid: 1810a906d12710b46b35d0d005d6be89,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1270587653529014473, guid: 1810a906d12710b46b35d0d005d6be89,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1270587653529014473, guid: 1810a906d12710b46b35d0d005d6be89,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 36f2ba08ee34ed347be7fdb9dc7b92da, type: 2}
+    - target: {fileID: 1270587653529014473, guid: 1810a906d12710b46b35d0d005d6be89,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb50d63f5854cf645b41ea3581e579e2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

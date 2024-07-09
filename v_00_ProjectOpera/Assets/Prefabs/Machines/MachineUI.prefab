@@ -1248,7 +1248,7 @@ GameObject:
   - component: {fileID: 2919867866529631333}
   - component: {fileID: 6671728974259934068}
   m_Layer: 3
-  m_Name: Highlight
+  m_Name: Highlight_Repair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1263,7 +1263,7 @@ Transform:
   m_GameObject: {fileID: 3913149047889978451}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.017138332, y: 1.3198087, z: 0.023989225}
+  m_LocalPosition: {x: -0.017138332, y: 0.01, z: 0.023989225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1785,7 +1785,7 @@ GameObject:
   - component: {fileID: 5838819984810079924}
   - component: {fileID: 187016462841618927}
   m_Layer: 3
-  m_Name: Highlight
+  m_Name: Highlight_Upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

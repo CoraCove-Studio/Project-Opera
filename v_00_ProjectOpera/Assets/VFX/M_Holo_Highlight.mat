@@ -23,7 +23,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Highlight
+  m_Name: M_Holo_Highlight
   m_Shader: {fileID: -6465566751694194690, guid: 4895666372609b144bf6ec3304911011,
     type: 3}
   m_Parent: {fileID: 0}
@@ -119,7 +119,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 7.751354, g: 2.4563346, b: 9.189588, a: 1}
+    - _Color: {r: 2.5330117, g: 11.034223, b: 9.544979, a: 1}
     - _DiffusionProfileAsset: {r: -1.0144955e-33, g: -0.000000338718, b: -0.033338346,
         a: -1.6551476e-23}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}

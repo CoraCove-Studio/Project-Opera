@@ -23,7 +23,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_BaseHighlight
+  m_Name: M_Transparent_Highlight
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -182,7 +182,7 @@ Material:
     - _DstBlend: 1
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
-    - _EmissiveIntensity: 1.22
+    - _EmissiveIntensity: 4.3
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
@@ -260,14 +260,14 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.8432274, b: 1, a: 0.7254902}
+    - _BaseColor: {r: 0, g: 0.8432274, b: 1, a: 0.11764706}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0, g: 0.8432274, b: 1, a: 0.7254902}
+    - _Color: {r: 0, g: 0.8432274, b: 1, a: 0.11764706}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissiveColor: {r: 0.2544289, g: 0.5993166, b: 0.21472457, a: 1.22}
-    - _EmissiveColorLDR: {r: 0.49402046, g: 0.72955966, b: 0.4565483, a: 1}
+    - _EmissiveColor: {r: 0.08215206, g: 4.3, b: 2.6101394, a: 4.3}
+    - _EmissiveColorLDR: {r: 0.14779863, g: 1, b: 0.8018743, a: 0.12941177}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
