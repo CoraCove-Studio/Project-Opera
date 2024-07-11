@@ -39,20 +39,16 @@ public class PlayerInteraction : MonoBehaviour
             return;
         }
 
-
         Ray ray = playerCam.ViewportPointToRay(interactRayPoint);
         Debug.DrawRay(ray.origin, ray.direction * interactDistance, Color.red);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance) && hit.collider.gameObject.layer == 3)
+        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactableLayerMask, QueryTriggerInteraction.Ignore)) //&& hit.collider.gameObject.layer == 3)
         {
-            // Check if the hit object's layer is in the interactableLayerMask
-            if (((1 << hit.collider.gameObject.layer) & interactableLayerMask) != 0)
+            // No need to check the layer again here, it's already filtered by interactableLayerMask
+            if (hit.collider.TryGetComponent(out currentInteractable))
             {
-                if (hit.collider.TryGetComponent(out currentInteractable))
-                {
-                    currentInteractable.OnFocus();
-                    playerUI.EnableInteractReticle();
-                }
+                currentInteractable.OnFocus();
+                playerUI.EnableInteractReticle();
             }
         }
         else
