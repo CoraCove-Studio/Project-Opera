@@ -17,6 +17,8 @@ public class MainMenuManager : MonoBehaviour
     private AudioSource audioSource;
     private bool firstButtonSelected = false;
 
+    [SerializeField] private SceneTransition sceneTransition;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -30,6 +32,12 @@ public class MainMenuManager : MonoBehaviour
     #region Button Methods
 
     public void OnClickStartButton()
+    {
+        sceneTransition.StartSceneClose();
+        Invoke(nameof(LoadMainScene), 1f);
+    }
+
+    private void LoadMainScene()
     {
         SceneManager.LoadScene(GameManager.Instance.mainGameSceneName);
     }
