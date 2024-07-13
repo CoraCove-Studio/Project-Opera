@@ -11,6 +11,7 @@ public class MachineSlot : MonoBehaviour
     [SerializeField] Transform spawnLocation;
     [SerializeField] GameObject machineUICanvas;
     [SerializeField] GameObject machine_Base_Highlight;
+    [SerializeField] private int machineCost = 35;
 
     [SerializeField] Image floatingIconImage;
     [SerializeField] private Sprite bitcoinIcon;
@@ -44,7 +45,7 @@ public class MachineSlot : MonoBehaviour
 
     public void SpawnMachine(ResourceTypes resourceType)
     {
-        if (GameManager.Instance.PlayerCredits >= 50)
+        if (GameManager.Instance.PlayerCredits >= machineCost)
         {
             switch (resourceType)
             {
@@ -63,7 +64,7 @@ public class MachineSlot : MonoBehaviour
                 default:
                     break;
             }
-            GameManager.Instance.TakeCreditsFromPlayer(50);
+            GameManager.Instance.TakeCreditsFromPlayer(machineCost);
             machineUICanvas.SetActive(false);
             InteractableComponent.enabled = false;
             machine_Base_Highlight.SetActive(false);

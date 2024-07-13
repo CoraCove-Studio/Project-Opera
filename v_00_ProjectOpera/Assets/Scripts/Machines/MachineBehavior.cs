@@ -174,7 +174,8 @@ public abstract class MachineBehavior : MonoBehaviour
             machineUI.UpdateEfficiencyLevelText(machineEfficiencyLevel);
             machineUI.UpdateInventoryLabel(inputInventory, maximumInventory);
             GameManager.Instance.TakeCreditsFromPlayer(upgradeCost);
-            upgradeCost += 15;
+            upgradeCost *= 2;
+            maximumMachineDurability += 10;
             machineUI.UpdateButtonCostLabel(upgradeCost);
             Debug.Log(gameObject.name + "Upgraded to " + machineEfficiencyLevel);
             if (GameManager.Instance.InTutorial) GameManager.Instance.TutorialHandler.UpgradedMachine();

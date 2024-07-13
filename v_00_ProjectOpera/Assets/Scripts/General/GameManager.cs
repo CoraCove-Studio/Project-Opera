@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateNetProfit()
     {
-        playerStatistics["Net Profit"] = playerStatistics["Credits Earned"] - playerStatistics["Credits Spent"] - MaxDebt;
+        playerStatistics["Net Profit"] = playerStatistics["Credits Earned"] - playerStatistics["Credits Spent"];
         DebtUI.UpdateStatistics(playerStatistics);
     }
 
