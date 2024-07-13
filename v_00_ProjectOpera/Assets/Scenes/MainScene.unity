@@ -14575,6 +14575,18 @@ Transform:
   - {fileID: 1535408626}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &945392139 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6271237670749143123, guid: c705e62d8ed374c409ae256467c175b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 982615805193237253}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d53127d96e56db4b95d0be67841767b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &947621647
 GameObject:
   m_ObjectHideFlags: 0
@@ -33596,6 +33608,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 189716742843156632, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 189716742843156632, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 189716742843156632, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 945392139}
+    - target: {fileID: 189716742843156632, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 189716742843156632, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickSellNitrogen
+      objectReference: {fileID: 0}
+    - target: {fileID: 189716742843156632, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TradeInterface, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 189716742843156632, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 561550046439666320, guid: c705e62d8ed374c409ae256467c175b4,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -33640,6 +33687,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969833917301254547, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969833917301254547, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969833917301254547, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 945392139}
+    - target: {fileID: 2969833917301254547, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969833917301254547, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickSellCrops
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969833917301254547, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TradeInterface, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969833917301254547, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4446403257226865382, guid: c705e62d8ed374c409ae256467c175b4,
         type: 3}
@@ -33751,6 +33833,41 @@ PrefabInstance:
       propertyPath: planetAtmospheres.Array.data[2]
       value: 
       objectReference: {fileID: 1182199905}
+    - target: {fileID: 7235245747050316044, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235245747050316044, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235245747050316044, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 945392139}
+    - target: {fileID: 7235245747050316044, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235245747050316044, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickSellParts
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235245747050316044, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TradeInterface, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235245747050316044, guid: c705e62d8ed374c409ae256467c175b4,
+        type: 3}
+      propertyPath: Hold.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7441594485970676594, guid: c705e62d8ed374c409ae256467c175b4,
         type: 3}
       propertyPath: m_CastShadows
