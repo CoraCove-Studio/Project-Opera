@@ -69,7 +69,7 @@ public class MonitorInterface : MonoBehaviour
     {
         if (GameManager.Instance.InTutorialMonitor)
         {
-            GameManager.Instance.CloseTutorialMonitor();
+            GameManager.Instance.SetTutorialMonitor(false);
             if (playerSelectedTutorial)
             {
                 GameManager.Instance.StartTutorial();

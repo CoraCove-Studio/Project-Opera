@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.031195005, g: 0.029489655, b: 0.025053378, a: 1}
+  m_IndirectSpecularColor: {r: 0.031194976, g: 0.029489718, b: 0.025053497, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4252,6 +4252,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MonitorArm
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854893862286736978, guid: 861285617ab285e4fb0db277f06f6569,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3555022808254179224, guid: 861285617ab285e4fb0db277f06f6569,
         type: 3}
@@ -28389,6 +28394,12 @@ RectTransform:
   m_AnchoredPosition: {x: -556, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1712222315 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 182814746311873623, guid: 7c9eeee814b401842a694843c3bbd582,
+    type: 3}
+  m_PrefabInstance: {fileID: 7542325022802552091}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1715794369 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1cd7f5cf03a831442872613fff62a066,
@@ -33759,6 +33770,23 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 747595511901758613, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010797485193758954, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: m_text
+      value: 'Tutorial complete!
+
+        Begin game?'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052691523894229833, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1345546082292942398, guid: 7c9eeee814b401842a694843c3bbd582,
         type: 3}
       propertyPath: m_AllowDynamicResolution
@@ -33824,11 +33852,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4763077711333772949, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
         type: 3}
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 1402205818}
+    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: tutorialLaunchPanel
+      value: 
+      objectReference: {fileID: 1712222315}
     - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
         type: 3}
       propertyPath: machineSelectionButtons.Array.size
@@ -33864,6 +33902,16 @@ PrefabInstance:
       propertyPath: machineSelectionButtons.Array.data[5]
       value: 
       objectReference: {fileID: 1653537776}
+    - target: {fileID: 6053018373971603869, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6615213644150838716, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6719195014343107136, guid: 7c9eeee814b401842a694843c3bbd582,
         type: 3}
       propertyPath: m_Name
@@ -33883,6 +33931,11 @@ PrefabInstance:
         type: 3}
       propertyPath: antialiasing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537277477395058271, guid: 7c9eeee814b401842a694843c3bbd582,
+        type: 3}
+      propertyPath: m_text
+      value: Start
       objectReference: {fileID: 0}
     - target: {fileID: 9002393781117172152, guid: 7c9eeee814b401842a694843c3bbd582,
         type: 3}

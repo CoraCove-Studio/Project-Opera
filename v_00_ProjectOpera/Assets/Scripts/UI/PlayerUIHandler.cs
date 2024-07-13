@@ -304,6 +304,7 @@ public class PlayerUIHandler : MonoBehaviour
     public void ActivateTutorialLaunchPanel()
     {
         GameManager.Instance.ActivateSubMenu();
+        GameManager.Instance.SetTutorialMonitor(true);
         tutorialLaunchPanel.SetActive(true);
         currentPanel = tutorialLaunchPanel;
         InputManager.Instance.PauseWithButton();
@@ -313,8 +314,8 @@ public class PlayerUIHandler : MonoBehaviour
 
     public void OnClickStartGameFromTutorial()
     {
-        currentPanel.SetActive(false);
         GameManager.Instance.StartGameFromTutorial();
+        currentPanel.SetActive(false);
         GameManager.Instance.ToggleGamePause();
         InputManager.Instance.UnpauseWithButton();
     }
