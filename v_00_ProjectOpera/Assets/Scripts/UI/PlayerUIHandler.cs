@@ -25,6 +25,7 @@ public class PlayerUIHandler : MonoBehaviour
 
     public ToolTipHandler tooltipHandler;
 
+    public GameObject tutorialLaunchPanel;
     public GameObject currentPanel;
     private MachineSlot currentMachineSlot;
 
@@ -297,5 +298,26 @@ public class PlayerUIHandler : MonoBehaviour
         }
         DeactivateMachineSpawnPanel();
     }
+    #endregion
+
+    #region Launch Game From Tutorial
+    public void ActivateTutorialLaunchPanel()
+    {
+        GameManager.Instance.ActivateSubMenu();
+        tutorialLaunchPanel.SetActive(true);
+        currentPanel = tutorialLaunchPanel;
+        InputManager.Instance.PauseWithButton();
+        ToggleReticleVisibility(false);
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void OnClickStartGameFromTutorial()
+    {
+        currentPanel.SetActive(false);
+        GameManager.Instance.StartGameFromTutorial();
+        GameManager.Instance.ToggleGamePause();
+        InputManager.Instance.UnpauseWithButton();
+    }
+
     #endregion
 }
