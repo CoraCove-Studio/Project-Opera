@@ -7,6 +7,7 @@ public class InteractableObject : Interactable
 {
     public UnityEvent Focus;
     public UnityEvent Interact;
+    public UnityEvent Hold;
     public UnityEvent LoseFocus;
 
     public override void OnFocus()
@@ -17,6 +18,11 @@ public class InteractableObject : Interactable
     public override void OnInteract()
     {
         Interact.Invoke();
+    }
+
+    public override void OnHold()
+    {
+        Hold.Invoke();
     }
 
     public override void OnLoseFocus()

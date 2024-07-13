@@ -10,6 +10,7 @@ public abstract class Interactable : MonoBehaviour
     }
 
     public abstract void OnInteract();
+    public abstract void OnHold();
     public abstract void OnFocus();
     public abstract void OnLoseFocus();
 }

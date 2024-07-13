@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
-
     private static bool isQuitting = false;
     private static InputManager instance;
     public static InputManager Instance
@@ -22,7 +21,6 @@ public class InputManager : MonoBehaviour
             return instance;
         }
     }
-
 
     private void Awake()
     {
@@ -49,10 +47,12 @@ public class InputManager : MonoBehaviour
     public event CameraInputHandler OnCamMove;
 
     public delegate void InteractHandler();
-    public event InteractHandler OnInteraction;
+    public event InteractHandler OnInteractionStart;
+    public event InteractHandler OnInteractionStop;
 
     public delegate void PauseHandler();
     public event PauseHandler OnPause;
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -93,7 +93,8 @@ public class InputManager : MonoBehaviour
         coreActionMap["Movement"].performed += HandleMovement;
         coreActionMap["Movement"].canceled += HandleMovement;
         coreActionMap["Look"].performed += HandleCamMovement;
-        coreActionMap["Interact"].performed += HandleInteraction;
+        coreActionMap["Interact"].started += StartInteraction;
+        coreActionMap["Interact"].canceled += StopInteraction;
         coreActionMap["Pause"].performed += HandlePause;
 
         UIActionMap["Pause"].performed += HandlePause;
@@ -129,12 +130,14 @@ public class InputManager : MonoBehaviour
         OnCamMove?.Invoke(ctx.ReadValue<Vector2>());
     }
 
-    private void HandleInteraction(InputAction.CallbackContext ctx)
+    private void StartInteraction(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-        {
-            OnInteraction?.Invoke();
-        }
+        OnInteractionStart?.Invoke();
+    }
+
+    private void StopInteraction(InputAction.CallbackContext ctx)
+    {
+        OnInteractionStop?.Invoke();
     }
 
     private void HandlePause(InputAction.CallbackContext context)
