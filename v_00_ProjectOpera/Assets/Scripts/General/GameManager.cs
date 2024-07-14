@@ -283,6 +283,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGameFromTutorial()
     {
+        SetTutorialMonitor(false);
         gameTimer.StartTimer();
         PlanetRotation.StartRotationCoroutine();
         Debug.Log("GameManager: StartGameFromTutorial: Starting a game from the tutorial.");

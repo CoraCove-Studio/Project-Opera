@@ -15256,16 +15256,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8279df620e75ba44a9f6b8a3e573f7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolutionDropdown: {fileID: 0}
-  displayModeDropdown: {fileID: 0}
-  yFlippedToggle: {fileID: 0}
-  moveUpButtonDropdown: {fileID: 0}
-  moveDownButtonDropdown: {fileID: 0}
-  mouseSensitivitySlider: {fileID: 0}
-  musicVolumeSlider: {fileID: 0}
-  sfxVolumeSlider: {fileID: 0}
-  applyButton: {fileID: 0}
-  saveButton: {fileID: 0}
+  resolutionDropdown: {fileID: 1931175532002400195}
+  displayModeDropdown: {fileID: 3252170218260920004}
+  yFlippedToggle: {fileID: 4910081393308204373}
+  moveUpButtonDropdown: {fileID: 2889700038381290179}
+  moveDownButtonDropdown: {fileID: 5753180339310542468}
+  mouseSensitivitySlider: {fileID: 2921782017482741153}
+  musicVolumeSlider: {fileID: 5862553430413139958}
+  sfxVolumeSlider: {fileID: 2537230146944391329}
+  applyButton: {fileID: 1218440896112028358}
+  saveButton: {fileID: 586211297889703273}
   inputActions: {fileID: -944628639613478452, guid: d194ec970e587a045b6f81bb7c7f2c21,
     type: 3}
 --- !u!1 &7684361091914623749

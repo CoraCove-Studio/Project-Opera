@@ -11,6 +11,8 @@ public class PlayerUIHandler : MonoBehaviour
     [SerializeField] private Image playerReticle;
     [SerializeField] private List<Sprite> reticles = new();
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject buttonPanel;
     [SerializeField] private GameObject machineSpawnPanel;
     [SerializeField] private EventSystem eventSystem;
 
@@ -110,6 +112,18 @@ public class PlayerUIHandler : MonoBehaviour
     private void LoadMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void OnClickSettingsButton()
+    {
+        buttonPanel.SetActive(false);
+        settingsMenu.SetActive(true);
+    }
+
+    public void OnClickBackButton()
+    {
+        settingsMenu.SetActive(false);
+        buttonPanel.SetActive(true);
     }
 
     public void OnClickQuitButton()
@@ -323,6 +337,7 @@ public class PlayerUIHandler : MonoBehaviour
     {
         GameManager.Instance.StartGameFromTutorial();
         currentPanel.SetActive(false);
+        currentPanel = null;
         GameManager.Instance.ToggleGamePause();
         InputManager.Instance.UnpauseWithButton();
     }
