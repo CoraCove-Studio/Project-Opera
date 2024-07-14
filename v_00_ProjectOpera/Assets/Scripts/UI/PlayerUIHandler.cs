@@ -162,14 +162,16 @@ public class PlayerUIHandler : MonoBehaviour
 
     #endregion
 
-    public void EnableInteractReticle()
+    public void EnableInteractReticle(GameObject interactable)
     {
         playerReticle.sprite = reticles[1];
+        playerReticle.color = Color.black;
     }
 
     public void DisableInteractReticle()
     {
         playerReticle.sprite = reticles[0];
+        playerReticle.gameObject.GetComponent<Image>().color = Color.white;
     }
 
     public void ToggleReticleVisibility(bool trueOrFalse)

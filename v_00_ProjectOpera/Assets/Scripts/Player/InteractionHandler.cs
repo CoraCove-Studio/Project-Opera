@@ -58,7 +58,7 @@ public class PlayerInteraction : MonoBehaviour
             if (hit.collider.TryGetComponent(out currentInteractable))
             {
                 currentInteractable.OnFocus();
-                playerUI.EnableInteractReticle();
+                playerUI.EnableInteractReticle(currentInteractable.gameObject);
             }
         }
         else

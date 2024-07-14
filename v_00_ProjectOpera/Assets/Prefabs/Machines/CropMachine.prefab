@@ -1084,6 +1084,11 @@ PrefabInstance:
       propertyPath: upgradingButton
       value: 
       objectReference: {fileID: 6889969847879349086}
+    - target: {fileID: 3010809557173875676, guid: 78faf1ea68d3a9149b91a03fab5cd27e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4700636367709031418, guid: 78faf1ea68d3a9149b91a03fab5cd27e,
         type: 3}
       propertyPath: m_Name
@@ -1103,6 +1108,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108016323885682321, guid: 78faf1ea68d3a9149b91a03fab5cd27e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -110,7 +110,7 @@
                 {
                     "name": "up",
                     "id": "31c24066-6307-4ec3-a895-4cef073b97bb",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -121,7 +121,7 @@
                 {
                     "name": "down",
                     "id": "5579615d-9c70-43be-b043-f3fce7e03bcd",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",

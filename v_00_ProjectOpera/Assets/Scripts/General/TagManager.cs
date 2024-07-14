@@ -13,5 +13,4 @@ public class TagManager : MonoBehaviour
     public const string WARP_SPEED_ACTIVATOR = "WarpSpeedActivator";
     public const string WARP_SPEED_DEACTIVATOR = "WarpSpeedDeactivator";
     public const string DOOR = "Door";
-
 }
