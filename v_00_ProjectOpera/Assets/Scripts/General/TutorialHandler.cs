@@ -89,6 +89,18 @@ public class TutorialHandler : MonoBehaviour
 
             yield return new WaitForSeconds(1);
 
+            #region Loading 1 Crop
+            gameManager.PlayerUI.SendConditionalNotification("Place 1 crop into the printer!");
+            while (conditions["OneCropInPartsMachine"] == false)
+            {
+                yield return new WaitForSeconds(checkInterval);
+            }
+            Debug.Log("Tutorialhandler: Main Routine: One crop put in parts machine.");
+            gameManager.PlayerUI.CloseConditionalNotification();
+            #endregion
+
+            yield return new WaitForSeconds(1);
+
             #region Placing Nitrogen Machine
             machineSlots[1].SetActive(true);
 
@@ -99,6 +111,18 @@ public class TutorialHandler : MonoBehaviour
                 yield return new WaitForSeconds(checkInterval);
             }
             Debug.Log("Tutorialhandler: Main Routine: Nitrogen machine was placed.");
+            gameManager.PlayerUI.CloseConditionalNotification();
+            #endregion
+
+            yield return new WaitForSeconds(1);
+
+            #region Loading 2 Parts
+            gameManager.PlayerUI.SendConditionalNotification("Place 2 parts into the cryopod!");
+            while (conditions["TwoPartsInNitrogenMachine"] == false)
+            {
+                yield return new WaitForSeconds(checkInterval);
+            }
+            Debug.Log("Tutorialhandler: Main Routine: Two parts put in nitrogen machine.");
             gameManager.PlayerUI.CloseConditionalNotification();
             #endregion
 
@@ -119,57 +143,6 @@ public class TutorialHandler : MonoBehaviour
 
             yield return new WaitForSeconds(1);
 
-            #region Loading 1 Crop
-            gameManager.PlayerUI.SendConditionalNotification("Place 1 crop into the printer!");
-            while (conditions["OneCropInPartsMachine"] == false)
-            {
-                yield return new WaitForSeconds(checkInterval);
-            }
-            Debug.Log("Tutorialhandler: Main Routine: One crop put in parts machine.");
-            gameManager.PlayerUI.CloseConditionalNotification();
-            #endregion
-
-            float startTime = Time.time;
-            bool extraMessageDisplayed = false;
-            while (gameManager.PlayerParts < 2)
-            {
-                yield return new WaitForSeconds(checkInterval);
-                float elapsedTime = Time.time - startTime;
-                if (elapsedTime > 12f && extraMessageDisplayed == false)
-                {
-                    gameManager.PlayerUI.SendTimedNotification("Find all of the parts!");
-                    extraMessageDisplayed = true;
-                }
-            }
-
-            #region Loading 2 Parts
-            gameManager.PlayerUI.SendConditionalNotification("Place 2 parts into the cryopod!");
-            while (conditions["TwoPartsInNitrogenMachine"] == false)
-            {
-                yield return new WaitForSeconds(checkInterval);
-            }
-            Debug.Log("Tutorialhandler: Main Routine: Two parts put in nitrogen machine.");
-            gameManager.PlayerUI.CloseConditionalNotification();
-            #endregion
-
-            startTime = Time.time;
-            extraMessageDisplayed = false;
-            while (gameManager.PlayerNitrogen < 6)
-            {
-                yield return new WaitForSeconds(checkInterval);
-                float elapsedTime = Time.time - startTime;
-                if (elapsedTime > 20f && extraMessageDisplayed == false)
-                {
-                    gameManager.PlayerUI.SendTimedNotification("Find all of the nitrogems!");
-                    extraMessageDisplayed = true;
-                }
-                if (elapsedTime > 30f && extraMessageDisplayed == false)
-                {
-                    gameManager.PlayerUI.SendTimedNotification("There must be more nitrogems!");
-                    extraMessageDisplayed = true;
-                }
-            }
-
             #region Loading 6 Nitrogen
             gameManager.PlayerUI.SendConditionalNotification("Place 6 nitrogen into the greenhouse!");
             while (conditions["SixNitrogenInCropsMachine"] == false)
@@ -181,13 +154,16 @@ public class TutorialHandler : MonoBehaviour
 
             #endregion
 
+            yield return new WaitForSeconds(1);
+
             #region Repairing Machine
             machineSlots[0].GetComponent<MachineSlot>().SpawnedMachine.TryGetComponent(out MachineBehavior machine);
             machine.BreakMachine();
 
-            gameManager.PlayerUI.SendTimedNotification("A machine broke!");
+            gameManager.PlayerUI.SendTimedNotification("The printer broke!");
             yield return new WaitForSeconds(3);
-            gameManager.PlayerUI.SendConditionalNotification("Repair the machine!");
+            gameManager.PlayerUI.SendConditionalNotification("Repair the printer!");
+            yield return new WaitForSeconds(0.5f);
             ToggleRepairButtons(true, false, false);
 
             while (conditions["RepairedMachine"] == false)
@@ -201,11 +177,11 @@ public class TutorialHandler : MonoBehaviour
             ToggleRepairButtons(true, true, true);
             #endregion
 
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1);
 
             #region Upgrading Machine
             if (conditions["UpgradedMachine"] == false) gameManager.AddCreditsToPlayer(35);
-            gameManager.PlayerUI.SendConditionalNotification("Upgrade a machine!");
+            gameManager.PlayerUI.SendConditionalNotification("Upgrade the printer!");
             ToggleUpgradeButtons(true, false, false);
             while (conditions["UpgradedMachine"] == false)
             {
