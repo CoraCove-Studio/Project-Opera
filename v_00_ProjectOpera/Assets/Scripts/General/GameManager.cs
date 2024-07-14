@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public TutorialHandler TutorialHandler { get; private set; }
     public DebtInterface DebtUI { get; private set; }
     public SceneTransition SceneTransition { get; private set; }
+    public SettingsMenu SettingsMenu { get; private set; }
 
     private float gameDurationInSeconds;
     public bool GamePaused { get; private set; } = true;
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour
     private int playerParts;
     private int playerNitrogen;
     private int playerDebt;
+
+    public Dictionary<string, object> SettingsDictionary { get; private set; }
 
     #region Resources Properties
 
@@ -146,6 +149,15 @@ public class GameManager : MonoBehaviour
         playerStatistics["Items Produced"] = 0;
         playerStatistics["Items Collected"] = 0;
     }
+    #endregion
+
+    #region Settings Methods
+
+    public void UpdateSettingsDictionary(Dictionary<string, object> settingsDict)
+    {
+        SettingsDictionary = settingsDict;
+    }
+
     #endregion
 
     #region High Score Properties and Methods
@@ -373,8 +385,8 @@ public class GameManager : MonoBehaviour
         TutorialHandler = GameObject.Find("TutorialHandler").GetComponent<TutorialHandler>();
         if (TutorialHandler == null) Debug.Log("GameManager: FindImportantReferences: TutorialHandler not found.");
 
-        PlanetRotation = GameObject.Find("PlanetRotation").GetComponent<PlanetRotation>();
-        if (PlanetRotation == null) Debug.Log("GameManager: FindImportantReferences: PlanetRotation not found.");
+        SettingsMenu = GameObject.Find("SettingsMenu").GetComponent<SettingsMenu>();
+        if (SettingsMenu == null) Debug.Log("GameManager: FindImportantReferences: SettingsMenu not found.");
     }
 
     #region Game Over Methods
