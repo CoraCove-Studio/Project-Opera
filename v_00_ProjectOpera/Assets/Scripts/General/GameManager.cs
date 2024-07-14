@@ -92,8 +92,6 @@ public class GameManager : MonoBehaviour
 
     #region Statistics And Debt
 
-
-
     public Dictionary<string, int> playerStatistics = new()
     {
         { "Player Debt", 35000 },   //updated via void method
@@ -148,6 +146,19 @@ public class GameManager : MonoBehaviour
         playerStatistics["Items Produced"] = 0;
         playerStatistics["Items Collected"] = 0;
     }
+    #endregion
+
+    #region High Score Properties and Methods
+
+    private List<int> topTenScores = new List<int>();
+
+    public List<int> TopTenScores
+    {
+        get { return topTenScores; }
+        private set { topTenScores = value; }
+    }
+
+
     #endregion
 
     #region Singleton pattern
@@ -252,6 +263,7 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    #region Start Game Methods
     public void StartGame()
     {
         InTutorial = false;
@@ -274,11 +286,6 @@ public class GameManager : MonoBehaviour
         // other things going to happen
 
         TutorialHandler.StartTutorialCoroutine();
-    }
-
-    public void SetInTutorialFalse()
-    {
-        InTutorial = false;
     }
 
     public void StartGameFromTutorial()
@@ -327,7 +334,9 @@ public class GameManager : MonoBehaviour
         gameDurationInSeconds = newGameValues["GameDuration"];
         playerDebt = newGameValues["PlayerDebt"];
     }
+    #endregion
 
+    #region Tooltip Methods
     public void DisplayTooltip(int value)
     {
         PlayerUI.DisplayTooltip(value);
@@ -341,6 +350,8 @@ public class GameManager : MonoBehaviour
     {
         PlayerUI.tooltipHandler.ClearDisplay();
     }
+
+    #endregion
 
     private void FindImportantReferences()
     {
@@ -366,6 +377,7 @@ public class GameManager : MonoBehaviour
         if (PlanetRotation == null) Debug.Log("GameManager: FindImportantReferences: PlanetRotation not found.");
     }
 
+    #region Game Over Methods
     private void CheckGameOver()
     {
         if (gameTimer != null && gameTimer.CountdownTimer <= 0)
@@ -385,12 +397,21 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameOver");
     }
+    #endregion
 
+    #region Tutorial Methods
     public void SetTutorialMonitor(bool isActive)
     {
         InTutorialMonitor = isActive;
     }
 
+    public void SetInTutorialFalse()
+    {
+        InTutorial = false;
+    }
+    #endregion
+
+    #region Game Pause Methods
     public void ToggleGamePause()
     {
         // This method is subscribed to the OnPause event from the InputHandler and 
@@ -431,6 +452,7 @@ public class GameManager : MonoBehaviour
     {
         GamePaused = true;
     }
+    #endregion
 
     #region Add / Take Resource Methods
 
