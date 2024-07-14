@@ -28,7 +28,16 @@ public class InputManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            InitializeControls();
+
+            if (FindAndAssignInputActionAsset())
+            {
+                LoadSavedBindings();
+                InitializeControls();
+            }
+            else
+            {
+                Debug.LogError("Failed to find and assign InputActionAsset. InputManager initialization aborted.");
+            }
         }
         else if (instance != this)
         {
@@ -36,7 +45,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private Controls controls;
+    private InputActionAsset inputActions;
     private InputActionMap coreActionMap;
     private InputActionMap UIActionMap;
 
@@ -57,12 +66,40 @@ public class InputManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         Application.quitting += Quitting;
+        //inputActions = InputActionAsset.FromJson()
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
         Application.quitting -= Quitting;
+    }
+
+    private bool FindAndAssignInputActionAsset()
+    {
+        GameObject playerCanvas = GameObject.Find("PlayerCanvas");
+        if (playerCanvas == null)
+        {
+            Debug.LogError("PlayerCanvas GameObject not found in the scene!");
+            return false;
+        }
+
+        SettingsMenu settingsMenu = playerCanvas.GetComponentInChildren<SettingsMenu>();
+        if (settingsMenu == null)
+        {
+            Debug.LogError("SettingsMenu component not found on PlayerCanvas!");
+            return false;
+        }
+
+        inputActions = settingsMenu.GetInputActions();
+        if (inputActions == null)
+        {
+            Debug.LogError("InputActionAsset not found in SettingsMenu!");
+            return false;
+        }
+
+        Debug.Log("InputActionAsset successfully assigned from SettingsMenu.");
+        return true;
     }
 
     private void Quitting()
@@ -85,19 +122,39 @@ public class InputManager : MonoBehaviour
 
     private void InitializeControls()
     {
-        controls = new Controls();
-        coreActionMap = controls.Core;
-        UIActionMap = controls.UI;
+        if (inputActions == null)
+        {
+            Debug.LogError("InputActionAsset is not assigned to InputManager!");
+            return;
+        }
+
+        coreActionMap = inputActions.FindActionMap("Core");
+        UIActionMap = inputActions.FindActionMap("UI");
+
+        if (coreActionMap == null || UIActionMap == null)
+        {
+            Debug.LogError("Core or UI action map not found in the InputActionAsset!");
+            return;
+        }
 
         // Assign action handlers
-        coreActionMap["Movement"].performed += HandleMovement;
-        coreActionMap["Movement"].canceled += HandleMovement;
-        coreActionMap["Look"].performed += HandleCamMovement;
-        coreActionMap["Interact"].started += StartInteraction;
-        coreActionMap["Interact"].canceled += StopInteraction;
-        coreActionMap["Pause"].performed += HandlePause;
+        coreActionMap.FindAction("Movement").performed += HandleMovement;
+        coreActionMap.FindAction("Movement").canceled += HandleMovement;
+        coreActionMap.FindAction("Look").performed += HandleCamMovement;
+        coreActionMap.FindAction("Interact").started += StartInteraction;
+        coreActionMap.FindAction("Interact").canceled += StopInteraction;
+        coreActionMap.FindAction("Pause").performed += HandlePause;
 
-        UIActionMap["Pause"].performed += HandlePause;
+        UIActionMap.FindAction("Pause").performed += HandlePause;
+    }
+
+    public void LoadSavedBindings()
+    {
+        string rebinds = PlayerPrefs.GetString("InputBindings", string.Empty);
+        if (!string.IsNullOrEmpty(rebinds))
+        {
+            inputActions.LoadBindingOverridesFromJson(rebinds);
+        }
     }
 
     private void EnableCoreControls()

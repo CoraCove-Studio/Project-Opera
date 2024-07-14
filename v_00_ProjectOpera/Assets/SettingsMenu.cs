@@ -268,6 +268,11 @@ public class SettingsMenu : MonoBehaviour
         // Implement y-flipped logic
     }
 
+    public InputActionAsset GetInputActions()
+    {
+        return inputActions;
+    }
+
     private void ApplyInputSettings(string moveUpButton, string moveDownButton)
     {
         // Find the Move action

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.031935256, g: 0.030079227, b: 0.025476983, a: 1}
+  m_IndirectSpecularColor: {r: 0.014990879, g: 0.015031771, b: 0.013667944, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6844,18 +6844,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9d3bb1e9c7d8428bcd10eff012ed5, type: 3}
---- !u!114 &362161212 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4875566973963514333, guid: 83e9d3bb1e9c7d8428bcd10eff012ed5,
-    type: 3}
-  m_PrefabInstance: {fileID: 362161211}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bdc67567643c324088ff5998523fa14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &380114090 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1cd7f5cf03a831442872613fff62a066,
@@ -30297,12 +30285,6 @@ RectTransform:
   m_AnchoredPosition: {x: -556, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1712222315 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 182814746311873623, guid: 7c9eeee814b401842a694843c3bbd582,
-    type: 3}
-  m_PrefabInstance: {fileID: 7542325022802552091}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1715794369 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1cd7f5cf03a831442872613fff62a066,
@@ -36055,48 +36037,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 747595511901758613, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1010797485193758954, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: m_text
-      value: 'Tutorial complete!
-
-        Begin game?'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1052691523894229833, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1345546082292942398, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: m_AllowDynamicResolution
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1989376660620192215, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 5.6938477
-      objectReference: {fileID: 0}
-    - target: {fileID: 1989376660620192215, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.5008545
-      objectReference: {fileID: 0}
-    - target: {fileID: 3169898618540486505, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 5.6938477
-      objectReference: {fileID: 0}
-    - target: {fileID: 3169898618540486505, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.5008545
-      objectReference: {fileID: 0}
     - target: {fileID: 3721341885599068328, guid: 7c9eeee814b401842a694843c3bbd582,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -36147,100 +36087,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4763077711333772949, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
         type: 3}
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 1402205818}
-    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: sceneTransition
-      value: 
-      objectReference: {fileID: 362161212}
-    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: tutorialLaunchPanel
-      value: 
-      objectReference: {fileID: 1712222315}
-    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: machineSelectionButtons.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: machineSelectionButtons.Array.data[0]
-      value: 
-      objectReference: {fileID: 187506167}
-    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: machineSelectionButtons.Array.data[1]
-      value: 
-      objectReference: {fileID: 1839995722}
-    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: machineSelectionButtons.Array.data[2]
-      value: 
-      objectReference: {fileID: 1848588958}
-    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: machineSelectionButtons.Array.data[3]
-      value: 
-      objectReference: {fileID: 2143777370}
-    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: machineSelectionButtons.Array.data[4]
-      value: 
-      objectReference: {fileID: 138358503}
-    - target: {fileID: 5082688392836546713, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: machineSelectionButtons.Array.data[5]
-      value: 
-      objectReference: {fileID: 1653537776}
-    - target: {fileID: 6053018373971603869, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6615213644150838716, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6719195014343107136, guid: 7c9eeee814b401842a694843c3bbd582,
         type: 3}
       propertyPath: m_Name
       value: PlayerPrefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200059015104631435, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: stopNaNs
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200059015104631435, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: dithering
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200059015104631435, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: antialiasing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8537277477395058271, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: m_text
-      value: Start
-      objectReference: {fileID: 0}
-    - target: {fileID: 9002393781117172152, guid: 7c9eeee814b401842a694843c3bbd582,
-        type: 3}
-      propertyPath: interactableLayerMask.m_Bits
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
