@@ -269,7 +269,8 @@ public class TutorialHandler : MonoBehaviour
             gameManager.PlayerUI.SendTimedNotification("Now get back to work!");
 
             UnSetUpTutorial();
-            gameManager.StartGameFromTutorial(); // Sets InTutorial to false
+            gameManager.SetInTutorialFalse();
+            gameManager.PlayerUI.ActivateTutorialLaunchPanel(); // Sets InTutorial to false
         }
     }
 

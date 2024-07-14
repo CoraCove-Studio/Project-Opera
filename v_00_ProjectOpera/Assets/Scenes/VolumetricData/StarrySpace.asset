@@ -97,7 +97,7 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.98483336, y: 1, z: 0.93, w: 0}
+    m_Value: {x: 0.98483336, y: 1, z: 0.93, w: 0.044506222}
   midtones:
     m_OverrideState: 1
     m_Value: {x: 1, y: 0.9615, z: 0.79, w: -0.08442777}
@@ -191,13 +191,13 @@ MonoBehaviour:
     m_Value: 55261.973
   aerosolDensity:
     m_OverrideState: 1
-    m_Value: 0.739
+    m_Value: 0.08
   aerosolTint:
     m_OverrideState: 1
-    m_Value: {r: 0.21569549, g: 0.51572317, b: 0.7882353, a: 1}
+    m_Value: {r: 0.72196513, g: 0.8188455, b: 0.9056604, a: 1}
   aerosolMaximumAltitude:
     m_OverrideState: 1
-    m_Value: 299.52
+    m_Value: 299
   aerosolAnisotropy:
     m_OverrideState: 0
     m_Value: -1
@@ -382,7 +382,7 @@ MonoBehaviour:
   active: 1
   indirectDiffuseLightingMultiplier:
     m_OverrideState: 1
-    m_Value: 7.1
+    m_Value: 3.17
   indirectDiffuseLightingLayers:
     m_OverrideState: 0
     m_Value: 255
@@ -443,7 +443,7 @@ MonoBehaviour:
     m_Value: 0.53
   intensity:
     m_OverrideState: 1
-    m_Value: 0.157
+    m_Value: 0.16
   scatter:
     m_OverrideState: 1
     m_Value: 0.86
@@ -669,13 +669,13 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 1.43
+    m_Value: 1.26
   directLightingStrength:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.84
   radius:
     m_OverrideState: 1
-    m_Value: 2.97
+    m_Value: 1.07
   spatialBilateralAggressiveness:
     m_OverrideState: 0
     m_Value: 0.15
