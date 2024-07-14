@@ -28,6 +28,15 @@ public class GameOverUIHandler : MonoBehaviour
 
     private void Awake()
     {
+        CheckIfRunSuccessful();
+    }
+
+    private void CheckIfRunSuccessful()
+    {
+        if(gameManager.PlayerDebt > 0)
+        {
+            gameManager.ResetSuccessfulRuns();
+        }
     }
     public void UpdateStatistics(Dictionary<string, int> statistics)
     {

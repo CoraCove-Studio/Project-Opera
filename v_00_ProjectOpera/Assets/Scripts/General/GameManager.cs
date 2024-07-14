@@ -205,7 +205,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void UpdateSuccessfulRuns()
+    public void UpdateSuccessfulRuns()
     {
         if(PlayerDebt <= 0)
         {
