@@ -12,6 +12,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject activePanel;
     [SerializeField] private GameObject helpPanel;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject scoreboardPanel;
     [SerializeField] private GameObject creditsPanel;
     [SerializeField] private List<AudioClip> buttonSelectClips;
     private AudioSource audioSource;
@@ -55,6 +56,11 @@ public class MainMenuManager : MonoBehaviour
     public void OnClickSettingsButton()
     {
         SwapActivePanel(settingsPanel);
+        PlayClickNoise();
+    }
+    public void OnClickScoreboardButton()
+    {
+        SwapActivePanel(scoreboardPanel);
         PlayClickNoise();
     }
     public void OnClickCreditsButton()
