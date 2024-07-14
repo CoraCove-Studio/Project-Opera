@@ -1729,7 +1729,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 839.8034, y: -29.1385}
+  m_AnchoredPosition: {x: 822.99585, y: -29.1385}
   m_SizeDelta: {x: 335.92136, y: 58.277}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5266594611680253363
@@ -3575,7 +3575,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 503.88208, y: -28.500614}
+  m_AnchoredPosition: {x: 503.88208, y: -59.50123}
   m_SizeDelta: {x: 1007.76416, y: 54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1193263242642890560
@@ -3690,7 +3690,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 503.88202, y: -29.1385}
+  m_AnchoredPosition: {x: 470.26685, y: -29.1385}
   m_SizeDelta: {x: 335.92136, y: 58.277}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5807385042159075299
@@ -3775,7 +3775,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2581167326617233850}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: ApplySettings
         m_Mode: 1
@@ -7591,7 +7591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1716018196742035796
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9543,8 +9543,8 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -14267,7 +14267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8398129904815178257
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14359,7 +14359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 503.88208, y: -90.50185}
+  m_AnchoredPosition: {x: 503.88208, y: -183.5037}
   m_SizeDelta: {x: 1007.76416, y: 54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7025874026952383761
@@ -15599,8 +15599,6 @@ MonoBehaviour:
   sfxVolumeSlider: {fileID: 2537230146944391329}
   applyButton: {fileID: 1218440896112028358}
   saveButton: {fileID: 586211297889703273}
-  inputActions: {fileID: -944628639613478452, guid: d194ec970e587a045b6f81bb7c7f2c21,
-    type: 3}
 --- !u!1 &7684361091914623749
 GameObject:
   m_ObjectHideFlags: 0
@@ -16846,8 +16844,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 503.88205, y: -29.1385}
-  m_SizeDelta: {x: 1007.7641, y: 10}
+  m_AnchoredPosition: {x: 142.7493, y: -29.1385}
+  m_SizeDelta: {x: 285.4986, y: 60.2295}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7750646458082821820
 CanvasRenderer:
@@ -16931,9 +16929,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
-        m_MethodName: ApplySettings
+      - m_Target: {fileID: 5082688392836546713}
+        m_TargetAssemblyTypeName: PlayerUIHandler, Assembly-CSharp
+        m_MethodName: OnClickBackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
