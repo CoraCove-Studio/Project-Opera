@@ -35,7 +35,7 @@ public class TutorialHandler : MonoBehaviour
 
     { "5SecondsPassed",                 false },
 
-    { "Made600Credits",                 false },
+    { "Made500Credits",                 false },
     { "MadeDebtPayment",                false }
 };
 
@@ -240,11 +240,11 @@ public class TutorialHandler : MonoBehaviour
             yield return new WaitForSeconds(5);
             #endregion
 
-            #region Make 600 Credits
-            gameManager.PlayerUI.SendConditionalNotification("Make 600 credits!");
-            while (conditions["Made600Credits"] == false)
+            #region Make 500 Credits
+            gameManager.PlayerUI.SendConditionalNotification("Make 500 credits!");
+            while (conditions["Made500Credits"] == false)
             {
-                if (GameManager.Instance.PlayerCredits >= 600) Made600Credits();
+                if (GameManager.Instance.PlayerCredits >= 500) Made500Credits();
                 yield return new WaitForSeconds(checkInterval);
             }
             Debug.Log("Tutorialhandler: Main Routine: Made 600 credits.");
@@ -403,9 +403,9 @@ public class TutorialHandler : MonoBehaviour
         conditions["5SecondsPassed"] = true;
     }
 
-    public void Made600Credits()
+    public void Made500Credits()
     {
-        conditions["Made600Credits"] = true;
+        conditions["Made500Credits"] = true;
     }
 
     public void MadeDebtPayment()

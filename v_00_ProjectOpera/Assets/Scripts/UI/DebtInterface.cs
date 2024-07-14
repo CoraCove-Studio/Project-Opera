@@ -46,8 +46,8 @@ public class DebtInterface : MonoBehaviour
         bool madePayment = false;
         if (gameManager.InTutorial)
         {
-            gameManager.TakeCreditsFromPlayer(gameManager.PlayerCredits);
-            gameManager.PayDebt(gameManager.PlayerCredits);
+            gameManager.PayDebt(amount);
+            gameManager.TakeCreditsFromPlayer(amount);
             gameManager.TutorialHandler.MadeDebtPayment();
             madePayment = true;
         }
@@ -56,8 +56,8 @@ public class DebtInterface : MonoBehaviour
 
             if (gameManager.PlayerCredits >= amount && gameManager.PlayerDebt >= amount && gameManager.PlayerDebt > 0)
             {
-                gameManager.TakeCreditsFromPlayer(amount);
                 gameManager.PayDebt(amount);
+                gameManager.TakeCreditsFromPlayer(amount);
                 madePayment = true;
             }
             else if (gameManager.PlayerCredits >= gameManager.PlayerDebt && gameManager.PlayerDebt < amount && gameManager.PlayerDebt > 0)
@@ -66,6 +66,7 @@ public class DebtInterface : MonoBehaviour
                 madePayment = true;
             }
         }
+        UpdateStatistics(gameManager.playerStatistics);
         if (madePayment) gameManager.audioManager.PlayDebtPaymentNoise();
 
     }
@@ -75,8 +76,9 @@ public class DebtInterface : MonoBehaviour
         if (gameManager.PlayerCredits >= gameManager.PlayerDebt && gameManager.PlayerDebt > 0)
         {
             Debug.Log("DebtInterface: OnClickPayAllDebt: debt paid.");
-            gameManager.TakeCreditsFromPlayer(gameManager.PlayerDebt);
             gameManager.PayDebt(gameManager.PlayerDebt);
+            gameManager.TakeCreditsFromPlayer(gameManager.PlayerDebt);
+            gameManager.audioManager.PlayDebtPaymentNoise();
         }
     }
 }
