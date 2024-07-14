@@ -23,6 +23,8 @@ public class MainMenuManager : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        GameManager.Instance.LoadGameData();
+        //UpdateUIScore();
     }
 
     private AudioClip GetRandomNoiseClip()
@@ -71,6 +73,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickQuit()
     {
+        GameManager.Instance.SaveGameData();
         Application.Quit();
     }
     private void SwapActivePanel(GameObject panel)

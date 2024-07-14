@@ -116,12 +116,14 @@ public class GameManager : MonoBehaviour
         PlayerDebt -= amount;
         playerStatistics["Player Debt"] -= amount;
         DebtUI.UpdateStatistics(playerStatistics);
+        UpdateSuccessfulRuns();
     }
 
     public void UpdateNetProfit()
     {
         playerStatistics["Net Profit"] = playerStatistics["Credits Earned"] - playerStatistics["Credits Spent"];
         DebtUI.UpdateStatistics(playerStatistics);
+        UpdateHighScore();
     }
 
     public void UpdateMachinesBroken()
@@ -150,14 +152,54 @@ public class GameManager : MonoBehaviour
 
     #region High Score Properties and Methods
 
-    private List<int> topTenScores = new List<int>();
-
-    public List<int> TopTenScores
+    private int highScore;
+    private int successfulRunsCount;
+    public int HighScore
     {
-        get { return topTenScores; }
-        private set { topTenScores = value; }
+        get => highScore;
+        private set => highScore = value;
+    }
+    public int SuccessfulRunsCount
+    {
+        get => successfulRunsCount;
+        private set => successfulRunsCount = value;
     }
 
+    public void LoadGameData()
+    {
+        HighScore = PlayerPrefs.GetInt("highScore", 0);
+        SuccessfulRunsCount = PlayerPrefs.GetInt("successfulRunsCount", 0);
+    }
+
+    public void ResetSuccessfulRuns()
+    {
+        PlayerPrefs.SetInt("successfulRunsCount", 0);
+        PlayerPrefs.Save();
+        SuccessfulRunsCount = 0;
+    }
+
+    public void SaveGameData()
+    {
+        PlayerPrefs.SetInt("highScore", HighScore);
+        PlayerPrefs.SetInt("successfulRunsCount", SuccessfulRunsCount);
+        PlayerPrefs.Save();
+    }
+
+    private void UpdateHighScore()
+    {
+        if (playerStatistics["Net Profit"] > HighScore)
+        {
+            HighScore = playerStatistics["Net Profit"];
+        }
+    }
+
+    private void UpdateSuccessfulRuns()
+    {
+        if(PlayerDebt <= 0)
+        {
+            SuccessfulRunsCount++;
+        }
+    }
 
     #endregion
 
