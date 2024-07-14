@@ -15467,8 +15467,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 57a600983141a8c4593ed6d434861875, type: 3}
   - {fileID: 21300000, guid: 02e0c6159e95ea046a97fab641304b8f, type: 3}
   pauseMenu: {fileID: 8222275293796203795}
-  settingsMenu: {fileID: 0}
-  buttonPanel: {fileID: 0}
+  settingsMenu: {fileID: 4814147782544251264}
+  buttonPanel: {fileID: 2473694767295773683}
   machineSpawnPanel: {fileID: 9140533246198801321}
   eventSystem: {fileID: 0}
   resourceLabels:
