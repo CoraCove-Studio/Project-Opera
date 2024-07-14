@@ -102,6 +102,13 @@ public class PlayerUIHandler : MonoBehaviour
 
     public void OnClickMainMenuButton()
     {
+        Time.timeScale = 1;
+        GameManager.Instance.SceneTransition.StartSceneClose();
+        Invoke(nameof(LoadMainMenu), 1f);
+    }
+
+    private void LoadMainMenu()
+    {
         SceneManager.LoadScene("MainMenu");
     }
 

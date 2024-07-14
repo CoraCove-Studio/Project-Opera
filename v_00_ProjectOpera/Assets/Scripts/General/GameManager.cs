@@ -19,8 +19,9 @@ public class GameManager : MonoBehaviour
     public PlanetRotation PlanetRotation { get; private set; }
     public TutorialHandler TutorialHandler { get; private set; }
     public DebtInterface DebtUI { get; private set; }
-    private float gameDurationInSeconds;
+    public SceneTransition SceneTransition { get; private set; }
 
+    private float gameDurationInSeconds;
     public bool GamePaused { get; private set; } = true;
     public bool InTutorial { get; private set; } = false;
     public bool InTutorialMonitor { get; private set; } = true;
@@ -245,6 +246,8 @@ public class GameManager : MonoBehaviour
             InTutorialMonitor = true;
             GamePaused = true;
         }
+        SceneTransition = GameObject.Find("SceneTransition").GetComponent<SceneTransition>();
+        if (SceneTransition == null) Debug.Log("GameManager: FindImportantReferences: SceneTransition not found.");
     }
 
     #endregion
@@ -370,8 +373,16 @@ public class GameManager : MonoBehaviour
             {
                 ToggleGamePause();
             }
-            SceneManager.LoadScene("GameOver");
+            {
+                SceneTransition.StartSceneClose();
+                Invoke(nameof(LoadEndScene), 1f);
+            }
         }
+    }
+
+    private void LoadEndScene()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 
     public void SetTutorialMonitor(bool isActive)

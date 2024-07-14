@@ -44,16 +44,22 @@ public class GameOverUIHandler : MonoBehaviour
     {
         if(gameManager.PlayerDebt <= 0)
         {
-            resultsLabel.text = "GREAT WORK! YOU PAID OFF YOUR DEBT!";
+            resultsLabel.text = "Great work! You paid off your debt!";
             returnButtonLabel.text = "NEW JOURNEY";
         }
         else if(gameManager.PlayerDebt > 0)
         {
-            resultsLabel.text = "YOU DID NOT EARN ENOUGH TO PAY OFF YOUR DEBT";
+            resultsLabel.text = "You did not earn enough to pay off your debt.";
             returnButtonLabel.text = "SELL SHIP";
         }
     }
     public void OnClickReturn()
+    {
+        GameManager.Instance.SceneTransition.StartSceneClose();
+        Invoke(nameof(LoadMainMenu), 1f);
+    }
+
+    private void LoadMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }
