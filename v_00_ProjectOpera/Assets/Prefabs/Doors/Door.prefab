@@ -52,11 +52,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.657986, y: 3.0240304, z: 3.1492386}
+  m_Size: {x: 2.657986, y: 3.0240304, z: 4.8709793}
   m_Center: {x: 0, y: 1.5013927, z: 0}
 --- !u!114 &2888614725799225595
 MonoBehaviour:
@@ -70,10 +70,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55e8bfad823c064e8ef234effc6a1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  audioSource: {fileID: 0}
-  doorOpen: {fileID: 0}
-  doorClose: {fileID: 0}
+  animator: {fileID: 8404061923924658443}
+  audioSource: {fileID: 4769306755007001498}
+  doorOpen: {fileID: 8300000, guid: 5634316fbb609b948904458130e915af, type: 3}
+  doorClose: {fileID: 8300000, guid: da1bf6b1d257a4345bfb728e9889ab96, type: 3}
 --- !u!95 &8404061923924658443
 Animator:
   serializedVersion: 5
@@ -104,7 +104,8 @@ AudioSource:
   m_GameObject: {fileID: 1282865163660681390}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1865512974525965942, guid: 9400992c9d5419e4ba4d6b7338d8ce91,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.808
@@ -320,6 +321,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  Hold:
+    m_PersistentCalls:
+      m_Calls: []
   LoseFocus:
     m_PersistentCalls:
       m_Calls: []
@@ -556,6 +560,16 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: eb8408b9ac0c4ee4593c6e5270d17479,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4627424000764826439, guid: eb8408b9ac0c4ee4593c6e5270d17479,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -144952894543255297, guid: eb8408b9ac0c4ee4593c6e5270d17479,
+        type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eb8408b9ac0c4ee4593c6e5270d17479,
