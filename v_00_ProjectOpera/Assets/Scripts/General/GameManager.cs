@@ -427,8 +427,8 @@ public class GameManager : MonoBehaviour
         TutorialHandler = GameObject.Find("TutorialHandler").GetComponent<TutorialHandler>();
         if (TutorialHandler == null) Debug.Log("GameManager: FindImportantReferences: TutorialHandler not found.");
 
-        SettingsMenu = GameObject.Find("SettingsMenu").GetComponent<SettingsMenu>();
-        if (SettingsMenu == null) Debug.Log("GameManager: FindImportantReferences: SettingsMenu not found.");
+        PlanetRotation = GameObject.Find("PlanetRotation").GetComponent<PlanetRotation>();
+        if (PlanetRotation == null) Debug.Log("GameManager: FindImportantReferences: PlanetRotation not found.");
     }
 
     #region Game Over Methods
