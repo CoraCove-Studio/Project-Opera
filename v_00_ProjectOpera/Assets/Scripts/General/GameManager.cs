@@ -164,8 +164,8 @@ public class GameManager : MonoBehaviour
 
     #region High Score Properties and Methods
 
-    private int highScore;
-    private int successfulRunsCount;
+    [SerializeField] private int highScore;
+    [SerializeField] private int successfulRunsCount;
     public int HighScore
     {
         get => highScore;
@@ -179,8 +179,8 @@ public class GameManager : MonoBehaviour
 
     public void LoadGameData()
     {
-        HighScore = PlayerPrefs.GetInt("highScore", 0);
-        SuccessfulRunsCount = PlayerPrefs.GetInt("successfulRunsCount", 0);
+        HighScore = PlayerPrefs.GetInt("highScore");
+        SuccessfulRunsCount = PlayerPrefs.GetInt("successfulRunsCount");
     }
 
     public void ResetSuccessfulRuns()
@@ -202,6 +202,7 @@ public class GameManager : MonoBehaviour
         if (playerStatistics["Net Profit"] > HighScore)
         {
             HighScore = playerStatistics["Net Profit"];
+            Debug.Log($"HighScore updated to {HighScore}");
         }
     }
 
@@ -210,6 +211,7 @@ public class GameManager : MonoBehaviour
         if(PlayerDebt <= 0)
         {
             SuccessfulRunsCount++;
+            Debug.Log($"SuccessfulRunsCount updated to {SuccessfulRunsCount}");
         }
     }
 
@@ -441,6 +443,8 @@ public class GameManager : MonoBehaviour
                 ToggleGamePause();
             }
             {
+                UpdateHighScore();
+                SaveGameData();
                 SceneTransition.StartSceneClose();
                 Invoke(nameof(LoadEndScene), 1f);
             }

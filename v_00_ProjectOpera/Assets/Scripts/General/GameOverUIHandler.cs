@@ -33,9 +33,9 @@ public class GameOverUIHandler : MonoBehaviour
 
     private void CheckIfRunSuccessful()
     {
-        if(gameManager.PlayerDebt > 0)
+        if(GameManager.Instance.PlayerDebt > 0)
         {
-            gameManager.ResetSuccessfulRuns();
+            GameManager.Instance.ResetSuccessfulRuns();
         }
     }
     public void UpdateStatistics(Dictionary<string, int> statistics)

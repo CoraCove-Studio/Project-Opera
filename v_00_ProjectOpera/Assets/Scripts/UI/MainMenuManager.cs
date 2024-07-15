@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using TMPro;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject scoreboardPanel;
     [SerializeField] private GameObject creditsPanel;
     [SerializeField] private List<AudioClip> buttonSelectClips;
+
+    [SerializeField] private TextMeshProUGUI netProfitNumberLabel;
+    [SerializeField] private TextMeshProUGUI successfulRunsNumberLabel;
     private AudioSource audioSource;
     private bool firstButtonSelected = false;
 
@@ -24,7 +28,17 @@ public class MainMenuManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         GameManager.Instance.LoadGameData();
-        //UpdateUIScore();
+        UpdateUIScore();
+    }
+
+    private void OnEnable()
+    {
+        UpdateUIScore();
+    }
+    private void UpdateUIScore()
+    {
+        netProfitNumberLabel.text = GameManager.Instance.HighScore.ToString();
+        successfulRunsNumberLabel.text = GameManager.Instance.SuccessfulRunsCount.ToString();
     }
 
     private AudioClip GetRandomNoiseClip()
@@ -62,6 +76,7 @@ public class MainMenuManager : MonoBehaviour
     }
     public void OnClickScoreboardButton()
     {
+        UpdateUIScore();
         SwapActivePanel(scoreboardPanel);
         PlayClickNoise();
     }
