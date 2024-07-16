@@ -30,6 +30,7 @@ Material:
   m_ValidKeywords:
   - _DISABLE_SSR_TRANSPARENT
   - _MASKMAP
+  - _NORMALMAP
   - _NORMALMAP_TANGENT_SPACE
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -52,7 +53,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: a9856728ed588bb43aec0b34d8e5bf0d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 63ba6cefad98d8b41bb8cdaa463a453b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -88,15 +89,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a9856728ed588bb43aec0b34d8e5bf0d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 63ba6cefad98d8b41bb8cdaa463a453b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 5b568401e73ef164f810b63ec90d63a3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 16a36eb94b698d646aeaeb82876f130c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 956bf972fc99d3042bcdd5ec8c662ead, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1f09c2835ef00d44da5e9c78f6cc29e5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
