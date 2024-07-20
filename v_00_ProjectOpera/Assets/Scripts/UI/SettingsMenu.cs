@@ -7,7 +7,7 @@ public class SettingsMenu : MonoBehaviour
 {
     // UI References
     [SerializeField] private TMP_Dropdown resolutionDropdown;
-    [SerializeField] private TMP_Dropdown displayModeDropdown;
+    [SerializeField] private Toggle displayModeToggle;
     [SerializeField] private Toggle yFlippedToggle;
     [SerializeField] private TMP_Dropdown moveUpButtonDropdown;
     [SerializeField] private TMP_Dropdown moveDownButtonDropdown;
@@ -25,7 +25,6 @@ public class SettingsMenu : MonoBehaviour
 
     private void Start()
     {
-        AddListenersAndDelegates();
         InitializeUI();
         if (GameManager.gameJustStarted)
         {
@@ -33,6 +32,7 @@ public class SettingsMenu : MonoBehaviour
             //ApplySettings();
             GameManager.gameJustStarted = true;
         }
+        AddListenersAndDelegates();
     }
 
     private void InitializeUI()
@@ -59,32 +59,23 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
-        // Set up display mode dropdown
-        displayModeDropdown.ClearOptions();
-        displayModeDropdown.AddOptions(new List<string> { "Fullscreen", "Windowed" });
-
         // Determine the current screen mode and set the dropdown value
         if (Screen.fullScreenMode == FullScreenMode.FullScreenWindow || Screen.fullScreenMode == FullScreenMode.ExclusiveFullScreen)
         {
             Debug.Log("DisplayMode was Fullscreen!");
-            displayModeDropdown.value = 0; // Fullscreen
+            displayModeToggle.isOn = true; // Fullscreen
         }
         else if (Screen.fullScreenMode == FullScreenMode.Windowed)
         {
             Debug.Log("DisplayMode was Windowed!");
-            displayModeDropdown.value = 1; // Windowed
+            displayModeToggle.isOn = false; // Windowed
         }
-
-        // Refresh the shown value to update the dropdown display
-        displayModeDropdown.RefreshShownValue();
-
-
     }
 
     private void AddListenersAndDelegates()
     {
         resolutionDropdown.onValueChanged.AddListener(OnSettingChanged);
-        displayModeDropdown.onValueChanged.AddListener(OnSettingChanged);
+        displayModeToggle.onValueChanged.AddListener(OnSettingChanged);
         yFlippedToggle.onValueChanged.AddListener(OnSettingChanged);
         mouseSensitivitySlider.onValueChanged.AddListener(OnSettingChanged);
         musicVolumeSlider.onValueChanged.AddListener(OnSettingChanged);
@@ -94,7 +85,7 @@ public class SettingsMenu : MonoBehaviour
     private void RemoveListenersAndDelegates()
     {
         resolutionDropdown.onValueChanged.RemoveListener(OnSettingChanged);
-        displayModeDropdown.onValueChanged.RemoveListener(OnSettingChanged);
+        displayModeToggle.onValueChanged.RemoveListener(OnSettingChanged);
         yFlippedToggle.onValueChanged.RemoveListener(OnSettingChanged);
         mouseSensitivitySlider.onValueChanged.RemoveListener(OnSettingChanged);
         musicVolumeSlider.onValueChanged.RemoveListener(OnSettingChanged);
@@ -136,7 +127,7 @@ public class SettingsMenu : MonoBehaviour
     private void UpdateSettingsDictionary()
     {
         settingsDictionary["Resolution"] = resolutions[resolutionDropdown.value];
-        settingsDictionary["DisplayMode"] = displayModeDropdown.value == 0 ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+        settingsDictionary["DisplayMode"] = displayModeToggle.isOn == true;
         settingsDictionary["YFlipped"] = yFlippedToggle.isOn;
         settingsDictionary["MouseSensitivity"] = mouseSensitivitySlider.value;
         settingsDictionary["MusicVolume"] = musicVolumeSlider.value;
@@ -202,8 +193,7 @@ public class SettingsMenu : MonoBehaviour
 
         if (PlayerPrefs.HasKey("DisplayMode"))
         {
-            displayModeDropdown.value = PlayerPrefs.GetInt("DisplayMode");
-            displayModeDropdown.RefreshShownValue();
+            displayModeToggle.isOn = PlayerPrefs.GetInt("DisplayMode") == 1;
             Debug.Log("SettingsMenu: LoadSettings: DisplayMode loaded!");
         }
 
@@ -240,9 +230,8 @@ public class SettingsMenu : MonoBehaviour
         // Apply resolution and display mode
         Resolution selectedResolution = (Resolution)settingsDictionary["Resolution"];
 
-        int displayModeIndex = (int)settingsDictionary["DisplayMode"];
-        FullScreenMode fullScreenMode = (FullScreenMode)displayModeIndex;
-        Debug.Log($"SettingsMenu: ApplySettings: Fullwscreen mode is {fullScreenMode}!");
+        FullScreenMode fullScreenMode = (bool)settingsDictionary["DisplayMode"] ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+        Debug.Log($"SettingsMenu: ApplySettings: Fullscreen mode is {fullScreenMode}!");
 
         Screen.SetResolution(selectedResolution.width, selectedResolution.height, fullScreenMode);
 

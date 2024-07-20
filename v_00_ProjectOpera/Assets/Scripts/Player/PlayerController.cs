@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float acceleration = 10f;
     [SerializeField] private float lookSpeed = 2f;
-    [SerializeField] private float xSensitivity = 0.5f;
-    [SerializeField] private float ySensitivity = 0.5f;
     [SerializeField] private float maxPitchAngle = 85f;  // Max angle for looking up and down
     [SerializeField] private float smoothing = 5f; // Smoothing factor
 
@@ -100,8 +98,8 @@ public class PlayerController : MonoBehaviour
     private void AccumulateInput()
     {
         // Have to flip the x and y from the input
-        float inputX = accumulatedInput.y * xSensitivity;
-        float inputY = accumulatedInput.x * ySensitivity;
+        float inputX = accumulatedInput.y * (float)GameManager.Instance.SettingsDictionary["MouseSensitivity"];
+        float inputY = accumulatedInput.x * (float)GameManager.Instance.SettingsDictionary["MouseSensitivity"];
 
         // Calculate the new rotation while clamping the z rotation to 0
         targetRotation *= Quaternion.Euler(-inputX * lookSpeed * Time.deltaTime, inputY * lookSpeed * Time.deltaTime, 0);
@@ -149,6 +147,14 @@ public class PlayerController : MonoBehaviour
 
     public void ReceiveCamInput(Vector2 input)
     {
-        accumulatedInput += input;
+        if ((bool)GameManager.Instance.SettingsDictionary["YFlipped"])
+        {
+            input.y = -input.y;
+            accumulatedInput = input;
+        }
+        else
+        {
+            accumulatedInput += input;
+        }
     }
 }

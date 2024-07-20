@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<string, object> SettingsDictionary { get; private set; }
 
+
+
     #region Resources Properties
 
     public int PlayerCrops
@@ -91,9 +93,6 @@ public class GameManager : MonoBehaviour
     { "GameDuration", 600 },
     { "PlayerDebt", 35000 }
 };
-
-
-
 
     #endregion
 
@@ -162,6 +161,7 @@ public class GameManager : MonoBehaviour
     public void UpdateSettingsDictionary(Dictionary<string, object> settingsDict)
     {
         SettingsDictionary = settingsDict;
+        if (currentlyInGameScene) audioManager.SetAudioMixerValues((float)SettingsDictionary["MusicVolume"], (float)SettingsDictionary["SFXVolume"]);
     }
 
     #endregion

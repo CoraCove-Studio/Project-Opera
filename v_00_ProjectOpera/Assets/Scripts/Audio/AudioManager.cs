@@ -44,73 +44,22 @@ public class AudioManager : MonoBehaviour
         return inputNoises[Random.Range(0, inputNoises.Count)];
     }
 
-    private void Awake()
+    public void SetAudioMixerValues(float musicVol, float sfxVol)
     {
-
-        // Initialize and shuffle availableBeats list from beats array
-        // availableBeats = new List<AudioClip>(beats);
-        // ShuffleBeats();
-        //if (beats.Length > 0)
-        //{
-        //    beatDuration = beats[0].length; // Assuming all beats have the same length
-        //}
-        // nextStartTime = AudioSettings.dspTime; // Initialize the next start time
+        masterMixer.SetFloat("musicVolume", musicVol);
+        masterMixer.SetFloat("sfxVolume", sfxVol);
     }
 
-    //public AudioClip ReturnRandomMachineProductionClip()
-    //{
-    //    Debug.Log("AudioManager: ReturnRandomMachineProductionClip: Returning clip.");
-    //    Debug.Log($"machineProductionLoops list contains {machineProductionLoops.Count} elements.");
-    //    return machineProductionLoops[Random.Range(0, machineProductionLoops.Count - 1)];
-    //}
+    private void Awake()
+    {
+        InitializeMixerValues();
+    }
 
-
-    #region Rachel's Methods
-    //private void Update()
-    //{
-    //    // Continuously update the next start time to maintain synchronization
-    //    if (AudioSettings.dspTime >= nextStartTime)
-    //    {
-    //        nextStartTime += beatDuration;
-    //    }
-    //}
-    //public AudioClip GetUniqueBeat()
-    //{
-    //    if (availableBeats.Count == 0)
-    //    {
-    //        Debug.LogError("No available beats!");
-    //        return null;
-    //    }
-    //    AudioClip beat = availableBeats[0];
-    //    availableBeats.RemoveAt(0);
-    //    return beat;
-    //}
-
-    //public void ReturnBeat(AudioClip beat)
-    //{
-    //    availableBeats.Add(beat);
-    //}
-
-    //public double GetNextStartTime()
-    //{
-    //    return nextStartTime;
-    //}
-
-    //public float GetBeatDuration(AudioClip beat)
-    //{
-    //    return beat.length;
-    //}
-
-    //private void ShuffleBeats()
-    //{
-    //    for (int i = 0; i < availableBeats.Count; i++)
-    //    {
-    //        AudioClip temp = availableBeats[i];
-    //        int randomIndex = UnityEngine.Random.Range(i, availableBeats.Count);
-    //        availableBeats[i] = availableBeats[randomIndex];
-    //        availableBeats[randomIndex] = temp;
-    //    }
-    //}
+    private void InitializeMixerValues()
+    {
+        GameManager gm = GameManager.Instance;
+        SetAudioMixerValues((float)gm.SettingsDictionary["MusicVolume"], (float)gm.SettingsDictionary["SFXVolume"]);
+    }
 
     public void PlaySFX(AudioClip clip)
     {
@@ -123,6 +72,4 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-
-    #endregion
 }
