@@ -25,10 +25,14 @@ public class SettingsMenu : MonoBehaviour
 
     private void Start()
     {
-        InitializeUI();
-        LoadSettings();
-        ApplySettings();
         AddListenersAndDelegates();
+        InitializeUI();
+        if (GameManager.gameJustStarted)
+        {
+            LoadSettings();
+            //ApplySettings();
+            GameManager.gameJustStarted = true;
+        }
     }
 
     private void InitializeUI()
@@ -42,7 +46,7 @@ public class SettingsMenu : MonoBehaviour
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
+            if (options.Contains(option) == false) options.Add(option);
 
             if (resolutions[i].width == Screen.currentResolution.width &&
                 resolutions[i].height == Screen.currentResolution.height)
@@ -55,9 +59,26 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
-        // Set up other dropdowns and UI elements
+        // Set up display mode dropdown
         displayModeDropdown.ClearOptions();
         displayModeDropdown.AddOptions(new List<string> { "Fullscreen", "Windowed" });
+
+        // Determine the current screen mode and set the dropdown value
+        if (Screen.fullScreenMode == FullScreenMode.FullScreenWindow || Screen.fullScreenMode == FullScreenMode.ExclusiveFullScreen)
+        {
+            Debug.Log("DisplayMode was Fullscreen!");
+            displayModeDropdown.value = 0; // Fullscreen
+        }
+        else if (Screen.fullScreenMode == FullScreenMode.Windowed)
+        {
+            Debug.Log("DisplayMode was Windowed!");
+            displayModeDropdown.value = 1; // Windowed
+        }
+
+        // Refresh the shown value to update the dropdown display
+        displayModeDropdown.RefreshShownValue();
+
+
     }
 
     private void AddListenersAndDelegates()
@@ -172,6 +193,7 @@ public class SettingsMenu : MonoBehaviour
                 if (resolutions[i].width == width && resolutions[i].height == height)
                 {
                     resolutionDropdown.value = i;
+                    resolutionDropdown.RefreshShownValue();
                     break;
                 }
             }
@@ -181,6 +203,7 @@ public class SettingsMenu : MonoBehaviour
         if (PlayerPrefs.HasKey("DisplayMode"))
         {
             displayModeDropdown.value = PlayerPrefs.GetInt("DisplayMode");
+            displayModeDropdown.RefreshShownValue();
             Debug.Log("SettingsMenu: LoadSettings: DisplayMode loaded!");
         }
 
@@ -216,7 +239,11 @@ public class SettingsMenu : MonoBehaviour
     {
         // Apply resolution and display mode
         Resolution selectedResolution = (Resolution)settingsDictionary["Resolution"];
-        FullScreenMode fullScreenMode = (FullScreenMode)settingsDictionary["DisplayMode"];
+
+        int displayModeIndex = (int)settingsDictionary["DisplayMode"];
+        FullScreenMode fullScreenMode = (FullScreenMode)displayModeIndex;
+        Debug.Log($"SettingsMenu: ApplySettings: Fullwscreen mode is {fullScreenMode}!");
+
         Screen.SetResolution(selectedResolution.width, selectedResolution.height, fullScreenMode);
 
         Debug.Log("SettingsMenu: ApplySettings: Settings applied!");

@@ -10752,6 +10752,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonitorArm_1
       objectReference: {fileID: 0}
+    - target: {fileID: 2105960852423186499, guid: 861285617ab285e4fb0db277f06f6569,
+        type: 3}
+      propertyPath: textField
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4263536763493402508, guid: 861285617ab285e4fb0db277f06f6569,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -10937,7 +10942,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 27.19
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2105960852423186499, guid: 861285617ab285e4fb0db277f06f6569, type: 3}
     m_RemovedGameObjects:
     - {fileID: 574085386374603241, guid: 861285617ab285e4fb0db277f06f6569, type: 3}
     m_AddedGameObjects: []
@@ -33312,6 +33318,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonitorArm_2
       objectReference: {fileID: 0}
+    - target: {fileID: 2105960852423186499, guid: 861285617ab285e4fb0db277f06f6569,
+        type: 3}
+      propertyPath: textField
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4263536763493402508, guid: 861285617ab285e4fb0db277f06f6569,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -33437,6 +33448,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5676925829430519200, guid: 861285617ab285e4fb0db277f06f6569,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6142165277921679868, guid: 861285617ab285e4fb0db277f06f6569,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -33497,7 +33513,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 27.19
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2105960852423186499, guid: 861285617ab285e4fb0db277f06f6569, type: 3}
     m_RemovedGameObjects:
     - {fileID: 574085386374603241, guid: 861285617ab285e4fb0db277f06f6569, type: 3}
     m_AddedGameObjects: []

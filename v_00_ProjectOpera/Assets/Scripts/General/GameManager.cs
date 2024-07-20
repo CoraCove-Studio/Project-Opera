@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public bool InTutorialMonitor { get; private set; } = true;
     private static bool isQuitting = false;
     private static bool currentlyInGameScene = true;
+    public static bool gameJustStarted = true;
 
     private const int MinResources = 0;
     private const int MaxResources = 5000;
@@ -90,6 +91,9 @@ public class GameManager : MonoBehaviour
     { "GameDuration", 600 },
     { "PlayerDebt", 35000 }
 };
+
+
+
 
     #endregion
 
@@ -293,9 +297,14 @@ public class GameManager : MonoBehaviour
         isQuitting = true;
     }
 
+    private void LoadPlayerPrefs()
+    {
+
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
         Debug.Log("GameManager: OnSceneLoaded: Current scene is: " + scene.name);
         if (gameScenes.Contains(scene.name))
         {

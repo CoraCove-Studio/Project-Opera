@@ -36,7 +36,7 @@ public class PlayerUIHandler : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private bool firstButtonSelected = false;
@@ -72,7 +72,7 @@ public class PlayerUIHandler : MonoBehaviour
         pauseMenu.SetActive(true);
         currentPanel = pauseMenu;
         ToggleReticleVisibility(false);
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void ResumeGame()
@@ -294,7 +294,7 @@ public class PlayerUIHandler : MonoBehaviour
         currentPanel = machineSpawnPanel;
         InputManager.Instance.PauseWithButton();
         ToggleReticleVisibility(false);
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void DeactivateMachineSpawnPanel()
@@ -332,7 +332,7 @@ public class PlayerUIHandler : MonoBehaviour
         currentPanel = tutorialLaunchPanel;
         InputManager.Instance.PauseWithButton();
         ToggleReticleVisibility(false);
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void OnClickStartGameFromTutorial()
