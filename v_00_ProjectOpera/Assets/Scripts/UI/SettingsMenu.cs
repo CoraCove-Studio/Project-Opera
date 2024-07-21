@@ -17,11 +17,19 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private GameObject applyButton;
     [SerializeField] private GameObject saveButton;
 
+    private int width, height;
+
     // Dictionary to store settings
     public Dictionary<string, object> settingsDictionary = new();
 
     // Resolution options
     private Resolution[] resolutions;
+
+    void Awake()
+    {
+        width = Screen.currentResolution.width;
+        height = Screen.currentResolution.height;
+    }
 
     private void Start()
     {
@@ -229,11 +237,19 @@ public class SettingsMenu : MonoBehaviour
     {
         // Apply resolution and display mode
         Resolution selectedResolution = (Resolution)settingsDictionary["Resolution"];
+        FullScreenMode fullScreenMode;
 
-        FullScreenMode fullScreenMode = (bool)settingsDictionary["DisplayMode"] ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+        if ((bool)settingsDictionary["DisplayMode"])
+        {
+            fullScreenMode = FullScreenMode.FullScreenWindow;
+            Screen.SetResolution(width, height, fullScreenMode);
+        }
+        else
+        {
+            fullScreenMode = FullScreenMode.Windowed;
+            Screen.SetResolution(selectedResolution.width, selectedResolution.height, fullScreenMode);
+        }
         Debug.Log($"SettingsMenu: ApplySettings: Fullscreen mode is {fullScreenMode}!");
-
-        Screen.SetResolution(selectedResolution.width, selectedResolution.height, fullScreenMode);
 
         Debug.Log("SettingsMenu: ApplySettings: Settings applied!");
         if (applyButton.activeInHierarchy == true) applyButton.SetActive(false);
