@@ -23,6 +23,7 @@ public class PlanetRotation : MonoBehaviour
 
     public void StartReturnToStartingRotationCoroutine()
     {
+        // I think this is what needs to be changed to fix the "Sell All" bug
         StartCoroutine(ReturnToStartingPosition(0.1f));
     }
 

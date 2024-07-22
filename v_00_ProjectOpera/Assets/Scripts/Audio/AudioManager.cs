@@ -50,7 +50,7 @@ public class AudioManager : MonoBehaviour
         masterMixer.SetFloat("sfxVolume", sfxVol);
     }
 
-    private void Awake()
+    private void Start()
     {
         InitializeMixerValues();
     }
