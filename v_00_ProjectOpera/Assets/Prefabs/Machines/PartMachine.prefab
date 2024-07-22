@@ -305,6 +305,7 @@ MonoBehaviour:
   outputPos: {fileID: 3552230780110768176}
   machineUI: {fileID: 8385677990305608928}
   brokenEffect: {fileID: 6644464721705973848}
+  iceEffect: {fileID: 0}
   animatorController: {fileID: 6258548118990003222}
   loopAudioSource: {fileID: 4540935439161473600}
   sfxAudioSource: {fileID: 6454882864751783041}

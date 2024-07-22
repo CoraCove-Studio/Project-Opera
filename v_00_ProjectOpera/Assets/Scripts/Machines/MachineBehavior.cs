@@ -21,6 +21,7 @@ public abstract class MachineBehavior : MonoBehaviour
     [SerializeField] private Transform outputPos;
     [SerializeField] private MachineUI machineUI;
     [SerializeField] private GameObject brokenEffect;
+    [SerializeField] private GameObject iceEffect;
     [SerializeField] private Animator animatorController;
     public InteractableObject InteractableComponent { get; private set; }
 
@@ -85,6 +86,7 @@ public abstract class MachineBehavior : MonoBehaviour
             if (isEmpty == false & isBroken == false)
             {
                 //Debug.Log("Starting Production loop.");
+                if (iceEffect != null) iceEffect.SetActive(true);
                 loopAudioSource.Play();
                 if (animatorController != null)
                 {
@@ -246,7 +248,7 @@ public abstract class MachineBehavior : MonoBehaviour
         if (inputInventory == 0)
         {
             isEmpty = true;
-            //Debug.Log("Machine empty!");      
+            if (iceEffect != null) iceEffect.SetActive(false);
             loopAudioSource.Stop();
             HandleErrorMessagePriority();
         }
@@ -266,6 +268,7 @@ public abstract class MachineBehavior : MonoBehaviour
             isBroken = true;
             //Debug.Log("Machine broken!");
             sfxAudioSource.PlayOneShot(glitchTransitionNoise);
+            if (iceEffect != null) iceEffect.SetActive(false);
             brokenEffect.SetActive(true);
             SwitchToBrokenNoiseLoop();
             HandleErrorMessagePriority();
