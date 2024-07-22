@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     private static bool isQuitting = false;
     private static bool currentlyInGameScene = true;
     public static bool gameJustStarted = true;
+    private static bool gameOver = false;
 
     private const int MinResources = 0;
     private const int MaxResources = 5000;
@@ -272,7 +273,7 @@ public class GameManager : MonoBehaviour
         if (GamePaused == false && currentlyInGameScene && InTutorial == false)
         {
             PlayerUI.UpdateGameTimer(gameTimer.TimeLeft.Item1, gameTimer.TimeLeft.Item2);
-            CheckGameOver();
+            if (!gameOver) { CheckGameOver(); }
         }
     }
 
@@ -317,6 +318,7 @@ public class GameManager : MonoBehaviour
         }
         if (scene.name == "MainMenu")
         {
+            gameOver = false;
             AudioListener.pause = false;
             InTutorial = false;
             InTutorialMonitor = true;
@@ -363,7 +365,7 @@ public class GameManager : MonoBehaviour
     private void SetUpNewGame()
     {
         Debug.Log("GameManager: SetUpNewGame: Setting up new game.");
-
+        
         FindImportantReferences();
         GamePaused = true;
         PlayerUI.ToggleReticleVisibility(false);
@@ -447,10 +449,12 @@ public class GameManager : MonoBehaviour
     {
         if (gameTimer != null && gameTimer.CountdownTimer <= 0)
         {
+            gameOver = true;
             if (GamePaused) // ensure that the game isn't paused to avoid weird bugs
             {
                 ToggleGamePause();
             }
+            else if(gameOver && !GamePaused)
             {
                 UpdateHighScore();
                 SaveGameData();
