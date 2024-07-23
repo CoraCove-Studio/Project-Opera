@@ -269,7 +269,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Cheatcodes();
+        //Cheatcodes();
         if (GamePaused == false && currentlyInGameScene && InTutorial == false)
         {
             PlayerUI.UpdateGameTimer(gameTimer.TimeLeft.Item1, gameTimer.TimeLeft.Item2);
